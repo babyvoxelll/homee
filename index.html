@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ruffle Flash</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: sans-serif;
+        }
+        .ruffle-container {
+            max-width: 100%;
+            max-height: 100%;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .ruffle-container ruffle-player {
+            display: block;
+            width: 800px;
+            height: 600px;
+            background: white;
+        }
+        @media (max-width: 820px) {
+            .ruffle-container ruffle-player {
+                width: 100vw;
+                height: 75vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ruffle-container">
+        <ruffle-player src="babyvoxelllmainTEST2.swf" />
+    </div>
+    <script src="https://unpkg.com/@ruffle-rs/ruffle@0.1.0/ruffle.min.js"></script>
+    <script>
+        window.RufflePlayer = window.RufflePlayer || {};
+        window.RufflePlayer.config = {
+            autoplay: "auto",
+            backgroundColor: "#ffffff",
+            allowScriptAccess: "always",
+        };
+    </script>
+</body>
+</html>

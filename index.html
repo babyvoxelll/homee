@@ -1,98 +1,104 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>babyvoxelll</title>
-<style>
-/* Сброс и центрирование */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-    background-color: #ffffff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    padding: 10px 10px;
-    font-family: "Dotum", "Gulim", "Arial", sans-serif;
-}
-/* Контейнер плеера */
-#player-container {
-    width: 800px;
-    height: 600px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-    margin-bottom: 0; /* 여백 제거 */
-}
-/* Блок информации — прижат вплотную к плееру (отрицательный отступ) */
-.info {
-    font-size: 12px;
-    text-align: center;
-    color: #000000;
-    line-height: 1.5;
-    max-width: 55%;
-    word-wrap: break-word;
-    margin: -4px auto 0 auto; /* 상단 마진을 마이너스로 주어 위로 바짝 끌어올림 */
-    padding-top: 0;
-    padding-bottom: 4px;
-}
-/* внутренние блоки */
-.info .block { margin-bottom: 4px; }
-/* цвета */
-.info .dark-green { color: #006400; }
-.info .light-green { color: #32cd32; }
-.info .black { color: #000000; }
-/* ссылки */
-.info a { color: #32cd32; text-decoration: none; }
-.info a:hover { text-decoration: underline; }
-/* Адаптив */
-@media (max-width: 860px) {
-    #player-container {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 800 / 600;
-        max-width: 800px;
-    }
-    .info { max-width: 90%; font-size: 11px; }
-}
-@media (max-width: 500px) {
-    .info { max-width: 98%; font-size: 10px; line-height: 1.4; }
-    .info .block { margin-bottom: 3px; }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>babyvoxelll</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px 10px;
+            font-family: "Dotum", "Gulim", "Arial", sans-serif;
+        }
+        #player-container {
+            width: 800px;
+            height: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .info {
+            font-size: 12px;
+            text-align: center;
+            color: #000;
+            line-height: 1.6;
+            max-width: 55%;
+            word-wrap: break-word;
+            margin: 0 auto;
+            padding: 0;
+            margin-top: 0;
+        }
+        .info .block {
+            margin-bottom: 6px;
+        }
+        .info .dark-green { color: #006400; }
+        .info .light-green { color: #32cd32; }
+        .info .black { color: #000; }
+        .info a {
+            color: #32cd32;
+            text-decoration: none;
+        }
+        .info a:hover { text-decoration: underline; }
+        @media (max-width: 860px) {
+            #player-container {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 800 / 600;
+                max-width: 800px;
+            }
+            .info {
+                max-width: 90%;
+                font-size: 11px;
+            }
+        }
+        @media (max-width: 500px) {
+            .info {
+                max-width: 98%;
+                font-size: 10px;
+                line-height: 1.5;
+            }
+            .info .block {
+                margin-bottom: 4px;
+            }
+        }
+    </style>
 </head>
 <body>
-<!-- Плеер -->
-<div id="player-container"></div>
-<!-- Информация -->
-<div class="info">
-    <div class="block">
-        <span class="black">babyvoxelll.2bd.net은 베이비복스 팬들을 위한 팬사이트입니다.</span><br>
-        <span class="black">이전에는 babyvoxelll.neocities.org라는 주소였으나 현재는 접속이 불가능합니다.</span>
+    <div id="player-container"></div>
+    <div class="info">
+        <div class="block">
+            <span class="black">babyvoxelll.2bd.net은 베이비복스 팬들을 위한 팬사이트입니다.</span><br>
+            <span class="black">이전에는 babyvoxelll.neocities.org라는 주소였으나 현재는 접속이 불가능합니다.</span>
+        </div>
+        <div class="block">
+            <span class="dark-green">저작권 © 2026 babyvoxelll.2bd.net. 모든 권리 보유.</span><br>
+            <span class="dark-green">이 페이지를 보려면 </span><span class="light-green">Macromedia Flash Player</span><span class="dark-green">가 필요합니다.</span><br>
+            <span class="dark-green">웹사이트 제작자: Kaze</span>
+        </div>
+        <div class="block">
+            <span class="dark-green">이메일: </span><a href="mailto:kazemorcihelp@gmail.com">kazemorcihelp@gmail.com</a>
+        </div>
     </div>
-    <div class="block">
-        <span class="dark-green">저작권 © 2026 babyvoxelll.2bd.net. 모든 권리 보유.</span><br>
-        <span class="dark-green">이 페이지를 보려면 </span><span class="light-green">Macromedia Flash Player</span><span class="dark-green">가 필요합니다.</span><br>
-        <span class="dark-green">웹사이트 제작자: Kaze</span>
-    </div>
-    <div class="block">
-        <span class="dark-green">이메일: </span><a href="mailto:kazemorcihelp@gmail.com">kazemorcihelp@gmail.com</a>
-    </div>
-</div>
-<!-- Ruffle -->
-<script src="https://unpkg.com/ruffle-rs/ruffle.js"></script>
-<script>
-window.addEventListener("DOMContentLoaded", () => {
-    const ruffle = window.RufflePlayer.newest();
-    const player = ruffle.createPlayer();
-    const container = document.getElementById("player-container");
-    container.innerHTML = '';
-    container.appendChild(player);
-    player.load({ url: "babyvoxelllmain1.swf" });
-});
-</script>
+    <script src="https://unpkg.com/ruffle-rs/ruffle.js"></script>
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            let ruffle = window.RufflePlayer.newest();
+            let player = ruffle.createPlayer();
+            let container = document.getElementById("player-container");
+            container.appendChild(player);
+            player.load({ url: "babyvoxelllmain1.swf" });
+        });
+    </script>
 </body>
 </html>

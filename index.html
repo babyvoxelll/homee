@@ -3,89 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flash</title>
-    <script src="https://unpkg.com/@ruffle-rs/ruffle@0.1.0/ruffle.min.js"></script>
+    <title>Ruffle Flash Player</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* Делаем страницу на весь экран и выравниваем по центру */
         html, body {
-            width: 100%;
             height: 100%;
-            background: #ffffff;
+            margin: 0;
+            background-color: #141414; /* Цвет фона страницы */
             display: flex;
-            align-items: center;
             justify-content: center;
-            overflow: hidden;
+            align-items: center;
         }
-
-        #ruffle-player {
-            width: 100%;
-            height: 100%;
-            max-width: 100vw;
-            max-height: 100vh;
-            background: #ffffff;
-        }
-
-        #ruffle-player ruffle-player {
-            width: 100% !important;
-            height: 100% !important;
-            display: block !important;
+        /* Контейнер для плеера */
+        #player-container {
+            width: 800px;  /* Ширина плеера */
+            height: 600px; /* Высота плеера */
         }
     </style>
 </head>
 <body>
-    <div id="ruffle-player"></div>
 
+    <!-- Контейнер, куда Ruffle внедрит Flash -->
+    <div id="player-container"></div>
+
+    <!-- Подключаем Ruffle из официального источника (CDN) -->
+    <script src="https://unpkg.com"></script>
+    
     <script>
-        (function() {
-            function startRuffle() {
-                const container = document.getElementById('ruffle-player');
-                if (!container) return;
-
-                if (typeof window.RufflePlayer === 'undefined') {
-                    setTimeout(startRuffle, 200);
-                    return;
-                }
-
-                try {
-                    const ruffle = window.RufflePlayer.newest();
-                    if (!ruffle) {
-                        setTimeout(startRuffle, 300);
-                        return;
-                    }
-
-                    const player = ruffle.createPlayer(container, {
-                        autoplay: 'on',
-                        backgroundColor: '#ffffff',
-                    });
-
-                    const swf = 'babyvoxelllmainTEST2.swf';
-                    player.load(swf).catch((err) => {
-                        container.innerHTML = `
-                            <div style="display:flex; align-items:center; justify-content:center; 
-                                 height:100%; font-family:sans-serif; color:#888; font-size:1.2rem; 
-                                 background:#ffffff; text-align:center; padding:20px;">
-                                <span>${swf} not found</span>
-                            </div>
-                        `;
-                        console.error('Error loading SWF:', err);
-                    });
-
-                } catch (e) {
-                    console.error('Ruffle error:', e);
-                }
-            }
-
-            if (document.readyState === 'complete') {
-                startRuffle();
-            } else {
-                window.addEventListener('load', startRuffle);
-            }
-        })();
+        window.addEventListener("DOMContentLoaded", () => {
+            const ruffle = window.RufflePlayer.newest();
+            const player = ruffle.createPlayer();
+            const container = document.getElementById("player-container");
+            
+            container.appendChild(player);
+            
+            // Загружаем ваш .swf файл
+            player.load({
+                url: "babyvoxelllmainTEST2.swf", // Укажите путь к вашему файлу
+                backgroundColor: "#000000",
+                autoplay: "on",
+                unmuteOverlay: "hidden"
+            });
+        });
     </script>
 </body>
 </html>
+

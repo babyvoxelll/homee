@@ -3,27 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BabyVoxelll Flash</title>
+    <title>babyvoxelll</title>
     <style>
         body {
             margin: 0;
             padding: 0;
             background-color: #ffffff;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
         #player-container {
             width: 800px;
             height: 600px;
+            margin-top: 20px; /* Спускаем эмулятор чуть-чуть вниз */
+        }
+        .footer-text {
+            margin-top: 15px;
+            text-align: center;
+            font-family: 'mona12', monospace, sans-serif;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+        .color-black {
+            color: #000000;
+        }
+        .color-dark-green {
+            color: #004d26; /* Тёмно-зелёный */
+        }
+        .color-light-green {
+            color: #47d185; /* Светло-зелёный */
         }
     </style>
 </head>
 <body>
 
     <div id="player-container"></div>
+
+    <div class="footer-text">
+        <div class="color-black">babyvoxelll.2bd.net은 베이비복스 팬들을 위한 팬사이트입니다. 이전에는 babyvoxelll.neocities.org라는 주소였으나 현재는 접속이 불가능합니다.</div>
+        <div class="color-dark-green">저작권 © 2026 babyvoxelll.2bd.net. 모든 권리 보유.</div>
+        <div class="color-light-green">이 페이지를 보려면 Macromedia Flash Player가 필요합니다.</div>
+        <div class="color-dark-green">웹사이트 제작자: Kaze</div>
+        <div class="color-light-green">이메일: kazemorcihelp@gmail.com</div>
+    </div>
 
     <!-- Подключаем официальный скрипт Ruffle -->
     <script src="https://unpkg.com"></script>
@@ -42,3 +68,4 @@
     </script>
 </body>
 </html>
+

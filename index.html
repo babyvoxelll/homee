@@ -3,49 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ruffle Flash Player</title>
+    <title>BabyVoxelll Flash</title>
     <style>
-        /* Делаем страницу на весь экран и выравниваем по центру */
-        html, body {
-            height: 100%;
+        body {
             margin: 0;
-            background-color: #141414; /* Цвет фона страницы */
+            padding: 0;
+            background-color: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 100vh;
+            overflow: hidden;
         }
-        /* Контейнер для плеера */
         #player-container {
-            width: 800px;  /* Ширина плеера */
-            height: 600px; /* Высота плеера */
+            width: 800px;
+            height: 600px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Контейнер, куда Ruffle внедрит Flash -->
     <div id="player-container"></div>
 
-    <!-- Подключаем Ruffle из официального источника (CDN) -->
+    <!-- Подключаем официальный скрипт Ruffle -->
     <script src="https://unpkg.com"></script>
-    
     <script>
         window.addEventListener("DOMContentLoaded", () => {
-            const ruffle = window.RufflePlayer.newest();
-            const player = ruffle.createPlayer();
-            const container = document.getElementById("player-container");
+            let ruffle = window.RufflePlayer.newest();
+            let player = ruffle.createPlayer();
+            let container = document.getElementById("player-container");
             
             container.appendChild(player);
             
-            // Загружаем ваш .swf файл
             player.load({
-                url: "babyvoxelllmainTEST2.swf", // Укажите путь к вашему файлу
-                backgroundColor: "#000000",
-                autoplay: "on",
-                unmuteOverlay: "hidden"
+                url: "babyvoxelllmainTEST2.swf"
             });
         });
     </script>
 </body>
 </html>
-

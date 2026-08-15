@@ -5,34 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>babyvoxelll</title>
     <style>
-        body {
+        /* Сброс и центрирование */
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
             background-color: #ffffff;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
             flex-direction: column;
+            justify-content: center;    /* вертикальное центрирование */
+            align-items: center;        /* горизонтальное центрирование */
+            min-height: 100vh;
+            padding: 20px 10px;
+            font-family: "Dotum", "Gulim", "Arial", sans-serif;
         }
+
+        /* Контейнер плеера — фиксированный размер, без смещений */
         #player-container {
             width: 800px;
             height: 600px;
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-shrink: 0;        /* не сжимается */
         }
+
+        /* Блок информации — прижат к плееру, без отступов сверху */
         .info {
-            font-family: "Dotum", "Gulim", "Arial", sans-serif;
             font-size: 12px;
             text-align: center;
-            margin-top: -5px;
             color: #000000;
             line-height: 1.6;
             max-width: 55%;
             word-wrap: break-word;
+            margin: 0 auto;          /* центрирование по горизонтали */
+            padding-top: 0;          /* убрали отступ сверху */
+            padding-bottom: 4px;     /* небольшой отступ снизу для воздуха */
         }
+
+        /* внутренние блоки */
+        .info .block {
+            margin-bottom: 6px;
+        }
+
+        /* цвета */
         .info .dark-green {
             color: #006400;
         }
@@ -42,9 +61,8 @@
         .info .black {
             color: #000000;
         }
-        .info .block {
-            margin-bottom: 6px;
-        }
+
+        /* ссылки */
         .info a {
             color: #32cd32;
             text-decoration: none;
@@ -52,12 +70,39 @@
         .info a:hover {
             text-decoration: underline;
         }
+
+        /* Адаптив: на узких экранах уменьшаем плеер и текст */
+        @media (max-width: 860px) {
+            #player-container {
+                width: 100%;
+                height: auto;
+                aspect-ratio: 800 / 600;
+                max-width: 800px;
+            }
+            .info {
+                max-width: 90%;
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .info {
+                max-width: 98%;
+                font-size: 10px;
+                line-height: 1.5;
+            }
+            .info .block {
+                margin-bottom: 4px;
+            }
+        }
     </style>
 </head>
 <body>
 
+    <!-- Плеер -->
     <div id="player-container"></div>
 
+    <!-- Информация — теперь сразу под плеером, margin-top: 0 -->
     <div class="info">
         <div class="block">
             <span class="black">babyvoxelll.2bd.net은 베이비복스 팬들을 위한 팬사이트입니다.</span><br>
@@ -73,16 +118,18 @@
         </div>
     </div>
 
-    <!-- Подключаем официальный скрипт Ruffle -->
+    <!-- Ruffle (официальный скрипт) -->
     <script src="https://unpkg.com/ruffle-rs/ruffle.js"></script>
     <script>
         window.addEventListener("DOMContentLoaded", () => {
-            let ruffle = window.RufflePlayer.newest();
-            let player = ruffle.createPlayer();
-            let container = document.getElementById("player-container");
-            
+            const ruffle = window.RufflePlayer.newest();
+            const player = ruffle.createPlayer();
+            const container = document.getElementById("player-container");
+
+            // Очищаем контейнер (на случай повторных вызовов)
+            container.innerHTML = '';
             container.appendChild(player);
-            
+
             player.load({
                 url: "babyvoxelllmain1.swf"
             });

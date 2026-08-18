@@ -15,16 +15,15 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
+            justify-content: center;
             min-height: 100vh;
             padding: 0;
             margin: 0;
             font-family: "Dotum", "Gulim", "Arial", sans-serif;
-            padding-top: 10px;
         }
         #player-container {
-            width: 600px;
-            height: 450px;
+            width: 800px;
+            height: 600px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -41,7 +40,7 @@
             word-wrap: break-word;
             margin: 0 auto;
             padding: 0;
-            margin-top: -5px;
+            margin-bottom: 15px; /* Отступ снизу, чтобы плеер был близко к тексту */
         }
         .info .block {
             margin-bottom: 6px;
@@ -58,12 +57,13 @@
             #player-container {
                 width: 100%;
                 height: auto;
-                aspect-ratio: 600 / 450;
-                max-width: 600px;
+                aspect-ratio: 800 / 600;
+                max-width: 800px;
             }
             .info {
                 max-width: 90%;
                 font-size: 11px;
+                margin-bottom: 10px; /* Адаптивный отступ для планшетов */
             }
         }
         @media (max-width: 500px) {
@@ -71,6 +71,7 @@
                 max-width: 98%;
                 font-size: 10px;
                 line-height: 1.5;
+                margin-bottom: 8px; /* Адаптивный отступ для телефонов */
             }
             .info .block {
                 margin-bottom: 4px;
@@ -79,7 +80,7 @@
     </style>
 </head>
 <body>
-    <div id="player-container"></div>
+    <!-- Текст перемещен наверх -->
     <div class="info">
         <div class="block">
             <span class="black">babyvoxelll.2bd.net은 베이비복스 팬들을 위한 팬사이트입니다.</span><br>
@@ -94,7 +95,11 @@
             <span class="dark-green">이메일: </span><a href="mailto:kazemorcihelp@gmail.com">kazemorcihelp@gmail.com</a>
         </div>
     </div>
-    <script src="https://unpkg.com/ruffle-rs/ruffle.js"></script>
+
+    <!-- Контейнер плеера теперь находится под текстом -->
+    <div id="player-container"></div>
+
+    <script src="https://unpkg.com"></script>
     <script>
         window.addEventListener("DOMContentLoaded", () => {
             let ruffle = window.RufflePlayer.newest();

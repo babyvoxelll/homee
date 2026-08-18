@@ -15,11 +15,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             min-height: 100vh;
             padding: 0;
             margin: 0;
             font-family: "Dotum", "Gulim", "Arial", sans-serif;
+            padding-top: 20px;
         }
         #player-container {
             width: 800px;
@@ -40,8 +41,7 @@
             word-wrap: break-word;
             margin: 0 auto;
             padding: 0;
-            margin-top: 0;
-            margin-bottom: 0;
+            margin-top: -10px;
         }
         .info .block {
             margin-bottom: 6px;
@@ -64,6 +64,7 @@
             .info {
                 max-width: 90%;
                 font-size: 11px;
+                margin-top: -8px;
             }
         }
         @media (max-width: 500px) {
@@ -71,6 +72,7 @@
                 max-width: 98%;
                 font-size: 10px;
                 line-height: 1.5;
+                margin-top: -5px;
             }
             .info .block {
                 margin-bottom: 4px;
@@ -80,7 +82,7 @@
 </head>
 <body>
     <div id="player-container"></div>
-    <div class="info" style="margin-top: 0; padding-top: 0;">
+    <div class="info">
         <div class="block">
             <span class="black">babyvoxelll.2bd.net은 베이비복스 팬들을 위한 팬사이트입니다.</span><br>
             <span class="black">이전에는 babyvoxelll.neocities.org라는 주소였으나 현재는 접속이 불가능합니다.</span>

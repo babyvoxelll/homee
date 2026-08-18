@@ -40,7 +40,8 @@
             word-wrap: break-word;
             margin: 0 auto;
             padding: 0;
-            margin-bottom: 15px; /* Отступ снизу, чтобы плеер был близко к тексту */
+            margin-top: -8px;   /* подняли текст выше (было -20px) */
+            margin-bottom: 10px; /* маленький отступ снизу, чтобы не прилипало к краю */
         }
         .info .block {
             margin-bottom: 6px;
@@ -63,7 +64,8 @@
             .info {
                 max-width: 90%;
                 font-size: 11px;
-                margin-bottom: 10px; /* Адаптивный отступ для планшетов */
+                margin-top: -5px;
+                margin-bottom: 8px;
             }
         }
         @media (max-width: 500px) {
@@ -71,7 +73,8 @@
                 max-width: 98%;
                 font-size: 10px;
                 line-height: 1.5;
-                margin-bottom: 8px; /* Адаптивный отступ для телефонов */
+                margin-top: -2px;
+                margin-bottom: 6px;
             }
             .info .block {
                 margin-bottom: 4px;
@@ -80,7 +83,7 @@
     </style>
 </head>
 <body>
-    <!-- Текст перемещен наверх -->
+    <div id="player-container"></div>
     <div class="info">
         <div class="block">
             <span class="black">babyvoxelll.2bd.net은 베이비복스 팬들을 위한 팬사이트입니다.</span><br>
@@ -95,11 +98,7 @@
             <span class="dark-green">이메일: </span><a href="mailto:kazemorcihelp@gmail.com">kazemorcihelp@gmail.com</a>
         </div>
     </div>
-
-    <!-- Контейнер плеера теперь находится под текстом -->
-    <div id="player-container"></div>
-
-    <script src="https://unpkg.com"></script>
+    <script src="https://unpkg.com/ruffle-rs/ruffle.js"></script>
     <script>
         window.addEventListener("DOMContentLoaded", () => {
             let ruffle = window.RufflePlayer.newest();

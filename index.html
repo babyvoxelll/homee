@@ -29,7 +29,7 @@
             margin: 0 auto;
             padding: 0;
             margin-top: 20px;
-            margin-left: 30px;
+            transform: translateX(30px);
         }
         #image-container img {
             display: block;
@@ -119,14 +119,17 @@
 
             player.style.width = "500px";
             player.style.height = "270px";
-            
-            // Автоматическое воспроизведение
-            player.addEventListener("loaded", () => {
-                player.play();
-            });
 
             container.appendChild(player);
             player.load({ url: "babyvoxmain3.swf" });
+            
+            // Автозапуск и скрытие кнопки Play
+            player.play();
+            player.addEventListener('loadeddata', () => {
+                player.play();
+            });
+            // Скрыть контекстное меню и элементы управления (включая кнопку Play)
+            player.style.pointerEvents = "none";
         });
     </script>
 </body>

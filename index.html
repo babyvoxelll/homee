@@ -123,10 +123,12 @@
             container.appendChild(player);
             player.load({ url: "babyvoxmain6.swf" });
             
+            // Автозапуск и скрытие кнопки Play
             player.play();
             player.addEventListener('loadeddata', () => {
                 player.play();
             });
+            // Скрыть контекстное меню и элементы управления (включая кнопку Play)
             player.style.pointerEvents = "none";
         });
     </script>

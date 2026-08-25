@@ -121,14 +121,12 @@
             player.style.height = "270px";
 
             container.appendChild(player);
-            player.load({ url: "babyvoxmain6.swf" });
+            player.load({ url: "babyvoxmain3.swf" });
             
-            // Автозапуск и скрытие кнопки Play
-            player.play();
+                     player.play();
             player.addEventListener('loadeddata', () => {
                 player.play();
             });
-            // Скрыть контекстное меню и элементы управления (включая кнопку Play)
             player.style.pointerEvents = "none";
         });
     </script>

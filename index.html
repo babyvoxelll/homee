@@ -24,8 +24,8 @@
             text-align: center;
         }
         link[rel="icon"] {
-            width: 128px;
-            height: 128px;
+            width: 256px;
+            height: 256px;
         }
         #image-container {
             display: flex;
@@ -83,23 +83,6 @@
         .info .ruffle-link:hover {
             text-decoration: none;
         }
-        #google_translate_element {
-            margin-top: 15px;
-            display: flex;
-            justify-content: center;
-        }
-        .goog-te-gadget {
-            font-family: "Dotum", "Gulim", "Arial", sans-serif !important;
-        }
-        .goog-te-gadget-simple {
-            background-color: #fff !important;
-            border: 1px solid #ccc !important;
-            padding: 5px 10px !important;
-            border-radius: 4px !important;
-        }
-        .goog-te-gadget-simple img {
-            display: none !important;
-        }
 
         @media (max-width: 860px) {
             .info {
@@ -143,8 +126,6 @@
         </div>
     </div>
     
-    <div id="google_translate_element"></div>
-    
     <script src="https://unpkg.com/ruffle-rs/ruffle.js"></script>
     <script>
         window.addEventListener("DOMContentLoaded", () => {
@@ -165,16 +146,5 @@
             });
         });
     </script>
-    
-    <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'ko',
-                includedLanguages: 'ko,en,ru,ja,zh-CN,zh-TW,es,fr,de,it,pt',
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-            }, 'google_translate_element');
-        }
-    </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>

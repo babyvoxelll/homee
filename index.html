@@ -1,1 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>babyvoxelll팬사이트</title>
+    <link rel="icon" href="babyvoxelll.ico" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+            font-family: "Dotum", "Gulim", "Arial", sans-serif;
+            text-align: center;
+        }
+        #image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            padding: 0;
+            margin-top: 20px;
+            transform: translateX(30px);
+        }
+        #image-container img {
+            display: block;
+            max-width: 400px;
+            height: auto;
+        }
+        #player-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            margin: 0 auto;
+            padding: 0;
+            width: auto;
+            height: auto;
+            margin-top: 0;
+        }
+        .info {
+            font-size: 11px;
+            text-align: center;
+            color: #000;
+            line-height: 1.5;
+            max-width: 55%;
+            word-wrap: break-word;
+            margin: 0 auto;
+            padding: 0;
+            margin-top: 25px;
+        }
+        .info .block {
+            margin-bottom: 3px;
+            text-align: center;
+        }
+        .info .dark-purple { color: #4a0080; }
+        .info .dark-blue { color: #00008b; }
+        .info .black { color: #000; }
+        .info a {
+            color: #00008b;
+            text-decoration: none;
+        }
+        .info a:hover { text-decoration: underline; }
+        .info .ruffle-link {
+            color: #00008b;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .info .ruffle-link:hover {
+            text-decoration: none;
+        }
 
+        @media (max-width: 860px) {
+            .info {
+                max-width: 90%;
+                font-size: 10px;
+                margin-top: 25px;
+            }
+        }
+        @media (max-width: 500px) {
+            .info {
+                max-width: 98%;
+                font-size: 9px;
+                line-height: 1.4;
+                margin-top: 25px;
+            }
+            .info .block {
+                margin-bottom: 2px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="image-container">
+        <img src="kazemain.jpg" alt="kaze">
+    </div>
+    <div id="player-container"></div>
+    <div class="info">
+        <div class="block">
+            <span class="black">babyvoxelll.2bd.net은 베이비복스 팬들을 위한 팬사이트입니다.</span><br>
+            <span class="black">이전에는 babyvoxelll.neocities.org라는 주소였으나 현재는 접속이 불가능합니다.</span>
+        </div>
+        <div class="block">
+            <span class="dark-purple">저작권 © 2026 babyvoxelll.2bd.net. 모든 권리 보유.</span><br>
+            <span class="dark-purple">이 페이지는</span>
+            <a href="https://ruffle.rs/" target="_blank" class="ruffle-link">ruffle</a>
+            <span class="dark-purple">확장 프로그램이 필요합니다.</span><br>
+            <span class="dark-purple">웹사이트 제작자: Kaze</span>
+        </div>
+        <div class="block">
+            <span class="dark-purple">E-mail: </span><a href="mailto:kazemorcihelp@gmail.com">kazemorcihelp@gmail.com</a>
+        </div>
+    </div>
+    <script src="https://unpkg.com/ruffle-rs/ruffle.js"></script>
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            let ruffle = window.RufflePlayer.newest();
+            let player = ruffle.createPlayer();
+            let container = document.getElementById("player-container");
+
+            player.style.width = "500px";
+            player.style.height = "270px";
+
+            container.appendChild(player);
+            player.load({ url: "babyvoxmain4.swf" });
+            
+            // Убираем pointer-events: none чтобы кнопки работали
+            // player.style.pointerEvents = "none"; // закомментировано
+        });
+    </script>
+</body>
+</html>

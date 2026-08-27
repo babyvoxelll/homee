@@ -18,7 +18,7 @@
             align-items: center;
             justify-content: flex-start;
             min-height: 100vh;
-            padding: 0;
+            padding: 20px 0;
             margin: 0;
             font-family: "Dotum", "Gulim", "Arial", sans-serif;
         }
@@ -29,29 +29,40 @@
             margin: 0;
             padding: 0;
             width: 100%;
+            margin-bottom: 10px;
         }
         #image-container img {
             display: block;
-            width: 60%;
-            max-width: 600px;
+            width: 35%;
+            max-width: 400px;
             height: auto;
+        }
+        .info-red {
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 10px;
+            text-align: center;
+            padding: 4px 0;
+            background-color: #00008b;
+            width: 35%;
+            max-width: 400px;
             margin: 0 auto;
         }
         .profiles-container {
-            width: 45%;
-            max-width: 650px;
+            width: 35%;
+            max-width: 400px;
             margin: 0 auto;
             padding: 0;
         }
         .member-block {
             background-color: #00008b;
             color: #fff;
-            padding: 12px 15px;
+            padding: 15px 18px;
             margin-bottom: 0;
             border-radius: 0;
             display: flex;
             align-items: flex-start;
-            gap: 12px;
+            gap: 15px;
             border-bottom: 2px solid #fff;
         }
         .member-block:last-child {
@@ -59,7 +70,7 @@
         }
         .member-photo {
             flex-shrink: 0;
-            width: 90px;
+            width: 140px;
             height: auto;
         }
         .member-photo img {
@@ -87,34 +98,32 @@
         .member-bio .section .label {
             font-weight: bold;
         }
-        .info-red {
-            color: #ff0000;
-            font-weight: bold;
-            font-size: 10px;
-            text-align: center;
-            padding: 4px 0;
-            background-color: #00008b;
-            width: 45%;
-            max-width: 650px;
-            margin: 0 auto;
+        .member-block.reverse {
+            flex-direction: row-reverse;
         }
         @media (max-width: 768px) {
             .profiles-container {
                 width: 80%;
+                max-width: 600px;
             }
             .info-red {
                 width: 80%;
+                max-width: 600px;
             }
             #image-container img {
-                width: 80%;
+                width: 65%;
+                max-width: 500px;
             }
             .member-block {
                 flex-direction: column;
                 align-items: center;
-                padding: 10px;
+                padding: 12px;
+            }
+            .member-block.reverse {
+                flex-direction: column;
             }
             .member-photo {
-                width: 110px;
+                width: 150px;
             }
             .member-bio {
                 font-size: 9px;
@@ -129,10 +138,10 @@
                 width: 92%;
             }
             #image-container img {
-                width: 92%;
+                width: 80%;
             }
             .member-photo {
-                width: 90px;
+                width: 120px;
             }
             .member-bio {
                 font-size: 8px;
@@ -149,7 +158,7 @@
     
     <div class="profiles-container">
         <!-- Kimez - фото справа -->
-        <div class="member-block">
+        <div class="member-block reverse">
             <div class="member-bio">
                 <div class="line"><span class="label">전체 이름</span> 김이지 (김희정)</div>
                 <div class="line"><span class="label">생년월일</span> 1980년 2월 3일</div>
@@ -220,7 +229,7 @@
         </div>
 
         <!-- Eunjin - фото справа -->
-        <div class="member-block">
+        <div class="member-block reverse">
             <div class="member-bio">
                 <div class="line"><span class="label">전체 이름</span> 심은진</div>
                 <div class="line"><span class="label">생년월일</span> 1981년 2월 6일</div>
@@ -295,7 +304,7 @@
         </div>
 
         <!-- Eunhye - фото справа -->
-        <div class="member-block">
+        <div class="member-block reverse">
             <div class="member-bio">
                 <div class="line"><span class="label">전체 이름</span> 윤은혜</div>
                 <div class="line"><span class="label">생년월일</span> 1984년 10월 3일</div>

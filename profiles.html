@@ -32,25 +32,26 @@
         }
         #image-container img {
             display: block;
-            width: 100%;
-            max-width: 100%;
+            width: 60%;
+            max-width: 600px;
             height: auto;
+            margin: 0 auto;
         }
         .profiles-container {
-            width: 60%;
-            max-width: 800px;
+            width: 45%;
+            max-width: 650px;
             margin: 0 auto;
             padding: 0;
         }
         .member-block {
             background-color: #00008b;
             color: #fff;
-            padding: 15px 20px;
+            padding: 12px 15px;
             margin-bottom: 0;
             border-radius: 0;
             display: flex;
             align-items: flex-start;
-            gap: 15px;
+            gap: 12px;
             border-bottom: 2px solid #fff;
         }
         .member-block:last-child {
@@ -58,7 +59,7 @@
         }
         .member-photo {
             flex-shrink: 0;
-            width: 100px;
+            width: 90px;
             height: auto;
         }
         .member-photo img {
@@ -68,8 +69,8 @@
         }
         .member-bio {
             flex: 1;
-            font-size: 11px;
-            line-height: 1.5;
+            font-size: 10px;
+            line-height: 1.4;
             color: #fff;
             text-align: left;
             word-wrap: break-word;
@@ -81,7 +82,7 @@
             font-weight: bold;
         }
         .member-bio .section {
-            margin-top: 6px;
+            margin-top: 4px;
         }
         .member-bio .section .label {
             font-weight: bold;
@@ -89,46 +90,52 @@
         .info-red {
             color: #ff0000;
             font-weight: bold;
-            font-size: 11px;
+            font-size: 10px;
             text-align: center;
-            padding: 5px 0;
+            padding: 4px 0;
             background-color: #00008b;
-            width: 60%;
-            max-width: 800px;
+            width: 45%;
+            max-width: 650px;
             margin: 0 auto;
         }
         @media (max-width: 768px) {
             .profiles-container {
-                width: 90%;
+                width: 80%;
             }
             .info-red {
-                width: 90%;
+                width: 80%;
+            }
+            #image-container img {
+                width: 80%;
             }
             .member-block {
                 flex-direction: column;
                 align-items: center;
-                padding: 12px;
+                padding: 10px;
             }
             .member-photo {
-                width: 120px;
+                width: 110px;
             }
             .member-bio {
-                font-size: 10px;
+                font-size: 9px;
                 text-align: center;
             }
         }
         @media (max-width: 500px) {
             .profiles-container {
-                width: 95%;
+                width: 92%;
             }
             .info-red {
-                width: 95%;
+                width: 92%;
+            }
+            #image-container img {
+                width: 92%;
             }
             .member-photo {
-                width: 100px;
+                width: 90px;
             }
             .member-bio {
-                font-size: 9px;
+                font-size: 8px;
             }
         }
     </style>

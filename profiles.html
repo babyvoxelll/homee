@@ -26,31 +26,31 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 0 auto;
+            margin: 0;
             padding: 0;
-            margin-top: 20px;
-            margin-bottom: 30px;
+            width: 100%;
         }
         #image-container img {
             display: block;
-            max-width: 400px;
+            width: 100%;
+            max-width: 100%;
             height: auto;
         }
         .profiles-container {
-            width: 80%;
-            max-width: 900px;
+            width: 60%;
+            max-width: 800px;
             margin: 0 auto;
             padding: 0;
         }
         .member-block {
             background-color: #00008b;
             color: #fff;
-            padding: 20px 25px;
+            padding: 15px 20px;
             margin-bottom: 0;
             border-radius: 0;
             display: flex;
             align-items: flex-start;
-            gap: 20px;
+            gap: 15px;
             border-bottom: 2px solid #fff;
         }
         .member-block:last-child {
@@ -58,7 +58,7 @@
         }
         .member-photo {
             flex-shrink: 0;
-            width: 120px;
+            width: 100px;
             height: auto;
         }
         .member-photo img {
@@ -68,20 +68,20 @@
         }
         .member-bio {
             flex: 1;
-            font-size: 12px;
-            line-height: 1.6;
+            font-size: 11px;
+            line-height: 1.5;
             color: #fff;
             text-align: left;
             word-wrap: break-word;
         }
         .member-bio .line {
-            margin-bottom: 2px;
+            margin-bottom: 1px;
         }
         .member-bio .label {
             font-weight: bold;
         }
         .member-bio .section {
-            margin-top: 8px;
+            margin-top: 6px;
         }
         .member-bio .section .label {
             font-weight: bold;
@@ -89,44 +89,46 @@
         .info-red {
             color: #ff0000;
             font-weight: bold;
-            font-size: 16px;
-            text-align: right;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            width: 80%;
-            max-width: 900px;
+            font-size: 11px;
+            text-align: center;
+            padding: 5px 0;
+            background-color: #00008b;
+            width: 60%;
+            max-width: 800px;
+            margin: 0 auto;
         }
         @media (max-width: 768px) {
             .profiles-container {
-                width: 95%;
+                width: 90%;
+            }
+            .info-red {
+                width: 90%;
             }
             .member-block {
                 flex-direction: column;
                 align-items: center;
-                padding: 15px;
+                padding: 12px;
             }
-            .member-photo {
-                width: 150px;
-            }
-            .member-bio {
-                font-size: 11px;
-                text-align: center;
-            }
-            .info-red {
-                font-size: 14px;
-                text-align: center;
-                width: 95%;
-            }
-        }
-        @media (max-width: 500px) {
             .member-photo {
                 width: 120px;
             }
             .member-bio {
                 font-size: 10px;
+                text-align: center;
+            }
+        }
+        @media (max-width: 500px) {
+            .profiles-container {
+                width: 95%;
             }
             .info-red {
-                font-size: 12px;
+                width: 95%;
+            }
+            .member-photo {
+                width: 100px;
+            }
+            .member-bio {
+                font-size: 9px;
             }
         }
     </style>
@@ -139,11 +141,8 @@
     <div class="info-red">정보는 2004년 기준입니다</div>
     
     <div class="profiles-container">
-        <!-- Kimez -->
+        <!-- Kimez - фото справа -->
         <div class="member-block">
-            <div class="member-photo">
-                <img src="kimez.jpg" alt="kimez">
-            </div>
             <div class="member-bio">
                 <div class="line"><span class="label">전체 이름</span> 김이지 (김희정)</div>
                 <div class="line"><span class="label">생년월일</span> 1980년 2월 3일</div>
@@ -172,9 +171,12 @@
                 <div class="line"><span class="label">가수가 아니었다면</span> 메이크업 아티스트</div>
                 <div class="line section"><span class="label">참고</span> 희정은 그룹에서 '섹시한' 역할을 맡았지만, 자신은 그렇지 않다고 생각하며 일반적인 유명인사에 속하지 않습니다. 리더로서 그녀는 팀 내 중립을 유지했습니다. 그녀는 매우 이해심이 많고 멤버들의 조언자나 멘토 역할을 했습니다. 가장 나이가 많은 멤버 중 하나였을지 모르지만 그녀는 젊은 정신을 가지고 있습니다. 그녀는 매우 강하고 고통을 쉽게 극복한다고 주장합니다. 그녀는 체계적이고 질서를 유지하는 것을 좋아합니다.</div>
             </div>
+            <div class="member-photo">
+                <img src="kimez.jpg" alt="kimez">
+            </div>
         </div>
 
-        <!-- Heejin -->
+        <!-- Heejin - фото слева -->
         <div class="member-block">
             <div class="member-photo">
                 <img src="heejin.jpg" alt="heejin">
@@ -210,11 +212,8 @@
             </div>
         </div>
 
-        <!-- Eunjin -->
+        <!-- Eunjin - фото справа -->
         <div class="member-block">
-            <div class="member-photo">
-                <img src="eunjin.jpg" alt="eunjin">
-            </div>
             <div class="member-bio">
                 <div class="line"><span class="label">전체 이름</span> 심은진</div>
                 <div class="line"><span class="label">생년월일</span> 1981년 2월 6일</div>
@@ -243,9 +242,12 @@
                 <div class="line"><span class="label">가수가 아니었다면</span> 평범한 학생</div>
                 <div class="line section"><span class="label">참고</span> 은진은 그룹에서 "소년 같은" 역할을 맡았습니다. 그녀는 보통 가장 조용한 멤버이지만 카메라 앞에서는 말을 잘합니다. 그녀의 이목구비는 성숙해 보이지만, 그녀의 성격 자체도 성숙하고 깊으며 감정이 풍부합니다. 지금은 횡설수설하는 버릇과 짧은 대답을 고치려고 노력 중입니다. 하지만 아마도 그녀는 그룹에서 가장 완벽한 얼굴을 가지고 있을 것입니다. 특히 그녀의 눈과 코는 걸작으로, 종종 인공적인 것으로 오해받습니다.</div>
             </div>
+            <div class="member-photo">
+                <img src="eunjin.jpg" alt="eunjin">
+            </div>
         </div>
 
-        <!-- Miyoun -->
+        <!-- Miyoun - фото слева -->
         <div class="member-block">
             <div class="member-photo">
                 <img src="miyoun.jpg" alt="miyoun">
@@ -285,11 +287,8 @@
             </div>
         </div>
 
-        <!-- Eunhye -->
+        <!-- Eunhye - фото справа -->
         <div class="member-block">
-            <div class="member-photo">
-                <img src="eunhye.jpg" alt="eunhye">
-            </div>
             <div class="member-bio">
                 <div class="line"><span class="label">전체 이름</span> 윤은혜</div>
                 <div class="line"><span class="label">생년월일</span> 1984년 10월 3일</div>
@@ -311,6 +310,9 @@
                 <div class="line"><span class="label">경력 목표</span> 많은 광고와 잡지에 출연하기</div>
                 <div class="line"><span class="label">가수가 아니었다면</span> 평범한 학생</div>
                 <div class="line section"><span class="label">참고</span> 윤은혜는 그룹에서 "막내" 역할을 맡았습니다. 그럼에도 불구하고, 그녀는 그룹에서 이 역할을 하면서 훨씬 더 성숙해졌다고 느낍니다.</div>
+            </div>
+            <div class="member-photo">
+                <img src="eunhye.jpg" alt="eunhye">
             </div>
         </div>
     </div>

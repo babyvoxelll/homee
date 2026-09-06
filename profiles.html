@@ -34,10 +34,12 @@
             display: block;
             width: 55%;
             max-width: 700px;
-            height: 120px;
-            object-fit: cover;
-            object-position: center 20%;
+            height: auto;
+            aspect-ratio: auto;
+            object-fit: scale-down;
             margin: 0 auto;
+            transform: scaleY(0.6);
+            transform-origin: center center;
         }
         .info-red {
             color: #ffffff;
@@ -116,9 +118,8 @@
             #image-container img {
                 width: 70%;
                 max-width: 600px;
-                height: 100px;
-                object-fit: cover;
-                object-position: center 20%;
+                transform: scaleY(0.6);
+                transform-origin: center center;
             }
             .member-block {
                 flex-direction: column;
@@ -146,9 +147,8 @@
             #image-container img {
                 width: 85%;
                 max-width: 450px;
-                height: 80px;
-                object-fit: cover;
-                object-position: center 20%;
+                transform: scaleY(0.55);
+                transform-origin: center center;
             }
             .member-photo {
                 width: 120px;

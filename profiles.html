@@ -23,6 +23,7 @@
             font-family: "Dotum", "Gulim", "Arial", sans-serif;
         }
         #image-container {
+            position: relative;
             display: flex;
             justify-content: center;
             align-items: flex-start;
@@ -30,7 +31,6 @@
             padding: 0;
             width: 100%;
             line-height: 0;
-            position: relative;
         }
         #image-container img {
             display: block;
@@ -43,38 +43,34 @@
             transform: scaleY(0.75);
             transform-origin: top center;
         }
-        .nav-buttons {
+        .nav-overlay {
             position: absolute;
-            right: calc(50% - 22%);
-            top: 10px;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            z-index: 10;
-            transform: scaleY(0.75);
-            transform-origin: top center;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
         }
-        .nav-buttons a {
+        .nav-overlay a {
+            position: absolute;
             display: block;
-            padding: 3px 6px;
-            background: rgba(0,0,0,0.15);
-            color: #fff;
-            font-size: 8px;
-            font-weight: bold;
+            pointer-events: auto;
+            background: transparent;
+            border: none;
+            cursor: pointer;
             text-decoration: none;
-            text-align: center;
-            border-radius: 3px;
-            backdrop-filter: blur(2px);
-            border: 1px solid rgba(255,255,255,0.3);
-            transition: 0.2s;
-            letter-spacing: 0.3px;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
-            white-space: nowrap;
+            width: 20px;
+            height: 20px;
         }
-        .nav-buttons a:hover {
-            background: rgba(0,0,0,0.4);
-            border-color: #fff;
-        }
+        /* Кнопки справа на фотке - расположены вертикально */
+        .nav-overlay a:nth-child(1) { right: 36%; top: 12%; }
+        .nav-overlay a:nth-child(2) { right: 36%; top: 22%; }
+        .nav-overlay a:nth-child(3) { right: 36%; top: 32%; }
+        .nav-overlay a:nth-child(4) { right: 36%; top: 42%; }
+        .nav-overlay a:nth-child(5) { right: 36%; top: 52%; }
+        .nav-overlay a:nth-child(6) { right: 36%; top: 62%; }
+        .nav-overlay a:nth-child(7) { right: 36%; top: 72%; }
+
         .info-red {
             color: #ffffff;
             font-weight: bold;
@@ -155,15 +151,17 @@
                 transform: scaleY(0.75);
                 transform-origin: top center;
             }
-            .nav-buttons {
-                right: calc(50% - 30%);
-                transform: scaleY(0.75);
-                transform-origin: top center;
+            .nav-overlay a {
+                width: 16px;
+                height: 16px;
             }
-            .nav-buttons a {
-                font-size: 7px;
-                padding: 2px 5px;
-            }
+            .nav-overlay a:nth-child(1) { right: 29%; top: 12%; }
+            .nav-overlay a:nth-child(2) { right: 29%; top: 22%; }
+            .nav-overlay a:nth-child(3) { right: 29%; top: 32%; }
+            .nav-overlay a:nth-child(4) { right: 29%; top: 42%; }
+            .nav-overlay a:nth-child(5) { right: 29%; top: 52%; }
+            .nav-overlay a:nth-child(6) { right: 29%; top: 62%; }
+            .nav-overlay a:nth-child(7) { right: 29%; top: 72%; }
             .member-block {
                 flex-direction: column;
                 align-items: center;
@@ -193,16 +191,17 @@
                 transform: scaleY(0.7);
                 transform-origin: top center;
             }
-            .nav-buttons {
-                right: calc(50% - 37%);
-                transform: scaleY(0.7);
-                transform-origin: top center;
-                gap: 3px;
+            .nav-overlay a {
+                width: 12px;
+                height: 12px;
             }
-            .nav-buttons a {
-                font-size: 6px;
-                padding: 2px 4px;
-            }
+            .nav-overlay a:nth-child(1) { right: 24%; top: 12%; }
+            .nav-overlay a:nth-child(2) { right: 24%; top: 22%; }
+            .nav-overlay a:nth-child(3) { right: 24%; top: 32%; }
+            .nav-overlay a:nth-child(4) { right: 24%; top: 42%; }
+            .nav-overlay a:nth-child(5) { right: 24%; top: 52%; }
+            .nav-overlay a:nth-child(6) { right: 24%; top: 62%; }
+            .nav-overlay a:nth-child(7) { right: 24%; top: 72%; }
             .member-photo {
                 width: 120px;
             }
@@ -215,13 +214,14 @@
 <body>
     <div id="image-container">
         <img src="profiles.jpg" alt="profiles">
-        <div class="nav-buttons">
-            <a href="index.html">🏠 INDEX</a>
-            <a href="profiles.html">👤 PROFILES</a>
-            <a href="discography.html">💿 DISCOGRAPHY</a>
-            <a href="history.html">📜 HISTORY</a>
-            <a href="bbachat.html">💬 BBACHAT</a>
-            <a href="photogallery.html">📸 PHOTOGALLERY</a>
+        <div class="nav-overlay">
+            <a href="index.html"></a>
+            <a href="profiles.html"></a>
+            <a href="discography.html"></a>
+            <a href="history.html"></a>
+            <a href="bbachat.html"></a>
+            <a href="photogallery.html"></a>
+            <a href="#"></a>
         </div>
     </div>
     

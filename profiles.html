@@ -30,6 +30,7 @@
             padding: 0;
             width: 100%;
             line-height: 0;
+            position: relative;
         }
         #image-container img {
             display: block;
@@ -41,6 +42,38 @@
             margin: 0 auto;
             transform: scaleY(0.75);
             transform-origin: top center;
+        }
+        .nav-buttons {
+            position: absolute;
+            right: calc(50% - 22%);
+            top: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            z-index: 10;
+            transform: scaleY(0.75);
+            transform-origin: top center;
+        }
+        .nav-buttons a {
+            display: block;
+            padding: 3px 6px;
+            background: rgba(0,0,0,0.15);
+            color: #fff;
+            font-size: 8px;
+            font-weight: bold;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 3px;
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: 0.2s;
+            letter-spacing: 0.3px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+            white-space: nowrap;
+        }
+        .nav-buttons a:hover {
+            background: rgba(0,0,0,0.4);
+            border-color: #fff;
         }
         .info-red {
             color: #ffffff;
@@ -122,6 +155,15 @@
                 transform: scaleY(0.75);
                 transform-origin: top center;
             }
+            .nav-buttons {
+                right: calc(50% - 30%);
+                transform: scaleY(0.75);
+                transform-origin: top center;
+            }
+            .nav-buttons a {
+                font-size: 7px;
+                padding: 2px 5px;
+            }
             .member-block {
                 flex-direction: column;
                 align-items: center;
@@ -151,6 +193,16 @@
                 transform: scaleY(0.7);
                 transform-origin: top center;
             }
+            .nav-buttons {
+                right: calc(50% - 37%);
+                transform: scaleY(0.7);
+                transform-origin: top center;
+                gap: 3px;
+            }
+            .nav-buttons a {
+                font-size: 6px;
+                padding: 2px 4px;
+            }
             .member-photo {
                 width: 120px;
             }
@@ -163,6 +215,14 @@
 <body>
     <div id="image-container">
         <img src="profiles.jpg" alt="profiles">
+        <div class="nav-buttons">
+            <a href="index.html">🏠 INDEX</a>
+            <a href="profiles.html">👤 PROFILES</a>
+            <a href="discography.html">💿 DISCOGRAPHY</a>
+            <a href="history.html">📜 HISTORY</a>
+            <a href="bbachat.html">💬 BBACHAT</a>
+            <a href="photogallery.html">📸 PHOTOGALLERY</a>
+        </div>
     </div>
     
     <div class="info-red">정보는 2004년 기준입니다</div>

@@ -76,7 +76,7 @@
             align-items: flex-start;
             width: 45%;
             max-width: 500px;
-            margin: 10px auto 0 auto;
+            margin: 5px auto 0 auto;
             padding: 0;
             line-height: 0;
         }
@@ -135,11 +135,18 @@
             height: auto;
             margin-bottom: 6px;
         }
+        .album-tracks .album-label.small-label {
+            width: 55%;
+            max-width: 55%;
+        }
         .album-tracks .album-divider {
             width: 100%;
             height: 2px;
             background: #000;
             margin-bottom: 8px;
+        }
+        .album-tracks .album-divider.small-divider {
+            width: 55%;
         }
         .album-tracks .line {
             margin-bottom: 1px;
@@ -197,6 +204,13 @@
                 font-size: 11px;
                 text-align: center;
                 align-items: center;
+            }
+            .album-tracks .album-label.small-label {
+                width: 55%;
+                max-width: 55%;
+            }
+            .album-tracks .album-divider.small-divider {
+                width: 55%;
             }
         }
         @media (max-width: 500px) {
@@ -386,8 +400,8 @@
                 <img src="fourthbig.jpg" alt="fourthbig">
             </div>
             <div class="album-tracks">
-                <img src="4TH.jpg" alt="4TH" class="album-label">
-                <div class="album-divider"></div>
+                <img src="4TH.jpg" alt="4TH" class="album-label small-label">
+                <div class="album-divider small-divider"></div>
                 <div class="line">1. why</div>
                 <div class="line">2. 배신</div>
                 <div class="line">3. 회상</div>
@@ -408,8 +422,8 @@
                 <img src="voxthird.jpg" alt="voxthird">
             </div>
             <div class="album-tracks">
-                <img src="3RD.jpg" alt="3RD" class="album-label">
-                <div class="album-divider"></div>
+                <img src="3RD.jpg" alt="3RD" class="album-label small-label">
+                <div class="album-divider small-divider"></div>
                 <div class="line">1. Intro</div>
                 <div class="line">2. Get up</div>
                 <div class="line">3. MissingYou</div>
@@ -429,8 +443,8 @@
                 <img src="twobig.jpg" alt="twobig">
             </div>
             <div class="album-tracks">
-                <img src="2ND.jpg" alt="2ND" class="album-label">
-                <div class="album-divider"></div>
+                <img src="2ND.jpg" alt="2ND" class="album-label small-label">
+                <div class="album-divider small-divider"></div>
                 <div class="line">1. 야야야</div>
                 <div class="line">2. Break it up</div>
                 <div class="line">3. 패자부활전</div>
@@ -446,8 +460,8 @@
                 <img src="voxfirst.jpg" alt="voxfirst">
             </div>
             <div class="album-tracks">
-                <img src="1ST.jpg" alt="1ST" class="album-label">
-                <div class="album-divider"></div>
+                <img src="1ST.jpg" alt="1ST" class="album-label small-label">
+                <div class="album-divider small-divider"></div>
                 <div class="line">1. Interlude</div>
                 <div class="line">2. 머리하는 날</div>
                 <div class="line">3. 남자에게 &lt;민주주의&gt;</div>

@@ -12,68 +12,25 @@
             box-sizing: border-box;
         }
         body {
-            background: #fff;
+            background: #990033;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
+            justify-content: center;
             min-height: 100vh;
             padding: 0;
             margin: 0;
             font-family: "Dotum", "Gulim", "Arial", sans-serif;
         }
-        #image-container {
-            position: relative;
+
+        .bbachat-page {
             display: flex;
-            justify-content: center;
             align-items: flex-start;
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            line-height: 0;
+            gap: 0;
         }
-        #image-container img {
-            display: block;
-            width: 45%;
-            max-width: 550px;
-            height: auto;
-            aspect-ratio: auto;
-            object-fit: scale-down;
-            margin: 0 auto;
-            transform: scaleY(0.75);
-            transform-origin: top center;
-        }
-        .nav-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-        .nav-overlay a {
-            position: absolute;
-            display: block;
-            pointer-events: auto;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            width: 110px;
-            height: 20px;
-        }
-        .nav-overlay a:nth-child(1) { right: 36%; top: 8%; }
-        .nav-overlay a:nth-child(2) { right: 36%; top: 17%; }
-        .nav-overlay a:nth-child(3) { right: 36%; top: 26%; }
-        .nav-overlay a:nth-child(4) { right: 36%; top: 35%; }
-        .nav-overlay a:nth-child(5) { right: 36%; top: 44%; }
-        .nav-overlay a:nth-child(6) { right: 36%; top: 53%; }
-        .nav-overlay a:nth-child(7) { right: 36%; top: 62%; }
 
         .bbachat-wrapper {
-            width: 55%;
-            max-width: 700px;
-            margin: 15px auto 0 auto;
+            width: 620px;
             padding: 20px;
             background: #404040;
             display: flex;
@@ -104,6 +61,7 @@
             gap: 0;
             overflow-y: auto;
             max-height: 460px;
+            min-height: 460px;
         }
         .bbachat-row {
             display: grid;
@@ -277,31 +235,40 @@
             background: #a00028;
         }
 
-        @media (max-width: 768px) {
+        .panel-side {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0;
+        }
+        .panel-side img.panel-img {
+            display: block;
+            width: 60px;
+            height: auto;
+        }
+        .panel-side img.bbvpanel-img {
+            display: block;
+            width: 160px;
+            height: auto;
+        }
+
+        @media (max-width: 900px) {
+            .bbachat-page {
+                flex-direction: column;
+                align-items: center;
+            }
             .bbachat-wrapper {
-                width: 85%;
+                width: 90%;
                 flex-direction: column;
             }
             .bbachat-form {
                 width: 100%;
             }
-            #image-container img {
-                width: 60%;
-                max-width: 450px;
-                transform: scaleY(0.75);
-                transform-origin: top center;
+            .panel-side {
+                flex-direction: row;
+                align-items: flex-start;
+                justify-content: center;
             }
-            .nav-overlay a {
-                width: 90px;
-                height: 16px;
-            }
-            .nav-overlay a:nth-child(1) { right: 29%; top: 8%; }
-            .nav-overlay a:nth-child(2) { right: 29%; top: 17%; }
-            .nav-overlay a:nth-child(3) { right: 29%; top: 26%; }
-            .nav-overlay a:nth-child(4) { right: 29%; top: 35%; }
-            .nav-overlay a:nth-child(5) { right: 29%; top: 44%; }
-            .nav-overlay a:nth-child(6) { right: 29%; top: 53%; }
-            .nav-overlay a:nth-child(7) { right: 29%; top: 62%; }
         }
         @media (max-width: 500px) {
             .bbachat-wrapper {
@@ -312,72 +279,55 @@
                 grid-template-columns: 35px 1fr 55px 70px 80px;
                 font-size: 10px;
             }
-            #image-container img {
-                width: 75%;
-                max-width: 350px;
-                transform: scaleY(0.7);
-                transform-origin: top center;
+            .panel-side img.panel-img {
+                width: 45px;
             }
-            .nav-overlay a {
-                width: 70px;
-                height: 12px;
+            .panel-side img.bbvpanel-img {
+                width: 120px;
             }
-            .nav-overlay a:nth-child(1) { right: 22%; top: 8%; }
-            .nav-overlay a:nth-child(2) { right: 22%; top: 17%; }
-            .nav-overlay a:nth-child(3) { right: 22%; top: 26%; }
-            .nav-overlay a:nth-child(4) { right: 22%; top: 35%; }
-            .nav-overlay a:nth-child(5) { right: 22%; top: 44%; }
-            .nav-overlay a:nth-child(6) { right: 22%; top: 53%; }
-            .nav-overlay a:nth-child(7) { right: 22%; top: 62%; }
         }
     </style>
 </head>
 <body>
-    <div id="image-container">
-        <img src="bbachat.jpg" alt="bbachat">
-        <div class="nav-overlay">
-            <a href="videos.html"></a>
-            <a href="index.html"></a>
-            <a href="profiles.html"></a>
-            <a href="discography.html"></a>
-            <a href="history.html"></a>
-            <a href="bbachat.html"></a>
-            <a href="photogallery.html"></a>
+    <div class="bbachat-page">
+        <div class="bbachat-wrapper">
+            <div class="bbachat-left">
+                <div class="bbachat-header">
+                    <div>번호</div>
+                    <div>메시지</div>
+                    <div>파일</div>
+                    <div>이름</div>
+                    <div>등록일</div>
+                </div>
+                <div class="bbachat-messages" id="messages"></div>
+                <div class="bbachat-pagination" id="pagination"></div>
+            </div>
+
+            <div class="bbachat-form">
+                <div class="form-title">메시지 보내기</div>
+                <label>이름</label>
+                <input type="text" id="name" maxlength="20" required>
+                <label>메시지 (최대 350자)</label>
+                <input type="text" id="message" maxlength="350" required>
+
+                <div class="form-row">
+                    <span class="gif-toggle" id="gifBtn">기프</span>
+                    <label for="file" class="file-btn">파일 선택</label>
+                    <input type="file" id="file" accept=".jpg,.jpeg,.exe">
+                </div>
+
+                <div class="gif-picker" id="gifPicker">
+                    <div class="gif-empty">사용 가능한 기프가 없습니다</div>
+                </div>
+                <div class="gif-preview" id="gifPreview"></div>
+
+                <button id="sendBtn">보내기</button>
+            </div>
         </div>
-    </div>
 
-    <div class="bbachat-wrapper">
-        <div class="bbachat-left">
-            <div class="bbachat-header">
-                <div>번호</div>
-                <div>메시지</div>
-                <div>파일</div>
-                <div>이름</div>
-                <div>등록일</div>
-            </div>
-            <div class="bbachat-messages" id="messages"></div>
-            <div class="bbachat-pagination" id="pagination"></div>
-        </div>
-
-        <div class="bbachat-form">
-            <div class="form-title">메시지 보내기</div>
-            <label>이름</label>
-            <input type="text" id="name" maxlength="20" required>
-            <label>메시지 (최대 350자)</label>
-            <input type="text" id="message" maxlength="350" required>
-
-            <div class="form-row">
-                <span class="gif-toggle" id="gifBtn">기프</span>
-                <label for="file" class="file-btn">파일 선택</label>
-                <input type="file" id="file" accept=".jpg,.jpeg,.exe">
-            </div>
-
-            <div class="gif-picker" id="gifPicker">
-                <div class="gif-empty">사용 가능한 기프가 없습니다</div>
-            </div>
-            <div class="gif-preview" id="gifPreview"></div>
-
-            <button id="sendBtn">보내기</button>
+        <div class="panel-side">
+            <img src="panel.png" alt="panel" class="panel-img">
+            <img src="bbvpanel.jpg" alt="bbvpanel" class="bbvpanel-img">
         </div>
     </div>
 

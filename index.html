@@ -23,6 +23,10 @@
             font-family: "Dotum", "Gulim", "Arial", sans-serif;
             text-align: center;
         }
+        link[rel="icon"] {
+            width: 512px;
+            height: 512px;
+        }
         #image-container {
             display: flex;
             justify-content: center;
@@ -122,143 +126,6 @@
         </div>
     </div>
     
-    <script>
-        (function() {
-            const internalPages = [
-                'videos.html',
-                'profiles.html',
-                'discography.html',
-                'history.html',
-                'bbachat.html',
-                'photogallery.html',
-                'index.html'
-            ];
-
-            function isInternal(url) {
-                if (!url) return false;
-                var s = String(url);
-                for (var i = 0; i < internalPages.length; i++) {
-                    if (s.indexOf(internalPages[i]) !== -1) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-
-            function redirectInternal(url) {
-                if (isInternal(url)) {
-                    window.location.assign(url);
-                    return true;
-                }
-                return false;
-            }
-
-            // 1. Перехват window.open
-            var originalOpen = window.open;
-            window.open = function(url, target, features) {
-                if (redirectInternal(url)) {
-                    return null;
-                }
-                return originalOpen.apply(window, arguments);
-            };
-
-            // 2. Перехват через defineProperty (некоторые версии Ruffle используют это)
-            try {
-                var _open = window.open;
-                Object.defineProperty(window, 'open', {
-                    get: function() {
-                        return function(url, target, features) {
-                            if (redirectInternal(url)) {
-                                return null;
-                            }
-                            return _open.apply(window, arguments);
-                        };
-                    },
-                    configurable: true
-                });
-            } catch (e) {}
-
-            // 3. Перехват клика по <a> внутри документа
-            document.addEventListener('click', function(e) {
-                var el = e.target;
-                while (el && el.tagName !== 'A') {
-                    el = el.parentElement;
-                }
-                if (el && el.tagName === 'A') {
-                    var href = el.getAttribute('href');
-                    if (isInternal(href)) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        window.location.assign(href);
-                    }
-                }
-            }, true);
-
-            // 4. Перехват через onbeforeunload / location change — не поможет, пропускаем
-
-            // 5. Ruffle создаёт <a> или вызывает window.open — можно также
-            //    перехватить создание элементов <a target="_blank"> и убрать target
-            var originalCreateElement = document.createElement.bind(document);
-            document.createElement = function(tag) {
-                var el = originalCreateElement(tag);
-                if (tag && tag.toLowerCase() === 'a') {
-                    try {
-                        Object.defineProperty(el, 'target', {
-                            set: function(v) {
-                                // игнорируем _blank
-                                if (v === '_blank') {
-                                    this.setAttribute('data-original-target', v);
-                                } else {
-                                    this.setAttribute('target', v);
-                                }
-                            },
-                            get: function() {
-                                return this.getAttribute('target') || '';
-                            },
-                            configurable: true
-                        });
-                    } catch (e) {}
-                }
-                return el;
-            };
-
-            // 6. Перехват через MutationObserver — удаляем target="_blank" у ссылок
-            var observer = new MutationObserver(function(mutations) {
-                mutations.forEach(function(mutation) {
-                    mutation.addedNodes.forEach(function(node) {
-                        if (node.nodeType === 1) {
-                            if (node.tagName === 'A') {
-                                var href = node.getAttribute('href');
-                                if (isInternal(href)) {
-                                    node.removeAttribute('target');
-                                    node.addEventListener('click', function(ev) {
-                                        ev.preventDefault();
-                                        ev.stopPropagation();
-                                        window.location.assign(href);
-                                    }, true);
-                                }
-                            }
-                            var links = node.querySelectorAll ? node.querySelectorAll('a') : [];
-                            for (var i = 0; i < links.length; i++) {
-                                var a = links[i];
-                                var href = a.getAttribute('href');
-                                if (isInternal(href)) {
-                                    a.removeAttribute('target');
-                                    a.addEventListener('click', function(ev) {
-                                        ev.preventDefault();
-                                        ev.stopPropagation();
-                                        window.location.assign(this.getAttribute('href'));
-                                    }, true);
-                                }
-                            }
-                        }
-                    });
-                });
-            });
-            observer.observe(document.documentElement, { childList: true, subtree: true });
-        })();
-    </script>
-    
     <script src="https://unpkg.com/ruffle-rs/ruffle.js"></script>
     <script>
         window.addEventListener("DOMContentLoaded", () => {
@@ -270,33 +137,12 @@
             player.style.height = "270px";
 
             container.appendChild(player);
-            player.load({ url: "babyvoxmain7.swf" });
-
+            player.load({ url: "babyvoxmain11.swf" });
+            
             player.play();
-
+            
             player.addEventListener('loadeddata', () => {
                 player.play();
             });
-
-            // Ruffle API: перехват navigate события
-            if (typeof player.addEventListener === 'function') {
-                player.addEventListener('navigate', (e) => {
-                    if (e && e.url) {
-                        var url = e.url;
-                        if (url.indexOf('videos.html') !== -1 ||
-                            url.indexOf('profiles.html') !== -1 ||
-                            url.indexOf('discography.html') !== -1 ||
-                            url.indexOf('history.html') !== -1 ||
-                            url.indexOf('bbachat.html') !== -1 ||
-                            url.indexOf('photogallery.html') !== -1 ||
-                            url.indexOf('index.html') !== -1) {
-                            if (e.preventDefault) e.preventDefault();
-                            window.location.assign(url);
-                        }
-                    }
-                });
-            }
         });
     </script>
-</body>
-</html>

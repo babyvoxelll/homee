@@ -98,6 +98,7 @@
             gap: 15px;
             align-items: flex-start;
             justify-content: center;
+            position: relative;
         }
         .bbachat-left {
             flex: 1;
@@ -334,39 +335,61 @@
             display: none;
             flex: 1;
             background: #404040;
-            padding: 0;
             min-width: 0;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            align-items: stretch;
+            justify-content: flex-start;
+            position: relative;
         }
         .bbachat-detail.open {
             display: flex;
+        }
+        .bbachat-detail .detail-back {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0 6px;
+            line-height: 1;
+            z-index: 5;
+        }
+        .bbachat-detail .detail-back:hover {
+            opacity: 0.7;
         }
         .bbachat-detail .detail-panel {
             width: 100%;
             background: #800020;
             color: #fff;
-            padding: 10px 14px;
-            font-size: 13px;
-            font-weight: bold;
+            padding: 6px 8px;
+            display: grid;
+            grid-template-columns: 50px 1fr 70px 100px 120px;
+            gap: 4px;
             text-align: center;
+            font-size: 12px;
+            font-weight: bold;
         }
         .bbachat-detail .detail-body {
             width: 100%;
             background: #d0d0d0;
-            padding: 14px;
             color: #000;
-            font-size: 14px;
-            line-height: 1.5;
+            font-size: 12px;
+            padding: 10px 14px 14px 14px;
             text-align: center;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            min-width: 0;
         }
         .bbachat-detail .detail-body .detail-message {
-            font-size: 15px;
+            font-size: 13px;
             word-wrap: break-word;
             overflow-wrap: break-word;
             white-space: pre-wrap;
-            margin-bottom: 12px;
+            margin-top: 6px;
         }
         .bbachat-detail .detail-body .detail-image {
             max-width: 100%;
@@ -443,7 +466,8 @@
                 margin: -80px auto 0 auto;
             }
             .bbachat-header,
-            .bbachat-row {
+            .bbachat-row,
+            .bbachat-detail .detail-panel {
                 grid-template-columns: 35px 1fr 55px 70px 80px;
                 font-size: 10px;
             }
@@ -489,7 +513,7 @@
         </div>
 
         <div class="bbachat-wrapper">
-            <div class="bbachat-left">
+            <div class="bbachat-left" id="bbachatLeft">
                 <div class="bbachat-header">
                     <div>번호</div>
                     <div>메시지</div>
@@ -521,6 +545,7 @@
             </div>
 
             <div class="bbachat-detail" id="bbachatDetail">
+                <button class="detail-back" id="detailBack">←</button>
                 <div class="detail-panel" id="detailPanel"></div>
                 <div class="detail-body" id="detailBody"></div>
             </div>
@@ -627,11 +652,36 @@
 
         function showDetail(data) {
             document.getElementById("bbachatForm").style.display = "none";
+            document.getElementById("bbachatLeft").style.display = "none";
             const detail = document.getElementById("bbachatDetail");
             detail.classList.add("open");
 
             const panel = document.getElementById("detailPanel");
-            panel.textContent = `${data.name || ""} · ${data.number || ""}`;
+            panel.innerHTML = "";
+
+            const numCell = document.createElement("div");
+            numCell.textContent = data.number || "";
+            panel.appendChild(numCell);
+
+            const msgCell = document.createElement("div");
+            msgCell.textContent = data.message || "";
+            panel.appendChild(msgCell);
+
+            const fileCell = document.createElement("div");
+            fileCell.textContent = data.fileType === "jpg" ? "JPG" : (data.fileType === "exe" ? "EXE" : "");
+            panel.appendChild(fileCell);
+
+            const nameCell = document.createElement("div");
+            nameCell.textContent = data.name || "";
+            panel.appendChild(nameCell);
+
+            const dateCell = document.createElement("div");
+            if (data.timestamp) {
+                const d = new Date(data.timestamp);
+                const pad = (n) => n.toString().padStart(2, "0");
+                dateCell.textContent = `${pad(d.getDate())}.${pad(d.getMonth() + 1)}.${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+            }
+            panel.appendChild(dateCell);
 
             const body = document.getElementById("detailBody");
             body.innerHTML = "";
@@ -666,12 +716,13 @@
                 });
                 body.appendChild(link);
             }
-
-            document.getElementById("detailPanel").addEventListener("click", () => {
-                document.getElementById("bbachatDetail").classList.remove("open");
-                document.getElementById("bbachatForm").style.display = "block";
-            });
         }
+
+        document.getElementById("detailBack").addEventListener("click", () => {
+            document.getElementById("bbachatDetail").classList.remove("open");
+            document.getElementById("bbachatForm").style.display = "block";
+            document.getElementById("bbachatLeft").style.display = "flex";
+        });
 
         function renderPage() {
             const container = document.getElementById("messages");

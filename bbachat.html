@@ -138,6 +138,11 @@
             word-wrap: break-word;
             overflow-wrap: break-word;
             min-width: 0;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .bbachat-row:hover {
+            background: #b8b8b8;
         }
         .bbachat-row > div {
             min-width: 0;
@@ -324,6 +329,93 @@
             background: #a00028;
         }
 
+        .bbachat-detail {
+            display: none;
+            flex: 1;
+            background: #404040;
+            padding: 0;
+            min-width: 0;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .bbachat-detail.open {
+            display: flex;
+        }
+        .bbachat-detail .detail-panel {
+            width: 100%;
+            background: #800020;
+            color: #fff;
+            padding: 10px 14px;
+            font-size: 13px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .bbachat-detail .detail-close {
+            background: transparent;
+            color: #fff;
+            border: 1px solid #fff;
+            padding: 2px 8px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .bbachat-detail .detail-close:hover {
+            background: #fff;
+            color: #800020;
+        }
+        .bbachat-detail .detail-body {
+            width: 100%;
+            background: #d0d0d0;
+            padding: 14px;
+            color: #000;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        .bbachat-detail .detail-body .detail-meta {
+            font-size: 11px;
+            color: #333;
+            margin-bottom: 8px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #999;
+        }
+        .bbachat-detail .detail-body .detail-message {
+            font-size: 14px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: pre-wrap;
+            margin-bottom: 12px;
+        }
+        .bbachat-detail .detail-body .detail-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin-top: 10px;
+        }
+        .bbachat-detail .detail-body .detail-gif {
+            max-width: 100px;
+            height: auto;
+            display: block;
+            margin-top: 10px;
+        }
+        .bbachat-detail .detail-body .detail-download {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 14px;
+            background: #800020;
+            color: #fff;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: bold;
+            border: 1px solid #555;
+            cursor: pointer;
+        }
+        .bbachat-detail .detail-body .detail-download:hover {
+            background: #a00028;
+        }
+
         @media (max-width: 1100px) {
             .bbachat-outer {
                 width: 90%;
@@ -429,7 +521,7 @@
                 <div class="bbachat-pagination" id="pagination"></div>
             </div>
 
-            <div class="bbachat-form">
+            <div class="bbachat-form" id="bbachatForm">
                 <div class="form-title">메시지 보내기</div>
                 <label>이름</label>
                 <input type="text" id="name" maxlength="20" required>
@@ -446,6 +538,14 @@
                 <div class="gif-preview" id="gifPreview"></div>
 
                 <button id="sendBtn">보내기</button>
+            </div>
+
+            <div class="bbachat-detail" id="bbachatDetail">
+                <div class="detail-panel">
+                    <span>메시지 상세</span>
+                    <button class="detail-close" id="detailClose">닫기</button>
+                </div>
+                <div class="detail-body" id="detailBody"></div>
             </div>
         </div>
     </div>
@@ -541,8 +641,62 @@
             row.appendChild(nameCell);
             row.appendChild(dateCell);
 
+            row.addEventListener("click", () => {
+                showDetail(data);
+            });
+
             return row;
         }
+
+        function showDetail(data) {
+            document.getElementById("bbachatForm").style.display = "none";
+            const detail = document.getElementById("bbachatDetail");
+            detail.classList.add("open");
+
+            const body = document.getElementById("detailBody");
+            body.innerHTML = "";
+
+            const meta = document.createElement("div");
+            meta.className = "detail-meta";
+            meta.textContent = `${data.name || ""} · ${data.number || ""} · ${data.timestamp ? new Date(data.timestamp).toLocaleString() : ""}`;
+            body.appendChild(meta);
+
+            const messageDiv = document.createElement("div");
+            messageDiv.className = "detail-message";
+            messageDiv.textContent = data.message || "";
+            body.appendChild(messageDiv);
+
+            if (data.gif) {
+                const gifImg = document.createElement("img");
+                gifImg.src = data.gif;
+                gifImg.className = "detail-gif";
+                gifImg.alt = "gif";
+                body.appendChild(gifImg);
+            }
+
+            if (data.fileType === "jpg") {
+                const img = document.createElement("img");
+                img.src = "JPG.gif";
+                img.className = "detail-image";
+                img.alt = "jpg";
+                body.appendChild(img);
+            } else if (data.fileType === "exe") {
+                const link = document.createElement("a");
+                link.href = "#";
+                link.className = "detail-download";
+                link.textContent = "EXE 파일 다운로드";
+                link.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    alert("파일 다운로드는 준비 중입니다.");
+                });
+                body.appendChild(link);
+            }
+        }
+
+        document.getElementById("detailClose").addEventListener("click", () => {
+            document.getElementById("bbachatDetail").classList.remove("open");
+            document.getElementById("bbachatForm").style.display = "block";
+        });
 
         function renderPage() {
             const container = document.getElementById("messages");

@@ -128,6 +128,51 @@
     
     <script src="https://unpkg.com/ruffle-rs/ruffle.js"></script>
     <script>
+        (function() {
+            const internalPages = [
+                'videos.html',
+                'profiles.html',
+                'discography.html',
+                'history.html',
+                'bbachat.html',
+                'photogallery.html',
+                'index.html'
+            ];
+
+            function isInternal(url) {
+                if (!url) return false;
+                for (let i = 0; i < internalPages.length; i++) {
+                    if (url.indexOf(internalPages[i]) !== -1) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            const originalOpen = window.open;
+            window.open = function(url, target, features) {
+                if (isInternal(url)) {
+                    window.location.href = url;
+                    return null;
+                }
+                return originalOpen.call(window, url, target, features);
+            };
+
+            document.addEventListener('click', function(e) {
+                let el = e.target;
+                while (el && el.tagName !== 'A') {
+                    el = el.parentElement;
+                }
+                if (el && el.tagName === 'A') {
+                    const href = el.getAttribute('href');
+                    if (isInternal(href)) {
+                        e.preventDefault();
+                        window.location.href = href;
+                    }
+                }
+            }, true);
+        })();
+
         window.addEventListener("DOMContentLoaded", () => {
             let ruffle = window.RufflePlayer.newest();
             let player = ruffle.createPlayer();
@@ -138,12 +183,18 @@
 
             container.appendChild(player);
             player.load({ url: "babyvoxmain7.swf" });
-            
+
             player.play();
-            
+
             player.addEventListener('loadeddata', () => {
                 player.play();
             });
+
+            if (player.addEventListener) {
+                player.addEventListener('navigate', (e) => {
+                    e.preventDefault();
+                });
+            }
         });
     </script>
 </body>

@@ -30,7 +30,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin: -60px auto 0 auto;
+            margin: -120px auto 0 auto;
             width: 1000px;
             max-width: 1000px;
         }
@@ -61,6 +61,35 @@
             display: block;
             z-index: 2;
         }
+
+        /* Прозрачные кнопки поверх panel.png */
+        .panel-nav-overlay {
+            position: absolute;
+            left: 280px;
+            bottom: 0;
+            width: 720px;
+            height: 100%;
+            z-index: 3;
+            pointer-events: none;
+        }
+        .panel-nav-overlay a {
+            position: absolute;
+            display: block;
+            pointer-events: auto;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            height: 30px;
+        }
+        /* Расположение кнопок по горизонтали на фотке (слева направо) */
+        .panel-nav-overlay a:nth-child(1) { left: 0%;   width: 13%; top: 0%; }
+        .panel-nav-overlay a:nth-child(2) { left: 13%;  width: 12%; top: 0%; }
+        .panel-nav-overlay a:nth-child(3) { left: 25%;  width: 14%; top: 0%; }
+        .panel-nav-overlay a:nth-child(4) { left: 39%;  width: 15%; top: 0%; }
+        .panel-nav-overlay a:nth-child(5) { left: 54%;  width: 12%; top: 0%; }
+        .panel-nav-overlay a:nth-child(6) { left: 66%;  width: 16%; top: 0%; }
+        .panel-nav-overlay a:nth-child(7) { left: 82%;  width: 18%; top: 0%; }
 
         .bbachat-wrapper {
             width: 1000px;
@@ -276,7 +305,7 @@
         @media (max-width: 1100px) {
             .bbachat-outer {
                 width: 90%;
-                margin: -40px auto 0 auto;
+                margin: -80px auto 0 auto;
             }
             .bbachat-wrapper {
                 width: 100%;
@@ -304,11 +333,15 @@
                 max-width: 460px;
                 left: 180px;
             }
+            .panel-nav-overlay {
+                left: 180px;
+                width: 460px;
+            }
         }
         @media (max-width: 500px) {
             .bbachat-outer {
                 width: 95%;
-                margin: -20px auto 0 auto;
+                margin: -40px auto 0 auto;
             }
             .bbachat-header,
             .bbachat-row {
@@ -327,6 +360,10 @@
                 max-width: 320px;
                 left: 120px;
             }
+            .panel-nav-overlay {
+                left: 120px;
+                width: 320px;
+            }
         }
     </style>
 </head>
@@ -336,6 +373,15 @@
         <div class="bbachat-top-imgs">
             <img src="bbvoxpanel.jpg" alt="bbvoxpanel" class="bbvoxpanel">
             <img src="panel.png" alt="panel" class="panel">
+            <div class="panel-nav-overlay">
+                <a href="videos.html"></a>
+                <a href="index.html"></a>
+                <a href="profiles.html"></a>
+                <a href="discography.html"></a>
+                <a href="history.html"></a>
+                <a href="bbachat.html"></a>
+                <a href="photogallery.html"></a>
+            </div>
         </div>
 
         <div class="bbachat-wrapper">

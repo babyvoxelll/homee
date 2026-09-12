@@ -70,16 +70,21 @@
         .nav-overlay a:nth-child(6) { right: 36%; top: 53%; }
         .nav-overlay a:nth-child(7) { right: 36%; top: 62%; }
 
-        .info-red {
-            color: #ffffff;
-            font-weight: bold;
-            font-size: 10px;
-            text-align: center;
-            padding: 4px 0;
-            background-color: #00008b;
+        .albumheader-container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
             width: 45%;
             max-width: 500px;
             margin: 10px auto 0 auto;
+            padding: 0;
+            line-height: 0;
+        }
+        .albumheader-container img {
+            display: block;
+            width: 55%;
+            max-width: 280px;
+            height: auto;
         }
         .discography-container {
             width: 45%;
@@ -114,11 +119,25 @@
         }
         .album-tracks {
             flex: 1;
-            font-size: 10px;
-            line-height: 1.4;
+            font-size: 12px;
+            line-height: 1.5;
             color: #000;
             text-align: left;
             word-wrap: break-word;
+        }
+        .album-tracks .album-label {
+            display: block;
+            width: 60%;
+            max-width: 120px;
+            height: auto;
+            margin-bottom: 6px;
+        }
+        .album-tracks .album-divider {
+            width: 60%;
+            max-width: 120px;
+            height: 2px;
+            background: #000;
+            margin-bottom: 8px;
         }
         .album-tracks .line {
             margin-bottom: 1px;
@@ -136,9 +155,13 @@
                 width: 85%;
                 max-width: 500px;
             }
-            .info-red {
+            .albumheader-container {
                 width: 85%;
                 max-width: 500px;
+            }
+            .albumheader-container img {
+                width: 55%;
+                max-width: 250px;
             }
             #image-container img {
                 width: 60%;
@@ -169,16 +192,28 @@
                 width: 150px;
             }
             .album-tracks {
-                font-size: 9px;
+                font-size: 11px;
                 text-align: center;
+            }
+            .album-tracks .album-label {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .album-tracks .album-divider {
+                margin-left: auto;
+                margin-right: auto;
             }
         }
         @media (max-width: 500px) {
             .discography-container {
                 width: 95%;
             }
-            .info-red {
+            .albumheader-container {
                 width: 95%;
+            }
+            .albumheader-container img {
+                width: 60%;
+                max-width: 200px;
             }
             #image-container img {
                 width: 75%;
@@ -201,7 +236,7 @@
                 width: 120px;
             }
             .album-tracks {
-                font-size: 8px;
+                font-size: 10px;
             }
         }
     </style>
@@ -220,7 +255,9 @@
         </div>
     </div>
     
-    <div class="info-red">정보는 2004년 기준입니다</div>
+    <div class="albumheader-container">
+        <img src="album.jpg" alt="album">
+    </div>
     
     <div class="discography-container">
         <div class="album-block">
@@ -228,6 +265,8 @@
                 <img src="ridewest.jpg" alt="ridewest">
             </div>
             <div class="album-tracks">
+                <img src="7TH.jpg" alt="7TH" class="album-label">
+                <div class="album-divider"></div>
                 <div class="line">1. Intro</div>
                 <div class="line">2. Xcstasy (English ver)</div>
                 <div class="line">3. Xcstasy (Korean ver)</div>
@@ -249,6 +288,8 @@
                 <img src="sixth.jpg" alt="sixth">
             </div>
             <div class="album-tracks">
+                <img src="6TH.jpg" alt="6TH" class="album-label">
+                <div class="album-divider"></div>
                 <div class="line">1. 나 어떡해</div>
                 <div class="line">2. 바램</div>
                 <div class="line">3. 슬픈기대</div>
@@ -271,6 +312,8 @@
                 <img src="voxspecial.jpg" alt="voxspecial">
             </div>
             <div class="album-tracks">
+                <img src="SPECIALALBUM.jpg" alt="SPECIALALBUM" class="album-label">
+                <div class="album-divider"></div>
                 <div class="disc-label">Disc 1</div>
                 <div class="line">1. 우연</div>
                 <div class="line">2. GO</div>
@@ -322,6 +365,8 @@
                 <img src="boyishbig.jpg" alt="boyishbig">
             </div>
             <div class="album-tracks">
+                <img src="5TH.jpg" alt="5TH" class="album-label">
+                <div class="album-divider"></div>
                 <div class="line">1. Intro</div>
                 <div class="line">2. Game over</div>
                 <div class="line">3. 인형</div>
@@ -346,6 +391,8 @@
                 <img src="fourthbig.jpg" alt="fourthbig">
             </div>
             <div class="album-tracks">
+                <img src="4TH.jpg" alt="4TH" class="album-label">
+                <div class="album-divider"></div>
                 <div class="line">1. why</div>
                 <div class="line">2. 배신</div>
                 <div class="line">3. 회상</div>
@@ -366,6 +413,8 @@
                 <img src="voxthird.jpg" alt="voxthird">
             </div>
             <div class="album-tracks">
+                <img src="3RD.jpg" alt="3RD" class="album-label">
+                <div class="album-divider"></div>
                 <div class="line">1. Intro</div>
                 <div class="line">2. Get up</div>
                 <div class="line">3. MissingYou</div>
@@ -385,6 +434,8 @@
                 <img src="twobig.jpg" alt="twobig">
             </div>
             <div class="album-tracks">
+                <img src="2ND.jpg" alt="2ND" class="album-label">
+                <div class="album-divider"></div>
                 <div class="line">1. 야야야</div>
                 <div class="line">2. Break it up</div>
                 <div class="line">3. 패자부활전</div>
@@ -400,6 +451,8 @@
                 <img src="voxfirst.jpg" alt="voxfirst">
             </div>
             <div class="album-tracks">
+                <img src="1ST.jpg" alt="1ST" class="album-label">
+                <div class="album-divider"></div>
                 <div class="line">1. Interlude</div>
                 <div class="line">2. 머리하는 날</div>
                 <div class="line">3. 남자에게 &lt;민주주의&gt;</div>

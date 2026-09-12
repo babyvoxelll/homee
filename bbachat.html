@@ -99,6 +99,7 @@
             align-items: flex-start;
             justify-content: center;
             position: relative;
+            min-height: 460px;
         }
         .bbachat-left {
             flex: 1;
@@ -336,22 +337,23 @@
             flex: 1;
             background: #404040;
             min-width: 0;
-            flex-direction: column;
-            align-items: stretch;
-            justify-content: flex-start;
+            min-height: 420px;
             position: relative;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: stretch;
         }
         .bbachat-detail.open {
             display: flex;
         }
         .bbachat-detail .detail-back {
             position: absolute;
-            top: 8px;
-            left: 8px;
+            top: 6px;
+            left: 6px;
             background: transparent;
             border: none;
             color: #fff;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: bold;
             cursor: pointer;
             padding: 0 6px;
@@ -361,51 +363,83 @@
         .bbachat-detail .detail-back:hover {
             opacity: 0.7;
         }
-        .bbachat-detail .detail-panel {
-            width: 100%;
+        .bbachat-detail .detail-header {
             background: #800020;
             color: #fff;
+            font-size: 12px;
+            font-weight: bold;
             padding: 6px 8px;
             display: grid;
             grid-template-columns: 50px 1fr 70px 100px 120px;
             gap: 4px;
             text-align: center;
-            font-size: 12px;
-            font-weight: bold;
+            flex-shrink: 0;
+            margin-top: 30px;
         }
-        .bbachat-detail .detail-body {
-            width: 100%;
+        .bbachat-detail .detail-row {
+            display: grid;
+            grid-template-columns: 50px 1fr 70px 100px 120px;
+            gap: 4px;
+            padding: 6px 8px;
             background: #d0d0d0;
-            color: #000;
             font-size: 12px;
-            padding: 10px 14px 14px 14px;
+            align-items: center;
             text-align: center;
             word-wrap: break-word;
             overflow-wrap: break-word;
             min-width: 0;
         }
-        .bbachat-detail .detail-body .detail-message {
-            font-size: 13px;
+        .bbachat-detail .detail-row > div {
+            min-width: 0;
             word-wrap: break-word;
             overflow-wrap: break-word;
-            white-space: pre-wrap;
-            margin-top: 6px;
         }
-        .bbachat-detail .detail-body .detail-image {
+        .bbachat-detail .detail-row .msg-cell {
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex-wrap: wrap;
+            min-width: 0;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: break-word;
+        }
+        .bbachat-detail .detail-row .msg-cell span {
+            min-width: 0;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: break-word;
+            white-space: pre-wrap;
+        }
+        .bbachat-detail .detail-row .file-cell img {
+            width: 14px;
+            height: auto;
+            display: inline-block;
+        }
+        .bbachat-detail .detail-extra {
+            background: #d0d0d0;
+            padding: 10px 14px 14px 14px;
+            text-align: center;
+            color: #000;
+            font-size: 13px;
+            border-top: 1px solid #b0b0b0;
+        }
+        .bbachat-detail .detail-extra .detail-image {
             max-width: 100%;
             height: auto;
             display: block;
-            margin: 10px auto 0 auto;
+            margin: 6px auto 0 auto;
         }
-        .bbachat-detail .detail-body .detail-gif {
+        .bbachat-detail .detail-extra .detail-gif {
             max-width: 100px;
             height: auto;
             display: block;
-            margin: 10px auto 0 auto;
+            margin: 6px auto 0 auto;
         }
-        .bbachat-detail .detail-body .detail-download {
+        .bbachat-detail .detail-extra .detail-download {
             display: inline-block;
-            margin-top: 10px;
+            margin-top: 8px;
             padding: 8px 14px;
             background: #800020;
             color: #fff;
@@ -415,7 +449,7 @@
             border: 1px solid #555;
             cursor: pointer;
         }
-        .bbachat-detail .detail-body .detail-download:hover {
+        .bbachat-detail .detail-extra .detail-download:hover {
             background: #a00028;
         }
 
@@ -467,7 +501,8 @@
             }
             .bbachat-header,
             .bbachat-row,
-            .bbachat-detail .detail-panel {
+            .bbachat-detail .detail-header,
+            .bbachat-detail .detail-row {
                 grid-template-columns: 35px 1fr 55px 70px 80px;
                 font-size: 10px;
             }
@@ -546,8 +581,15 @@
 
             <div class="bbachat-detail" id="bbachatDetail">
                 <button class="detail-back" id="detailBack">←</button>
-                <div class="detail-panel" id="detailPanel"></div>
-                <div class="detail-body" id="detailBody"></div>
+                <div class="detail-header">
+                    <div>번호</div>
+                    <div>메시지</div>
+                    <div>파일</div>
+                    <div>이름</div>
+                    <div>등록일</div>
+                </div>
+                <div class="detail-row" id="detailRow"></div>
+                <div class="detail-extra" id="detailExtra"></div>
             </div>
         </div>
     </div>
@@ -656,24 +698,45 @@
             const detail = document.getElementById("bbachatDetail");
             detail.classList.add("open");
 
-            const panel = document.getElementById("detailPanel");
-            panel.innerHTML = "";
+            const rowContainer = document.getElementById("detailRow");
+            rowContainer.innerHTML = "";
 
             const numCell = document.createElement("div");
             numCell.textContent = data.number || "";
-            panel.appendChild(numCell);
+            rowContainer.appendChild(numCell);
 
             const msgCell = document.createElement("div");
-            msgCell.textContent = data.message || "";
-            panel.appendChild(msgCell);
+            msgCell.className = "msg-cell";
+            const msgText = document.createElement("span");
+            msgText.textContent = data.message || "";
+            msgCell.appendChild(msgText);
+            if (data.gif) {
+                const gifImg = document.createElement("img");
+                gifImg.src = data.gif;
+                gifImg.className = "gif-inline";
+                gifImg.alt = "gif";
+                msgCell.appendChild(gifImg);
+            }
+            rowContainer.appendChild(msgCell);
 
             const fileCell = document.createElement("div");
-            fileCell.textContent = data.fileType === "jpg" ? "JPG" : (data.fileType === "exe" ? "EXE" : "");
-            panel.appendChild(fileCell);
+            fileCell.className = "file-cell";
+            if (data.fileType === "jpg") {
+                const img = document.createElement("img");
+                img.src = "JPG.gif";
+                img.alt = "JPG";
+                fileCell.appendChild(img);
+            } else if (data.fileType === "exe") {
+                const img = document.createElement("img");
+                img.src = "EXE.gif";
+                img.alt = "EXE";
+                fileCell.appendChild(img);
+            }
+            rowContainer.appendChild(fileCell);
 
             const nameCell = document.createElement("div");
             nameCell.textContent = data.name || "";
-            panel.appendChild(nameCell);
+            rowContainer.appendChild(nameCell);
 
             const dateCell = document.createElement("div");
             if (data.timestamp) {
@@ -681,30 +744,17 @@
                 const pad = (n) => n.toString().padStart(2, "0");
                 dateCell.textContent = `${pad(d.getDate())}.${pad(d.getMonth() + 1)}.${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
             }
-            panel.appendChild(dateCell);
+            rowContainer.appendChild(dateCell);
 
-            const body = document.getElementById("detailBody");
-            body.innerHTML = "";
-
-            const messageDiv = document.createElement("div");
-            messageDiv.className = "detail-message";
-            messageDiv.textContent = data.message || "";
-            body.appendChild(messageDiv);
-
-            if (data.gif) {
-                const gifImg = document.createElement("img");
-                gifImg.src = data.gif;
-                gifImg.className = "detail-gif";
-                gifImg.alt = "gif";
-                body.appendChild(gifImg);
-            }
+            const extra = document.getElementById("detailExtra");
+            extra.innerHTML = "";
 
             if (data.fileType === "jpg") {
                 const img = document.createElement("img");
                 img.src = "JPG.gif";
                 img.className = "detail-image";
                 img.alt = "jpg";
-                body.appendChild(img);
+                extra.appendChild(img);
             } else if (data.fileType === "exe") {
                 const link = document.createElement("a");
                 link.href = "#";
@@ -714,7 +764,12 @@
                     e.preventDefault();
                     alert("파일 다운로드는 준비 중입니다.");
                 });
-                body.appendChild(link);
+                extra.appendChild(link);
+            } else {
+                extra.style.display = "none";
+            }
+            if (data.fileType === "jpg" || data.fileType === "exe") {
+                extra.style.display = "block";
             }
         }
 

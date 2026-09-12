@@ -34,23 +34,29 @@
         }
 
         .bbachat-top-imgs {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
+            position: relative;
             width: 100%;
+            height: 280px;
             margin-bottom: 0;
         }
-        .bbachat-top-imgs img {
-            display: block;
+        .bbachat-top-imgs img.bbvoxpanel {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 300px;
+            max-width: 300px;
             height: auto;
+            display: block;
         }
-        .bbachat-top-imgs img.left {
-            width: 220px;
-            max-width: 220px;
-        }
-        .bbachat-top-imgs img.right {
-            width: 220px;
-            max-width: 220px;
+        .bbachat-top-imgs img.panel {
+            position: absolute;
+            left: 200px;
+            bottom: 0;
+            width: 300px;
+            max-width: 300px;
+            height: auto;
+            display: block;
+            z-index: 2;
         }
 
         .bbachat-wrapper {
@@ -272,10 +278,17 @@
             .bbachat-form {
                 width: 100%;
             }
-            .bbachat-top-imgs img.left,
-            .bbachat-top-imgs img.right {
-                width: 160px;
-                max-width: 160px;
+            .bbachat-top-imgs {
+                height: 220px;
+            }
+            .bbachat-top-imgs img.bbvoxpanel {
+                width: 220px;
+                max-width: 220px;
+            }
+            .bbachat-top-imgs img.panel {
+                width: 220px;
+                max-width: 220px;
+                left: 140px;
             }
         }
         @media (max-width: 500px) {
@@ -287,10 +300,17 @@
                 grid-template-columns: 35px 1fr 55px 70px 80px;
                 font-size: 10px;
             }
-            .bbachat-top-imgs img.left,
-            .bbachat-top-imgs img.right {
-                width: 120px;
-                max-width: 120px;
+            .bbachat-top-imgs {
+                height: 160px;
+            }
+            .bbachat-top-imgs img.bbvoxpanel {
+                width: 160px;
+                max-width: 160px;
+            }
+            .bbachat-top-imgs img.panel {
+                width: 160px;
+                max-width: 160px;
+                left: 100px;
             }
         }
     </style>
@@ -299,8 +319,8 @@
 
     <div class="bbachat-outer">
         <div class="bbachat-top-imgs">
-            <img src="bbvoxpanel.jpg" alt="bbvoxpanel" class="left">
-            <img src="panel.png" alt="panel" class="right">
+            <img src="bbvoxpanel.jpg" alt="bbvoxpanel" class="bbvoxpanel">
+            <img src="panel.png" alt="panel" class="panel">
         </div>
 
         <div class="bbachat-wrapper">

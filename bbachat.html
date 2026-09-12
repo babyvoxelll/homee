@@ -25,35 +25,32 @@
 
         .bbachat-outer {
             display: flex;
-            align-items: flex-start;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            gap: 15px;
             margin: 20px auto;
+            width: 700px;
+            max-width: 700px;
         }
 
-        .bbachat-side-left {
-            flex-shrink: 0;
+        .bbachat-top-imgs {
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: flex-end;
+            width: 100%;
+            margin-bottom: 0;
         }
-        .bbachat-side-left img {
+        .bbachat-top-imgs img {
             display: block;
-            width: 220px;
-            max-width: 220px;
             height: auto;
         }
-        .bbachat-side-right {
-            flex-shrink: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-        .bbachat-side-right img {
-            display: block;
+        .bbachat-top-imgs img.left {
             width: 220px;
             max-width: 220px;
-            height: auto;
+        }
+        .bbachat-top-imgs img.right {
+            width: 220px;
+            max-width: 220px;
         }
 
         .bbachat-wrapper {
@@ -264,33 +261,25 @@
             background: #a00028;
         }
 
-        @media (max-width: 1100px) {
-            .bbachat-side-left img,
-            .bbachat-side-right img {
-                width: 180px;
-                max-width: 180px;
-            }
-        }
         @media (max-width: 900px) {
             .bbachat-outer {
-                flex-direction: column;
-                align-items: center;
+                width: 90%;
             }
             .bbachat-wrapper {
-                width: 90%;
+                width: 100%;
                 flex-direction: column;
             }
             .bbachat-form {
                 width: 100%;
             }
-            .bbachat-side-left img,
-            .bbachat-side-right img {
+            .bbachat-top-imgs img.left,
+            .bbachat-top-imgs img.right {
                 width: 160px;
                 max-width: 160px;
             }
         }
         @media (max-width: 500px) {
-            .bbachat-wrapper {
+            .bbachat-outer {
                 width: 95%;
             }
             .bbachat-header,
@@ -298,10 +287,10 @@
                 grid-template-columns: 35px 1fr 55px 70px 80px;
                 font-size: 10px;
             }
-            .bbachat-side-left img,
-            .bbachat-side-right img {
-                width: 130px;
-                max-width: 130px;
+            .bbachat-top-imgs img.left,
+            .bbachat-top-imgs img.right {
+                width: 120px;
+                max-width: 120px;
             }
         }
     </style>
@@ -309,8 +298,9 @@
 <body>
 
     <div class="bbachat-outer">
-        <div class="bbachat-side-left">
-            <img src="bbvox.jpg" alt="bbvox">
+        <div class="bbachat-top-imgs">
+            <img src="bbvoxpanel.jpg" alt="bbvoxpanel" class="left">
+            <img src="panel.png" alt="panel" class="right">
         </div>
 
         <div class="bbachat-wrapper">
@@ -346,10 +336,6 @@
 
                 <button id="sendBtn">보내기</button>
             </div>
-        </div>
-
-        <div class="bbachat-side-right">
-            <img src="panel.png" alt="panel">
         </div>
     </div>
 

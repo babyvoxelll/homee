@@ -182,7 +182,7 @@
             margin-left: 6px;
         }
         .bbachat-row .file-cell img {
-            width: 14px;
+            width: 22px;
             height: auto;
             display: inline-block;
         }
@@ -419,7 +419,7 @@
             margin-left: 6px;
         }
         .bbachat-detail .detail-row .file-cell img {
-            width: 14px;
+            width: 22px;
             height: auto;
             display: inline-block;
         }
@@ -431,48 +431,19 @@
             font-size: 13px;
             border-top: 1px solid #b0b0b0;
         }
-        .bbachat-detail .detail-extra .detail-link {
+        .bbachat-detail .detail-extra a.detail-file-link {
             display: inline-block;
-            color: #800020;
+            color: #0000ee;
             text-decoration: underline;
             font-size: 13px;
-            font-weight: bold;
             cursor: pointer;
-            background: transparent;
-            border: none;
-            padding: 2px 0;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
-        .bbachat-detail .detail-extra .detail-link:hover {
-            color: #a00028;
+        .bbachat-detail .detail-extra a.detail-file-link:visited {
+            color: #551a8b;
         }
-        .bbachat-detail .detail-extra .detail-image {
-            max-width: 100%;
-            height: auto;
-            display: none;
-            margin-top: 8px;
-            border: 1px solid #888;
-        }
-        .bbachat-detail .detail-extra .detail-image.visible {
-            display: block;
-        }
-        .bbachat-detail .detail-extra .detail-download {
-            display: none;
-            margin-top: 8px;
-            padding: 8px 14px;
-            background: #800020;
-            color: #fff;
-            text-decoration: none;
-            font-size: 12px;
-            font-weight: bold;
-            border: 1px solid #555;
-            cursor: pointer;
-        }
-        .bbachat-detail .detail-extra .detail-download.visible {
-            display: inline-block;
-        }
-        .bbachat-detail .detail-extra .detail-download:hover {
-            background: #a00028;
+        .bbachat-detail .detail-extra a.detail-file-link:hover {
+            color: #800020;
         }
 
         @media (max-width: 1100px) {
@@ -639,6 +610,7 @@
         let currentPage = 1;
         let allMessages = [];
         let selectedGif = null;
+        let selectedFileData = null;
 
         function generateRandomNumber() {
             return Math.floor(10000 + Math.random() * 90000).toString();
@@ -772,36 +744,20 @@
             extra.innerHTML = "";
 
             if (data.fileType === "jpg") {
-                const link = document.createElement("button");
-                link.className = "detail-link";
-                link.textContent = "JPG 파일 보기";
-                const img = document.createElement("img");
-                img.className = "detail-image";
-                img.alt = "jpg";
-                img.src = "JPG.gif";
-                link.addEventListener("click", () => {
-                    img.classList.toggle("visible");
-                });
+                const link = document.createElement("a");
+                link.className = "detail-file-link";
+                link.href = "JPG.gif";
+                link.download = "photo.jpg";
+                link.textContent = "사진 다운로드";
                 extra.appendChild(link);
-                extra.appendChild(img);
                 extra.style.display = "block";
             } else if (data.fileType === "exe") {
-                const link = document.createElement("button");
-                link.className = "detail-link";
-                link.textContent = "EXE 파일 다운로드";
-                const downloadBtn = document.createElement("a");
-                downloadBtn.className = "detail-download";
-                downloadBtn.href = "#";
-                downloadBtn.textContent = "다운로드";
-                downloadBtn.addEventListener("click", (e) => {
-                    e.preventDefault();
-                    alert("파일 다운로드는 준비 중입니다.");
-                });
-                link.addEventListener("click", () => {
-                    downloadBtn.classList.toggle("visible");
-                });
+                const link = document.createElement("a");
+                link.className = "detail-file-link";
+                link.href = "EXE.gif";
+                link.download = "file.exe";
+                link.textContent = "파일 다운로드";
                 extra.appendChild(link);
-                extra.appendChild(downloadBtn);
                 extra.style.display = "block";
             } else {
                 extra.style.display = "none";

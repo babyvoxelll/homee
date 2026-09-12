@@ -79,17 +79,16 @@
             border: none;
             cursor: pointer;
             text-decoration: none;
-            width: 55px;
             height: 22px;
         }
-        /* 7 кнопок ГОРИЗОНТАЛЬНО, прижаты к панели, короче */
-        .nav-overlay a:nth-child(1) { left: 0%;  bottom: 2%; }
-        .nav-overlay a:nth-child(2) { left: 13%; bottom: 2%; }
-        .nav-overlay a:nth-child(3) { left: 26%; bottom: 2%; }
-        .nav-overlay a:nth-child(4) { left: 39%; bottom: 2%; }
-        .nav-overlay a:nth-child(5) { left: 52%; bottom: 2%; }
-        .nav-overlay a:nth-child(6) { left: 65%; bottom: 2%; }
-        .nav-overlay a:nth-child(7) { left: 78%; bottom: 2%; }
+        /* 7 кнопок ГОРИЗОНТАЛЬНО, прижаты к панели, с индивидуальными размерами */
+        .nav-overlay a:nth-child(1) { left: 0%;   bottom: 2%; width: 55px; }
+        .nav-overlay a:nth-child(2) { left: 11%;  bottom: 2%; width: 55px; }
+        .nav-overlay a:nth-child(3) { left: 23%;  bottom: 2%; width: 55px; }
+        .nav-overlay a:nth-child(4) { left: 36%;  bottom: 2%; width: 80px; }
+        .nav-overlay a:nth-child(5) { left: 52%;  bottom: 2%; width: 55px; }
+        .nav-overlay a:nth-child(6) { left: 65%;  bottom: 2%; width: 70px; }
+        .nav-overlay a:nth-child(7) { left: 82%;  bottom: 2%; width: 55px; }
 
         .bbachat-wrapper {
             width: 1000px;
@@ -339,7 +338,7 @@
                 height: 280px;
             }
             .nav-overlay a {
-                width: 45px;
+                width: 40px;
                 height: 16px;
             }
         }

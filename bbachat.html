@@ -97,6 +97,7 @@
             display: flex;
             gap: 15px;
             align-items: flex-start;
+            justify-content: center;
         }
         .bbachat-left {
             flex: 1;
@@ -337,7 +338,7 @@
             min-width: 0;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
+            justify-content: center;
         }
         .bbachat-detail.open {
             display: flex;
@@ -349,40 +350,19 @@
             padding: 10px 14px;
             font-size: 13px;
             font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .bbachat-detail .detail-close {
-            background: transparent;
-            color: #fff;
-            border: 1px solid #fff;
-            padding: 2px 8px;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: bold;
-        }
-        .bbachat-detail .detail-close:hover {
-            background: #fff;
-            color: #800020;
+            text-align: center;
         }
         .bbachat-detail .detail-body {
             width: 100%;
             background: #d0d0d0;
             padding: 14px;
             color: #000;
-            font-size: 13px;
+            font-size: 14px;
             line-height: 1.5;
-        }
-        .bbachat-detail .detail-body .detail-meta {
-            font-size: 11px;
-            color: #333;
-            margin-bottom: 8px;
-            padding-bottom: 6px;
-            border-bottom: 1px solid #999;
+            text-align: center;
         }
         .bbachat-detail .detail-body .detail-message {
-            font-size: 14px;
+            font-size: 15px;
             word-wrap: break-word;
             overflow-wrap: break-word;
             white-space: pre-wrap;
@@ -392,13 +372,13 @@
             max-width: 100%;
             height: auto;
             display: block;
-            margin-top: 10px;
+            margin: 10px auto 0 auto;
         }
         .bbachat-detail .detail-body .detail-gif {
             max-width: 100px;
             height: auto;
             display: block;
-            margin-top: 10px;
+            margin: 10px auto 0 auto;
         }
         .bbachat-detail .detail-body .detail-download {
             display: inline-block;
@@ -541,10 +521,7 @@
             </div>
 
             <div class="bbachat-detail" id="bbachatDetail">
-                <div class="detail-panel">
-                    <span>메시지 상세</span>
-                    <button class="detail-close" id="detailClose">닫기</button>
-                </div>
+                <div class="detail-panel" id="detailPanel"></div>
                 <div class="detail-body" id="detailBody"></div>
             </div>
         </div>
@@ -653,13 +630,11 @@
             const detail = document.getElementById("bbachatDetail");
             detail.classList.add("open");
 
+            const panel = document.getElementById("detailPanel");
+            panel.textContent = `${data.name || ""} · ${data.number || ""}`;
+
             const body = document.getElementById("detailBody");
             body.innerHTML = "";
-
-            const meta = document.createElement("div");
-            meta.className = "detail-meta";
-            meta.textContent = `${data.name || ""} · ${data.number || ""} · ${data.timestamp ? new Date(data.timestamp).toLocaleString() : ""}`;
-            body.appendChild(meta);
 
             const messageDiv = document.createElement("div");
             messageDiv.className = "detail-message";
@@ -691,12 +666,12 @@
                 });
                 body.appendChild(link);
             }
-        }
 
-        document.getElementById("detailClose").addEventListener("click", () => {
-            document.getElementById("bbachatDetail").classList.remove("open");
-            document.getElementById("bbachatForm").style.display = "block";
-        });
+            document.getElementById("detailPanel").addEventListener("click", () => {
+                document.getElementById("bbachatDetail").classList.remove("open");
+                document.getElementById("bbachatForm").style.display = "block";
+            });
+        }
 
         function renderPage() {
             const container = document.getElementById("messages");

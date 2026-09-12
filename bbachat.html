@@ -134,23 +134,23 @@
         .bbachat-pagination {
             display: flex;
             justify-content: center;
-            gap: 4px;
+            gap: 6px;
             padding: 8px 0;
             background: #404040;
             flex-wrap: wrap;
         }
         .bbachat-pagination button {
-            background: #800020;
+            background: transparent;
             color: #fff;
-            border: 1px solid #fff;
-            padding: 3px 9px;
-            font-size: 12px;
+            border: none;
+            padding: 2px 6px;
+            font-size: 13px;
             cursor: pointer;
             font-weight: bold;
         }
         .bbachat-pagination button.active {
-            background: #fff;
-            color: #800020;
+            color: #fff;
+            background: #fff2;
         }
         .bbachat-pagination button:hover {
             opacity: 0.85;
@@ -176,28 +176,59 @@
             margin-bottom: 2px;
             margin-top: 8px;
         }
-        .bbachat-form input[type="text"],
-        .bbachat-form input[type="file"] {
+        .bbachat-form input[type="text"] {
             width: 100%;
             font-size: 12px;
             padding: 4px;
             border: 1px solid #888;
             background: #fff;
         }
-        .bbachat-form button {
-            width: 100%;
-            margin-top: 12px;
-            padding: 8px;
-            font-size: 13px;
+        .bbachat-form .file-label-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 8px;
+        }
+        .bbachat-form .file-label-row label {
+            margin: 0;
+            font-size: 12px;
             font-weight: bold;
+        }
+        .bbachat-form .file-btn {
+            display: inline-block;
+            padding: 3px 8px;
+            background: #eee;
+            border: 1px solid #888;
+            font-size: 12px;
+            cursor: pointer;
+            color: #000;
+        }
+        .bbachat-form .file-name {
+            font-size: 11px;
+            color: #333;
+        }
+        .bbachat-form input[type="file"] {
+            display: none;
+        }
+
+        .gif-toggle {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: bold;
+            color: #000;
+            cursor: pointer;
+            margin-top: 10px;
+            padding: 2px 4px;
+        }
+        .gif-toggle:hover {
             background: #800020;
             color: #fff;
-            border: 1px solid #555;
-            cursor: pointer;
         }
-        .bbachat-form button:hover {
-            background: #a00028;
+        .gif-toggle.open {
+            background: #800020;
+            color: #fff;
         }
+
         .gif-picker {
             display: none;
             background: #fff;
@@ -210,19 +241,6 @@
         .gif-picker.open {
             display: block;
         }
-        .gif-picker .gif-item {
-            display: inline-block;
-            width: 60px;
-            height: 60px;
-            background: #eee;
-            margin: 2px;
-            cursor: pointer;
-            border: 1px solid #ccc;
-            font-size: 10px;
-            text-align: center;
-            line-height: 60px;
-            color: #888;
-        }
         .gif-picker .gif-empty {
             font-size: 11px;
             color: #666;
@@ -233,6 +251,21 @@
             margin-top: 4px;
             font-size: 11px;
             color: #000;
+        }
+
+        .bbachat-form button#sendBtn {
+            width: 100%;
+            margin-top: 12px;
+            padding: 8px;
+            font-size: 13px;
+            font-weight: bold;
+            background: #800020;
+            color: #fff;
+            border: 1px solid #555;
+            cursor: pointer;
+        }
+        .bbachat-form button#sendBtn:hover {
+            background: #a00028;
         }
 
         @media (max-width: 768px) {
@@ -323,14 +356,20 @@
             <input type="text" id="name" maxlength="20" required>
             <label>메시지 (최대 350자)</label>
             <input type="text" id="message" maxlength="350" required>
-            <label>파일 (jpg/exe)</label>
-            <input type="file" id="file" accept=".jpg,.jpeg,.exe">
-            <label>기프</label>
-            <button type="button" id="gifBtn">기프 선택</button>
+
+            <div class="file-label-row">
+                <label>파일</label>
+                <label for="file" class="file-btn">파일 선택</label>
+                <span class="file-name" id="fileName">선택된 파일 없음</span>
+                <input type="file" id="file" accept=".jpg,.jpeg,.exe">
+            </div>
+
+            <span class="gif-toggle" id="gifBtn">기프</span>
             <div class="gif-picker" id="gifPicker">
                 <div class="gif-empty">사용 가능한 기프가 없습니다</div>
             </div>
             <div class="gif-preview" id="gifPreview"></div>
+
             <button id="sendBtn">보내기</button>
         </div>
     </div>
@@ -446,7 +485,8 @@
         function renderPagination() {
             const pag = document.getElementById("pagination");
             pag.innerHTML = "";
-            const totalPages = Math.ceil(allMessages.length / PER_PAGE) || 1;
+            const totalPages = Math.ceil(allMessages.length / PER_PAGE);
+            if (totalPages < 1) return;
             for (let i = 1; i <= totalPages; i++) {
                 const btn = document.createElement("button");
                 btn.textContent = i;
@@ -466,8 +506,8 @@
                 allMessages.push(child.val());
             });
             allMessages.sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
-            const totalPages = Math.ceil(allMessages.length / PER_PAGE) || 1;
-            if (currentPage > totalPages) currentPage = totalPages;
+            const totalPages = Math.ceil(allMessages.length / PER_PAGE);
+            if (currentPage > totalPages && totalPages > 0) currentPage = totalPages;
             renderPage();
             renderPagination();
         });
@@ -479,35 +519,45 @@
 
         gifBtn.addEventListener("click", () => {
             gifPicker.classList.toggle("open");
+            gifBtn.classList.toggle("open");
         });
 
-        // Пустой список — на будущее можно добавить гифки
         const availableGifs = [];
         if (availableGifs.length === 0) {
             gifPicker.innerHTML = '<div class="gif-empty">사용 가능한 기프가 없습니다</div>';
         } else {
             availableGifs.forEach((src) => {
-                const item = document.createElement("div");
-                item.className = "gif-item";
-                const img = document.createElement("img");
-                img.src = src;
-                img.style.maxWidth = "100%";
-                img.style.maxHeight = "100%";
-                item.appendChild(img);
+                const item = document.createElement("img");
+                item.src = src;
+                item.style.width = "60px";
+                item.style.height = "60px";
+                item.style.margin = "2px";
+                item.style.cursor = "pointer";
                 item.addEventListener("click", () => {
                     selectedGif = src;
                     gifPreview.textContent = "선택됨: " + src;
                     gifPicker.classList.remove("open");
+                    gifBtn.classList.remove("open");
                 });
                 gifPicker.appendChild(item);
             });
         }
 
+        // File name display
+        const fileInput = document.getElementById("file");
+        const fileNameLabel = document.getElementById("fileName");
+        fileInput.addEventListener("change", () => {
+            if (fileInput.files && fileInput.files.length > 0) {
+                fileNameLabel.textContent = fileInput.files[0].name;
+            } else {
+                fileNameLabel.textContent = "선택된 파일 없음";
+            }
+        });
+
         // Send
         document.getElementById("sendBtn").addEventListener("click", async () => {
             const name = document.getElementById("name").value.trim();
             const message = document.getElementById("message").value.trim();
-            const fileInput = document.getElementById("file");
 
             if (!name || !message) {
                 alert("이름과 메시지를 입력하세요.");
@@ -543,7 +593,8 @@
             });
 
             document.getElementById("message").value = "";
-            document.getElementById("file").value = "";
+            fileInput.value = "";
+            fileNameLabel.textContent = "선택된 파일 없음";
             selectedGif = null;
             gifPreview.textContent = "";
         });

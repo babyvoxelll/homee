@@ -30,7 +30,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            margin: 0 auto;
+            margin: -60px auto 0 auto;
             width: 1000px;
             max-width: 1000px;
         }
@@ -38,7 +38,7 @@
         .bbachat-top-imgs {
             position: relative;
             width: 1000px;
-            height: 300px;
+            height: 340px;
             margin-bottom: 0;
             flex-shrink: 0;
         }
@@ -46,17 +46,17 @@
             position: absolute;
             left: 0;
             bottom: 0;
-            width: 380px;
-            max-width: 380px;
+            width: 440px;
+            max-width: 440px;
             height: auto;
             display: block;
         }
         .bbachat-top-imgs img.panel {
             position: absolute;
-            left: 340px;
+            left: 320px;
             bottom: 0;
-            width: 460px;
-            max-width: 460px;
+            width: 540px;
+            max-width: 540px;
             height: auto;
             display: block;
             z-index: 2;
@@ -276,6 +276,7 @@
         @media (max-width: 1100px) {
             .bbachat-outer {
                 width: 90%;
+                margin: -40px auto 0 auto;
             }
             .bbachat-wrapper {
                 width: 100%;
@@ -292,21 +293,22 @@
                 width: 100%;
             }
             .bbachat-top-imgs {
-                height: 220px;
+                height: 240px;
             }
             .bbachat-top-imgs img.bbvoxpanel {
-                width: 260px;
-                max-width: 260px;
+                width: 300px;
+                max-width: 300px;
             }
             .bbachat-top-imgs img.panel {
-                width: 320px;
-                max-width: 320px;
-                left: 180px;
+                width: 360px;
+                max-width: 360px;
+                left: 200px;
             }
         }
         @media (max-width: 500px) {
             .bbachat-outer {
                 width: 95%;
+                margin: -20px auto 0 auto;
             }
             .bbachat-header,
             .bbachat-row {
@@ -314,16 +316,16 @@
                 font-size: 10px;
             }
             .bbachat-top-imgs {
-                height: 160px;
+                height: 180px;
             }
             .bbachat-top-imgs img.bbvoxpanel {
-                width: 180px;
-                max-width: 180px;
+                width: 200px;
+                max-width: 200px;
             }
             .bbachat-top-imgs img.panel {
-                width: 220px;
-                max-width: 220px;
-                left: 120px;
+                width: 250px;
+                max-width: 250px;
+                left: 130px;
             }
         }
     </style>
@@ -396,13 +398,9 @@
         let allMessages = [];
         let selectedGif = null;
 
-        function getUserNumber() {
-            let num = localStorage.getItem("bbachat_number");
-            if (!num) {
-                num = Math.floor(10000 + Math.random() * 90000).toString();
-                localStorage.setItem("bbachat_number", num);
-            }
-            return num;
+        // Каждое сообщение получает СВОЙ случайный 5-значный номер
+        function generateRandomNumber() {
+            return Math.floor(10000 + Math.random() * 90000).toString();
         }
 
         function buildRow(data) {
@@ -600,7 +598,8 @@
                 }
             }
 
-            const userNumber = getUserNumber();
+            // Новый случайный номер для КАЖДОГО сообщения
+            const userNumber = generateRandomNumber();
 
             await push(messagesRef, {
                 number: userNumber,

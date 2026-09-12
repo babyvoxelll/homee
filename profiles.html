@@ -62,29 +62,14 @@
             width: 60px;
             height: 20px;
         }
-        /* 7 кнопок слева на фотке - расположены вертикально, удлинены вправо */
-        .nav-overlay a:nth-child(1) { left: 30%; top: 8%; }
-        .nav-overlay a:nth-child(2) { left: 30%; top: 18%; }
-        .nav-overlay a:nth-child(3) { left: 30%; top: 28%; }
-        .nav-overlay a:nth-child(4) { left: 30%; top: 38%; }
-        .nav-overlay a:nth-child(5) { left: 30%; top: 48%; }
-        .nav-overlay a:nth-child(6) { left: 30%; top: 58%; }
-        .nav-overlay a:nth-child(7) { left: 30%; top: 68%; }
-
-        .memberprofile-img {
-            display: block;
-            width: 45%;
-            max-width: 550px;
-            height: auto;
-            margin: 0 auto;
-            line-height: 0;
-        }
-        .memberprofile-img img {
-            display: block;
-            width: 60px;
-            height: auto;
-            margin: 0;
-        }
+        /* 7 кнопок справа на фотке - сдвинуты левее и выше */
+        .nav-overlay a:nth-child(1) { right: 36%; top: 8%; }
+        .nav-overlay a:nth-child(2) { right: 36%; top: 17%; }
+        .nav-overlay a:nth-child(3) { right: 36%; top: 26%; }
+        .nav-overlay a:nth-child(4) { right: 36%; top: 35%; }
+        .nav-overlay a:nth-child(5) { right: 36%; top: 44%; }
+        .nav-overlay a:nth-child(6) { right: 36%; top: 53%; }
+        .nav-overlay a:nth-child(7) { right: 36%; top: 62%; }
 
         .info-red {
             color: #ffffff;
@@ -95,6 +80,23 @@
             background-color: #00008b;
             width: 55%;
             max-width: 600px;
+            margin: 10px auto 0 auto;
+        }
+        .memberprofile-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 55%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0;
+            line-height: 0;
+        }
+        .memberprofile-container img {
+            display: block;
+            width: 60%;
+            max-width: 350px;
+            height: auto;
             margin: 0 auto;
         }
         .profiles-container {
@@ -160,27 +162,27 @@
                 width: 85%;
                 max-width: 600px;
             }
+            .memberprofile-container {
+                width: 85%;
+                max-width: 600px;
+            }
             #image-container img {
                 width: 60%;
                 max-width: 450px;
                 transform: scaleY(0.75);
                 transform-origin: top center;
             }
-            .memberprofile-img {
-                width: 60%;
-                max-width: 450px;
-            }
             .nav-overlay a {
                 width: 50px;
                 height: 16px;
             }
-            .nav-overlay a:nth-child(1) { left: 23%; top: 8%; }
-            .nav-overlay a:nth-child(2) { left: 23%; top: 18%; }
-            .nav-overlay a:nth-child(3) { left: 23%; top: 28%; }
-            .nav-overlay a:nth-child(4) { left: 23%; top: 38%; }
-            .nav-overlay a:nth-child(5) { left: 23%; top: 48%; }
-            .nav-overlay a:nth-child(6) { left: 23%; top: 58%; }
-            .nav-overlay a:nth-child(7) { left: 23%; top: 68%; }
+            .nav-overlay a:nth-child(1) { right: 29%; top: 8%; }
+            .nav-overlay a:nth-child(2) { right: 29%; top: 17%; }
+            .nav-overlay a:nth-child(3) { right: 29%; top: 26%; }
+            .nav-overlay a:nth-child(4) { right: 29%; top: 35%; }
+            .nav-overlay a:nth-child(5) { right: 29%; top: 44%; }
+            .nav-overlay a:nth-child(6) { right: 29%; top: 53%; }
+            .nav-overlay a:nth-child(7) { right: 29%; top: 62%; }
             .member-block {
                 flex-direction: column;
                 align-items: center;
@@ -204,27 +206,26 @@
             .info-red {
                 width: 95%;
             }
+            .memberprofile-container {
+                width: 95%;
+            }
             #image-container img {
                 width: 75%;
                 max-width: 350px;
                 transform: scaleY(0.7);
                 transform-origin: top center;
             }
-            .memberprofile-img {
-                width: 75%;
-                max-width: 350px;
-            }
             .nav-overlay a {
                 width: 40px;
                 height: 12px;
             }
-            .nav-overlay a:nth-child(1) { left: 17%; top: 8%; }
-            .nav-overlay a:nth-child(2) { left: 17%; top: 18%; }
-            .nav-overlay a:nth-child(3) { left: 17%; top: 28%; }
-            .nav-overlay a:nth-child(4) { left: 17%; top: 38%; }
-            .nav-overlay a:nth-child(5) { left: 17%; top: 48%; }
-            .nav-overlay a:nth-child(6) { left: 17%; top: 58%; }
-            .nav-overlay a:nth-child(7) { left: 17%; top: 68%; }
+            .nav-overlay a:nth-child(1) { right: 22%; top: 8%; }
+            .nav-overlay a:nth-child(2) { right: 22%; top: 17%; }
+            .nav-overlay a:nth-child(3) { right: 22%; top: 26%; }
+            .nav-overlay a:nth-child(4) { right: 22%; top: 35%; }
+            .nav-overlay a:nth-child(5) { right: 22%; top: 44%; }
+            .nav-overlay a:nth-child(6) { right: 22%; top: 53%; }
+            .nav-overlay a:nth-child(7) { right: 22%; top: 62%; }
             .member-photo {
                 width: 120px;
             }
@@ -247,12 +248,12 @@
             <a href="photogallery.html"></a>
         </div>
     </div>
-
-    <div class="memberprofile-img">
-        <img src="memberprofile.jpg" alt="memberprofile">
-    </div>
     
     <div class="info-red">정보는 2004년 기준입니다</div>
+    
+    <div class="memberprofile-container">
+        <img src="memberprofile.jpg" alt="memberprofile">
+    </div>
     
     <div class="profiles-container">
         <div class="member-block reverse">

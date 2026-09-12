@@ -412,6 +412,12 @@
             word-break: break-word;
             white-space: pre-wrap;
         }
+        .bbachat-detail .detail-row .msg-cell img.gif-inline {
+            width: 32px;
+            height: auto;
+            flex-shrink: 0;
+            margin-left: 6px;
+        }
         .bbachat-detail .detail-row .file-cell img {
             width: 14px;
             height: auto;
@@ -420,25 +426,38 @@
         .bbachat-detail .detail-extra {
             background: #d0d0d0;
             padding: 10px 14px 14px 14px;
-            text-align: center;
+            text-align: left;
             color: #000;
             font-size: 13px;
             border-top: 1px solid #b0b0b0;
         }
+        .bbachat-detail .detail-extra .detail-link {
+            display: inline-block;
+            color: #800020;
+            text-decoration: underline;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            padding: 2px 0;
+            margin-bottom: 8px;
+        }
+        .bbachat-detail .detail-extra .detail-link:hover {
+            color: #a00028;
+        }
         .bbachat-detail .detail-extra .detail-image {
             max-width: 100%;
             height: auto;
-            display: block;
-            margin: 6px auto 0 auto;
+            display: none;
+            margin-top: 8px;
+            border: 1px solid #888;
         }
-        .bbachat-detail .detail-extra .detail-gif {
-            max-width: 100px;
-            height: auto;
+        .bbachat-detail .detail-extra .detail-image.visible {
             display: block;
-            margin: 6px auto 0 auto;
         }
         .bbachat-detail .detail-extra .detail-download {
-            display: inline-block;
+            display: none;
             margin-top: 8px;
             padding: 8px 14px;
             background: #800020;
@@ -448,6 +467,9 @@
             font-weight: bold;
             border: 1px solid #555;
             cursor: pointer;
+        }
+        .bbachat-detail .detail-extra .detail-download.visible {
+            display: inline-block;
         }
         .bbachat-detail .detail-extra .detail-download:hover {
             background: #a00028;
@@ -750,26 +772,39 @@
             extra.innerHTML = "";
 
             if (data.fileType === "jpg") {
+                const link = document.createElement("button");
+                link.className = "detail-link";
+                link.textContent = "JPG 파일 보기";
                 const img = document.createElement("img");
-                img.src = "JPG.gif";
                 img.className = "detail-image";
                 img.alt = "jpg";
+                img.src = "JPG.gif";
+                link.addEventListener("click", () => {
+                    img.classList.toggle("visible");
+                });
+                extra.appendChild(link);
                 extra.appendChild(img);
+                extra.style.display = "block";
             } else if (data.fileType === "exe") {
-                const link = document.createElement("a");
-                link.href = "#";
-                link.className = "detail-download";
+                const link = document.createElement("button");
+                link.className = "detail-link";
                 link.textContent = "EXE 파일 다운로드";
-                link.addEventListener("click", (e) => {
+                const downloadBtn = document.createElement("a");
+                downloadBtn.className = "detail-download";
+                downloadBtn.href = "#";
+                downloadBtn.textContent = "다운로드";
+                downloadBtn.addEventListener("click", (e) => {
                     e.preventDefault();
                     alert("파일 다운로드는 준비 중입니다.");
                 });
+                link.addEventListener("click", () => {
+                    downloadBtn.classList.toggle("visible");
+                });
                 extra.appendChild(link);
+                extra.appendChild(downloadBtn);
+                extra.style.display = "block";
             } else {
                 extra.style.display = "none";
-            }
-            if (data.fileType === "jpg" || data.fileType === "exe") {
-                extra.style.display = "block";
             }
         }
 

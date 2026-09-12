@@ -62,14 +62,29 @@
             width: 60px;
             height: 20px;
         }
-        /* 7 кнопок справа на фотке - расположены вертикально, удлинены влево */
-        .nav-overlay a:nth-child(1) { right: 30%; top: 10%; }
-        .nav-overlay a:nth-child(2) { right: 30%; top: 20%; }
-        .nav-overlay a:nth-child(3) { right: 30%; top: 30%; }
-        .nav-overlay a:nth-child(4) { right: 30%; top: 40%; }
-        .nav-overlay a:nth-child(5) { right: 30%; top: 50%; }
-        .nav-overlay a:nth-child(6) { right: 30%; top: 60%; }
-        .nav-overlay a:nth-child(7) { right: 30%; top: 70%; }
+        /* 7 кнопок слева на фотке - расположены вертикально, удлинены вправо */
+        .nav-overlay a:nth-child(1) { left: 30%; top: 8%; }
+        .nav-overlay a:nth-child(2) { left: 30%; top: 18%; }
+        .nav-overlay a:nth-child(3) { left: 30%; top: 28%; }
+        .nav-overlay a:nth-child(4) { left: 30%; top: 38%; }
+        .nav-overlay a:nth-child(5) { left: 30%; top: 48%; }
+        .nav-overlay a:nth-child(6) { left: 30%; top: 58%; }
+        .nav-overlay a:nth-child(7) { left: 30%; top: 68%; }
+
+        .memberprofile-img {
+            display: block;
+            width: 45%;
+            max-width: 550px;
+            height: auto;
+            margin: 0 auto;
+            line-height: 0;
+        }
+        .memberprofile-img img {
+            display: block;
+            width: 60px;
+            height: auto;
+            margin: 0;
+        }
 
         .info-red {
             color: #ffffff;
@@ -80,7 +95,7 @@
             background-color: #00008b;
             width: 55%;
             max-width: 600px;
-            margin: 10px auto 0 auto;
+            margin: 0 auto;
         }
         .profiles-container {
             width: 55%;
@@ -151,17 +166,21 @@
                 transform: scaleY(0.75);
                 transform-origin: top center;
             }
+            .memberprofile-img {
+                width: 60%;
+                max-width: 450px;
+            }
             .nav-overlay a {
                 width: 50px;
                 height: 16px;
             }
-            .nav-overlay a:nth-child(1) { right: 23%; top: 10%; }
-            .nav-overlay a:nth-child(2) { right: 23%; top: 20%; }
-            .nav-overlay a:nth-child(3) { right: 23%; top: 30%; }
-            .nav-overlay a:nth-child(4) { right: 23%; top: 40%; }
-            .nav-overlay a:nth-child(5) { right: 23%; top: 50%; }
-            .nav-overlay a:nth-child(6) { right: 23%; top: 60%; }
-            .nav-overlay a:nth-child(7) { right: 23%; top: 70%; }
+            .nav-overlay a:nth-child(1) { left: 23%; top: 8%; }
+            .nav-overlay a:nth-child(2) { left: 23%; top: 18%; }
+            .nav-overlay a:nth-child(3) { left: 23%; top: 28%; }
+            .nav-overlay a:nth-child(4) { left: 23%; top: 38%; }
+            .nav-overlay a:nth-child(5) { left: 23%; top: 48%; }
+            .nav-overlay a:nth-child(6) { left: 23%; top: 58%; }
+            .nav-overlay a:nth-child(7) { left: 23%; top: 68%; }
             .member-block {
                 flex-direction: column;
                 align-items: center;
@@ -191,17 +210,21 @@
                 transform: scaleY(0.7);
                 transform-origin: top center;
             }
+            .memberprofile-img {
+                width: 75%;
+                max-width: 350px;
+            }
             .nav-overlay a {
                 width: 40px;
                 height: 12px;
             }
-            .nav-overlay a:nth-child(1) { right: 17%; top: 10%; }
-            .nav-overlay a:nth-child(2) { right: 17%; top: 20%; }
-            .nav-overlay a:nth-child(3) { right: 17%; top: 30%; }
-            .nav-overlay a:nth-child(4) { right: 17%; top: 40%; }
-            .nav-overlay a:nth-child(5) { right: 17%; top: 50%; }
-            .nav-overlay a:nth-child(6) { right: 17%; top: 60%; }
-            .nav-overlay a:nth-child(7) { right: 17%; top: 70%; }
+            .nav-overlay a:nth-child(1) { left: 17%; top: 8%; }
+            .nav-overlay a:nth-child(2) { left: 17%; top: 18%; }
+            .nav-overlay a:nth-child(3) { left: 17%; top: 28%; }
+            .nav-overlay a:nth-child(4) { left: 17%; top: 38%; }
+            .nav-overlay a:nth-child(5) { left: 17%; top: 48%; }
+            .nav-overlay a:nth-child(6) { left: 17%; top: 58%; }
+            .nav-overlay a:nth-child(7) { left: 17%; top: 68%; }
             .member-photo {
                 width: 120px;
             }
@@ -223,6 +246,10 @@
             <a href="bbachat.html"></a>
             <a href="photogallery.html"></a>
         </div>
+    </div>
+
+    <div class="memberprofile-img">
+        <img src="memberprofile.jpg" alt="memberprofile">
     </div>
     
     <div class="info-red">정보는 2004년 기준입니다</div>

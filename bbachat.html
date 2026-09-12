@@ -167,6 +167,12 @@
             height: auto;
             flex-shrink: 0;
         }
+        .bbachat-row .msg-cell img.gif-inline {
+            width: 32px;
+            height: auto;
+            flex-shrink: 0;
+            margin-left: 6px;
+        }
         .bbachat-row .file-cell img {
             width: 14px;
             height: auto;
@@ -273,16 +279,34 @@
         .gif-picker.open {
             display: block;
         }
-        .gif-picker .gif-empty {
-            font-size: 11px;
-            color: #666;
-            text-align: center;
-            padding: 10px;
+        .gif-picker .gif-item {
+            display: inline-block;
+            margin: 2px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            padding: 2px;
+            background: #eee;
+        }
+        .gif-picker .gif-item img {
+            width: 32px;
+            height: auto;
+            display: block;
+        }
+        .gif-picker .gif-item.selected {
+            border-color: #800020;
+            background: #ffe;
         }
         .gif-preview {
             margin-top: 4px;
             font-size: 11px;
             color: #000;
+            min-height: 14px;
+        }
+        .gif-preview img {
+            width: 28px;
+            height: auto;
+            vertical-align: middle;
+            margin-right: 4px;
         }
 
         .bbachat-form button#sendBtn {
@@ -418,9 +442,7 @@
                     <input type="file" id="file" accept=".jpg,.jpeg,.exe">
                 </div>
 
-                <div class="gif-picker" id="gifPicker">
-                    <div class="gif-empty">사용 가능한 기프가 없습니다</div>
-                </div>
+                <div class="gif-picker" id="gifPicker"></div>
                 <div class="gif-preview" id="gifPreview"></div>
 
                 <button id="sendBtn">보내기</button>
@@ -484,9 +506,8 @@
             if (data.gif) {
                 const gifImg = document.createElement("img");
                 gifImg.src = data.gif;
-                gifImg.style.width = "40px";
-                gifImg.style.height = "auto";
-                gifImg.style.marginLeft = "6px";
+                gifImg.className = "gif-inline";
+                gifImg.alt = "gif";
                 msgCell.appendChild(gifImg);
             }
 
@@ -603,26 +624,34 @@
             gifBtn.classList.toggle("open");
         });
 
-        const availableGifs = [];
-        if (availableGifs.length === 0) {
-            gifPicker.innerHTML = '<div class="gif-empty">사용 가능한 기프가 없습니다</div>';
-        } else {
-            availableGifs.forEach((src) => {
-                const item = document.createElement("img");
-                item.src = src;
-                item.style.width = "60px";
-                item.style.height = "60px";
-                item.style.margin = "2px";
-                item.style.cursor = "pointer";
-                item.addEventListener("click", () => {
-                    selectedGif = src;
-                    gifPreview.textContent = "선택됨: " + src;
-                    gifPicker.classList.remove("open");
-                    gifBtn.classList.remove("open");
-                });
-                gifPicker.appendChild(item);
+        const availableGifs = [
+            "1.gif", "2.gif", "3.gif", "4.gif", "5.gif", "6.gif",
+            "7.gif", "8.gif", "9.gif", "10.gif", "11.gif", "12.gif"
+        ];
+
+        availableGifs.forEach((src) => {
+            const item = document.createElement("div");
+            item.className = "gif-item";
+            const img = document.createElement("img");
+            img.src = src;
+            img.alt = "gif";
+            item.appendChild(img);
+            item.addEventListener("click", () => {
+                document.querySelectorAll(".gif-picker .gif-item").forEach((el) => el.classList.remove("selected"));
+                item.classList.add("selected");
+                selectedGif = src;
+                gifPreview.innerHTML = "";
+                const previewImg = document.createElement("img");
+                previewImg.src = src;
+                gifPreview.appendChild(previewImg);
+                const previewText = document.createElement("span");
+                previewText.textContent = "선택됨";
+                gifPreview.appendChild(previewText);
+                gifPicker.classList.remove("open");
+                gifBtn.classList.remove("open");
             });
-        }
+            gifPicker.appendChild(item);
+        });
 
         document.getElementById("sendBtn").addEventListener("click", async () => {
             const name = document.getElementById("name").value.trim();
@@ -665,7 +694,8 @@
             document.getElementById("message").value = "";
             fileInput.value = "";
             selectedGif = null;
-            gifPreview.textContent = "";
+            gifPreview.innerHTML = "";
+            document.querySelectorAll(".gif-picker .gif-item").forEach((el) => el.classList.remove("selected"));
         });
     </script>
 </body>

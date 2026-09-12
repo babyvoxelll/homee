@@ -11,6 +11,9 @@
             padding: 0;
             box-sizing: border-box;
         }
+        html, body {
+            height: 100%;
+        }
         body {
             background: #990033;
             display: flex;
@@ -35,15 +38,16 @@
         .bbachat-top-imgs {
             position: relative;
             width: 700px;
-            height: 480px;
+            height: 300px;
             margin-bottom: 0;
+            flex-shrink: 0;
         }
         .bbachat-top-imgs img.bbvoxpanel {
             position: absolute;
             left: 0;
             bottom: 0;
-            width: 420px;
-            max-width: 420px;
+            width: 380px;
+            max-width: 380px;
             height: auto;
             display: block;
         }
@@ -51,8 +55,8 @@
             position: absolute;
             left: 220px;
             bottom: 0;
-            width: 520px;
-            max-width: 520px;
+            width: 460px;
+            max-width: 460px;
             height: auto;
             display: block;
             z-index: 2;
@@ -73,7 +77,7 @@
             display: flex;
             flex-direction: column;
             min-width: 0;
-            min-height: 520px;
+            height: 600px;
         }
         .bbachat-header {
             background: #800020;
@@ -85,13 +89,13 @@
             grid-template-columns: 50px 1fr 70px 100px 120px;
             gap: 4px;
             text-align: center;
+            flex-shrink: 0;
         }
         .bbachat-messages {
             display: flex;
             flex-direction: column;
             gap: 0;
             overflow-y: auto;
-            max-height: 560px;
             flex: 1;
         }
         .bbachat-row {
@@ -131,13 +135,14 @@
             white-space: pre-wrap;
         }
         .bbachat-row .msg-cell img.new-icon {
-            width: 22px;
+            width: 18px;
             height: auto;
             flex-shrink: 0;
         }
         .bbachat-row .file-cell img {
-            width: 28px;
+            width: 14px;
             height: auto;
+            display: inline-block;
         }
         .bbachat-pagination {
             display: flex;
@@ -147,6 +152,7 @@
             padding: 6px 0;
             background: #404040;
             flex-wrap: nowrap;
+            flex-shrink: 0;
         }
         .bbachat-pagination button {
             background: transparent;
@@ -172,6 +178,7 @@
             background: #d0d0d0;
             padding: 12px;
             flex-shrink: 0;
+            height: 600px;
         }
         .bbachat-form .form-title {
             font-size: 12px;
@@ -276,19 +283,24 @@
             }
             .bbachat-form {
                 width: 100%;
+                height: auto;
+            }
+            .bbachat-left {
+                height: auto;
+                min-height: 400px;
             }
             .bbachat-top-imgs {
                 width: 100%;
-                height: 320px;
+                height: 220px;
             }
             .bbachat-top-imgs img.bbvoxpanel {
-                width: 280px;
-                max-width: 280px;
+                width: 260px;
+                max-width: 260px;
             }
             .bbachat-top-imgs img.panel {
-                width: 340px;
-                max-width: 340px;
-                left: 150px;
+                width: 320px;
+                max-width: 320px;
+                left: 140px;
             }
         }
         @media (max-width: 500px) {
@@ -301,16 +313,16 @@
                 font-size: 10px;
             }
             .bbachat-top-imgs {
-                height: 220px;
+                height: 160px;
             }
             .bbachat-top-imgs img.bbvoxpanel {
-                width: 200px;
-                max-width: 200px;
+                width: 180px;
+                max-width: 180px;
             }
             .bbachat-top-imgs img.panel {
-                width: 240px;
-                max-width: 240px;
-                left: 100px;
+                width: 220px;
+                max-width: 220px;
+                left: 90px;
             }
         }
     </style>

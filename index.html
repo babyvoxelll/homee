@@ -126,7 +126,7 @@
         </div>
     </div>
     
-    <script src="https://unpkg.com/ruffle-rs/ruffle.js"></script>
+    <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <script>
         window.addEventListener("DOMContentLoaded", () => {
             let ruffle = window.RufflePlayer.newest();
@@ -137,12 +137,24 @@
             player.style.height = "270px";
 
             container.appendChild(player);
-            player.load({ url: "babyvoxmain12.swf" });
-            
-            player.play();
-            
+
+            player.load({
+                url: "babyvoxmain12.swf",
+                openUrlMode: "allow",
+                allowNetworking: "all"
+            });
+
+            player.addEventListener("navigate", (event) => {
+                event.preventDefault();
+                if (event.url) {
+                    window.location.href = event.url;
+                }
+            });
+
             player.addEventListener('loadeddata', () => {
                 player.play();
             });
         });
     </script>
+</body>
+</html>

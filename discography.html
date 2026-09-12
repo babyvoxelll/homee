@@ -1,1 +1,416 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>babyvoxelll팬사이트 - Discography</title>
+    <link rel="icon" href="babyvoxelll.ico" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+            font-family: "Dotum", "Gulim", "Arial", sans-serif;
+        }
+        #image-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            line-height: 0;
+        }
+        #image-container img {
+            display: block;
+            width: 45%;
+            max-width: 550px;
+            height: auto;
+            aspect-ratio: auto;
+            object-fit: scale-down;
+            margin: 0 auto;
+            transform: scaleY(0.75);
+            transform-origin: top center;
+        }
+        .nav-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .nav-overlay a {
+            position: absolute;
+            display: block;
+            pointer-events: auto;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            width: 110px;
+            height: 20px;
+        }
+        .nav-overlay a:nth-child(1) { right: 36%; top: 8%; }
+        .nav-overlay a:nth-child(2) { right: 36%; top: 17%; }
+        .nav-overlay a:nth-child(3) { right: 36%; top: 26%; }
+        .nav-overlay a:nth-child(4) { right: 36%; top: 35%; }
+        .nav-overlay a:nth-child(5) { right: 36%; top: 44%; }
+        .nav-overlay a:nth-child(6) { right: 36%; top: 53%; }
+        .nav-overlay a:nth-child(7) { right: 36%; top: 62%; }
 
+        .info-red {
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 10px;
+            text-align: center;
+            padding: 4px 0;
+            background-color: #00008b;
+            width: 45%;
+            max-width: 500px;
+            margin: 10px auto 0 auto;
+        }
+        .discography-container {
+            width: 45%;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 0;
+        }
+        .album-block {
+            background-color: #ffffff;
+            color: #000;
+            padding: 15px 18px;
+            margin-bottom: 0;
+            border-radius: 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            border: 2px solid #00008b;
+            border-bottom: 2px solid #00008b;
+        }
+        .album-block:last-child {
+            border-bottom: 2px solid #00008b;
+        }
+        .album-photo {
+            flex-shrink: 0;
+            width: 140px;
+            height: auto;
+        }
+        .album-photo img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .album-tracks {
+            flex: 1;
+            font-size: 10px;
+            line-height: 1.4;
+            color: #000;
+            text-align: left;
+            word-wrap: break-word;
+        }
+        .album-tracks .line {
+            margin-bottom: 1px;
+        }
+        .album-tracks .disc-label {
+            font-weight: bold;
+            margin-top: 4px;
+            margin-bottom: 2px;
+        }
+        .album-block.reverse {
+            flex-direction: row-reverse;
+        }
+        @media (max-width: 768px) {
+            .discography-container {
+                width: 85%;
+                max-width: 500px;
+            }
+            .info-red {
+                width: 85%;
+                max-width: 500px;
+            }
+            #image-container img {
+                width: 60%;
+                max-width: 450px;
+                transform: scaleY(0.75);
+                transform-origin: top center;
+            }
+            .nav-overlay a {
+                width: 90px;
+                height: 16px;
+            }
+            .nav-overlay a:nth-child(1) { right: 29%; top: 8%; }
+            .nav-overlay a:nth-child(2) { right: 29%; top: 17%; }
+            .nav-overlay a:nth-child(3) { right: 29%; top: 26%; }
+            .nav-overlay a:nth-child(4) { right: 29%; top: 35%; }
+            .nav-overlay a:nth-child(5) { right: 29%; top: 44%; }
+            .nav-overlay a:nth-child(6) { right: 29%; top: 53%; }
+            .nav-overlay a:nth-child(7) { right: 29%; top: 62%; }
+            .album-block {
+                flex-direction: column;
+                align-items: center;
+                padding: 12px;
+            }
+            .album-block.reverse {
+                flex-direction: column;
+            }
+            .album-photo {
+                width: 150px;
+            }
+            .album-tracks {
+                font-size: 9px;
+                text-align: center;
+            }
+        }
+        @media (max-width: 500px) {
+            .discography-container {
+                width: 95%;
+            }
+            .info-red {
+                width: 95%;
+            }
+            #image-container img {
+                width: 75%;
+                max-width: 350px;
+                transform: scaleY(0.7);
+                transform-origin: top center;
+            }
+            .nav-overlay a {
+                width: 70px;
+                height: 12px;
+            }
+            .nav-overlay a:nth-child(1) { right: 22%; top: 8%; }
+            .nav-overlay a:nth-child(2) { right: 22%; top: 17%; }
+            .nav-overlay a:nth-child(3) { right: 22%; top: 26%; }
+            .nav-overlay a:nth-child(4) { right: 22%; top: 35%; }
+            .nav-overlay a:nth-child(5) { right: 22%; top: 44%; }
+            .nav-overlay a:nth-child(6) { right: 22%; top: 53%; }
+            .nav-overlay a:nth-child(7) { right: 22%; top: 62%; }
+            .album-photo {
+                width: 120px;
+            }
+            .album-tracks {
+                font-size: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="image-container">
+        <img src="discography.jpg" alt="discography">
+        <div class="nav-overlay">
+            <a href="videos.html"></a>
+            <a href="index.html"></a>
+            <a href="profiles.html"></a>
+            <a href="discography.html"></a>
+            <a href="history.html"></a>
+            <a href="bbachat.html"></a>
+            <a href="photogallery.html"></a>
+        </div>
+    </div>
+    
+    <div class="info-red">정보는 2004년 기준입니다</div>
+    
+    <div class="discography-container">
+        <div class="album-block">
+            <div class="album-photo">
+                <img src="ridewest.jpg" alt="ridewest">
+            </div>
+            <div class="album-tracks">
+                <div class="line">1. Intro</div>
+                <div class="line">2. Xcstasy (English ver)</div>
+                <div class="line">3. Xcstasy (Korean ver)</div>
+                <div class="line">4. Xcstasy (Remix ver)</div>
+                <div class="line">5. Play Remix (English ver)</div>
+                <div class="line">6. Play Remix (Korean ver)</div>
+                <div class="line">7. Play Remix (Extended ver)</div>
+                <div class="line">8. The First And Last</div>
+                <div class="line">9. Move Your Body</div>
+                <div class="line">10. I Want You Back</div>
+                <div class="line">11. I'm Still Loving You (Chinese ver)</div>
+                <div class="line">12. Go (Japanese ver)</div>
+                <div class="line">13. O.S.T (Father &amp; I)</div>
+            </div>
+        </div>
+
+        <div class="album-block reverse">
+            <div class="album-photo">
+                <img src="sixth.jpg" alt="sixth">
+            </div>
+            <div class="album-tracks">
+                <div class="line">1. 나 어떡해</div>
+                <div class="line">2. 바램</div>
+                <div class="line">3. 슬픈기대</div>
+                <div class="line">4. 상처</div>
+                <div class="line">5. 사랑인가봐요</div>
+                <div class="line">6. 나를 잡아줘</div>
+                <div class="line">7. LOVELESS</div>
+                <div class="line">8. 눈물</div>
+                <div class="line">9. 거짓사랑</div>
+                <div class="line">10. 버려진 이별</div>
+                <div class="line">11. 마지막엔</div>
+                <div class="line">12. A.S.A.P (As soon as possible)</div>
+                <div class="line">13. 우연 (Deep club Re-mix)</div>
+                <div class="line">14. I'm still loving you</div>
+            </div>
+        </div>
+
+        <div class="album-block">
+            <div class="album-photo">
+                <img src="voxspecial.jpg" alt="voxspecial">
+            </div>
+            <div class="album-tracks">
+                <div class="disc-label">Disc 1</div>
+                <div class="line">1. 우연</div>
+                <div class="line">2. GO</div>
+                <div class="line">3. 배신</div>
+                <div class="line">4. Game Over</div>
+                <div class="line">5. 야야야</div>
+                <div class="line">6. Get Up</div>
+                <div class="line">7. Killer</div>
+                <div class="line">8. Why</div>
+                <div class="line">9. Change</div>
+                <div class="line">10. 머리하는 날</div>
+                <div class="line">11. 인형</div>
+                <div class="line">12. Love And Extasy</div>
+                <div class="line">13. 비밀</div>
+                <div class="disc-label">Disc 2</div>
+                <div class="line">1. Intro 2</div>
+                <div class="line">2. Cut</div>
+                <div class="line">3. 회상</div>
+                <div class="line">4. 사랑해요</div>
+                <div class="line">5. Mask</div>
+                <div class="line">6. Bad Boy</div>
+                <div class="line">7. Come To Me</div>
+                <div class="line">8. Lucky 7</div>
+                <div class="line">9. Puzzle</div>
+                <div class="line">10. 올가미</div>
+                <div class="line">11. Summer Story</div>
+                <div class="line">12. 패자부활전</div>
+                <div class="line">13. Love And Extasy 2</div>
+                <div class="line">14. 꽃무늬 비키니</div>
+                <div class="line">15. Sugar Baby</div>
+                <div class="disc-label">Disc 3</div>
+                <div class="line">1. Missing You</div>
+                <div class="line">2. 허락</div>
+                <div class="line">3. Waiting</div>
+                <div class="line">4. Before Sunrise</div>
+                <div class="line">5. 하늘과 함께한 사랑</div>
+                <div class="line">6. LUX(빛)</div>
+                <div class="line">7. 슬픈 별에서</div>
+                <div class="line">8. 내 사랑이기를</div>
+                <div class="line">9. 부디</div>
+                <div class="line">10. To. Angel</div>
+                <div class="line">11. The One</div>
+                <div class="line">12. 마지막 선물</div>
+            </div>
+        </div>
+
+        <div class="album-block reverse">
+            <div class="album-photo">
+                <img src="boyishbig.jpg" alt="boyishbig">
+            </div>
+            <div class="album-tracks">
+                <div class="line">1. Intro</div>
+                <div class="line">2. Game over</div>
+                <div class="line">3. 인형</div>
+                <div class="line">4. 내 사랑이기를...</div>
+                <div class="line">5. CUT</div>
+                <div class="line">6. Lucky 7</div>
+                <div class="line">7. 부디</div>
+                <div class="line">8. 가 까 이</div>
+                <div class="line">9. Come to me</div>
+                <div class="line">10. To. Angel...</div>
+                <div class="line">11. PUZZLE</div>
+                <div class="line">12. The one</div>
+                <div class="line">13. GO go, NO no, SO so</div>
+                <div class="line">14. 마지막 선물</div>
+                <div class="line">15. Game over : MR</div>
+                <div class="line">16. Outro</div>
+            </div>
+        </div>
+
+        <div class="album-block reverse">
+            <div class="album-photo">
+                <img src="fourthbig.jpg" alt="fourthbig">
+            </div>
+            <div class="album-tracks">
+                <div class="line">1. why</div>
+                <div class="line">2. 배신</div>
+                <div class="line">3. 회상</div>
+                <div class="line">4. 허락</div>
+                <div class="line">5. Overlap</div>
+                <div class="line">6. LUX(빛)</div>
+                <div class="line">7. 슬픈 별에서</div>
+                <div class="line">8. Bad Boy</div>
+                <div class="line">9. 올가미</div>
+                <div class="line">10. Before Sunrise</div>
+                <div class="line">11. PATRON</div>
+                <div class="line">12. Why -MR</div>
+            </div>
+        </div>
+
+        <div class="album-block">
+            <div class="album-photo">
+                <img src="voxthird.jpg" alt="voxthird">
+            </div>
+            <div class="album-tracks">
+                <div class="line">1. Intro</div>
+                <div class="line">2. Get up</div>
+                <div class="line">3. MissingYou</div>
+                <div class="line">4. Killer</div>
+                <div class="line">5. 꽃무늬 비키니</div>
+                <div class="line">6. 사랑해요</div>
+                <div class="line">7. Mask</div>
+                <div class="line">8. 하늘과 함께한 사랑</div>
+                <div class="line">9. Summer Story</div>
+                <div class="line">10. 웃어요</div>
+                <div class="line">11. Love and Ecstasy</div>
+            </div>
+        </div>
+
+        <div class="album-block reverse">
+            <div class="album-photo">
+                <img src="twobig.jpg" alt="twobig">
+            </div>
+            <div class="album-tracks">
+                <div class="line">1. 야야야</div>
+                <div class="line">2. Break it up</div>
+                <div class="line">3. 패자부활전</div>
+                <div class="line">4. Waiting</div>
+                <div class="line">5. Change</div>
+                <div class="line">6. Sugar baby</div>
+                <div class="line">7. Top of the world</div>
+            </div>
+        </div>
+
+        <div class="album-block">
+            <div class="album-photo">
+                <img src="voxfirst.jpg" alt="voxfirst">
+            </div>
+            <div class="album-tracks">
+                <div class="line">1. Interlude</div>
+                <div class="line">2. 머리하는 날</div>
+                <div class="line">3. 남자에게 &lt;민주주의&gt;</div>
+                <div class="line">4. 스타트</div>
+                <div class="line">5. 그들만의 세상</div>
+                <div class="line">6. 비밀</div>
+                <div class="line">7. 미혼모</div>
+                <div class="line">8. Waiting</div>
+                <div class="line">9. 남자에게 (Instrumental)</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

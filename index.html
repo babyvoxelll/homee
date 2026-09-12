@@ -23,10 +23,6 @@
             font-family: "Dotum", "Gulim", "Arial", sans-serif;
             text-align: center;
         }
-        link[rel="icon"] {
-            width: 512px;
-            height: 512px;
-        }
         #image-container {
             display: flex;
             justify-content: center;
@@ -136,17 +132,18 @@
             player.style.width = "500px";
             player.style.height = "270px";
 
-            container.appendChild(player);
-
-            player.load({
-                url: "babyvoxmain12.swf",
+            player.config = {
                 openUrlMode: "allow",
                 allowNetworking: "all"
-            });
+            };
+
+            container.appendChild(player);
+
+            player.load({ url: "babyvoxmain12.swf" });
 
             player.addEventListener("navigate", (event) => {
-                event.preventDefault();
                 if (event.url) {
+                    event.preventDefault();
                     window.location.href = event.url;
                 }
             });

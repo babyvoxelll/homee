@@ -76,47 +76,42 @@
             margin: 15px auto 0 auto;
             padding: 20px;
             background: #404040;
-            border-radius: 6px;
             display: flex;
             gap: 15px;
             align-items: flex-start;
         }
         .bbachat-left {
             flex: 1;
-            background: #d0d0d0;
-            border-radius: 4px;
-            padding: 10px;
+            background: #404040;
             min-height: 420px;
             display: flex;
             flex-direction: column;
         }
         .bbachat-header {
-            background: #ff69b4;
-            color: #000;
-            font-size: 10px;
+            background: #800020;
+            color: #fff;
+            font-size: 12px;
             font-weight: bold;
-            padding: 4px 6px;
+            padding: 6px 8px;
             display: grid;
-            grid-template-columns: 40px 1fr 70px 90px 100px;
+            grid-template-columns: 50px 1fr 70px 100px 120px;
             gap: 4px;
             text-align: center;
-            border-radius: 2px 2px 0 0;
         }
         .bbachat-messages {
-            flex: 1;
-            background: #e8e8e8;
-            padding: 6px;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
             overflow-y: auto;
-            font-size: 10px;
-            border-radius: 0 0 2px 2px;
             max-height: 460px;
         }
         .bbachat-row {
             display: grid;
-            grid-template-columns: 40px 1fr 70px 90px 100px;
+            grid-template-columns: 50px 1fr 70px 100px 120px;
             gap: 4px;
-            padding: 3px 4px;
-            border-bottom: 1px solid #c0c0c0;
+            padding: 6px 8px;
+            background: #d0d0d0;
+            font-size: 12px;
             align-items: center;
             text-align: center;
             word-wrap: break-word;
@@ -136,15 +131,39 @@
             width: 28px;
             height: auto;
         }
+        .bbachat-pagination {
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+            padding: 8px 0;
+            background: #404040;
+            flex-wrap: wrap;
+        }
+        .bbachat-pagination button {
+            background: #800020;
+            color: #fff;
+            border: 1px solid #fff;
+            padding: 3px 9px;
+            font-size: 12px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .bbachat-pagination button.active {
+            background: #fff;
+            color: #800020;
+        }
+        .bbachat-pagination button:hover {
+            opacity: 0.85;
+        }
+
         .bbachat-form {
-            width: 180px;
-            background: #e8e8e8;
-            border-radius: 4px;
-            padding: 10px;
+            width: 200px;
+            background: #d0d0d0;
+            padding: 12px;
             flex-shrink: 0;
         }
         .bbachat-form .form-title {
-            font-size: 10px;
+            font-size: 12px;
             font-weight: bold;
             color: #000;
             margin-bottom: 8px;
@@ -152,35 +171,70 @@
         }
         .bbachat-form label {
             display: block;
-            font-size: 10px;
+            font-size: 12px;
             color: #000;
             margin-bottom: 2px;
-            margin-top: 6px;
+            margin-top: 8px;
         }
         .bbachat-form input[type="text"],
         .bbachat-form input[type="file"] {
             width: 100%;
-            font-size: 10px;
-            padding: 3px;
+            font-size: 12px;
+            padding: 4px;
             border: 1px solid #888;
-            border-radius: 2px;
             background: #fff;
         }
         .bbachat-form button {
             width: 100%;
-            margin-top: 10px;
-            padding: 6px;
-            font-size: 11px;
+            margin-top: 12px;
+            padding: 8px;
+            font-size: 13px;
             font-weight: bold;
-            background: #ff69b4;
-            color: #000;
-            border: 1px solid #888;
-            border-radius: 2px;
+            background: #800020;
+            color: #fff;
+            border: 1px solid #555;
             cursor: pointer;
         }
         .bbachat-form button:hover {
-            background: #ff85c2;
+            background: #a00028;
         }
+        .gif-picker {
+            display: none;
+            background: #fff;
+            border: 1px solid #888;
+            margin-top: 4px;
+            padding: 6px;
+            max-height: 120px;
+            overflow-y: auto;
+        }
+        .gif-picker.open {
+            display: block;
+        }
+        .gif-picker .gif-item {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            background: #eee;
+            margin: 2px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            font-size: 10px;
+            text-align: center;
+            line-height: 60px;
+            color: #888;
+        }
+        .gif-picker .gif-empty {
+            font-size: 11px;
+            color: #666;
+            text-align: center;
+            padding: 10px;
+        }
+        .gif-preview {
+            margin-top: 4px;
+            font-size: 11px;
+            color: #000;
+        }
+
         @media (max-width: 768px) {
             .bbachat-wrapper {
                 width: 85%;
@@ -213,8 +267,8 @@
             }
             .bbachat-header,
             .bbachat-row {
-                grid-template-columns: 30px 1fr 50px 60px 70px;
-                font-size: 9px;
+                grid-template-columns: 35px 1fr 55px 70px 80px;
+                font-size: 10px;
             }
             #image-container img {
                 width: 75%;
@@ -260,25 +314,30 @@
                 <div>등록일</div>
             </div>
             <div class="bbachat-messages" id="messages"></div>
+            <div class="bbachat-pagination" id="pagination"></div>
         </div>
 
         <div class="bbachat-form">
             <div class="form-title">메시지 보내기</div>
             <label>이름</label>
             <input type="text" id="name" maxlength="20" required>
-            <label>메시지</label>
-            <input type="text" id="message" maxlength="200" required>
+            <label>메시지 (최대 350자)</label>
+            <input type="text" id="message" maxlength="350" required>
             <label>파일 (jpg/exe)</label>
             <input type="file" id="file" accept=".jpg,.jpeg,.exe">
             <label>기프</label>
-            <input type="text" id="gif" maxlength="20">
+            <button type="button" id="gifBtn">기프 선택</button>
+            <div class="gif-picker" id="gifPicker">
+                <div class="gif-empty">사용 가능한 기프가 없습니다</div>
+            </div>
+            <div class="gif-preview" id="gifPreview"></div>
             <button id="sendBtn">보내기</button>
         </div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getDatabase, ref, push, onValue, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+        import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyDBxl0S2LbjmxRTOGlAc6KsxIWM_ID7trI",
@@ -295,7 +354,11 @@
         const db = getDatabase(app);
         const messagesRef = ref(db, "bbachat/messages");
 
-        // Получаем или генерируем постоянный ID (сохраняется в localStorage)
+        const PER_PAGE = 10;
+        let currentPage = 1;
+        let allMessages = [];
+        let selectedGif = null;
+
         function getUserNumber() {
             let num = localStorage.getItem("bbachat_number");
             if (!num) {
@@ -305,8 +368,7 @@
             return num;
         }
 
-        // Рендер одного сообщения
-        function renderMessage(key, data) {
+        function buildRow(data) {
             const row = document.createElement("div");
             row.className = "bbachat-row";
 
@@ -316,7 +378,6 @@
             const msgCell = document.createElement("div");
             msgCell.className = "msg-cell";
 
-            // new.gif показываем, если сообщение младше 24 часов
             if (data.timestamp) {
                 const age = Date.now() - data.timestamp;
                 if (age < 24 * 60 * 60 * 1000) {
@@ -327,9 +388,19 @@
                     msgCell.appendChild(newImg);
                 }
             }
+
             const msgText = document.createElement("span");
             msgText.textContent = data.message || "";
             msgCell.appendChild(msgText);
+
+            if (data.gif) {
+                const gifImg = document.createElement("img");
+                gifImg.src = data.gif;
+                gifImg.style.width = "40px";
+                gifImg.style.height = "auto";
+                gifImg.style.marginLeft = "6px";
+                msgCell.appendChild(gifImg);
+            }
 
             const fileCell = document.createElement("div");
             fileCell.className = "file-cell";
@@ -364,31 +435,86 @@
             return row;
         }
 
-        // Загрузка сообщений
-        onValue(messagesRef, (snapshot) => {
+        function renderPage() {
             const container = document.getElementById("messages");
             container.innerHTML = "";
-            const items = [];
+            const start = (currentPage - 1) * PER_PAGE;
+            const pageItems = allMessages.slice(start, start + PER_PAGE);
+            pageItems.forEach((m) => container.appendChild(buildRow(m)));
+        }
+
+        function renderPagination() {
+            const pag = document.getElementById("pagination");
+            pag.innerHTML = "";
+            const totalPages = Math.ceil(allMessages.length / PER_PAGE) || 1;
+            for (let i = 1; i <= totalPages; i++) {
+                const btn = document.createElement("button");
+                btn.textContent = i;
+                if (i === currentPage) btn.classList.add("active");
+                btn.addEventListener("click", () => {
+                    currentPage = i;
+                    renderPage();
+                    renderPagination();
+                });
+                pag.appendChild(btn);
+            }
+        }
+
+        onValue(messagesRef, (snapshot) => {
+            allMessages = [];
             snapshot.forEach((child) => {
-                items.push({ key: child.key, data: child.val() });
+                allMessages.push(child.val());
             });
-            // Сортируем по времени (старые сверху)
-            items.sort((a, b) => (a.data.timestamp || 0) - (b.data.timestamp || 0));
-            items.forEach((item) => {
-                container.appendChild(renderMessage(item.key, item.data));
-            });
-            container.scrollTop = container.scrollHeight;
+            allMessages.sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
+            const totalPages = Math.ceil(allMessages.length / PER_PAGE) || 1;
+            if (currentPage > totalPages) currentPage = totalPages;
+            renderPage();
+            renderPagination();
         });
 
-        // Отправка
+        // GIF picker
+        const gifBtn = document.getElementById("gifBtn");
+        const gifPicker = document.getElementById("gifPicker");
+        const gifPreview = document.getElementById("gifPreview");
+
+        gifBtn.addEventListener("click", () => {
+            gifPicker.classList.toggle("open");
+        });
+
+        // Пустой список — на будущее можно добавить гифки
+        const availableGifs = [];
+        if (availableGifs.length === 0) {
+            gifPicker.innerHTML = '<div class="gif-empty">사용 가능한 기프가 없습니다</div>';
+        } else {
+            availableGifs.forEach((src) => {
+                const item = document.createElement("div");
+                item.className = "gif-item";
+                const img = document.createElement("img");
+                img.src = src;
+                img.style.maxWidth = "100%";
+                img.style.maxHeight = "100%";
+                item.appendChild(img);
+                item.addEventListener("click", () => {
+                    selectedGif = src;
+                    gifPreview.textContent = "선택됨: " + src;
+                    gifPicker.classList.remove("open");
+                });
+                gifPicker.appendChild(item);
+            });
+        }
+
+        // Send
         document.getElementById("sendBtn").addEventListener("click", async () => {
             const name = document.getElementById("name").value.trim();
             const message = document.getElementById("message").value.trim();
             const fileInput = document.getElementById("file");
-            const gif = document.getElementById("gif").value.trim();
 
             if (!name || !message) {
                 alert("이름과 메시지를 입력하세요.");
+                return;
+            }
+            if (message.length > 350) {
+                alert("메시지는 최대 350자까지 입력할 수 있습니다.");
                 return;
             }
 
@@ -412,13 +538,14 @@
                 message: message,
                 name: name,
                 fileType: fileType,
-                gif: gif || null,
+                gif: selectedGif || null,
                 timestamp: Date.now()
             });
 
             document.getElementById("message").value = "";
             document.getElementById("file").value = "";
-            document.getElementById("gif").value = "";
+            selectedGif = null;
+            gifPreview.textContent = "";
         });
     </script>
 </body>

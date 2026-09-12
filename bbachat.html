@@ -14,7 +14,6 @@
         body {
             background: #990033;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
@@ -22,20 +21,17 @@
             margin: 0;
             font-family: "Dotum", "Gulim", "Arial", sans-serif;
         }
-
-        .bbachat-page {
+        .bbachat-outer {
             display: flex;
             align-items: flex-start;
             gap: 0;
         }
-
         .bbachat-wrapper {
-            width: 620px;
-            padding: 20px;
-            background: #404040;
             display: flex;
             gap: 15px;
             align-items: flex-start;
+            background: #404040;
+            padding: 20px;
         }
         .bbachat-left {
             flex: 1;
@@ -43,6 +39,8 @@
             display: flex;
             flex-direction: column;
             min-width: 0;
+            width: 380px;
+            min-height: 420px;
         }
         .bbachat-header {
             background: #800020;
@@ -60,8 +58,8 @@
             flex-direction: column;
             gap: 0;
             overflow-y: auto;
+            flex: 1;
             max-height: 460px;
-            min-height: 460px;
         }
         .bbachat-row {
             display: grid;
@@ -235,61 +233,59 @@
             background: #a00028;
         }
 
-        .panel-side {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0;
-        }
-        .panel-side img.panel-img {
+        .bbachat-panel-right,
+        .bbachat-bbvox-right {
             display: block;
-            width: 60px;
             height: auto;
         }
-        .panel-side img.bbvpanel-img {
+        .bbachat-panel-right img {
             display: block;
-            width: 160px;
-            height: auto;
+            max-height: 460px;
+            width: auto;
+        }
+        .bbachat-bbvox-right img {
+            display: block;
+            max-height: 460px;
+            width: auto;
         }
 
         @media (max-width: 900px) {
-            .bbachat-page {
+            .bbachat-outer {
                 flex-direction: column;
                 align-items: center;
             }
+            .bbachat-panel-right img,
+            .bbachat-bbvox-right img {
+                max-height: 300px;
+            }
+        }
+        @media (max-width: 768px) {
             .bbachat-wrapper {
-                width: 90%;
                 flex-direction: column;
+                width: 90%;
             }
             .bbachat-form {
                 width: 100%;
             }
-            .panel-side {
-                flex-direction: row;
-                align-items: flex-start;
-                justify-content: center;
+            .bbachat-left {
+                width: 100%;
             }
         }
         @media (max-width: 500px) {
             .bbachat-wrapper {
                 width: 95%;
+                padding: 10px;
             }
             .bbachat-header,
             .bbachat-row {
                 grid-template-columns: 35px 1fr 55px 70px 80px;
                 font-size: 10px;
             }
-            .panel-side img.panel-img {
-                width: 45px;
-            }
-            .panel-side img.bbvpanel-img {
-                width: 120px;
-            }
         }
     </style>
 </head>
 <body>
-    <div class="bbachat-page">
+    <div class="bbachat-outer">
         <div class="bbachat-wrapper">
             <div class="bbachat-left">
                 <div class="bbachat-header">
@@ -325,9 +321,12 @@
             </div>
         </div>
 
-        <div class="panel-side">
-            <img src="panel.png" alt="panel" class="panel-img">
-            <img src="bbvpanel.jpg" alt="bbvpanel" class="bbvpanel-img">
+        <div class="bbachat-panel-right">
+            <img src="panel.png" alt="panel">
+        </div>
+
+        <div class="bbachat-bbvox-right">
+            <img src="bbvoxpanel.jpg" alt="bbvoxpanel">
         </div>
     </div>
 

@@ -14,6 +14,7 @@
         body {
             background: #990033;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
@@ -21,17 +22,48 @@
             margin: 0;
             font-family: "Dotum", "Gulim", "Arial", sans-serif;
         }
+
         .bbachat-outer {
             display: flex;
             align-items: flex-start;
-            gap: 0;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px auto;
         }
+
+        .bbachat-side-left {
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        .bbachat-side-left img {
+            display: block;
+            width: 160px;
+            max-width: 160px;
+            height: auto;
+        }
+        .bbachat-side-right {
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .bbachat-side-right img {
+            display: block;
+            width: 160px;
+            max-width: 160px;
+            height: auto;
+        }
+
         .bbachat-wrapper {
+            width: 700px;
+            max-width: 700px;
+            padding: 20px;
+            background: #404040;
             display: flex;
             gap: 15px;
             align-items: flex-start;
-            background: #404040;
-            padding: 20px;
         }
         .bbachat-left {
             flex: 1;
@@ -39,7 +71,6 @@
             display: flex;
             flex-direction: column;
             min-width: 0;
-            width: 380px;
             min-height: 420px;
         }
         .bbachat-header {
@@ -58,8 +89,8 @@
             flex-direction: column;
             gap: 0;
             overflow-y: auto;
-            flex: 1;
             max-height: 460px;
+            flex: 1;
         }
         .bbachat-row {
             display: grid;
@@ -233,59 +264,48 @@
             background: #a00028;
         }
 
-        .bbachat-panel-right,
-        .bbachat-bbvox-right {
-            display: block;
-            height: auto;
-        }
-        .bbachat-panel-right img {
-            display: block;
-            max-height: 460px;
-            width: auto;
-        }
-        .bbachat-bbvox-right img {
-            display: block;
-            max-height: 460px;
-            width: auto;
-        }
-
         @media (max-width: 900px) {
             .bbachat-outer {
                 flex-direction: column;
                 align-items: center;
             }
-            .bbachat-panel-right img,
-            .bbachat-bbvox-right img {
-                max-height: 300px;
-            }
-        }
-        @media (max-width: 768px) {
             .bbachat-wrapper {
-                flex-direction: column;
                 width: 90%;
+                flex-direction: column;
             }
             .bbachat-form {
                 width: 100%;
             }
-            .bbachat-left {
-                width: 100%;
+            .bbachat-side-left img,
+            .bbachat-side-right img {
+                width: 140px;
+                max-width: 140px;
             }
         }
         @media (max-width: 500px) {
             .bbachat-wrapper {
                 width: 95%;
-                padding: 10px;
             }
             .bbachat-header,
             .bbachat-row {
                 grid-template-columns: 35px 1fr 55px 70px 80px;
                 font-size: 10px;
             }
+            .bbachat-side-left img,
+            .bbachat-side-right img {
+                width: 110px;
+                max-width: 110px;
+            }
         }
     </style>
 </head>
 <body>
+
     <div class="bbachat-outer">
+        <div class="bbachat-side-left">
+            <img src="panel.png" alt="panel">
+        </div>
+
         <div class="bbachat-wrapper">
             <div class="bbachat-left">
                 <div class="bbachat-header">
@@ -321,11 +341,7 @@
             </div>
         </div>
 
-        <div class="bbachat-panel-right">
-            <img src="panel.png" alt="panel">
-        </div>
-
-        <div class="bbachat-bbvox-right">
+        <div class="bbachat-side-right">
             <img src="bbvoxpanel.jpg" alt="bbvoxpanel">
         </div>
     </div>

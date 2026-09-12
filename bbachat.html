@@ -134,26 +134,33 @@
         .bbachat-pagination {
             display: flex;
             justify-content: center;
-            gap: 6px;
-            padding: 8px 0;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 0;
             background: #404040;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
         }
         .bbachat-pagination button {
             background: transparent;
             color: #fff;
             border: none;
-            padding: 2px 6px;
+            padding: 2px 5px;
             font-size: 13px;
             cursor: pointer;
             font-weight: bold;
         }
         .bbachat-pagination button.active {
-            color: #fff;
-            background: #fff2;
+            background: #fff;
+            color: #800020;
         }
         .bbachat-pagination button:hover {
             opacity: 0.85;
+        }
+        .bbachat-pagination .ellipsis {
+            color: #fff;
+            font-size: 13px;
+            font-weight: bold;
+            padding: 0 2px;
         }
 
         .bbachat-form {
@@ -183,57 +190,44 @@
             border: 1px solid #888;
             background: #fff;
         }
-        .bbachat-form .file-label-row {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-top: 8px;
-        }
-        .bbachat-form .file-label-row label {
-            margin: 0;
-            font-size: 12px;
-            font-weight: bold;
-        }
-        .bbachat-form .file-btn {
-            display: inline-block;
-            padding: 3px 8px;
-            background: #eee;
-            border: 1px solid #888;
-            font-size: 12px;
-            cursor: pointer;
-            color: #000;
-        }
-        .bbachat-form .file-name {
-            font-size: 11px;
-            color: #333;
-        }
         .bbachat-form input[type="file"] {
             display: none;
         }
-
-        .gif-toggle {
-            display: inline-block;
+        .form-row {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            align-items: center;
+        }
+        .form-row .gif-toggle,
+        .form-row .file-btn {
+            flex: 1;
+            text-align: center;
             font-size: 12px;
             font-weight: bold;
             color: #000;
             cursor: pointer;
-            margin-top: 10px;
-            padding: 2px 4px;
+            padding: 4px 0;
+            background: #eee;
+            border: 1px solid #888;
         }
-        .gif-toggle:hover {
+        .form-row .gif-toggle:hover,
+        .form-row .file-btn:hover {
             background: #800020;
             color: #fff;
+            border-color: #800020;
         }
-        .gif-toggle.open {
+        .form-row .gif-toggle.open {
             background: #800020;
             color: #fff;
+            border-color: #800020;
         }
 
         .gif-picker {
             display: none;
             background: #fff;
             border: 1px solid #888;
-            margin-top: 4px;
+            margin-top: 6px;
             padding: 6px;
             max-height: 120px;
             overflow-y: auto;
@@ -357,14 +351,12 @@
             <label>메시지 (최대 350자)</label>
             <input type="text" id="message" maxlength="350" required>
 
-            <div class="file-label-row">
-                <label>파일</label>
+            <div class="form-row">
+                <span class="gif-toggle" id="gifBtn">기프</span>
                 <label for="file" class="file-btn">파일 선택</label>
-                <span class="file-name" id="fileName">선택된 파일 없음</span>
                 <input type="file" id="file" accept=".jpg,.jpeg,.exe">
             </div>
 
-            <span class="gif-toggle" id="gifBtn">기프</span>
             <div class="gif-picker" id="gifPicker">
                 <div class="gif-empty">사용 가능한 기프가 없습니다</div>
             </div>
@@ -486,8 +478,31 @@
             const pag = document.getElementById("pagination");
             pag.innerHTML = "";
             const totalPages = Math.ceil(allMessages.length / PER_PAGE);
-            if (totalPages < 1) return;
-            for (let i = 1; i <= totalPages; i++) {
+            // Показываем номера только если есть хотя бы одна полная страница (10 сообщений)
+            if (allMessages.length < PER_PAGE) return;
+
+            const maxNumbers = 5;
+            let startPage = Math.max(1, currentPage - Math.floor(maxNumbers / 2));
+            let endPage = startPage + maxNumbers - 1;
+
+            if (endPage > totalPages) {
+                endPage = totalPages;
+                startPage = Math.max(1, endPage - maxNumbers + 1);
+            }
+
+            // Стрелка влево
+            if (startPage > 1) {
+                const prev = document.createElement("button");
+                prev.textContent = "←";
+                prev.addEventListener("click", () => {
+                    currentPage = Math.max(1, currentPage - 1);
+                    renderPage();
+                    renderPagination();
+                });
+                pag.appendChild(prev);
+            }
+
+            for (let i = startPage; i <= endPage; i++) {
                 const btn = document.createElement("button");
                 btn.textContent = i;
                 if (i === currentPage) btn.classList.add("active");
@@ -497,6 +512,18 @@
                     renderPagination();
                 });
                 pag.appendChild(btn);
+            }
+
+            // Стрелка вправо
+            if (endPage < totalPages) {
+                const next = document.createElement("button");
+                next.textContent = "→";
+                next.addEventListener("click", () => {
+                    currentPage = Math.min(totalPages, currentPage + 1);
+                    renderPage();
+                    renderPagination();
+                });
+                pag.appendChild(next);
             }
         }
 
@@ -508,6 +535,7 @@
             allMessages.sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
             const totalPages = Math.ceil(allMessages.length / PER_PAGE);
             if (currentPage > totalPages && totalPages > 0) currentPage = totalPages;
+            if (allMessages.length < PER_PAGE) currentPage = 1;
             renderPage();
             renderPagination();
         });
@@ -543,21 +571,11 @@
             });
         }
 
-        // File name display
-        const fileInput = document.getElementById("file");
-        const fileNameLabel = document.getElementById("fileName");
-        fileInput.addEventListener("change", () => {
-            if (fileInput.files && fileInput.files.length > 0) {
-                fileNameLabel.textContent = fileInput.files[0].name;
-            } else {
-                fileNameLabel.textContent = "선택된 파일 없음";
-            }
-        });
-
         // Send
         document.getElementById("sendBtn").addEventListener("click", async () => {
             const name = document.getElementById("name").value.trim();
             const message = document.getElementById("message").value.trim();
+            const fileInput = document.getElementById("file");
 
             if (!name || !message) {
                 alert("이름과 메시지를 입력하세요.");
@@ -594,7 +612,6 @@
 
             document.getElementById("message").value = "";
             fileInput.value = "";
-            fileNameLabel.textContent = "선택된 파일 없음";
             selectedGif = null;
             gifPreview.textContent = "";
         });

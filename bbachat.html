@@ -182,7 +182,7 @@
             margin-left: 6px;
         }
         .bbachat-row .file-cell img {
-            width: 22px;
+            width: 16px;
             height: auto;
             display: inline-block;
         }
@@ -273,6 +273,14 @@
             background: #800020;
             color: #fff;
             border-color: #800020;
+        }
+        .file-name-display {
+            margin-top: 4px;
+            font-size: 11px;
+            color: #000;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            min-height: 14px;
         }
 
         .gif-picker {
@@ -419,7 +427,7 @@
             margin-left: 6px;
         }
         .bbachat-detail .detail-row .file-cell img {
-            width: 22px;
+            width: 16px;
             height: auto;
             display: inline-block;
         }
@@ -438,6 +446,9 @@
             font-size: 13px;
             cursor: pointer;
             margin-bottom: 4px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            max-width: 100%;
         }
         .bbachat-detail .detail-extra a.detail-file-link:visited {
             color: #551a8b;
@@ -565,6 +576,7 @@
                     <label for="file" class="file-btn">파일 선택</label>
                     <input type="file" id="file" accept=".jpg,.jpeg,.exe">
                 </div>
+                <div class="file-name-display" id="fileNameDisplay"></div>
 
                 <div class="gif-picker" id="gifPicker"></div>
                 <div class="gif-preview" id="gifPreview"></div>
@@ -610,7 +622,8 @@
         let currentPage = 1;
         let allMessages = [];
         let selectedGif = null;
-        let selectedFileData = null;
+        let selectedFile = null;
+        let selectedFileDataUrl = null;
 
         function generateRandomNumber() {
             return Math.floor(10000 + Math.random() * 90000).toString();
@@ -743,20 +756,12 @@
             const extra = document.getElementById("detailExtra");
             extra.innerHTML = "";
 
-            if (data.fileType === "jpg") {
+            if (data.fileData && data.fileName) {
                 const link = document.createElement("a");
                 link.className = "detail-file-link";
-                link.href = "JPG.gif";
-                link.download = "photo.jpg";
-                link.textContent = "사진 다운로드";
-                extra.appendChild(link);
-                extra.style.display = "block";
-            } else if (data.fileType === "exe") {
-                const link = document.createElement("a");
-                link.className = "detail-file-link";
-                link.href = "EXE.gif";
-                link.download = "file.exe";
-                link.textContent = "파일 다운로드";
+                link.href = data.fileData;
+                link.download = data.fileName;
+                link.textContent = data.fileName;
                 extra.appendChild(link);
                 extra.style.display = "block";
             } else {
@@ -844,10 +849,29 @@
         const gifBtn = document.getElementById("gifBtn");
         const gifPicker = document.getElementById("gifPicker");
         const gifPreview = document.getElementById("gifPreview");
+        const fileInput = document.getElementById("file");
+        const fileNameDisplay = document.getElementById("fileNameDisplay");
 
         gifBtn.addEventListener("click", () => {
             gifPicker.classList.toggle("open");
             gifBtn.classList.toggle("open");
+        });
+
+        fileInput.addEventListener("change", () => {
+            if (fileInput.files && fileInput.files.length > 0) {
+                selectedFile = fileInput.files[0];
+                fileNameDisplay.textContent = selectedFile.name;
+
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    selectedFileDataUrl = e.target.result;
+                };
+                reader.readAsDataURL(selectedFile);
+            } else {
+                selectedFile = null;
+                selectedFileDataUrl = null;
+                fileNameDisplay.textContent = "";
+            }
         });
 
         const availableGifs = [
@@ -882,7 +906,6 @@
         document.getElementById("sendBtn").addEventListener("click", async () => {
             const name = document.getElementById("name").value.trim();
             const message = document.getElementById("message").value.trim();
-            const fileInput = document.getElementById("file");
 
             if (!name || !message) {
                 alert("이름과 메시지를 입력하세요.");
@@ -894,8 +917,11 @@
             }
 
             let fileType = null;
-            if (fileInput.files && fileInput.files.length > 0) {
-                const fname = fileInput.files[0].name.toLowerCase();
+            let fileData = null;
+            let fileName = null;
+
+            if (selectedFile) {
+                const fname = selectedFile.name.toLowerCase();
                 if (fname.endsWith(".jpg") || fname.endsWith(".jpeg")) {
                     fileType = "jpg";
                 } else if (fname.endsWith(".exe")) {
@@ -904,6 +930,14 @@
                     alert("jpg 또는 exe 파일만 업로드할 수 있습니다.");
                     return;
                 }
+
+                if (!selectedFileDataUrl) {
+                    alert("파일을 읽는 중입니다. 잠시 후 다시 시도하세요.");
+                    return;
+                }
+
+                fileData = selectedFileDataUrl;
+                fileName = selectedFile.name;
             }
 
             const userNumber = generateRandomNumber();
@@ -913,12 +947,17 @@
                 message: message,
                 name: name,
                 fileType: fileType,
+                fileData: fileData,
+                fileName: fileName,
                 gif: selectedGif || null,
                 timestamp: Date.now()
             });
 
             document.getElementById("message").value = "";
             fileInput.value = "";
+            fileNameDisplay.textContent = "";
+            selectedFile = null;
+            selectedFileDataUrl = null;
             selectedGif = null;
             gifPreview.innerHTML = "";
             document.querySelectorAll(".gif-picker .gif-item").forEach((el) => el.classList.remove("selected"));

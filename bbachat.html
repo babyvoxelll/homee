@@ -83,9 +83,9 @@
         .bbachat-left {
             flex: 1;
             background: #404040;
-            min-height: 420px;
             display: flex;
             flex-direction: column;
+            min-width: 0;
         }
         .bbachat-header {
             background: #800020;
@@ -115,6 +115,13 @@
             align-items: center;
             text-align: center;
             word-wrap: break-word;
+            overflow-wrap: break-word;
+            min-width: 0;
+        }
+        .bbachat-row > div {
+            min-width: 0;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
         .bbachat-row .msg-cell {
             text-align: left;
@@ -122,10 +129,22 @@
             align-items: center;
             gap: 4px;
             flex-wrap: wrap;
+            min-width: 0;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: break-word;
+        }
+        .bbachat-row .msg-cell span {
+            min-width: 0;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: break-word;
+            white-space: pre-wrap;
         }
         .bbachat-row .msg-cell img.new-icon {
             width: 22px;
             height: auto;
+            flex-shrink: 0;
         }
         .bbachat-row .file-cell img {
             width: 28px;
@@ -135,7 +154,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
             padding: 6px 0;
             background: #404040;
             flex-wrap: nowrap;
@@ -144,23 +163,19 @@
             background: transparent;
             color: #fff;
             border: none;
-            padding: 2px 5px;
+            padding: 2px 6px;
             font-size: 13px;
             cursor: pointer;
             font-weight: bold;
         }
         .bbachat-pagination button.active {
-            background: #fff;
-            color: #800020;
+            color: #fff;
+            background: transparent;
+            text-decoration: underline;
         }
         .bbachat-pagination button:hover {
-            opacity: 0.85;
-        }
-        .bbachat-pagination .ellipsis {
             color: #fff;
-            font-size: 13px;
-            font-weight: bold;
-            padding: 0 2px;
+            opacity: 0.7;
         }
 
         .bbachat-form {
@@ -478,7 +493,6 @@
             const pag = document.getElementById("pagination");
             pag.innerHTML = "";
             const totalPages = Math.ceil(allMessages.length / PER_PAGE);
-            // Показываем номера только если есть хотя бы одна полная страница (10 сообщений)
             if (allMessages.length < PER_PAGE) return;
 
             const maxNumbers = 5;
@@ -490,7 +504,6 @@
                 startPage = Math.max(1, endPage - maxNumbers + 1);
             }
 
-            // Стрелка влево
             if (startPage > 1) {
                 const prev = document.createElement("button");
                 prev.textContent = "←";
@@ -514,7 +527,6 @@
                 pag.appendChild(btn);
             }
 
-            // Стрелка вправо
             if (endPage < totalPages) {
                 const next = document.createElement("button");
                 next.textContent = "→";
@@ -540,7 +552,6 @@
             renderPagination();
         });
 
-        // GIF picker
         const gifBtn = document.getElementById("gifBtn");
         const gifPicker = document.getElementById("gifPicker");
         const gifPreview = document.getElementById("gifPreview");
@@ -571,7 +582,6 @@
             });
         }
 
-        // Send
         document.getElementById("sendBtn").addEventListener("click", async () => {
             const name = document.getElementById("name").value.trim();
             const message = document.getElementById("message").value.trim();

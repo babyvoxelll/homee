@@ -1,1 +1,281 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>babyvoxelll팬사이트 - Videos</title>
+    <link rel="icon" href="babyvoxelll.ico" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+            font-family: "Dotum", "Gulim", "Arial", sans-serif;
+        }
+        #image-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            line-height: 0;
+        }
+        #image-container img {
+            display: block;
+            width: 45%;
+            max-width: 550px;
+            height: auto;
+            aspect-ratio: auto;
+            object-fit: scale-down;
+            margin: 0 auto;
+            transform: scaleY(0.75);
+            transform-origin: top center;
+        }
+        .nav-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .nav-overlay a {
+            position: absolute;
+            display: block;
+            pointer-events: auto;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            width: 110px;
+            height: 20px;
+        }
+        .nav-overlay a:nth-child(1) { right: 36%; top: 8%; }
+        .nav-overlay a:nth-child(2) { right: 36%; top: 17%; }
+        .nav-overlay a:nth-child(3) { right: 36%; top: 26%; }
+        .nav-overlay a:nth-child(4) { right: 36%; top: 35%; }
+        .nav-overlay a:nth-child(5) { right: 36%; top: 44%; }
+        .nav-overlay a:nth-child(6) { right: 36%; top: 53%; }
+        .nav-overlay a:nth-child(7) { right: 36%; top: 62%; }
 
+        .videos-wrapper {
+            width: 55%;
+            max-width: 600px;
+            margin: 15px auto 0 auto;
+            padding: 15px;
+            background: #00008b;
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+            justify-content: flex-start;
+        }
+        .videos-left {
+            flex: 1;
+            background: #00008b;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+        .video-item {
+            background: #d0d0d0;
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
+            cursor: pointer;
+            max-width: 260px;
+        }
+        .video-preview {
+            width: 240px;
+            height: 135px;
+            background: #000;
+            object-fit: cover;
+            display: block;
+        }
+        .video-name {
+            font-size: 12px;
+            color: #000;
+            font-weight: bold;
+            text-align: left;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        .video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+        .video-modal.open {
+            display: flex;
+        }
+        .video-modal video {
+            max-width: 90%;
+            max-height: 90%;
+            background: #000;
+        }
+        .videos-panelvideos {
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-start;
+            width: 55%;
+            max-width: 600px;
+            margin: -20px auto 0 auto;
+            padding: 0;
+            line-height: 0;
+        }
+        .videos-panelvideos img {
+            display: block;
+            width: 22%;
+            max-width: 130px;
+            height: auto;
+        }
+
+        @media (max-width: 768px) {
+            .videos-wrapper {
+                width: 85%;
+                max-width: 600px;
+                flex-direction: column;
+            }
+            .videos-panelvideos {
+                width: 85%;
+                max-width: 600px;
+            }
+            #image-container img {
+                width: 60%;
+                max-width: 450px;
+                transform: scaleY(0.75);
+                transform-origin: top center;
+            }
+            .nav-overlay a {
+                width: 90px;
+                height: 16px;
+            }
+            .nav-overlay a:nth-child(1) { right: 29%; top: 8%; }
+            .nav-overlay a:nth-child(2) { right: 29%; top: 17%; }
+            .nav-overlay a:nth-child(3) { right: 29%; top: 26%; }
+            .nav-overlay a:nth-child(4) { right: 29%; top: 35%; }
+            .nav-overlay a:nth-child(5) { right: 29%; top: 44%; }
+            .nav-overlay a:nth-child(6) { right: 29%; top: 53%; }
+            .nav-overlay a:nth-child(7) { right: 29%; top: 62%; }
+        }
+        @media (max-width: 500px) {
+            .videos-wrapper {
+                width: 95%;
+            }
+            .videos-panelvideos {
+                width: 95%;
+            }
+            #image-container img {
+                width: 75%;
+                max-width: 350px;
+                transform: scaleY(0.7);
+                transform-origin: top center;
+            }
+            .nav-overlay a {
+                width: 70px;
+                height: 12px;
+            }
+            .nav-overlay a:nth-child(1) { right: 22%; top: 8%; }
+            .nav-overlay a:nth-child(2) { right: 22%; top: 17%; }
+            .nav-overlay a:nth-child(3) { right: 22%; top: 26%; }
+            .nav-overlay a:nth-child(4) { right: 22%; top: 35%; }
+            .nav-overlay a:nth-child(5) { right: 22%; top: 44%; }
+            .nav-overlay a:nth-child(6) { right: 22%; top: 53%; }
+            .nav-overlay a:nth-child(7) { right: 22%; top: 62%; }
+        }
+    </style>
+</head>
+<body>
+    <div id="image-container">
+        <img src="videos.jpg" alt="videos">
+        <div class="nav-overlay">
+            <a href="videos.html"></a>
+            <a href="index.html"></a>
+            <a href="profiles.html"></a>
+            <a href="discography.html"></a>
+            <a href="history.html"></a>
+            <a href="bbachat.html"></a>
+            <a href="photogallery.html"></a>
+        </div>
+    </div>
+
+    <div class="videos-wrapper">
+        <div class="videos-left">
+            <div class="video-item" id="videoItem">
+                <video class="video-preview" id="videoPreview" muted playsinline preload="auto">
+                    <source src="1.mp4" type="video/mp4">
+                </video>
+                <div class="video-name">1.mp4</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="videos-panelvideos">
+        <img src="panelvideos.jpg" alt="panelvideos">
+    </div>
+
+    <div class="video-modal" id="videoModal">
+        <video id="videoFull" controls autoplay>
+            <source src="1.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <script>
+        const preview = document.getElementById("videoPreview");
+        const modal = document.getElementById("videoModal");
+        const full = document.getElementById("videoFull");
+        const item = document.getElementById("videoItem");
+
+        preview.addEventListener("loadedmetadata", () => {
+            preview.currentTime = 1;
+        });
+
+        let previewInterval = null;
+        preview.addEventListener("play", () => {
+            if (previewInterval) clearInterval(previewInterval);
+            previewInterval = setInterval(() => {
+                if (preview.duration) {
+                    preview.currentTime = (preview.currentTime + 1) % preview.duration;
+                }
+            }, 1000);
+        });
+
+        preview.addEventListener("loadeddata", () => {
+            preview.play().catch(() => {});
+        });
+
+        item.addEventListener("click", () => {
+            modal.classList.add("open");
+            full.currentTime = 0;
+            full.play().catch(() => {});
+        });
+
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                modal.classList.remove("open");
+                full.pause();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -74,8 +74,8 @@
             display: flex;
             justify-content: flex-end;
             align-items: flex-start;
-            width: 60%;
-            max-width: 700px;
+            width: 35%;
+            max-width: 420px;
             margin: 10px auto 0 auto;
             padding: 0;
             line-height: 0;
@@ -83,19 +83,19 @@
         .panelvideos-container img {
             display: block;
             width: 55%;
-            max-width: 300px;
+            max-width: 220px;
             height: auto;
         }
         .videos-container {
-            width: 60%;
-            max-width: 700px;
+            width: 35%;
+            max-width: 420px;
             margin: 0 auto;
             padding: 0;
         }
         .video-block {
             background-color: #ffffff;
             color: #000;
-            padding: 15px 18px;
+            padding: 30px 18px;
             margin-bottom: 0;
             border-radius: 0;
             border: 2px solid #00008b;
@@ -108,10 +108,10 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            gap: 6px;
+            gap: 5px;
         }
         .video-thumb {
-            width: 180px;
+            width: 130px;
             height: auto;
             cursor: pointer;
         }
@@ -121,8 +121,9 @@
             display: block;
         }
         .video-title {
-            font-size: 12px;
-            font-weight: bold;
+            font-family: "Gulim", "Arial", sans-serif;
+            font-weight: normal;
+            font-size: 11px;
             color: #000;
             text-align: left;
         }
@@ -170,15 +171,15 @@
         @media (max-width: 768px) {
             .videos-container {
                 width: 85%;
-                max-width: 700px;
+                max-width: 420px;
             }
             .panelvideos-container {
                 width: 85%;
-                max-width: 700px;
+                max-width: 420px;
             }
             .panelvideos-container img {
                 width: 45%;
-                max-width: 250px;
+                max-width: 200px;
             }
             #image-container img {
                 width: 60%;
@@ -207,7 +208,7 @@
             }
             .panelvideos-container img {
                 width: 50%;
-                max-width: 180px;
+                max-width: 160px;
             }
             #image-container img {
                 width: 75%;
@@ -227,10 +228,10 @@
             .nav-overlay a:nth-child(6) { right: 22%; top: 53%; }
             .nav-overlay a:nth-child(7) { right: 22%; top: 62%; }
             .video-thumb {
-                width: 140px;
+                width: 110px;
             }
             .video-title {
-                font-size: 11px;
+                font-size: 10px;
             }
         }
     </style>
@@ -257,7 +258,7 @@
         <div class="video-block">
             <div class="video-item">
                 <div class="video-thumb" onclick="openVideo('1.mp4')">
-                    <canvas id="thumb1" width="180" height="101"></canvas>
+                    <canvas id="thumb1" width="130" height="73"></canvas>
                 </div>
                 <div class="video-title">1.mp4</div>
             </div>

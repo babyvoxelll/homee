@@ -70,69 +70,64 @@
         .nav-overlay a:nth-child(6) { right: 36%; top: 53%; }
         .nav-overlay a:nth-child(7) { right: 36%; top: 62%; }
 
-        .videos-row {
+        .panelvideos-container {
             display: flex;
-            align-items: flex-start;
-            justify-content: center;
-            gap: 0;
-            width: 55%;
-            max-width: 600px;
-            margin: 15px auto 0 auto;
-        }
-        .videos-wrapper {
-            flex: 1;
-            background: #00008b;
-            padding: 15px;
-            display: flex;
-            gap: 15px;
-            align-items: flex-start;
-            justify-content: flex-start;
-            min-height: 500px;
-        }
-        .videos-left {
-            background: #ffffff;
-            padding: 10px;
-            display: inline-flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            cursor: pointer;
-            max-width: 140px;
-        }
-        .video-preview {
-            width: 110px;
-            height: 62px;
-            background: #000;
-            object-fit: cover;
-            display: block;
-            border: 1px solid #00008b;
-        }
-        .video-name {
-            font-size: 11px;
-            color: #000;
-            font-weight: bold;
-            text-align: center;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
-        .videos-panelvideos {
-            flex-shrink: 0;
-            display: flex;
-            align-items: flex-start;
             justify-content: flex-end;
+            align-items: flex-start;
+            width: 42%;
+            max-width: 470px;
+            margin: 10px auto 0 auto;
             padding: 0;
             line-height: 0;
-            align-self: flex-start;
-            margin-top: 0;
         }
-        .videos-panelvideos img {
+        .panelvideos-container img {
             display: block;
-            width: 180px;
-            max-width: 180px;
+            width: 25%;
+            max-width: 125px;
             height: auto;
         }
+        .videos-container {
+            width: 42%;
+            max-width: 470px;
+            margin: 0 auto;
+            padding: 0;
+        }
+        .video-block {
+            background-color: #ffffff;
+            color: #000;
+            padding: 15px 18px;
+            margin-bottom: 0;
+            border-radius: 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 2px solid #00008b;
+            border-bottom: 2px solid #00008b;
+        }
+        .video-block:last-child {
+            border-bottom: 2px solid #00008b;
+        }
+        .video-thumb {
+            flex-shrink: 0;
+            width: 100px;
+            height: auto;
+            cursor: pointer;
+        }
+        .video-thumb canvas {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .video-title {
+            flex: 1;
+            font-size: 12px;
+            font-weight: bold;
+            color: #000;
+            text-align: center;
+        }
 
-        .video-modal {
+        /* Модальное окно с полным видео */
+        .modal-overlay {
             display: none;
             position: fixed;
             top: 0;
@@ -140,32 +135,50 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
             justify-content: center;
             align-items: center;
-            z-index: 100;
         }
-        .video-modal.open {
+        .modal-overlay.active {
             display: flex;
         }
-        .video-modal video {
+        .modal-content {
+            position: relative;
             max-width: 90%;
             max-height: 90%;
-            background: #000;
+        }
+        .modal-content video {
+            display: block;
+            max-width: 90vw;
+            max-height: 90vh;
+            width: auto;
+            height: auto;
+        }
+        .modal-close {
+            position: absolute;
+            top: -35px;
+            right: 0;
+            color: #fff;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            background: none;
+            border: none;
+            line-height: 1;
         }
 
         @media (max-width: 768px) {
-            .videos-row {
+            .videos-container {
                 width: 85%;
-                flex-direction: column;
-                align-items: center;
+                max-width: 470px;
             }
-            .videos-wrapper {
-                width: 100%;
-                min-height: 400px;
+            .panelvideos-container {
+                width: 85%;
+                max-width: 470px;
             }
-            .videos-panelvideos img {
-                width: 140px;
-                max-width: 140px;
+            .panelvideos-container img {
+                width: 25%;
+                max-width: 115px;
             }
             #image-container img {
                 width: 60%;
@@ -186,11 +199,14 @@
             .nav-overlay a:nth-child(7) { right: 29%; top: 62%; }
         }
         @media (max-width: 500px) {
-            .videos-row {
+            .videos-container {
                 width: 95%;
             }
-            .videos-panelvideos img {
-                width: 100px;
+            .panelvideos-container {
+                width: 95%;
+            }
+            .panelvideos-container img {
+                width: 30%;
                 max-width: 100px;
             }
             #image-container img {
@@ -210,6 +226,12 @@
             .nav-overlay a:nth-child(5) { right: 22%; top: 44%; }
             .nav-overlay a:nth-child(6) { right: 22%; top: 53%; }
             .nav-overlay a:nth-child(7) { right: 22%; top: 62%; }
+            .video-thumb {
+                width: 80px;
+            }
+            .video-title {
+                font-size: 10px;
+            }
         }
     </style>
 </head>
@@ -226,69 +248,86 @@
             <a href="photogallery.html"></a>
         </div>
     </div>
-
-    <div class="videos-row">
-        <div class="videos-wrapper">
-            <div class="videos-left" id="videoItem">
-                <video class="video-preview" id="videoPreview" muted playsinline preload="auto">
-                    <source src="1.mp4" type="video/mp4">
-                </video>
-                <div class="video-name">1.mp4</div>
+    
+    <div class="panelvideos-container">
+        <img src="panelvideos.jpg" alt="panelvideos">
+    </div>
+    
+    <div class="videos-container">
+        <div class="video-block">
+            <div class="video-thumb" onclick="openVideo('1.mp4')">
+                <canvas id="thumb1" width="160" height="90"></canvas>
             </div>
-        </div>
-
-        <div class="videos-panelvideos">
-            <img src="panelvideos.jpg" alt="panelvideos">
+            <div class="video-title">1.mp4</div>
         </div>
     </div>
 
-    <div class="video-modal" id="videoModal">
-        <video id="videoFull" controls>
-            <source src="1.mp4" type="video/mp4">
-        </video>
+    <div class="modal-overlay" id="modal" onclick="closeVideo(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeVideo(event)">×</button>
+            <video id="modalVideo" controls></video>
+        </div>
     </div>
 
     <script>
-        const preview = document.getElementById("videoPreview");
-        const modal = document.getElementById("videoModal");
-        const full = document.getElementById("videoFull");
-        const item = document.getElementById("videoItem");
+        // Превью-гифка: 5 кадров из видео, циклично
+        function setupThumb(videoSrc, canvasId) {
+            const video = document.createElement('video');
+            video.src = videoSrc;
+            video.muted = true;
+            video.playsInline = true;
+            video.preload = 'auto';
 
-        let previewInterval = null;
-        let previewReady = false;
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext('2d');
+            let duration = 0;
+            let currentFrame = 0;
+            let frames = [];
 
-        preview.addEventListener("loadeddata", () => {
-            previewReady = true;
-            startPreview();
-        });
-
-        function startPreview() {
-            if (!previewReady) return;
-            const times = [1, 3, 5, 7, 9];
-            let idx = 0;
-            preview.currentTime = times[0];
-            previewInterval = setInterval(() => {
-                idx = (idx + 1) % times.length;
-                if (preview.duration && times[idx] < preview.duration) {
-                    preview.currentTime = times[idx];
+            video.addEventListener('loadedmetadata', () => {
+                duration = video.duration;
+                // 5 кадров равномерно по видео
+                const step = duration / 5;
+                for (let i = 0; i < 5; i++) {
+                    frames.push(step * i + step * 0.1);
                 }
-            }, 1200);
+                // Загружаем первый кадр
+                video.currentTime = frames[0];
+            });
+
+            video.addEventListener('seeked', () => {
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                currentFrame++;
+                if (currentFrame < frames.length) {
+                    video.currentTime = frames[currentFrame];
+                } else {
+                    // Цикл
+                    setTimeout(() => {
+                        currentFrame = 0;
+                        video.currentTime = frames[0];
+                    }, 400);
+                }
+            });
         }
 
-        item.addEventListener("click", () => {
-            if (previewInterval) clearInterval(previewInterval);
-            modal.classList.add("open");
-            full.currentTime = 0;
-            full.play().catch(() => {});
-        });
+        setupThumb('1.mp4', 'thumb1');
 
-        modal.addEventListener("click", (e) => {
-            if (e.target === modal) {
-                modal.classList.remove("open");
-                full.pause();
-                startPreview();
-            }
-        });
+        function openVideo(src) {
+            const modal = document.getElementById('modal');
+            const video = document.getElementById('modalVideo');
+            video.src = src;
+            modal.classList.add('active');
+            video.play();
+        }
+
+        function closeVideo(event) {
+            const modal = document.getElementById('modal');
+            const video = document.getElementById('modalVideo');
+            modal.classList.remove('active');
+            video.pause();
+            video.currentTime = 0;
+            video.src = '';
+        }
     </script>
 </body>
 </html>

@@ -74,38 +74,44 @@
             display: flex;
             justify-content: flex-end;
             align-items: flex-start;
-            width: 42%;
-            max-width: 470px;
+            width: 60%;
+            max-width: 700px;
             margin: 10px auto 0 auto;
             padding: 0;
             line-height: 0;
         }
         .panelvideos-container img {
             display: block;
-            width: 35%;
-            max-width: 200px;
+            width: 55%;
+            max-width: 300px;
             height: auto;
         }
         .videos-container {
-            width: 42%;
-            max-width: 470px;
+            width: 60%;
+            max-width: 700px;
             margin: 0 auto;
             padding: 0;
-            background-color: #00008b;
-            border: 2px solid #00008b;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px 15px;
         }
         .video-block {
+            background-color: #ffffff;
+            color: #000;
+            padding: 15px 18px;
+            margin-bottom: 0;
+            border-radius: 0;
+            border: 2px solid #00008b;
+            border-bottom: 2px solid #00008b;
+        }
+        .video-block:last-child {
+            border-bottom: 2px solid #00008b;
+        }
+        .video-item {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 8px;
+            align-items: flex-start;
+            gap: 6px;
         }
         .video-thumb {
-            width: 130px;
+            width: 180px;
             height: auto;
             cursor: pointer;
         }
@@ -117,8 +123,8 @@
         .video-title {
             font-size: 12px;
             font-weight: bold;
-            color: #ffffff;
-            text-align: center;
+            color: #000;
+            text-align: left;
         }
 
         .modal-overlay {
@@ -164,15 +170,15 @@
         @media (max-width: 768px) {
             .videos-container {
                 width: 85%;
-                max-width: 470px;
+                max-width: 700px;
             }
             .panelvideos-container {
                 width: 85%;
-                max-width: 470px;
+                max-width: 700px;
             }
             .panelvideos-container img {
-                width: 35%;
-                max-width: 180px;
+                width: 45%;
+                max-width: 250px;
             }
             #image-container img {
                 width: 60%;
@@ -200,8 +206,8 @@
                 width: 95%;
             }
             .panelvideos-container img {
-                width: 45%;
-                max-width: 150px;
+                width: 50%;
+                max-width: 180px;
             }
             #image-container img {
                 width: 75%;
@@ -221,7 +227,7 @@
             .nav-overlay a:nth-child(6) { right: 22%; top: 53%; }
             .nav-overlay a:nth-child(7) { right: 22%; top: 62%; }
             .video-thumb {
-                width: 110px;
+                width: 140px;
             }
             .video-title {
                 font-size: 11px;
@@ -249,10 +255,12 @@
     
     <div class="videos-container">
         <div class="video-block">
-            <div class="video-thumb" onclick="openVideo('1.mp4')">
-                <canvas id="thumb1" width="160" height="90"></canvas>
+            <div class="video-item">
+                <div class="video-thumb" onclick="openVideo('1.mp4')">
+                    <canvas id="thumb1" width="180" height="101"></canvas>
+                </div>
+                <div class="video-title">1.mp4</div>
             </div>
-            <div class="video-title">1.mp4</div>
         </div>
     </div>
 

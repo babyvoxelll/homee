@@ -105,6 +105,11 @@
         .video-block:last-child {
             border-bottom: 2px solid #00008b;
         }
+        .video-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 40px;
+        }
         .video-item {
             display: flex;
             flex-direction: column;
@@ -156,18 +161,6 @@
             max-height: 90vh;
             width: auto;
             height: auto;
-        }
-        .modal-close {
-            position: absolute;
-            top: -35px;
-            right: 0;
-            color: #fff;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            background: none;
-            border: none;
-            line-height: 1;
         }
 
         @media (max-width: 768px) {
@@ -236,6 +229,9 @@
                 font-size: 10px;
                 width: 60px;
             }
+            .video-row {
+                gap: 20px;
+            }
         }
     </style>
 </head>
@@ -259,18 +255,25 @@
     
     <div class="videos-container">
         <div class="video-block">
-            <div class="video-item">
-                <div class="video-thumb" onclick="openVideo('1.mp4')">
-                    <canvas id="thumb1" width="70" height="40"></canvas>
+            <div class="video-row">
+                <div class="video-item">
+                    <div class="video-thumb" onclick="openVideo('1.mp4')">
+                        <canvas id="thumb1" width="70" height="40"></canvas>
+                    </div>
+                    <div class="video-title">1.mp4</div>
                 </div>
-                <div class="video-title">1.mp4</div>
+                <div class="video-item">
+                    <div class="video-thumb" onclick="openVideo('2.mp4')">
+                        <canvas id="thumb2" width="70" height="40"></canvas>
+                    </div>
+                    <div class="video-title">2.mp4</div>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="modal-overlay" id="modal" onclick="closeVideo(event)">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <button class="modal-close" onclick="closeVideo(event)">×</button>
             <video id="modalVideo" controls></video>
         </div>
     </div>
@@ -313,6 +316,7 @@
         }
 
         setupThumb('1.mp4', 'thumb1');
+        setupThumb('2.mp4', 'thumb2');
 
         function openVideo(src) {
             const modal = document.getElementById('modal');

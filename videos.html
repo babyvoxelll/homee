@@ -82,8 +82,8 @@
         }
         .panelvideos-container img {
             display: block;
-            width: 25%;
-            max-width: 125px;
+            width: 35%;
+            max-width: 200px;
             height: auto;
         }
         .videos-container {
@@ -91,25 +91,21 @@
             max-width: 470px;
             margin: 0 auto;
             padding: 0;
+            background-color: #00008b;
+            border: 2px solid #00008b;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 15px;
         }
         .video-block {
-            background-color: #ffffff;
-            color: #000;
-            padding: 15px 18px;
-            margin-bottom: 0;
-            border-radius: 0;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 15px;
-            border: 2px solid #00008b;
-            border-bottom: 2px solid #00008b;
-        }
-        .video-block:last-child {
-            border-bottom: 2px solid #00008b;
+            gap: 8px;
         }
         .video-thumb {
-            flex-shrink: 0;
-            width: 100px;
+            width: 130px;
             height: auto;
             cursor: pointer;
         }
@@ -119,14 +115,12 @@
             display: block;
         }
         .video-title {
-            flex: 1;
             font-size: 12px;
             font-weight: bold;
-            color: #000;
+            color: #ffffff;
             text-align: center;
         }
 
-        /* Модальное окно с полным видео */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -177,8 +171,8 @@
                 max-width: 470px;
             }
             .panelvideos-container img {
-                width: 25%;
-                max-width: 115px;
+                width: 35%;
+                max-width: 180px;
             }
             #image-container img {
                 width: 60%;
@@ -206,8 +200,8 @@
                 width: 95%;
             }
             .panelvideos-container img {
-                width: 30%;
-                max-width: 100px;
+                width: 45%;
+                max-width: 150px;
             }
             #image-container img {
                 width: 75%;
@@ -227,10 +221,10 @@
             .nav-overlay a:nth-child(6) { right: 22%; top: 53%; }
             .nav-overlay a:nth-child(7) { right: 22%; top: 62%; }
             .video-thumb {
-                width: 80px;
+                width: 110px;
             }
             .video-title {
-                font-size: 10px;
+                font-size: 11px;
             }
         }
     </style>
@@ -270,7 +264,6 @@
     </div>
 
     <script>
-        // Превью-гифка: 5 кадров из видео, циклично
         function setupThumb(videoSrc, canvasId) {
             const video = document.createElement('video');
             video.src = videoSrc;
@@ -286,12 +279,10 @@
 
             video.addEventListener('loadedmetadata', () => {
                 duration = video.duration;
-                // 5 кадров равномерно по видео
                 const step = duration / 5;
                 for (let i = 0; i < 5; i++) {
                     frames.push(step * i + step * 0.1);
                 }
-                // Загружаем первый кадр
                 video.currentTime = frames[0];
             });
 
@@ -301,7 +292,6 @@
                 if (currentFrame < frames.length) {
                     video.currentTime = frames[currentFrame];
                 } else {
-                    // Цикл
                     setTimeout(() => {
                         currentFrame = 0;
                         video.currentTime = frames[0];

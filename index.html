@@ -151,25 +151,22 @@
             };
         })();
     </script>
-    <script src="https://unpkg.com/ruffle-rs/ruffle.js"></script>
-    <script>
-        window.addEventListener("DOMContentLoaded", () => {
-            let ruffle = window.RufflePlayer.newest();
-            let player = ruffle.createPlayer();
-            let container = document.getElementById("player-container");
+<script src="https://unpkg.com/ruffle-rs/ruffle.js"></script>
+<script>
+    window.addEventListener("DOMContentLoaded", () => {
+        let ruffle = window.RufflePlayer.newest();
+        let player = ruffle.createPlayer();
+        let container = document.getElementById("player-container");
 
-            player.style.width = "500px";
-            player.style.height = "270px";
+        player.style.width = "500px";
+        player.style.height = "270px";
 
-            container.appendChild(player);
-            player.load({ url: "babyvoxmain22.swf" });
-            
+        container.appendChild(player);
+        player.load({ url: "babyvoxmain22.swf" });
+        player.addEventListener('loadeddata', () => {
             player.play();
-            
-            player.addEventListener('loadeddata', () => {
-                player.play();
-            });
         });
+    });
     </script>
 </body>
 </html>

@@ -310,6 +310,7 @@
             let duration = 0;
             let currentFrame = 0;
             let frames = [];
+            let loopInterval = null;
 
             video.addEventListener('loadedmetadata', () => {
                 duration = video.duration;
@@ -326,11 +327,21 @@
                 if (currentFrame < frames.length) {
                     video.currentTime = frames[currentFrame];
                 } else {
-                    setTimeout(() => {
+                    if (loopInterval) clearTimeout(loopInterval);
+                    loopInterval = setTimeout(() => {
                         currentFrame = 0;
                         video.currentTime = frames[0];
                     }, 400);
                 }
+            });
+
+            video.addEventListener('error', () => {
+                ctx.fillStyle = '#e0e0e0';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#000';
+                ctx.font = '10px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('no preview', canvas.width/2, canvas.height/2);
             });
         }
 

@@ -23,10 +23,6 @@
             font-family: "Dotum", "Gulim", "Arial", sans-serif;
             text-align: center;
         }
-        link[rel="icon"] {
-            width: 512px;
-            height: 512px;
-        }
         #image-container {
             display: flex;
             justify-content: center;
@@ -68,21 +64,12 @@
             text-align: center;
         }
         .info .dark-purple { color: #4a0080; }
-        .info .dark-blue { color: #00008b; }
         .info .black { color: #000; }
         .info a {
             color: #00008b;
             text-decoration: none;
         }
         .info a:hover { text-decoration: underline; }
-        .info .ruffle-link {
-            color: #00008b;
-            text-decoration: underline;
-            cursor: pointer;
-        }
-        .info .ruffle-link:hover {
-            text-decoration: none;
-        }
 
         @media (max-width: 860px) {
             .info {
@@ -117,7 +104,7 @@
         <div class="block">
             <span class="dark-purple">Copyright © 2026 BABYVOXELLL.2BD.NET All rights reserved.</span><br>
             <span class="dark-purple">이 페이지는</span>
-            <a href="https://ruffle.rs/" target="_blank" class="ruffle-link">ruffle</a>
+            <a href="https://ruffle.rs/" target="_blank">ruffle</a>
             <span class="dark-purple">확장 프로그램이 필요합니다.</span><br>
             <span class="dark-purple">웹사이트 제작자: Kaze</span>
         </div>
@@ -127,16 +114,6 @@
     </div>
     
     <script>
-        window.RufflePlayer = window.RufflePlayer || {};
-        window.RufflePlayer.config = {
-            "openUrlMode": "allow",
-            "allowScriptAccess": true,
-            "warnOnUnsupportedContent": false,
-            "autoplay": "on",
-            "unmuteOverlay": "hidden",
-            "publicPath": "ruffle/"
-        };
-
         (function() {
             const originalOpen = window.open;
             window.open = function(url, target, features) {
@@ -152,7 +129,7 @@
             };
         })();
     </script>
-    <script src="ruffle/ruffle.js"></script>
+    <script src="https://unpkg.com/ruffle-rs/ruffle.js"></script>
     <script>
         window.addEventListener("DOMContentLoaded", () => {
             let ruffle = window.RufflePlayer.newest();
@@ -161,15 +138,13 @@
 
             player.style.width = "500px";
             player.style.height = "270px";
+            player.style.maxWidth = "100%";
 
             container.appendChild(player);
+            
             player.load({ url: "babyvoxmain22.swf" });
             
             player.play();
-            
-            player.addEventListener('loadeddata', () => {
-                player.play();
-            });
         });
     </script>
 </body>

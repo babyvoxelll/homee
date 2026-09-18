@@ -23,7 +23,7 @@
             min-height: 100vh;
             padding: 0;
             margin: 0;
-            font-family: "Dotum", "Gulim", "Arial", sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         .bbacommunity-top {
@@ -241,8 +241,8 @@
         }
 
         .bba-post {
-            padding: 10px 14px;
-            border-bottom: 1px solid #000;
+            padding: 10px 14px 0 14px;
+            border-bottom: none;
         }
         .bba-post:last-child {
             border-bottom: none;
@@ -269,17 +269,17 @@
             color: #000;
         }
         .bba-post-header .post-reply-btn {
-            background: transparent;
-            border: none;
-            color: #0000ee;
-            text-decoration: underline;
-            font-size: 12px;
+            background: #cccccc;
+            border: 1px solid #999;
+            color: #000;
+            text-decoration: none;
+            font-size: 11px;
             cursor: pointer;
             font-family: "Dotum", "Gulim", "Arial", sans-serif;
-            padding: 0;
+            padding: 1px 8px;
         }
         .bba-post-header .post-reply-btn:hover {
-            color: #800020;
+            background: #b0b0b0;
         }
 
         .bba-post-body {
@@ -291,7 +291,7 @@
         }
         .bba-post-body .post-img {
             flex-shrink: 0;
-            width: 120px;
+            width: 55px;
             height: auto;
         }
         .bba-post-body .post-img img {
@@ -330,36 +330,61 @@
             word-wrap: break-word;
         }
 
-        .reply-form-box {
-            display: none;
-            margin-top: 8px;
-            padding: 8px;
-            background: #f0f0f0;
-            border: 1px solid #ccc;
+        .bba-post-bottom {
+            width: 70%;
+            height: 2px;
+            background: #000;
+            margin: 10px 0 0 0;
         }
-        .reply-form-box.open {
+        .bba-post-spacer {
+            height: 25px;
+        }
+
+        .reply-info {
+            display: none;
+            color: #999;
+            font-size: 11px;
+            margin-top: 6px;
+            padding-left: 4px;
+            font-family: "Dotum", "Gulim", "Arial", sans-serif;
+        }
+        .reply-info.open {
             display: block;
         }
-        .reply-form-box input,
-        .reply-form-box textarea {
+
+        .reply-inline-form {
+            display: none;
+            margin-top: 6px;
+            padding: 6px 0;
+            background: transparent;
+        }
+        .reply-inline-form.open {
+            display: block;
+        }
+        .reply-inline-form input,
+        .reply-inline-form textarea {
             width: 100%;
             font-size: 12px;
             padding: 3px 5px;
             border: 1px solid #ccc;
             margin-bottom: 4px;
             font-family: "Dotum", "Gulim", "Arial", sans-serif;
+            background: #fff;
         }
-        .reply-form-box textarea {
+        .reply-inline-form textarea {
             min-height: 50px;
         }
-        .reply-form-box button {
-            padding: 4px 16px;
-            font-size: 12px;
-            background: #800020;
-            color: #fff;
-            border: 1px solid #555;
+        .reply-inline-form button {
+            padding: 3px 14px;
+            font-size: 11px;
+            background: #cccccc;
+            color: #000;
+            border: 1px solid #999;
             cursor: pointer;
             font-family: "Dotum", "Gulim", "Arial", sans-serif;
+        }
+        .reply-inline-form button:hover {
+            background: #b0b0b0;
         }
 
         @media (max-width: 760px) {
@@ -389,7 +414,7 @@
                 width: 110px;
             }
             .bba-post-body .post-img {
-                width: 90px;
+                width: 45px;
             }
             .bba-colors-row .label {
                 width: 60px;
@@ -560,10 +585,10 @@
                 replyBtn.className = "post-reply-btn";
                 replyBtn.textContent = "답변";
                 replyBtn.addEventListener("click", () => {
-                    const box = document.getElementById("replyBox-" + post.id);
-                    if (box) {
-                        box.classList.toggle("open");
-                    }
+                    const info = document.getElementById("replyInfo-" + post.id);
+                    const form = document.getElementById("replyForm-" + post.id);
+                    if (info) info.classList.toggle("open");
+                    if (form) form.classList.toggle("open");
                 });
                 header.appendChild(replyBtn);
 
@@ -605,6 +630,50 @@
                     postEl.appendChild(urlLine);
                 }
 
+                const replyInfo = document.createElement("div");
+                replyInfo.className = "reply-info";
+                replyInfo.id = "replyInfo-" + post.id;
+                replyInfo.textContent = "위에 있는 모든 정보를 입력해주세요 (이름, 이메일 등)";
+                postEl.appendChild(replyInfo);
+
+                const replyForm = document.createElement("div");
+                replyForm.className = "reply-inline-form";
+                replyForm.id = "replyForm-" + post.id;
+
+                const rNameInput = document.createElement("input");
+                rNameInput.type = "text";
+                rNameInput.placeholder = "이름";
+                replyForm.appendChild(rNameInput);
+
+                const rCommentInput = document.createElement("textarea");
+                rCommentInput.placeholder = "코멘트";
+                replyForm.appendChild(rCommentInput);
+
+                const rSubmit = document.createElement("button");
+                rSubmit.textContent = "답변 보내기";
+                rSubmit.addEventListener("click", async () => {
+                    const rName = rNameInput.value.trim();
+                    const rComment = rCommentInput.value.trim();
+                    if (!rName || !rComment) {
+                        alert("이름과 코멘트를 입력하세요.");
+                        return;
+                    }
+                    const replyRef = ref(db, "bbacommunity/posts/" + post.id + "/replies");
+                    await push(replyRef, {
+                        name: rName,
+                        comment: rComment,
+                        textColor: selectedColor,
+                        timestamp: Date.now()
+                    });
+                    rNameInput.value = "";
+                    rCommentInput.value = "";
+                    replyInfo.classList.remove("open");
+                    replyForm.classList.remove("open");
+                });
+                replyForm.appendChild(rSubmit);
+
+                postEl.appendChild(replyForm);
+
                 const repliesBox = document.createElement("div");
                 repliesBox.className = "bba-replies";
 
@@ -640,43 +709,15 @@
                     });
                 }
 
-                const replyBox = document.createElement("div");
-                replyBox.className = "reply-form-box";
-                replyBox.id = "replyBox-" + post.id;
-
-                const rNameInput = document.createElement("input");
-                rNameInput.type = "text";
-                rNameInput.placeholder = "이름";
-                replyBox.appendChild(rNameInput);
-
-                const rCommentInput = document.createElement("textarea");
-                rCommentInput.placeholder = "코멘트";
-                replyBox.appendChild(rCommentInput);
-
-                const rSubmit = document.createElement("button");
-                rSubmit.textContent = "답변 보내기";
-                rSubmit.addEventListener("click", async () => {
-                    const rName = rNameInput.value.trim();
-                    const rComment = rCommentInput.value.trim();
-                    if (!rName || !rComment) {
-                        alert("이름과 코멘트를 입력하세요.");
-                        return;
-                    }
-                    const replyRef = ref(db, "bbacommunity/posts/" + post.id + "/replies");
-                    await push(replyRef, {
-                        name: rName,
-                        comment: rComment,
-                        textColor: selectedColor,
-                        timestamp: Date.now()
-                    });
-                    rNameInput.value = "";
-                    rCommentInput.value = "";
-                    replyBox.classList.remove("open");
-                });
-                replyBox.appendChild(rSubmit);
-
-                repliesBox.appendChild(replyBox);
                 postEl.appendChild(repliesBox);
+
+                const bottomLine = document.createElement("div");
+                bottomLine.className = "bba-post-bottom";
+                postEl.appendChild(bottomLine);
+
+                const spacer = document.createElement("div");
+                spacer.className = "bba-post-spacer";
+                postEl.appendChild(spacer);
 
                 board.appendChild(postEl);
             });

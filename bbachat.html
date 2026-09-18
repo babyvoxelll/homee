@@ -237,15 +237,16 @@
             padding: 0;
             color: #000;
             font-size: 12px;
-            font-family: "Dotum", "Gulim", "Arial", sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         .bba-post {
-            padding: 10px 14px 0 14px;
-            border-bottom: none;
+            padding: 12px 14px;
+            border-bottom: 2px solid #000;
+            margin-bottom: 8px;
         }
         .bba-post:last-child {
-            border-bottom: none;
+            border-bottom: 2px solid #000;
         }
         .bba-post-header {
             display: flex;
@@ -253,7 +254,7 @@
             align-items: center;
             gap: 10px;
             font-size: 12px;
-            font-family: "Dotum", "Gulim", "Arial", sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
         }
         .bba-post-header .post-title {
             color: #006400;
@@ -269,17 +270,21 @@
             color: #000;
         }
         .bba-post-header .post-reply-btn {
-            background: #cccccc;
-            border: 1px solid #999;
+            background: #c0c0c0;
+            border: 1px solid #888;
             color: #000;
-            text-decoration: none;
             font-size: 11px;
             cursor: pointer;
-            font-family: "Dotum", "Gulim", "Arial", sans-serif;
-            padding: 1px 8px;
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 2px 8px;
         }
         .bba-post-header .post-reply-btn:hover {
-            background: #b0b0b0;
+            background: #a8a8a8;
+        }
+        .bba-post-header .post-reply-hint {
+            color: #888;
+            font-size: 10px;
+            margin-left: 4px;
         }
 
         .bba-post-body {
@@ -291,7 +296,7 @@
         }
         .bba-post-body .post-img {
             flex-shrink: 0;
-            width: 55px;
+            width: 50px;
             height: auto;
         }
         .bba-post-body .post-img img {
@@ -306,6 +311,7 @@
             color: #000;
             white-space: pre-wrap;
             word-wrap: break-word;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         .bba-replies {
@@ -317,6 +323,7 @@
             border-top: 1px dashed #000;
             font-size: 12px;
             color: #000;
+            font-family: Arial, Helvetica, sans-serif;
         }
         .bba-reply .reply-header {
             display: flex;
@@ -328,63 +335,6 @@
             margin-top: 4px;
             white-space: pre-wrap;
             word-wrap: break-word;
-        }
-
-        .bba-post-bottom {
-            width: 70%;
-            height: 2px;
-            background: #000;
-            margin: 10px 0 0 0;
-        }
-        .bba-post-spacer {
-            height: 25px;
-        }
-
-        .reply-info {
-            display: none;
-            color: #999;
-            font-size: 11px;
-            margin-top: 6px;
-            padding-left: 4px;
-            font-family: "Dotum", "Gulim", "Arial", sans-serif;
-        }
-        .reply-info.open {
-            display: block;
-        }
-
-        .reply-inline-form {
-            display: none;
-            margin-top: 6px;
-            padding: 6px 0;
-            background: transparent;
-        }
-        .reply-inline-form.open {
-            display: block;
-        }
-        .reply-inline-form input,
-        .reply-inline-form textarea {
-            width: 100%;
-            font-size: 12px;
-            padding: 3px 5px;
-            border: 1px solid #ccc;
-            margin-bottom: 4px;
-            font-family: "Dotum", "Gulim", "Arial", sans-serif;
-            background: #fff;
-        }
-        .reply-inline-form textarea {
-            min-height: 50px;
-        }
-        .reply-inline-form button {
-            padding: 3px 14px;
-            font-size: 11px;
-            background: #cccccc;
-            color: #000;
-            border: 1px solid #999;
-            cursor: pointer;
-            font-family: "Dotum", "Gulim", "Arial", sans-serif;
-        }
-        .reply-inline-form button:hover {
-            background: #b0b0b0;
         }
 
         @media (max-width: 760px) {
@@ -414,7 +364,7 @@
                 width: 110px;
             }
             .bba-post-body .post-img {
-                width: 45px;
+                width: 40px;
             }
             .bba-colors-row .label {
                 width: 60px;
@@ -585,12 +535,17 @@
                 replyBtn.className = "post-reply-btn";
                 replyBtn.textContent = "답변";
                 replyBtn.addEventListener("click", () => {
-                    const info = document.getElementById("replyInfo-" + post.id);
-                    const form = document.getElementById("replyForm-" + post.id);
-                    if (info) info.classList.toggle("open");
-                    if (form) form.classList.toggle("open");
+                    const box = document.getElementById("replyBox-" + post.id);
+                    if (box) {
+                        box.classList.toggle("open");
+                    }
                 });
                 header.appendChild(replyBtn);
+
+                const replyHint = document.createElement("span");
+                replyHint.className = "post-reply-hint";
+                replyHint.textContent = "(위 칸에 정보를 입력하세요)";
+                header.appendChild(replyHint);
 
                 postEl.appendChild(header);
 
@@ -630,50 +585,6 @@
                     postEl.appendChild(urlLine);
                 }
 
-                const replyInfo = document.createElement("div");
-                replyInfo.className = "reply-info";
-                replyInfo.id = "replyInfo-" + post.id;
-                replyInfo.textContent = "위에 있는 모든 정보를 입력해주세요 (이름, 이메일 등)";
-                postEl.appendChild(replyInfo);
-
-                const replyForm = document.createElement("div");
-                replyForm.className = "reply-inline-form";
-                replyForm.id = "replyForm-" + post.id;
-
-                const rNameInput = document.createElement("input");
-                rNameInput.type = "text";
-                rNameInput.placeholder = "이름";
-                replyForm.appendChild(rNameInput);
-
-                const rCommentInput = document.createElement("textarea");
-                rCommentInput.placeholder = "코멘트";
-                replyForm.appendChild(rCommentInput);
-
-                const rSubmit = document.createElement("button");
-                rSubmit.textContent = "답변 보내기";
-                rSubmit.addEventListener("click", async () => {
-                    const rName = rNameInput.value.trim();
-                    const rComment = rCommentInput.value.trim();
-                    if (!rName || !rComment) {
-                        alert("이름과 코멘트를 입력하세요.");
-                        return;
-                    }
-                    const replyRef = ref(db, "bbacommunity/posts/" + post.id + "/replies");
-                    await push(replyRef, {
-                        name: rName,
-                        comment: rComment,
-                        textColor: selectedColor,
-                        timestamp: Date.now()
-                    });
-                    rNameInput.value = "";
-                    rCommentInput.value = "";
-                    replyInfo.classList.remove("open");
-                    replyForm.classList.remove("open");
-                });
-                replyForm.appendChild(rSubmit);
-
-                postEl.appendChild(replyForm);
-
                 const repliesBox = document.createElement("div");
                 repliesBox.className = "bba-replies";
 
@@ -709,15 +620,12 @@
                     });
                 }
 
+                const replyBox = document.createElement("div");
+                replyBox.className = "reply-form-box";
+                replyBox.id = "replyBox-" + post.id;
+
+                repliesBox.appendChild(replyBox);
                 postEl.appendChild(repliesBox);
-
-                const bottomLine = document.createElement("div");
-                bottomLine.className = "bba-post-bottom";
-                postEl.appendChild(bottomLine);
-
-                const spacer = document.createElement("div");
-                spacer.className = "bba-post-spacer";
-                postEl.appendChild(spacer);
 
                 board.appendChild(postEl);
             });

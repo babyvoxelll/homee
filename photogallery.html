@@ -70,48 +70,33 @@
         .nav-overlay a:nth-child(6) { right: 36%; top: 53%; }
         .nav-overlay a:nth-child(7) { right: 36%; top: 62%; }
 
-        .photos-header {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 55%;
-            max-width: 600px;
-            margin: 10px auto 0 auto;
-            padding: 0;
-            line-height: 0;
-        }
-        .photos-header img {
-            display: block;
-            width: 22%;
-            max-width: 130px;
-            height: auto;
-            margin: 0 auto;
-        }
         .gallery-panel {
             background-color: #ffffff;
             color: #000;
             padding: 15px 18px;
             width: 55%;
             max-width: 600px;
-            margin: 0 auto;
+            margin: 10px auto 0 auto;
             border: 2px solid #00008b;
             border-bottom: 2px solid #00008b;
             min-height: 600px;
             position: relative;
         }
+        .panel-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 20px;
+        }
         .member-select {
-            position: absolute;
-            left: 15px;
-            top: 15px;
-            z-index: 10;
+            position: relative;
+            flex-shrink: 0;
+            align-self: flex-start;
         }
         .member-btn {
-            background-color: #d4d0c8;
+            background-color: #ffffff;
             color: #000;
-            border-top: 2px solid #ffffff;
-            border-left: 2px solid #ffffff;
-            border-right: 2px solid #808080;
-            border-bottom: 2px solid #808080;
+            border: 1px solid #000;
             padding: 3px 10px;
             font-family: "Gulim", "Arial", sans-serif;
             font-size: 11px;
@@ -119,22 +104,16 @@
             min-width: 130px;
             text-align: left;
         }
-        .member-btn:active {
-            border-top: 2px solid #808080;
-            border-left: 2px solid #808080;
-            border-right: 2px solid #ffffff;
-            border-bottom: 2px solid #ffffff;
+        .member-btn:hover {
+            background-color: #f0f0f0;
         }
         .member-dropdown {
             display: none;
             position: absolute;
             top: 100%;
             left: 0;
-            background-color: #d4d0c8;
-            border-top: 2px solid #ffffff;
-            border-left: 2px solid #ffffff;
-            border-right: 2px solid #808080;
-            border-bottom: 2px solid #808080;
+            background-color: #ffffff;
+            border: 1px solid #000;
             min-width: 130px;
             z-index: 20;
         }
@@ -149,10 +128,6 @@
             color: #000;
             text-decoration: none;
             cursor: pointer;
-            border-bottom: 1px solid #a0a0a0;
-        }
-        .member-dropdown a:last-child {
-            border-bottom: none;
         }
         .member-dropdown a:hover {
             background-color: #00008b;
@@ -160,24 +135,23 @@
         }
 
         .photos-center {
+            flex: 1;
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            padding-top: 10px;
         }
         .photos-center img {
             display: block;
-            width: 22%;
-            max-width: 130px;
+            width: 110px;
             height: auto;
         }
 
         .photos-grid {
             display: none;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
             margin-top: 20px;
-            justify-content: center;
+            justify-content: flex-start;
         }
         .photos-grid.active {
             display: flex;
@@ -188,8 +162,9 @@
         }
         .photos-grid img {
             display: block;
-            width: 90px;
-            height: auto;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
             border: 1px solid #000;
         }
 
@@ -197,14 +172,6 @@
             .gallery-panel {
                 width: 85%;
                 max-width: 600px;
-            }
-            .photos-header {
-                width: 85%;
-                max-width: 600px;
-            }
-            .photos-header img {
-                width: 22%;
-                max-width: 110px;
             }
             #image-container img {
                 width: 60%;
@@ -223,17 +190,14 @@
             .nav-overlay a:nth-child(5) { right: 29%; top: 44%; }
             .nav-overlay a:nth-child(6) { right: 29%; top: 53%; }
             .nav-overlay a:nth-child(7) { right: 29%; top: 62%; }
+            .photos-grid img {
+                width: 80px;
+                height: 80px;
+            }
         }
         @media (max-width: 500px) {
             .gallery-panel {
                 width: 95%;
-            }
-            .photos-header {
-                width: 95%;
-            }
-            .photos-header img {
-                width: 28%;
-                max-width: 90px;
             }
             #image-container img {
                 width: 75%;
@@ -252,8 +216,22 @@
             .nav-overlay a:nth-child(5) { right: 22%; top: 44%; }
             .nav-overlay a:nth-child(6) { right: 22%; top: 53%; }
             .nav-overlay a:nth-child(7) { right: 22%; top: 62%; }
+            .photos-center img {
+                width: 80px;
+            }
             .photos-grid img {
-                width: 70px;
+                width: 60px;
+                height: 60px;
+            }
+            .member-btn {
+                min-width: 100px;
+                font-size: 10px;
+            }
+            .member-dropdown {
+                min-width: 100px;
+            }
+            .member-dropdown a {
+                font-size: 10px;
             }
         }
     </style>
@@ -272,20 +250,21 @@
         </div>
     </div>
     
-    <div class="photos-header">
-        <img src="photos.jpg" alt="photos">
-    </div>
-    
     <div class="gallery-panel">
-        <div class="member-select">
-            <button class="member-btn" onclick="toggleDropdown(event)">멤버 선택</button>
-            <div class="member-dropdown" id="memberDropdown">
-                <a onclick="showPhotos('ez')">Kim E-Z</a>
-                <a onclick="showPhotos('hee')">Lee Heejin</a>
-                <a onclick="showPhotos('eun')">Shim Eunjin</a>
-                <a onclick="showPhotos('mi')">Kan Miyoun</a>
-                <a onclick="showPhotos('hye')">Yoon Eunhye</a>
-                <a onclick="showPhotos('bbvox')">Baby V.O.X</a>
+        <div class="panel-header">
+            <div class="member-select">
+                <button class="member-btn" onclick="toggleDropdown(event)">멤버 선택</button>
+                <div class="member-dropdown" id="memberDropdown">
+                    <a onclick="showPhotos('ez')">Kim E-Z</a>
+                    <a onclick="showPhotos('hee')">Lee Heejin</a>
+                    <a onclick="showPhotos('eun')">Shim Eunjin</a>
+                    <a onclick="showPhotos('mi')">Kan Miyoun</a>
+                    <a onclick="showPhotos('hye')">Yoon Eunhye</a>
+                    <a onclick="showPhotos('bbvox')">Baby V.O.X</a>
+                </div>
+            </div>
+            <div class="photos-center">
+                <img src="photos.jpg" alt="photos">
             </div>
         </div>
 

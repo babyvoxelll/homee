@@ -70,28 +70,21 @@
         .nav-overlay a:nth-child(6) { right: 36%; top: 53%; }
         .nav-overlay a:nth-child(7) { right: 36%; top: 62%; }
 
-        .gallery-panel {
-            background-color: #ffffff;
-            color: #000;
-            padding: 15px 18px;
+        .top-row {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
             width: 55%;
             max-width: 600px;
             margin: 10px auto 0 auto;
-            border: 2px solid #00008b;
-            border-bottom: 2px solid #00008b;
-            min-height: 600px;
+            padding: 0;
             position: relative;
-        }
-        .panel-header {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 20px;
         }
         .member-select {
-            position: relative;
-            flex-shrink: 0;
-            align-self: flex-start;
+            position: absolute;
+            left: 25%;
+            bottom: 0;
+            z-index: 10;
         }
         .member-btn {
             background-color: #ffffff;
@@ -101,7 +94,7 @@
             font-family: "Gulim", "Arial", sans-serif;
             font-size: 11px;
             cursor: pointer;
-            min-width: 130px;
+            min-width: 95px;
             text-align: left;
         }
         .member-btn:hover {
@@ -110,11 +103,11 @@
         .member-dropdown {
             display: none;
             position: absolute;
-            top: 100%;
+            bottom: 100%;
             left: 0;
             background-color: #ffffff;
             border: 1px solid #000;
-            min-width: 130px;
+            min-width: 95px;
             z-index: 20;
         }
         .member-dropdown.open {
@@ -133,12 +126,11 @@
             background-color: #00008b;
             color: #ffffff;
         }
-
         .photos-center {
-            flex: 1;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items: flex-end;
+            line-height: 0;
         }
         .photos-center img {
             display: block;
@@ -146,11 +138,21 @@
             height: auto;
         }
 
+        .gallery-panel {
+            background-color: #ffffff;
+            color: #000;
+            padding: 15px 18px;
+            width: 55%;
+            max-width: 600px;
+            margin: 0 auto;
+            border: 2px solid #00008b;
+            border-bottom: 2px solid #00008b;
+            min-height: 600px;
+        }
         .photos-grid {
             display: none;
             flex-wrap: wrap;
             gap: 6px;
-            margin-top: 20px;
             justify-content: flex-start;
         }
         .photos-grid.active {
@@ -169,7 +171,7 @@
         }
 
         @media (max-width: 768px) {
-            .gallery-panel {
+            .gallery-panel, .top-row {
                 width: 85%;
                 max-width: 600px;
             }
@@ -196,7 +198,7 @@
             }
         }
         @media (max-width: 500px) {
-            .gallery-panel {
+            .gallery-panel, .top-row {
                 width: 95%;
             }
             #image-container img {
@@ -224,14 +226,17 @@
                 height: 60px;
             }
             .member-btn {
-                min-width: 100px;
+                min-width: 80px;
                 font-size: 10px;
             }
             .member-dropdown {
-                min-width: 100px;
+                min-width: 80px;
             }
             .member-dropdown a {
                 font-size: 10px;
+            }
+            .member-select {
+                left: 15%;
             }
         }
     </style>
@@ -250,24 +255,24 @@
         </div>
     </div>
     
-    <div class="gallery-panel">
-        <div class="panel-header">
-            <div class="member-select">
-                <button class="member-btn" onclick="toggleDropdown(event)">멤버 선택</button>
-                <div class="member-dropdown" id="memberDropdown">
-                    <a onclick="showPhotos('ez')">Kim E-Z</a>
-                    <a onclick="showPhotos('hee')">Lee Heejin</a>
-                    <a onclick="showPhotos('eun')">Shim Eunjin</a>
-                    <a onclick="showPhotos('mi')">Kan Miyoun</a>
-                    <a onclick="showPhotos('hye')">Yoon Eunhye</a>
-                    <a onclick="showPhotos('bbvox')">Baby V.O.X</a>
-                </div>
-            </div>
-            <div class="photos-center">
-                <img src="photos.jpg" alt="photos">
+    <div class="top-row">
+        <div class="member-select">
+            <button class="member-btn" onclick="toggleDropdown(event)">멤버 선택</button>
+            <div class="member-dropdown" id="memberDropdown">
+                <a onclick="showPhotos('ez')">Kim E-Z</a>
+                <a onclick="showPhotos('hee')">Lee Heejin</a>
+                <a onclick="showPhotos('eun')">Shim Eunjin</a>
+                <a onclick="showPhotos('mi')">Kan Miyoun</a>
+                <a onclick="showPhotos('hye')">Yoon Eunhye</a>
+                <a onclick="showPhotos('bbvox')">Baby V.O.X</a>
             </div>
         </div>
+        <div class="photos-center">
+            <img src="photos.jpg" alt="photos">
+        </div>
+    </div>
 
+    <div class="gallery-panel">
         <div class="photos-grid" id="grid-ez">
             <a href="ez1.jpg" target="_self"><img src="ez1.jpg" alt=""></a>
             <a href="ez2.jpg" target="_self"><img src="ez2.jpg" alt=""></a>

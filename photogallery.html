@@ -34,8 +34,8 @@
         }
         #image-container img {
             display: block;
-            width: 45%;
-            max-width: 550px;
+            width: 50%;
+            max-width: 620px;
             height: auto;
             aspect-ratio: auto;
             object-fit: scale-down;
@@ -70,69 +70,41 @@
         .nav-overlay a:nth-child(6) { right: 36%; top: 53%; }
         .nav-overlay a:nth-child(7) { right: 36%; top: 62%; }
 
-        .photos-container {
+        .menu-bar {
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items: center;
             width: 55%;
             max-width: 600px;
             margin: 10px auto 0 auto;
             padding: 0;
-            line-height: 0;
-        }
-        .photos-container img {
-            display: block;
-            width: 50%;
-            max-width: 280px;
-            height: auto;
-        }
-        .gallery-container {
-            width: 55%;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 0;
-        }
-        .gallery-block {
-            background-color: #ffffff;
-            color: #000;
-            padding: 15px 18px;
-            margin-bottom: 0;
-            border-radius: 0;
-            border: 2px solid #00008b;
-            border-bottom: 2px solid #00008b;
-            min-height: 600px;
-        }
-        .gallery-block:last-child {
-            border-bottom: 2px solid #00008b;
-        }
-        .gallery-layout {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-        }
-        .menu-wrapper {
-            flex-shrink: 0;
             position: relative;
         }
         .menu-btn {
-            background: #ffffff;
-            border: 2px solid #00008b;
-            color: #00008b;
+            background: #d4d0c8;
+            border-top: 2px solid #ffffff;
+            border-left: 2px solid #ffffff;
+            border-right: 2px solid #404040;
+            border-bottom: 2px solid #404040;
+            color: #000;
             font-family: "Gulim", "Arial", sans-serif;
             font-size: 11px;
-            padding: 6px 10px;
+            padding: 3px 12px;
             cursor: pointer;
             white-space: nowrap;
         }
-        .menu-btn:hover {
-            background: #00008b;
-            color: #fff;
+        .menu-btn:active {
+            border-top: 2px solid #404040;
+            border-left: 2px solid #404040;
+            border-right: 2px solid #ffffff;
+            border-bottom: 2px solid #ffffff;
         }
         .menu-dropdown {
             display: none;
             position: absolute;
             top: 100%;
-            left: 0;
+            left: 50%;
+            transform: translateX(-50%);
             background: #ffffff;
             border: 2px solid #00008b;
             z-index: 50;
@@ -160,19 +132,53 @@
             color: #fff;
         }
 
+        .photos-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 55%;
+            max-width: 600px;
+            margin: 5px auto 0 auto;
+            padding: 0;
+            line-height: 0;
+        }
+        .photos-container img {
+            display: block;
+            width: 30%;
+            max-width: 160px;
+            height: auto;
+        }
+        .gallery-container {
+            width: 55%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0;
+        }
+        .gallery-block {
+            background-color: #ffffff;
+            color: #000;
+            padding: 15px 18px;
+            margin-bottom: 0;
+            border-radius: 0;
+            border: 2px solid #00008b;
+            border-bottom: 2px solid #00008b;
+            min-height: 600px;
+        }
+        .gallery-block:last-child {
+            border-bottom: 2px solid #00008b;
+        }
         .photos-grid {
-            flex: 1;
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
             align-content: flex-start;
         }
         .photos-grid img {
-            width: 70px;
-            height: auto;
             display: block;
             border: 1px solid #000;
             cursor: pointer;
+            max-width: 90px;
+            height: auto;
         }
 
         .photo-viewer {
@@ -208,12 +214,16 @@
                 max-width: 600px;
             }
             .photos-container img {
-                width: 45%;
-                max-width: 240px;
+                width: 35%;
+                max-width: 150px;
+            }
+            .menu-bar {
+                width: 85%;
+                max-width: 600px;
             }
             #image-container img {
-                width: 60%;
-                max-width: 450px;
+                width: 65%;
+                max-width: 500px;
                 transform: scaleY(0.75);
                 transform-origin: top center;
             }
@@ -237,12 +247,15 @@
                 width: 95%;
             }
             .photos-container img {
-                width: 55%;
-                max-width: 200px;
+                width: 45%;
+                max-width: 130px;
+            }
+            .menu-bar {
+                width: 95%;
             }
             #image-container img {
-                width: 75%;
-                max-width: 350px;
+                width: 80%;
+                max-width: 380px;
                 transform: scaleY(0.7);
                 transform-origin: top center;
             }
@@ -258,7 +271,7 @@
             .nav-overlay a:nth-child(6) { right: 22%; top: 53%; }
             .nav-overlay a:nth-child(7) { right: 22%; top: 62%; }
             .photos-grid img {
-                width: 60px;
+                max-width: 70px;
             }
         }
     </style>
@@ -277,26 +290,25 @@
         </div>
     </div>
     
+    <div class="menu-bar">
+        <button class="menu-btn" onclick="toggleMenu(event)">멤버 선택</button>
+        <div class="menu-dropdown" id="memberMenu">
+            <a onclick="showMember('ez', event)">Kim E-Z</a>
+            <a onclick="showMember('eun', event)">Lee Heejin</a>
+            <a onclick="showMember('hee', event)">Shim Eunjin</a>
+            <a onclick="showMember('mi', event)">Kan Miyoun</a>
+            <a onclick="showMember('hye', event)">Yoon Eunhye</a>
+            <a onclick="showMember('bbvox', event)">Baby V.O.X</a>
+        </div>
+    </div>
+    
     <div class="photos-container">
         <img src="photos.jpg" alt="photos">
     </div>
     
     <div class="gallery-container">
         <div class="gallery-block">
-            <div class="gallery-layout">
-                <div class="menu-wrapper">
-                    <button class="menu-btn" onclick="toggleMenu(event)">멤버 선택</button>
-                    <div class="menu-dropdown" id="memberMenu">
-                        <a onclick="showMember('ez', event)">Kim E-Z</a>
-                        <a onclick="showMember('eun', event)">Lee Heejin</a>
-                        <a onclick="showMember('hee', event)">Shim Eunjin</a>
-                        <a onclick="showMember('mi', event)">Kan Miyoun</a>
-                        <a onclick="showMember('hye', event)">Yoon Eunhye</a>
-                        <a onclick="showMember('bbvox', event)">Baby V.O.X</a>
-                    </div>
-                </div>
-                <div class="photos-grid" id="photosGrid"></div>
-            </div>
+            <div class="photos-grid" id="photosGrid"></div>
         </div>
     </div>
 

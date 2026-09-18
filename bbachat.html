@@ -264,6 +264,9 @@
         .bba-post-header .post-author {
             color: #000;
         }
+        .bba-post-header .post-email {
+            color: #0000ee;
+        }
         .bba-post-header .post-date {
             color: #000;
         }
@@ -318,7 +321,7 @@
 
         .bba-replies {
             margin-top: 10px;
-            padding-left: 20px;
+            padding-left: 0;
         }
         .bba-reply {
             padding: 8px 0;
@@ -352,6 +355,9 @@
             color: #000;
             align-items: center;
         }
+        .bba-reply .reply-email {
+            color: #0000ee;
+        }
         .bba-reply .reply-number {
             color: #000;
         }
@@ -376,28 +382,6 @@
             color: #888;
             font-size: 10px;
             font-family: Arial, Helvetica, sans-serif;
-        }
-        .bba-reply .nested-replies {
-            margin-top: 8px;
-            padding-left: 16px;
-        }
-        .bba-reply .nested-reply {
-            padding: 6px 0;
-            border-top: 1px solid #aaa;
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
-            flex-wrap: wrap;
-        }
-        .bba-reply .nested-reply .reply-img {
-            flex-shrink: 0;
-            width: 45px;
-            height: auto;
-        }
-        .bba-reply .nested-reply .reply-img img {
-            width: 100%;
-            height: auto;
-            display: block;
         }
 
         .re-line {
@@ -433,8 +417,7 @@
                 width: 110px;
             }
             .bba-post-body .post-img,
-            .bba-reply .reply-img,
-            .bba-reply .nested-reply .reply-img {
+            .bba-reply .reply-img {
                 width: 45px;
             }
             .bba-colors-row .label {
@@ -528,7 +511,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+        import { getDatabase, ref, push, onValue, update } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBBlC1bSVdJv3ZgbZ64lgkDgraK7K2z-dI",
@@ -545,9 +528,7 @@
         const postsRef = ref(db, "bbacommunity/posts");
 
         let selectedColor = "#000000";
-        let replyTargetPath = null;
-        let replyTargetHintId = null;
-        let replyTargetName = null;
+        let replyTarget = null;
 
         document.querySelectorAll(".bba-colors-row .circle").forEach((circle) => {
             circle.addEventListener("click", () => {
@@ -576,103 +557,17 @@
             document.querySelectorAll(".post-reply-hint, .reply-hint").forEach((h) => h.style.display = "none");
         }
 
-        function setReplyTarget(path, hintId, targetName) {
-            if (replyTargetPath === path) {
-                replyTargetPath = null;
-                replyTargetHintId = null;
-                replyTargetName = null;
+        function setReplyTarget(postId, replyKey, targetName, hintId) {
+            if (replyTarget && replyTarget.postId === postId && replyTarget.replyKey === replyKey) {
+                replyTarget = null;
                 clearAllHints();
             } else {
-                replyTargetPath = path;
-                replyTargetHintId = hintId;
-                replyTargetName = targetName;
+                replyTarget = { postId: postId, replyKey: replyKey, targetName: targetName };
                 clearAllHints();
                 const hint = document.getElementById(hintId);
                 if (hint) hint.style.display = "inline";
                 document.getElementById("name").focus();
             }
-        }
-
-        function buildNestedReply(nestedReply, postId, parentPath, parentAuthorName) {
-            const nestedEl = document.createElement("div");
-            nestedEl.className = "nested-reply";
-
-            if (nestedReply.image) {
-                const nImgWrap = document.createElement("div");
-                nImgWrap.className = "reply-img";
-                const nImg = document.createElement("img");
-                nImg.src = nestedReply.image;
-                nImg.alt = "image";
-                nImgWrap.appendChild(nImg);
-                nestedEl.appendChild(nImgWrap);
-            }
-
-            const nContent = document.createElement("div");
-            nContent.className = "reply-content";
-
-            const nHeader = document.createElement("div");
-            nHeader.className = "reply-header";
-
-            if (nestedReply.replyTo) {
-                const nReLine = document.createElement("span");
-                nReLine.className = "re-line";
-                nReLine.textContent = "Re: " + nestedReply.replyTo;
-                nHeader.appendChild(nReLine);
-            }
-
-            const nAuthor = document.createElement("span");
-            nAuthor.textContent = "작성자: " + (nestedReply.name || "");
-            nHeader.appendChild(nAuthor);
-
-            const nDate = document.createElement("span");
-            nDate.textContent = formatDate(nestedReply.timestamp);
-            nHeader.appendChild(nDate);
-
-            const nNumber = document.createElement("span");
-            nNumber.className = "reply-number";
-            nNumber.textContent = "No." + (nestedReply.number || "");
-            nHeader.appendChild(nNumber);
-
-            const nHintId = "replyHint-" + postId + "-" + (nestedReply.id || Math.random().toString(36).substr(2, 9));
-            const nBtn = document.createElement("button");
-            nBtn.className = "reply-btn";
-            nBtn.textContent = "답변";
-            const nestedPath = parentPath + "/" + nestedReply.id + "/replies";
-            nBtn.addEventListener("click", () => {
-                setReplyTarget(nestedPath, nHintId, nestedReply.name || "");
-            });
-            nHeader.appendChild(nBtn);
-
-            const nHint = document.createElement("span");
-            nHint.className = "reply-hint";
-            nHint.id = nHintId;
-            nHint.style.display = "none";
-            nHint.textContent = "위의 모든 정보를 입력하세요";
-            nHeader.appendChild(nHint);
-
-            nContent.appendChild(nHeader);
-
-            const nText = document.createElement("div");
-            nText.className = "reply-text";
-            nText.textContent = nestedReply.comment || "";
-            if (nestedReply.textColor) {
-                nText.style.color = nestedReply.textColor;
-            }
-            nContent.appendChild(nText);
-
-            if (nestedReply.replies) {
-                const deeper = document.createElement("div");
-                deeper.className = "nested-replies";
-                Object.keys(nestedReply.replies).forEach((k) => {
-                    const deepReply = nestedReply.replies[k];
-                    deepReply.id = k;
-                    deeper.appendChild(buildNestedReply(deepReply, postId, nestedPath, nestedReply.name || ""));
-                });
-                nContent.appendChild(deeper);
-            }
-
-            nestedEl.appendChild(nContent);
-            return nestedEl;
         }
 
         function buildReplyElement(reply, postId, replyKey) {
@@ -706,6 +601,13 @@
             rAuthor.textContent = "작성자: " + (reply.name || "");
             rHeader.appendChild(rAuthor);
 
+            if (reply.email) {
+                const rEmail = document.createElement("span");
+                rEmail.className = "reply-email";
+                rEmail.textContent = reply.email;
+                rHeader.appendChild(rEmail);
+            }
+
             const rDate = document.createElement("span");
             rDate.textContent = formatDate(reply.timestamp);
             rHeader.appendChild(rDate);
@@ -719,9 +621,8 @@
             const rBtn = document.createElement("button");
             rBtn.className = "reply-btn";
             rBtn.textContent = "답변";
-            const replyPath = "bbacommunity/posts/" + postId + "/replies/" + replyKey + "/replies";
             rBtn.addEventListener("click", () => {
-                setReplyTarget(replyPath, hintId, reply.name || "");
+                setReplyTarget(postId, replyKey, reply.name || "", hintId);
             });
             rHeader.appendChild(rBtn);
 
@@ -741,17 +642,6 @@
                 rText.style.color = reply.textColor;
             }
             rContent.appendChild(rText);
-
-            if (reply.replies) {
-                const nested = document.createElement("div");
-                nested.className = "nested-replies";
-                Object.keys(reply.replies).forEach((k) => {
-                    const nestedReply = reply.replies[k];
-                    nestedReply.id = k;
-                    nested.appendChild(buildNestedReply(nestedReply, postId, replyPath, reply.name || ""));
-                });
-                rContent.appendChild(nested);
-            }
 
             replyEl.appendChild(rContent);
             return replyEl;
@@ -780,6 +670,13 @@
                 author.textContent = "작성자: " + (post.name || "");
                 header.appendChild(author);
 
+                if (post.email) {
+                    const email = document.createElement("span");
+                    email.className = "post-email";
+                    email.textContent = post.email;
+                    header.appendChild(email);
+                }
+
                 const date = document.createElement("span");
                 date.className = "post-date";
                 date.textContent = formatDate(post.timestamp);
@@ -795,7 +692,7 @@
                 replyBtn.className = "post-reply-btn";
                 replyBtn.textContent = "답변";
                 replyBtn.addEventListener("click", () => {
-                    setReplyTarget("bbacommunity/posts/" + post.id + "/replies", postHintId, post.name || "");
+                    setReplyTarget(post.id, null, post.name || "", postHintId);
                 });
                 header.appendChild(replyBtn);
 
@@ -883,20 +780,19 @@
                 return;
             }
 
-            if (replyTargetPath) {
-                const replyRef = ref(db, replyTargetPath);
+            if (replyTarget) {
+                const replyRef = ref(db, "bbacommunity/posts/" + replyTarget.postId + "/replies");
                 await push(replyRef, {
                     number: generateNumber(),
                     name: name,
+                    email: email || null,
                     comment: comment,
                     image: image || null,
                     textColor: selectedColor,
-                    replyTo: replyTargetName || "",
+                    replyTo: replyTarget.targetName || "",
                     timestamp: Date.now()
                 });
-                replyTargetPath = null;
-                replyTargetHintId = null;
-                replyTargetName = null;
+                replyTarget = null;
                 clearAllHints();
             } else {
                 if (!title) {
@@ -907,7 +803,7 @@
                 await push(postsRef, {
                     number: userNumber,
                     name: name,
-                    email: email,
+                    email: email || null,
                     title: title,
                     comment: comment,
                     url: url,

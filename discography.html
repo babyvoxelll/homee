@@ -159,21 +159,64 @@
             align-items: center;
             gap: 6px;
         }
+        .album-tracks .line .mp3-icon {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
         .album-tracks .disc-label {
             font-weight: bold;
             margin-top: 4px;
             margin-bottom: 2px;
         }
-        .album-tracks .mp3-icon {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            cursor: pointer;
-            vertical-align: middle;
-        }
         .album-block.reverse {
             flex-direction: row-reverse;
         }
+
+        .mp3-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .mp3-modal-overlay.active {
+            display: flex;
+        }
+        .mp3-modal-content {
+            background: #fff;
+            padding: 20px;
+            border: 2px solid #00008b;
+            max-width: 90%;
+            width: 400px;
+            text-align: center;
+        }
+        .mp3-modal-content .mp3-title {
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #00008b;
+        }
+        .mp3-modal-content audio {
+            width: 100%;
+        }
+        .mp3-modal-content .mp3-download {
+            display: inline-block;
+            margin-top: 12px;
+            font-size: 12px;
+            color: #00008b;
+            text-decoration: underline;
+        }
+        .mp3-modal-content .mp3-download:hover {
+            text-decoration: none;
+        }
+
         @media (max-width: 768px) {
             .discography-container {
                 width: 85%;
@@ -231,6 +274,9 @@
             .album-tracks .album-label.bigger-shifted {
                 width: 75%;
                 margin-left: 0;
+            }
+            .album-tracks .line {
+                justify-content: center;
             }
         }
         @media (max-width: 500px) {
@@ -299,17 +345,17 @@
                 <div class="album-divider"></div>
                 <div class="line">1. Intro</div>
                 <div class="line">2. Xcstasy (English ver)</div>
-                <div class="line">3. Xcstasy (Korean ver) <a href="Xcstasy (kor.ver).mp3" download><img src="mp3.gif" alt="mp3" class="mp3-icon"></a></div>
+                <div class="line">3. Xcstasy (Korean ver)<img src="mp3.gif" alt="mp3" class="mp3-icon" onclick="openMp3('Xcstasy (kor.ver).mp3', 'Xcstasy (Korean ver)')"></div>
                 <div class="line">4. Xcstasy (Remix ver)</div>
                 <div class="line">5. Play Remix (English ver)</div>
-                <div class="line">6. Play Remix (Korean ver) <a href="Play Remix (kor.ver).mp3" download><img src="mp3.gif" alt="mp3" class="mp3-icon"></a></div>
+                <div class="line">6. Play Remix (Korean ver)<img src="mp3.gif" alt="mp3" class="mp3-icon" onclick="openMp3('Play Remix (kor.ver).mp3', 'Play Remix (Korean ver)')"></div>
                 <div class="line">7. Play Remix (Extended ver)</div>
                 <div class="line">8. The First And Last</div>
                 <div class="line">9. Move Your Body</div>
-                <div class="line">10. I Want You Back <a href="I Want You Back.mp3" download><img src="mp3.gif" alt="mp3" class="mp3-icon"></a></div>
+                <div class="line">10. I Want You Back<img src="mp3.gif" alt="mp3" class="mp3-icon" onclick="openMp3('I Want You Back.mp3', 'I Want You Back')"></div>
                 <div class="line">11. I'm Still Loving You (Chinese ver)</div>
                 <div class="line">12. Go (Japanese ver)</div>
-                <div class="line">13. O.S.T (Father &amp; I) <a href="Father & I.mp3" download><img src="mp3.gif" alt="mp3" class="mp3-icon"></a></div>
+                <div class="line">13. O.S.T (Father &amp; I)<img src="mp3.gif" alt="mp3" class="mp3-icon" onclick="openMp3('Father & I.mp3', 'O.S.T (Father & I)')"></div>
             </div>
         </div>
 
@@ -320,14 +366,14 @@
             <div class="album-tracks">
                 <img src="6TH.jpg" alt="6TH" class="album-label">
                 <div class="album-divider"></div>
-                <div class="line">1. 나 어떡해 <a href="What Should I Do.mp3" download><img src="mp3.gif" alt="mp3" class="mp3-icon"></a></div>
-                <div class="line">2. 바램 <a href="Wish.mp3" download><img src="mp3.gif" alt="mp3" class="mp3-icon"></a></div>
+                <div class="line">1. 나 어떡해<img src="mp3.gif" alt="mp3" class="mp3-icon" onclick="openMp3('What Should I Do.mp3', '나 어떡해')"></div>
+                <div class="line">2. 바램<img src="mp3.gif" alt="mp3" class="mp3-icon" onclick="openMp3('Wish.mp3', '바램')"></div>
                 <div class="line">3. 슬픈기대</div>
                 <div class="line">4. 상처</div>
                 <div class="line">5. 사랑인가봐요</div>
                 <div class="line">6. 나를 잡아줘</div>
                 <div class="line">7. LOVELESS</div>
-                <div class="line">8. 눈물 <a href="Tears.mp3" download><img src="mp3.gif" alt="mp3" class="mp3-icon"></a></div>
+                <div class="line">8. 눈물<img src="mp3.gif" alt="mp3" class="mp3-icon" onclick="openMp3('Tears.mp3', '눈물')"></div>
                 <div class="line">9. 거짓사랑</div>
                 <div class="line">10. 버려진 이별</div>
                 <div class="line">11. 마지막엔</div>
@@ -345,7 +391,7 @@
                 <img src="SPECIALALBUM.jpg" alt="SPECIALALBUM" class="album-label">
                 <div class="album-divider"></div>
                 <div class="disc-label">Disc 1</div>
-                <div class="line">1. 우연 <a href="Coincidence.mp3" download><img src="mp3.gif" alt="mp3" class="mp3-icon"></a></div>
+                <div class="line">1. 우연<img src="mp3.gif" alt="mp3" class="mp3-icon" onclick="openMp3('Coincidence.mp3', '우연')"></div>
                 <div class="line">2. GO</div>
                 <div class="line">3. 배신</div>
                 <div class="line">4. Game Over</div>
@@ -398,12 +444,12 @@
                 <img src="5TH.jpg" alt="5TH" class="album-label">
                 <div class="album-divider"></div>
                 <div class="line">1. Intro</div>
-                <div class="line">2. Game over <a href="Game Over.mp3" download><img src="mp3.gif" alt="mp3" class="mp3-icon"></a></div>
-                <div class="line">3. 인형 <a href="Doll.mp3" download><img src="mp3.gif" alt="mp3" class="mp3-icon"></a></div>
+                <div class="line">2. Game over<img src="mp3.gif" alt="mp3" class="mp3-icon" onclick="openMp3('Game Over.mp3', 'Game over')"></div>
+                <div class="line">3. 인형<img src="mp3.gif" alt="mp3" class="mp3-icon" onclick="openMp3('Doll.mp3', '인형')"></div>
                 <div class="line">4. 내 사랑이기를...</div>
                 <div class="line">5. CUT</div>
                 <div class="line">6. Lucky 7</div>
-                <div class="line">7. 부디 <a href="Please.mp3" download><img src="mp3.gif" alt="mp3" class="mp3-icon"></a></div>
+                <div class="line">7. 부디<img src="mp3.gif" alt="mp3" class="mp3-icon" onclick="openMp3('Please.mp3', '부디')"></div>
                 <div class="line">8. 가 까 이</div>
                 <div class="line">9. Come to me</div>
                 <div class="line">10. To. Angel...</div>
@@ -423,8 +469,8 @@
             <div class="album-tracks">
                 <img src="4TH.jpg" alt="4TH" class="album-label bigger-shifted">
                 <div class="album-divider"></div>
-                <div class="line">1. why <a href="Why.mp3" download><img src="mp3.gif" alt="mp3" class="mp3-icon"></a></div>
-                <div class="line">2. 배신 <a href="Betrayal.mp3" download><img src="mp3.gif" alt="mp3" class="mp3-icon"></a></div>
+                <div class="line">1. why<img src="mp3.gif" alt="mp3" class="mp3-icon" onclick="openMp3('Why.mp3', 'why')"></div>
+                <div class="line">2. 배신<img src="mp3.gif" alt="mp3" class="mp3-icon" onclick="openMp3('Betrayal.mp3', '배신')"></div>
                 <div class="line">3. 회상</div>
                 <div class="line">4. 허락</div>
                 <div class="line">5. Overlap</div>
@@ -433,7 +479,7 @@
                 <div class="line">8. Bad Boy</div>
                 <div class="line">9. 올가미</div>
                 <div class="line">10. Before Sunrise</div>
-                <div class="line">11. PATRON <a href="Patron.mp3" download><img src="mp3.gif" alt="mp3" class="mp3-icon"></a></div>
+                <div class="line">11. PATRON<img src="mp3.gif" alt="mp3" class="mp3-icon" onclick="openMp3('Patron.mp3', 'PATRON')"></div>
                 <div class="line">12. Why -MR</div>
             </div>
         </div>
@@ -446,9 +492,9 @@
                 <img src="3RD.jpg" alt="3RD" class="album-label smaller-shifted">
                 <div class="album-divider"></div>
                 <div class="line">1. Intro</div>
-                <div class="line">2. Get up <a href="Get Up.mp3" download><img src="mp3.gif" alt="mp3" class="mp3-icon"></a></div>
+                <div class="line">2. Get up<img src="mp3.gif" alt="mp3" class="mp3-icon" onclick="openMp3('Get Up.mp3', 'Get Up')"></div>
                 <div class="line">3. MissingYou</div>
-                <div class="line">4. Killer <a href="Killer.mp3" download><img src="mp3.gif" alt="mp3" class="mp3-icon"></a></div>
+                <div class="line">4. Killer<img src="mp3.gif" alt="mp3" class="mp3-icon" onclick="openMp3('Killer.mp3', 'Killer')"></div>
                 <div class="line">5. 꽃무늬 비키니</div>
                 <div class="line">6. 사랑해요</div>
                 <div class="line">7. Mask</div>
@@ -466,11 +512,11 @@
             <div class="album-tracks">
                 <img src="2ND.jpg" alt="2ND" class="album-label smaller-shifted">
                 <div class="album-divider"></div>
-                <div class="line">1. 야야야 <a href="Ya Ya Ya.mp3" download><img src="mp3.gif" alt="mp3" class="mp3-icon"></a></div>
+                <div class="line">1. 야야야<img src="mp3.gif" alt="mp3" class="mp3-icon" onclick="openMp3('Ya Ya Ya.mp3', '야야야')"></div>
                 <div class="line">2. Break it up</div>
                 <div class="line">3. 패자부활전</div>
                 <div class="line">4. Waiting</div>
-                <div class="line">5. Change <a href="Change.mp3" download><img src="mp3.gif" alt="mp3" class="mp3-icon"></a></div>
+                <div class="line">5. Change<img src="mp3.gif" alt="mp3" class="mp3-icon" onclick="openMp3('Change.mp3', 'Change')"></div>
                 <div class="line">6. Sugar baby</div>
                 <div class="line">7. Top of the world</div>
             </div>
@@ -489,11 +535,45 @@
                 <div class="line">4. 스타트</div>
                 <div class="line">5. 그들만의 세상</div>
                 <div class="line">6. 비밀</div>
-                <div class="line">7. 미혼모 <a href="Single Mothers.mp3" download><img src="mp3.gif" alt="mp3" class="mp3-icon"></a></div>
+                <div class="line">7. 미혼모<img src="mp3.gif" alt="mp3" class="mp3-icon" onclick="openMp3('Single Mothers.mp3', '미혼모')"></div>
                 <div class="line">8. Waiting</div>
                 <div class="line">9. 남자에게 (Instrumental)</div>
             </div>
         </div>
     </div>
+
+    <div class="mp3-modal-overlay" id="mp3Modal" onclick="closeMp3(event)">
+        <div class="mp3-modal-content" onclick="event.stopPropagation()">
+            <div class="mp3-title" id="mp3Title"></div>
+            <audio id="mp3Player" controls></audio>
+            <br>
+            <a class="mp3-download" id="mp3Download" href="#" download>Скачать</a>
+        </div>
+    </div>
+
+    <script>
+        function openMp3(file, title) {
+            const modal = document.getElementById('mp3Modal');
+            const player = document.getElementById('mp3Player');
+            const titleEl = document.getElementById('mp3Title');
+            const download = document.getElementById('mp3Download');
+
+            titleEl.textContent = title;
+            player.src = file;
+            download.href = file;
+            download.setAttribute('download', file);
+            modal.classList.add('active');
+            player.play();
+        }
+
+        function closeMp3(event) {
+            const modal = document.getElementById('mp3Modal');
+            const player = document.getElementById('mp3Player');
+            modal.classList.remove('active');
+            player.pause();
+            player.currentTime = 0;
+            player.src = '';
+        }
+    </script>
 </body>
 </html>

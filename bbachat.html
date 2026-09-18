@@ -400,6 +400,12 @@
             display: block;
         }
 
+        .re-line {
+            color: #008000;
+            font-weight: bold;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
         @media (max-width: 760px) {
             .bba-form-table td.label {
                 width: 75px;
@@ -541,6 +547,7 @@
         let selectedColor = "#000000";
         let replyTargetPath = null;
         let replyTargetHintId = null;
+        let replyTargetName = null;
 
         document.querySelectorAll(".bba-colors-row .circle").forEach((circle) => {
             circle.addEventListener("click", () => {
@@ -569,14 +576,16 @@
             document.querySelectorAll(".post-reply-hint, .reply-hint").forEach((h) => h.style.display = "none");
         }
 
-        function setReplyTarget(path, hintId) {
+        function setReplyTarget(path, hintId, targetName) {
             if (replyTargetPath === path) {
                 replyTargetPath = null;
                 replyTargetHintId = null;
+                replyTargetName = null;
                 clearAllHints();
             } else {
                 replyTargetPath = path;
                 replyTargetHintId = hintId;
+                replyTargetName = targetName;
                 clearAllHints();
                 const hint = document.getElementById(hintId);
                 if (hint) hint.style.display = "inline";
@@ -584,7 +593,7 @@
             }
         }
 
-        function buildReplyElement(reply, postId, parentReplyId) {
+        function buildReplyElement(reply, postId, parentReplyId, postAuthorName) {
             const replyEl = document.createElement("div");
             replyEl.className = "bba-reply";
 
@@ -604,6 +613,13 @@
             const rHeader = document.createElement("div");
             rHeader.className = "reply-header";
 
+            if (reply.replyTo) {
+                const reLine = document.createElement("span");
+                reLine.className = "re-line";
+                reLine.textContent = "Re: " + reply.replyTo;
+                rHeader.appendChild(reLine);
+            }
+
             const rAuthor = document.createElement("span");
             rAuthor.textContent = "작성자: " + (reply.name || "");
             rHeader.appendChild(rAuthor);
@@ -621,11 +637,9 @@
             const rBtn = document.createElement("button");
             rBtn.className = "reply-btn";
             rBtn.textContent = "답변";
-            const replyPath = parentReplyId
-                ? "bbacommunity/posts/" + postId + "/replies/" + parentReplyId + "/replies"
-                : "bbacommunity/posts/" + postId + "/replies";
+            const replyPath = "bbacommunity/posts/" + postId + "/replies/" + parentReplyId + "/replies";
             rBtn.addEventListener("click", () => {
-                setReplyTarget(replyPath, hintId);
+                setReplyTarget(replyPath, hintId, reply.name || "");
             });
             rHeader.appendChild(rBtn);
 
@@ -670,6 +684,13 @@
 
                     const nHeader = document.createElement("div");
                     nHeader.className = "reply-header";
+
+                    if (nestedReply.replyTo) {
+                        const nReLine = document.createElement("span");
+                        nReLine.className = "re-line";
+                        nReLine.textContent = "Re: " + nestedReply.replyTo;
+                        nHeader.appendChild(nReLine);
+                    }
 
                     const nAuthor = document.createElement("span");
                     nAuthor.textContent = "작성자: " + (nestedReply.name || "");
@@ -742,7 +763,7 @@
                 replyBtn.className = "post-reply-btn";
                 replyBtn.textContent = "답변";
                 replyBtn.addEventListener("click", () => {
-                    setReplyTarget("bbacommunity/posts/" + post.id + "/replies", postHintId);
+                    setReplyTarget("bbacommunity/posts/" + post.id + "/replies", postHintId, post.name || "");
                 });
                 header.appendChild(replyBtn);
 
@@ -798,7 +819,7 @@
                     Object.keys(post.replies).forEach((k) => {
                         const r = post.replies[k];
                         r.id = k;
-                        repliesBox.appendChild(buildReplyElement(r, post.id, k));
+                        repliesBox.appendChild(buildReplyElement(r, post.id, k, post.name || ""));
                     });
                 }
 
@@ -838,10 +859,12 @@
                     comment: comment,
                     image: image || null,
                     textColor: selectedColor,
+                    replyTo: replyTargetName || "",
                     timestamp: Date.now()
                 });
                 replyTargetPath = null;
                 replyTargetHintId = null;
+                replyTargetName = null;
                 clearAllHints();
             } else {
                 if (!title) {

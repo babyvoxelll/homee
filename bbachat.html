@@ -241,12 +241,19 @@
         }
 
         .bba-post {
-            padding: 12px 14px;
-            border-bottom: 2px solid #000;
-            margin-bottom: 8px;
+            padding: 0;
+            border-bottom: none;
+            margin-bottom: 18px;
         }
         .bba-post:last-child {
-            border-bottom: 2px solid #000;
+            margin-bottom: 0;
+        }
+        .bba-post-inner {
+            padding: 10px 14px;
+            border-bottom: 1px solid #000;
+        }
+        .bba-post:last-child .bba-post-inner {
+            border-bottom: none;
         }
         .bba-post-header {
             display: flex;
@@ -273,6 +280,7 @@
             background: #c0c0c0;
             border: 1px solid #888;
             color: #000;
+            text-decoration: none;
             font-size: 11px;
             cursor: pointer;
             font-family: Arial, Helvetica, sans-serif;
@@ -284,7 +292,7 @@
         .bba-post-header .post-reply-hint {
             color: #888;
             font-size: 10px;
-            margin-left: 4px;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         .bba-post-body {
@@ -296,7 +304,7 @@
         }
         .bba-post-body .post-img {
             flex-shrink: 0;
-            width: 50px;
+            width: 55px;
             height: auto;
         }
         .bba-post-body .post-img img {
@@ -364,7 +372,7 @@
                 width: 110px;
             }
             .bba-post-body .post-img {
-                width: 40px;
+                width: 45px;
             }
             .bba-colors-row .label {
                 width: 60px;
@@ -474,6 +482,7 @@
         const postsRef = ref(db, "bbacommunity/posts");
 
         let selectedColor = "#000000";
+        let replyTargetId = null;
 
         document.querySelectorAll(".bba-colors-row .circle").forEach((circle) => {
             circle.addEventListener("click", () => {
@@ -508,6 +517,9 @@
                 const postEl = document.createElement("div");
                 postEl.className = "bba-post";
 
+                const inner = document.createElement("div");
+                inner.className = "bba-post-inner";
+
                 const header = document.createElement("div");
                 header.className = "bba-post-header";
 
@@ -535,19 +547,21 @@
                 replyBtn.className = "post-reply-btn";
                 replyBtn.textContent = "답변";
                 replyBtn.addEventListener("click", () => {
-                    const box = document.getElementById("replyBox-" + post.id);
-                    if (box) {
-                        box.classList.toggle("open");
-                    }
+                    replyTargetId = post.id;
+                    const hint = document.getElementById("replyHint-" + post.id);
+                    if (hint) hint.style.display = "inline";
+                    document.getElementById("name").focus();
                 });
                 header.appendChild(replyBtn);
 
                 const replyHint = document.createElement("span");
                 replyHint.className = "post-reply-hint";
-                replyHint.textContent = "(위 칸에 정보를 입력하세요)";
+                replyHint.id = "replyHint-" + post.id;
+                replyHint.style.display = "none";
+                replyHint.textContent = "위의 모든 정보를 입력하세요";
                 header.appendChild(replyHint);
 
-                postEl.appendChild(header);
+                inner.appendChild(header);
 
                 const body = document.createElement("div");
                 body.className = "bba-post-body";
@@ -570,7 +584,7 @@
                 }
                 body.appendChild(comment);
 
-                postEl.appendChild(body);
+                inner.appendChild(body);
 
                 if (post.url) {
                     const urlLine = document.createElement("div");
@@ -582,7 +596,7 @@
                     urlLink.textContent = post.url;
                     urlLink.style.color = "#0000ee";
                     urlLine.appendChild(urlLink);
-                    postEl.appendChild(urlLine);
+                    inner.appendChild(urlLine);
                 }
 
                 const repliesBox = document.createElement("div");
@@ -620,13 +634,8 @@
                     });
                 }
 
-                const replyBox = document.createElement("div");
-                replyBox.className = "reply-form-box";
-                replyBox.id = "replyBox-" + post.id;
-
-                repliesBox.appendChild(replyBox);
-                postEl.appendChild(repliesBox);
-
+                inner.appendChild(repliesBox);
+                postEl.appendChild(inner);
                 board.appendChild(postEl);
             });
         }
@@ -649,24 +658,40 @@
             const url = document.getElementById("url").value.trim();
             const image = document.getElementById("image").value;
 
-            if (!name || !title || !comment) {
-                alert("이름, 제목, 코멘트를 입력하세요.");
+            if (!name || !comment) {
+                alert("이름과 코멘트를 입력하세요.");
                 return;
             }
 
-            const userNumber = generateNumber();
-
-            await push(postsRef, {
-                number: userNumber,
-                name: name,
-                email: email,
-                title: title,
-                comment: comment,
-                url: url,
-                image: image || null,
-                textColor: selectedColor,
-                timestamp: Date.now()
-            });
+            if (replyTargetId) {
+                const replyRef = ref(db, "bbacommunity/posts/" + replyTargetId + "/replies");
+                await push(replyRef, {
+                    name: name,
+                    comment: comment,
+                    textColor: selectedColor,
+                    timestamp: Date.now()
+                });
+                const hint = document.getElementById("replyHint-" + replyTargetId);
+                if (hint) hint.style.display = "none";
+                replyTargetId = null;
+            } else {
+                if (!title) {
+                    alert("제목을 입력하세요.");
+                    return;
+                }
+                const userNumber = generateNumber();
+                await push(postsRef, {
+                    number: userNumber,
+                    name: name,
+                    email: email,
+                    title: title,
+                    comment: comment,
+                    url: url,
+                    image: image || null,
+                    textColor: selectedColor,
+                    timestamp: Date.now()
+                });
+            }
 
             document.getElementById("name").value = "";
             document.getElementById("email").value = "";

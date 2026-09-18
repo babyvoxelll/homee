@@ -15,11 +15,10 @@
             height: 100%;
         }
         body {
-            background: #990033;
+            background: #ffffff;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
+            align-items: flex-start;
+            justify-content: center;
             min-height: 100vh;
             padding: 0;
             margin: 0;
@@ -32,50 +31,51 @@
             align-items: center;
             justify-content: flex-start;
             margin: 0 auto;
-            width: 1000px;
-            max-width: 1000px;
+            width: 900px;
+            max-width: 100%;
+            padding: 0;
         }
 
-        .bbacommunity-container {
+        .bbacommunity-wrap {
+            width: 100%;
             display: flex;
             justify-content: center;
-            align-items: center;
-            width: 100%;
+            align-items: flex-start;
+            line-height: 0;
             margin: 0;
             padding: 0;
-            line-height: 0;
         }
-        .bbacommunity-container img {
+        .bbacommunity-wrap img {
             display: block;
-            width: 180px;
-            max-width: 180px;
+            width: 130px;
             height: auto;
+            margin: 0 auto;
         }
 
         .bbachat-top-imgs {
             position: relative;
-            width: 1000px;
-            height: 420px;
-            margin-bottom: 0;
-            flex-shrink: 0;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            line-height: 0;
+            display: flex;
+            justify-content: center;
         }
         .bbachat-top-imgs img.panel {
-            position: absolute;
-            left: 280px;
-            bottom: 0;
-            width: 720px;
-            max-width: 720px;
-            height: auto;
             display: block;
-            z-index: 2;
+            width: 900px;
+            max-width: 100%;
+            height: auto;
         }
 
         .nav-overlay {
             position: absolute;
-            left: 280px;
-            bottom: 0;
-            width: 720px;
-            height: 420px;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 900px;
+            max-width: 100%;
+            height: 100%;
             pointer-events: none;
             z-index: 10;
         }
@@ -83,138 +83,130 @@
             position: absolute;
             display: block;
             pointer-events: auto;
-            background: rgba(255, 255, 255, 0.001);
+            background: transparent;
             border: none;
             cursor: pointer;
             text-decoration: none;
             height: 22px;
         }
-        .nav-overlay a:nth-child(1) { left: 0%;   bottom: 2%; width: 55px; }
-        .nav-overlay a:nth-child(2) { left: 11%;  bottom: 2%; width: 55px; }
-        .nav-overlay a:nth-child(3) { left: 23%;  bottom: 2%; width: 55px; }
-        .nav-overlay a:nth-child(4) { left: 36%;  bottom: 2%; width: 80px; }
-        .nav-overlay a:nth-child(5) { left: 52%;  bottom: 2%; width: 55px; }
-        .nav-overlay a:nth-child(6) { left: 65%;  bottom: 2%; width: 70px; }
-        .nav-overlay a:nth-child(7) { left: 85%;  bottom: 2%; width: 85px; }
+        .nav-overlay a:nth-child(1) { left: 3%;   bottom: 4%; width: 55px; }
+        .nav-overlay a:nth-child(2) { left: 12%;  bottom: 4%; width: 55px; }
+        .nav-overlay a:nth-child(3) { left: 22%;  bottom: 4%; width: 55px; }
+        .nav-overlay a:nth-child(4) { left: 33%;  bottom: 4%; width: 80px; }
+        .nav-overlay a:nth-child(5) { left: 46%;  bottom: 4%; width: 55px; }
+        .nav-overlay a:nth-child(6) { left: 58%;  bottom: 4%; width: 70px; }
+        .nav-overlay a:nth-child(7) { left: 73%;  bottom: 4%; width: 85px; }
 
-        .community-form {
-            width: 1000px;
-            max-width: 1000px;
-            padding: 20px;
+        .form-outer {
+            width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .color-picker {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+            align-items: flex-end;
+        }
+        .color-picker .circle-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+        }
+        .color-picker .circle {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 1px solid #333;
+            background: #fff;
+            transition: all 0.15s;
+        }
+        .color-picker .circle.selected {
+            background: #0033cc;
+            border-color: #0033cc;
+        }
+        .color-picker .square {
+            width: 8px;
+            height: 8px;
+            margin-top: 3px;
+        }
+
+        .form-table {
+            width: 100%;
+            max-width: 720px;
+            border-collapse: collapse;
+        }
+        .form-table td {
+            padding: 4px 6px;
+            font-size: 12px;
+            vertical-align: top;
             color: #000;
         }
-        .community-form .form-row {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-        }
-        .community-form .form-row label {
-            width: 140px;
-            font-size: 13px;
+        .form-table td.label-cell {
+            width: 120px;
+            white-space: nowrap;
             font-weight: bold;
-            color: #fff;
-            padding-top: 5px;
-            flex-shrink: 0;
         }
-        .community-form input[type="text"],
-        .community-form input[type="email"] {
-            flex: 1;
-            font-size: 13px;
-            padding: 5px;
-            border: 1px solid #888;
-            background: #fff;
-            font-family: inherit;
+        .form-table td.input-cell {
+            width: auto;
         }
-        .community-form textarea {
-            flex: 1;
-            font-size: 13px;
-            padding: 5px;
-            border: 1px solid #888;
+        .form-table input[type="text"],
+        .form-table textarea {
+            width: 100%;
+            font-family: "Dotum", "Gulim", "Arial", sans-serif;
+            font-size: 12px;
+            padding: 3px 5px;
+            border: 1px solid #666;
             background: #fff;
-            min-height: 140px;
+            box-sizing: border-box;
+        }
+        .form-table textarea {
+            height: 120px;
             resize: vertical;
-            font-family: inherit;
         }
-        .community-form .image-select {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            padding-top: 2px;
+        .form-table input[type="url"] {
+            width: 100%;
+            font-family: "Dotum", "Gulim", "Arial", sans-serif;
+            font-size: 12px;
+            padding: 3px 5px;
+            border: 1px solid #666;
+            background: #fff;
+            box-sizing: border-box;
         }
-        .community-form .image-select label {
-            width: auto;
-            font-size: 0;
-            padding: 0;
-            cursor: pointer;
-            display: block;
-            border: 2px solid transparent;
-        }
-        .community-form .image-select input[type="radio"] {
-            display: none;
-        }
-        .community-form .image-select label img {
-            width: 70px;
-            height: auto;
-            display: block;
-        }
-        .community-form .image-select input[type="radio"]:checked + img {
-            border: 2px solid #00f;
-        }
-        .community-form .color-select {
-            display: flex;
-            gap: 10px;
-            padding-top: 4px;
-        }
-        .community-form .color-select label {
-            width: auto;
-            padding: 0;
-            cursor: pointer;
-            display: block;
-            position: relative;
-        }
-        .community-form .color-select input[type="radio"] {
-            display: none;
-        }
-        .community-form .color-select .color-circle {
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            display: block;
-            border: 2px solid transparent;
-            position: relative;
-        }
-        .community-form .color-select input[type="radio"]:checked + .color-circle {
-            border-color: #00f;
-        }
-        .community-form .color-select .color-circle::after {
-            content: "";
-            position: absolute;
-            right: -6px;
-            bottom: -6px;
-            width: 10px;
-            height: 10px;
-            background: inherit;
-            border: 1px solid #333;
-        }
-        .color-red { background: #ff0000; }
-        .color-blue { background: #0000ff; }
-        .color-pink { background: #ff69b4; }
-        .color-green { background: #00aa00; }
-        .color-purple { background: #800080; }
-        .color-brown { background: #8b4513; }
-        .color-black { background: #000000; }
-        .color-orange { background: #ff8c00; }
 
-        .community-form .submit-row {
+        .images-list {
             display: flex;
-            justify-content: flex-end;
-            padding-top: 8px;
+            flex-wrap: wrap;
+            gap: 6px;
         }
-        .community-form button#submitBtn {
-            padding: 8px 30px;
+        .images-list .img-choice {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11px;
+            cursor: pointer;
+            padding: 2px 4px;
+            border: 1px solid #ccc;
+            background: #f4f4f4;
+        }
+        .images-list .img-choice.selected {
+            border-color: #0033cc;
+            background: #dbe4ff;
+        }
+        .images-list .img-choice input {
+            margin: 0;
+        }
+
+        .submit-row {
+            margin-top: 12px;
+            text-align: center;
+        }
+        .submit-row button {
+            padding: 6px 24px;
             font-size: 13px;
             font-weight: bold;
             background: #800020;
@@ -222,246 +214,225 @@
             border: 1px solid #555;
             cursor: pointer;
         }
-        .community-form button#submitBtn:hover {
+        .submit-row button:hover {
             background: #a00028;
         }
 
-        .chat-panel {
-            width: 1000px;
-            max-width: 1000px;
-            background: #fff;
+        .chat-board {
+            width: 100%;
+            max-width: 900px;
+            margin: 20px auto;
+            background: #ffffff;
             border: 1px solid #000;
-            margin-top: 20px;
+            min-height: 300px;
             padding: 0;
         }
-        .chat-message {
-            padding: 14px 18px;
-            border-bottom: 1px solid #ddd;
+        .post {
+            padding: 12px 16px;
+            border-bottom: 1px solid #000;
         }
-        .chat-message:last-child {
-            border-bottom: none;
+        .post:last-child {
+            border-bottom: 1px solid #000;
         }
-        .chat-message > .final-divider {
-            border-bottom: 2px solid #000;
-            margin-top: 12px;
-        }
-        .chat-message-header {
+        .post-header {
             display: flex;
-            flex-wrap: wrap;
             align-items: center;
-            gap: 14px;
+            flex-wrap: wrap;
+            gap: 10px;
             font-size: 12px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
-        .chat-message-header .title {
-            color: #006400;
+        .post-header .post-title {
+            color: #005500;
             font-weight: bold;
             font-size: 14px;
         }
-        .chat-message-header .meta {
+        .post-header .post-author {
             color: #000;
         }
-        .chat-message-header .reply-btn {
-            background: none;
-            border: 1px solid #888;
-            padding: 2px 8px;
-            font-size: 11px;
-            cursor: pointer;
-            color: #000;
+        .post-header .post-date {
+            color: #333;
         }
-        .chat-message-header .reply-btn:hover {
+        .post-header .post-num {
+            color: #333;
+        }
+        .post-header .reply-btn {
+            margin-left: auto;
             background: #eee;
-        }
-        .chat-message-body {
-            display: flex;
-            gap: 14px;
-            align-items: flex-start;
-        }
-        .chat-message-body .msg-photo {
-            width: 80px;
-            height: auto;
-            flex-shrink: 0;
-        }
-        .chat-message-body .msg-photo img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        .chat-message-body .msg-text {
-            flex: 1;
-            font-size: 13px;
-            line-height: 1.6;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
-        .chat-message-body .msg-url {
-            font-size: 12px;
-            color: #0000ee;
-            text-decoration: underline;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            display: block;
-            margin-top: 6px;
-        }
-        .chat-replies {
-            margin-left: 40px;
-            margin-top: 10px;
-            padding-left: 12px;
-            border-left: 1px solid #000;
-        }
-        .chat-reply {
-            padding: 8px 0;
-            border-bottom: 1px solid #000;
-            font-size: 12px;
-        }
-        .chat-reply:last-child {
-            border-bottom: 1px solid #000;
-        }
-        .chat-reply .reply-header {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 6px;
-            color: #000;
-        }
-        .chat-reply .reply-header .reply-title {
-            color: #006400;
-            font-weight: bold;
-        }
-        .chat-reply .reply-body {
-            display: flex;
-            gap: 10px;
-            align-items: flex-start;
-        }
-        .chat-reply .reply-body .reply-photo {
-            width: 50px;
-            height: auto;
-            flex-shrink: 0;
-        }
-        .chat-reply .reply-body .reply-photo img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        .chat-reply .reply-body .reply-text {
-            flex: 1;
-            font-size: 12px;
-            line-height: 1.5;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
-        .reply-form {
-            margin-left: 40px;
-            margin-top: 8px;
-            padding: 10px;
-            background: #f5f5f5;
-            border: 1px solid #ccc;
-            display: none;
-        }
-        .reply-form.open {
-            display: block;
-        }
-        .reply-form .reply-row {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 6px;
-            align-items: center;
-        }
-        .reply-form .reply-row label {
-            font-size: 12px;
-            color: #000;
-            width: 80px;
-            flex-shrink: 0;
-        }
-        .reply-form input[type="text"] {
-            flex: 1;
-            font-size: 12px;
-            padding: 3px 6px;
             border: 1px solid #888;
-        }
-        .reply-form textarea {
-            width: 100%;
-            font-size: 12px;
-            padding: 3px 6px;
-            border: 1px solid #888;
-            min-height: 50px;
+            font-size: 11px;
+            padding: 2px 8px;
+            cursor: pointer;
             font-family: inherit;
-            resize: vertical;
         }
-        .reply-form .reply-submit {
-            margin-top: 6px;
-            text-align: right;
-        }
-        .reply-form button {
-            padding: 4px 14px;
-            font-size: 12px;
+        .post-header .reply-btn:hover {
             background: #800020;
             color: #fff;
-            border: none;
-            cursor: pointer;
+            border-color: #800020;
         }
-        .reply-form button:hover {
-            background: #a00028;
+        .post-body {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            font-size: 12px;
+        }
+        .post-body img.post-image {
+            width: 120px;
+            height: auto;
+            flex-shrink: 0;
+            border: 1px solid #ccc;
+        }
+        .post-body .post-comment {
+            flex: 1;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            color: #000;
+        }
+        .post-body .post-link {
+            display: block;
+            margin-top: 4px;
+            color: #0000ee;
+            text-decoration: underline;
+            font-size: 11px;
+            word-break: break-all;
         }
 
-        @media (max-width: 1100px) {
-            .bbachat-outer {
-                width: 95%;
-            }
-            .bbachat-top-imgs {
-                width: 100%;
-            }
-            .community-form,
-            .chat-panel {
-                width: 100%;
-            }
+        .reply-block {
+            margin-top: 8px;
+            margin-left: 30px;
+            padding-top: 8px;
+            border-top: 1px solid #000;
+            padding-left: 10px;
         }
+        .reply-block .reply {
+            padding: 6px 0;
+            border-bottom: 1px dotted #999;
+            font-size: 12px;
+        }
+        .reply-block .reply:last-child {
+            border-bottom: none;
+        }
+        .reply-block .reply .reply-header {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+            font-size: 11px;
+            color: #333;
+            margin-bottom: 3px;
+        }
+        .reply-block .reply .reply-header .reply-title {
+            color: #005500;
+            font-weight: bold;
+        }
+        .reply-block .reply .reply-header .reply-num {
+            color: #333;
+        }
+        .reply-block .reply .reply-header .reply-author {
+            color: #000;
+        }
+        .reply-block .reply-header .reply-btn {
+            margin-left: auto;
+            background: #eee;
+            border: 1px solid #888;
+            font-size: 10px;
+            padding: 1px 6px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .reply-block .reply-header .reply-btn:hover {
+            background: #800020;
+            color: #fff;
+            border-color: #800020;
+        }
+        .reply-block .reply .reply-body {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+        .reply-block .reply .reply-body img.reply-image {
+            width: 80px;
+            height: auto;
+            flex-shrink: 0;
+            border: 1px solid #ccc;
+        }
+        .reply-block .reply .reply-body .reply-comment {
+            flex: 1;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        .reply-block .reply .reply-body .reply-link {
+            display: block;
+            margin-top: 4px;
+            color: #0000ee;
+            text-decoration: underline;
+            font-size: 11px;
+            word-break: break-all;
+        }
+
+        .reply-form-inline {
+            margin-top: 8px;
+            padding: 8px;
+            background: #f4f4f4;
+            border: 1px solid #999;
+            font-size: 11px;
+        }
+        .reply-form-inline .row {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 4px;
+        }
+        .reply-form-inline input[type="text"],
+        .reply-form-inline textarea {
+            font-family: inherit;
+            font-size: 11px;
+            padding: 2px 4px;
+            border: 1px solid #666;
+            background: #fff;
+            flex: 1;
+        }
+        .reply-form-inline textarea {
+            min-height: 50px;
+            resize: vertical;
+        }
+        .reply-form-inline button {
+            padding: 3px 10px;
+            font-size: 11px;
+            background: #800020;
+            color: #fff;
+            border: 1px solid #555;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .reply-form-inline button.cancel-btn {
+            background: #ccc;
+            color: #000;
+        }
+
         @media (max-width: 900px) {
-            .bbachat-top-imgs {
-                height: 280px;
+            .bbachat-outer {
+                width: 100%;
+                padding: 0 8px;
             }
-            .bbachat-top-imgs img.panel {
-                width: 460px;
-                max-width: 460px;
-                left: 180px;
-            }
-            .nav-overlay {
-                left: 180px;
-                width: 460px;
-                height: 280px;
+            .form-table td.label-cell {
+                width: 100px;
+                font-size: 11px;
             }
             .nav-overlay a {
-                width: 40px;
-                height: 16px;
+                height: 18px;
             }
         }
-        @media (max-width: 500px) {
-            .bbachat-outer {
-                width: 98%;
+        @media (max-width: 600px) {
+            .bbacommunity-wrap img {
+                width: 100px;
             }
-            .bbachat-top-imgs {
-                height: 200px;
+            .post-body img.post-image {
+                width: 90px;
             }
-            .bbachat-top-imgs img.panel {
-                width: 320px;
-                max-width: 320px;
-                left: 120px;
-            }
-            .nav-overlay {
-                left: 120px;
-                width: 320px;
-                height: 200px;
-            }
-            .nav-overlay a {
-                width: 30px;
-                height: 12px;
-            }
-            .community-form .form-row {
-                flex-direction: column;
-                gap: 4px;
-            }
-            .community-form .form-row label {
-                width: auto;
+            .reply-block .reply .reply-body img.reply-image {
+                width: 60px;
             }
         }
     </style>
@@ -469,7 +440,7 @@
 <body>
 
     <div class="bbachat-outer">
-        <div class="bbacommunity-container">
+        <div class="bbacommunity-wrap">
             <img src="bbacommunity.jpg" alt="bbacommunity">
         </div>
 
@@ -486,342 +457,354 @@
             </div>
         </div>
 
-        <div class="community-form">
-            <div class="form-row">
-                <label>이름</label>
-                <input type="text" id="postName" maxlength="30">
+        <div class="form-outer">
+
+            <div class="color-picker" id="colorPicker">
+                <div class="circle-wrap" data-color="#cc0000"><div class="circle"></div><div class="square" style="background:#cc0000;"></div></div>
+                <div class="circle-wrap" data-color="#0033cc"><div class="circle"></div><div class="square" style="background:#0033cc;"></div></div>
+                <div class="circle-wrap" data-color="#ff66b3"><div class="circle"></div><div class="square" style="background:#ff66b3;"></div></div>
+                <div class="circle-wrap" data-color="#009933"><div class="circle"></div><div class="square" style="background:#009933;"></div></div>
+                <div class="circle-wrap" data-color="#8000cc"><div class="circle"></div><div class="square" style="background:#8000cc;"></div></div>
+                <div class="circle-wrap" data-color="#8b4513"><div class="circle"></div><div class="square" style="background:#8b4513;"></div></div>
+                <div class="circle-wrap" data-color="#000000"><div class="circle"></div><div class="square" style="background:#000000;"></div></div>
+                <div class="circle-wrap" data-color="#ff8800"><div class="circle"></div><div class="square" style="background:#ff8800;"></div></div>
             </div>
-            <div class="form-row">
-                <label>이메일</label>
-                <input type="email" id="postEmail" maxlength="60">
-            </div>
-            <div class="form-row">
-                <label>제목</label>
-                <input type="text" id="postTitle" maxlength="80">
-            </div>
-            <div class="form-row">
-                <label>댓글</label>
-                <textarea id="postComment" maxlength="5000"></textarea>
-            </div>
-            <div class="form-row">
-                <label>URL</label>
-                <input type="text" id="postUrl" placeholder="http(s)://" onfocus="if(this.value=='http(s)://')this.value=''" onblur="if(this.value=='')this.value='http(s)://'">
-            </div>
-            <div class="form-row">
-                <label>이미지</label>
-                <div class="image-select">
-                    <label><input type="radio" name="postImage" value="kimez.jpg"><img src="kimez.jpg" alt="kimez"></label>
-                    <label><input type="radio" name="postImage" value="leeheejin.jpg"><img src="leeheejin.jpg" alt="leeheejin"></label>
-                    <label><input type="radio" name="postImage" value="shimeunjin.jpg"><img src="shimeunjin.jpg" alt="shimeunjin"></label>
-                    <label><input type="radio" name="postImage" value="kanmiyoun.jpg"><img src="kanmiyoun.jpg" alt="kanmiyoun"></label>
-                    <label><input type="radio" name="postImage" value="yooneunhye.jpg"><img src="yooneunhye.jpg" alt="yooneunhye"></label>
-                </div>
-            </div>
-            <div class="form-row">
-                <label>텍스트 색상</label>
-                <div class="color-select">
-                    <label><input type="radio" name="postColor" value="#ff0000"><span class="color-circle color-red"></span></label>
-                    <label><input type="radio" name="postColor" value="#0000ff"><span class="color-circle color-blue"></span></label>
-                    <label><input type="radio" name="postColor" value="#ff69b4"><span class="color-circle color-pink"></span></label>
-                    <label><input type="radio" name="postColor" value="#00aa00"><span class="color-circle color-green"></span></label>
-                    <label><input type="radio" name="postColor" value="#800080"><span class="color-circle color-purple"></span></label>
-                    <label><input type="radio" name="postColor" value="#8b4513"><span class="color-circle color-brown"></span></label>
-                    <label><input type="radio" name="postColor" value="#000000"><span class="color-circle color-black"></span></label>
-                    <label><input type="radio" name="postColor" value="#ff8c00"><span class="color-circle color-orange"></span></label>
-                </div>
-            </div>
+
+            <table class="form-table">
+                <tr>
+                    <td class="label-cell">이름</td>
+                    <td class="input-cell"><input type="text" id="fieldName" maxlength="20"></td>
+                </tr>
+                <tr>
+                    <td class="label-cell">전자 우편</td>
+                    <td class="input-cell"><input type="text" id="fieldEmail" maxlength="60"></td>
+                </tr>
+                <tr>
+                    <td class="label-cell">제목</td>
+                    <td class="input-cell"><input type="text" id="fieldTitle" maxlength="80"></td>
+                </tr>
+                <tr>
+                    <td class="label-cell">코멘트</td>
+                    <td class="input-cell"><textarea id="fieldComment"></textarea></td>
+                </tr>
+                <tr>
+                    <td class="label-cell">URL</td>
+                    <td class="input-cell"><input type="text" id="fieldUrl" value="http(s)://" onfocus="if(this.value=='http(s)://')this.value='';" onblur="if(this.value=='')this.value='http(s)://';"></td>
+                </tr>
+                <tr>
+                    <td class="label-cell">이미지</td>
+                    <td class="input-cell">
+                        <div class="images-list" id="imagesList">
+                            <label class="img-choice"><input type="radio" name="img" value="kimez.jpg">kimez.jpg</label>
+                            <label class="img-choice"><input type="radio" name="img" value="leeheejin.jpg">leeheejin.jpg</label>
+                            <label class="img-choice"><input type="radio" name="img" value="shimeunjin.jpg">shimeunjin.jpg</label>
+                            <label class="img-choice"><input type="radio" name="img" value="kanmiyoun.jpg">kanmiyoun.jpg</label>
+                            <label class="img-choice"><input type="radio" name="img" value="yooneunhye.jpg">yooneunhye.jpg</label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-cell">텍스트 색상</td>
+                    <td class="input-cell" id="colorLabelCell">—</td>
+                </tr>
+            </table>
+
             <div class="submit-row">
-                <button id="submitBtn">보내기</button>
+                <button id="submitPost">보내기</button>
             </div>
         </div>
 
-        <div class="chat-panel" id="chatPanel"></div>
+        <div class="chat-board" id="chatBoard"></div>
     </div>
 
     <script>
-        const STORAGE_KEY = "bbachat_messages_v1";
+        const colorPicker = document.getElementById('colorPicker');
+        const colorLabelCell = document.getElementById('colorLabelCell');
+        let selectedColor = '#000000';
 
-        function loadMessages() {
-            try {
-                const raw = localStorage.getItem(STORAGE_KEY);
-                return raw ? JSON.parse(raw) : [];
-            } catch (e) {
-                return [];
-            }
-        }
+        colorPicker.querySelectorAll('.circle-wrap').forEach(wrap => {
+            wrap.addEventListener('click', () => {
+                colorPicker.querySelectorAll('.circle').forEach(c => c.classList.remove('selected'));
+                wrap.querySelector('.circle').classList.add('selected');
+                selectedColor = wrap.getAttribute('data-color');
+                colorLabelCell.textContent = selectedColor;
+            });
+        });
 
-        function saveMessages(list) {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
-        }
+        document.querySelectorAll('#imagesList .img-choice').forEach(label => {
+            label.addEventListener('click', () => {
+                setTimeout(() => {
+                    document.querySelectorAll('#imagesList .img-choice').forEach(l => l.classList.remove('selected'));
+                    if (label.querySelector('input').checked) label.classList.add('selected');
+                }, 0);
+            });
+        });
 
-        function generateNumber() {
-            return Math.floor(10000 + Math.random() * 90000).toString();
-        }
+        const DAYS_KR = ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'];
 
-        function getDayOfWeek(d) {
-            const days = ["일", "월", "화", "수", "목", "금", "토"];
-            return days[d.getDay()];
-        }
-
-        function formatDate(ts) {
+        function formatDateKR(ts) {
             const d = new Date(ts);
-            const pad = (n) => n.toString().padStart(2, "0");
-            return `${d.getFullYear()}.${pad(d.getMonth() + 1)}.${pad(d.getDate())} (${getDayOfWeek(d)}) ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+            const pad = n => n.toString().padStart(2,'0');
+            return `${d.getFullYear()}년 ${pad(d.getMonth()+1)}월 ${pad(d.getDate())}일 ${DAYS_KR[d.getDay()]} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
         }
 
-        let messages = loadMessages();
+        function randomNum() {
+            return Math.floor(10000 + Math.random()*90000).toString();
+        }
 
-        function renderChat() {
-            const panel = document.getElementById("chatPanel");
-            panel.innerHTML = "";
+        const posts = [];
 
-            messages.forEach((msg, msgIndex) => {
-                const div = document.createElement("div");
-                div.className = "chat-message";
+        const chatBoard = document.getElementById('chatBoard');
 
-                const header = document.createElement("div");
-                header.className = "chat-message-header";
-
-                const title = document.createElement("span");
-                title.className = "title";
-                title.textContent = msg.title || "(제목 없음)";
-                header.appendChild(title);
-
-                const author = document.createElement("span");
-                author.className = "meta";
-                author.textContent = "작성자: " + (msg.name || "");
-                header.appendChild(author);
-
-                const dateEl = document.createElement("span");
-                dateEl.className = "meta";
-                dateEl.textContent = formatDate(msg.timestamp);
-                header.appendChild(dateEl);
-
-                const numEl = document.createElement("span");
-                numEl.className = "meta";
-                numEl.textContent = "№" + msg.number;
-                header.appendChild(numEl);
-
-                const replyBtn = document.createElement("button");
-                replyBtn.className = "reply-btn";
-                replyBtn.textContent = "답글";
-                replyBtn.addEventListener("click", () => {
-                    const form = document.getElementById("replyForm-" + msgIndex);
-                    if (form) form.classList.toggle("open");
-                });
-                header.appendChild(replyBtn);
-
-                div.appendChild(header);
-
-                const body = document.createElement("div");
-                body.className = "chat-message-body";
-
-                if (msg.image) {
-                    const photo = document.createElement("div");
-                    photo.className = "msg-photo";
-                    const img = document.createElement("img");
-                    img.src = msg.image;
-                    img.alt = "photo";
-                    photo.appendChild(img);
-                    body.appendChild(photo);
-                }
-
-                const text = document.createElement("div");
-                text.className = "msg-text";
-                text.style.color = msg.color || "#000";
-                text.textContent = msg.comment || "";
-                body.appendChild(text);
-
-                div.appendChild(body);
-
-                if (msg.url && msg.url.trim() !== "" && msg.url !== "http(s)://") {
-                    const urlEl = document.createElement("a");
-                    urlEl.className = "msg-url";
-                    urlEl.href = msg.url;
-                    urlEl.target = "_blank";
-                    urlEl.textContent = msg.url;
-                    div.appendChild(urlEl);
-                }
-
-                if (msg.replies && msg.replies.length > 0) {
-                    const repliesBox = document.createElement("div");
-                    repliesBox.className = "chat-replies";
-                    msg.replies.forEach((rep) => {
-                        const repDiv = document.createElement("div");
-                        repDiv.className = "chat-reply";
-
-                        const repHeader = document.createElement("div");
-                        repHeader.className = "reply-header";
-
-                        const repTitle = document.createElement("span");
-                        repTitle.className = "reply-title";
-                        repTitle.textContent = rep.title || "(제목 없음)";
-                        repHeader.appendChild(repTitle);
-
-                        const repAuthor = document.createElement("span");
-                        repAuthor.textContent = "작성자: " + (rep.name || "");
-                        repHeader.appendChild(repAuthor);
-
-                        const repDate = document.createElement("span");
-                        repDate.textContent = formatDate(rep.timestamp);
-                        repHeader.appendChild(repDate);
-
-                        const repNum = document.createElement("span");
-                        repNum.textContent = "№" + rep.number;
-                        repHeader.appendChild(repNum);
-
-                        repDiv.appendChild(repHeader);
-
-                        const repBody = document.createElement("div");
-                        repBody.className = "reply-body";
-
-                        if (rep.image) {
-                            const repPhoto = document.createElement("div");
-                            repPhoto.className = "reply-photo";
-                            const repImg = document.createElement("img");
-                            repImg.src = rep.image;
-                            repImg.alt = "photo";
-                            repPhoto.appendChild(repImg);
-                            repBody.appendChild(repPhoto);
-                        }
-
-                        const repText = document.createElement("div");
-                        repText.className = "reply-text";
-                        repText.style.color = rep.color || "#000";
-                        repText.textContent = rep.comment || "";
-                        repBody.appendChild(repText);
-
-                        repDiv.appendChild(repBody);
-
-                        if (rep.url && rep.url.trim() !== "" && rep.url !== "http(s)://") {
-                            const repUrl = document.createElement("a");
-                            repUrl.className = "msg-url";
-                            repUrl.href = rep.url;
-                            repUrl.target = "_blank";
-                            repUrl.textContent = rep.url;
-                            repDiv.appendChild(repUrl);
-                        }
-
-                        repliesBox.appendChild(repDiv);
-                    });
-                    div.appendChild(repliesBox);
-                }
-
-                const replyForm = document.createElement("div");
-                replyForm.className = "reply-form";
-                replyForm.id = "replyForm-" + msgIndex;
-
-                replyForm.innerHTML = `
-                    <div class="reply-row"><label>이름</label><input type="text" id="repName-${msgIndex}" maxlength="30"></div>
-                    <div class="reply-row"><label>제목</label><input type="text" id="repTitle-${msgIndex}" maxlength="80"></div>
-                    <div class="reply-row"><label>URL</label><input type="text" id="repUrl-${msgIndex}" value="http(s)://" onfocus="if(this.value=='http(s)://')this.value=''" onblur="if(this.value=='')this.value='http(s)://'"></div>
-                    <textarea id="repComment-${msgIndex}" placeholder="댓글"></textarea>
-                    <div class="reply-row" style="margin-top:6px;">
-                        <label>이미지</label>
-                        <div class="image-select" style="padding-top:0;">
-                            <label><input type="radio" name="repImage-${msgIndex}" value="kimez.jpg"><img src="kimez.jpg" style="width:40px;"></label>
-                            <label><input type="radio" name="repImage-${msgIndex}" value="leeheejin.jpg"><img src="leeheejin.jpg" style="width:40px;"></label>
-                            <label><input type="radio" name="repImage-${msgIndex}" value="shimeunjin.jpg"><img src="shimeunjin.jpg" style="width:40px;"></label>
-                            <label><input type="radio" name="repImage-${msgIndex}" value="kanmiyoun.jpg"><img src="kanmiyoun.jpg" style="width:40px;"></label>
-                            <label><input type="radio" name="repImage-${msgIndex}" value="yooneunhye.jpg"><img src="yooneunhye.jpg" style="width:40px;"></label>
-                        </div>
-                    </div>
-                    <div class="reply-row" style="margin-top:6px;">
-                        <label>색상</label>
-                        <div class="color-select" style="padding-top:0;">
-                            <label><input type="radio" name="repColor-${msgIndex}" value="#ff0000"><span class="color-circle color-red"></span></label>
-                            <label><input type="radio" name="repColor-${msgIndex}" value="#0000ff"><span class="color-circle color-blue"></span></label>
-                            <label><input type="radio" name="repColor-${msgIndex}" value="#ff69b4"><span class="color-circle color-pink"></span></label>
-                            <label><input type="radio" name="repColor-${msgIndex}" value="#00aa00"><span class="color-circle color-green"></span></label>
-                            <label><input type="radio" name="repColor-${msgIndex}" value="#800080"><span class="color-circle color-purple"></span></label>
-                            <label><input type="radio" name="repColor-${msgIndex}" value="#8b4513"><span class="color-circle color-brown"></span></label>
-                            <label><input type="radio" name="repColor-${msgIndex}" value="#000000"><span class="color-circle color-black"></span></label>
-                            <label><input type="radio" name="repColor-${msgIndex}" value="#ff8c00"><span class="color-circle color-orange"></span></label>
-                        </div>
-                    </div>
-                    <div class="reply-submit"><button type="button" data-idx="${msgIndex}">답글 등록</button></div>
-                `;
-
-                replyForm.querySelector("button[data-idx]").addEventListener("click", (e) => {
-                    const idx = parseInt(e.target.getAttribute("data-idx"));
-                    const name = document.getElementById("repName-" + idx).value.trim();
-                    const title = document.getElementById("repTitle-" + idx).value.trim();
-                    const url = document.getElementById("repUrl-" + idx).value.trim();
-                    const comment = document.getElementById("repComment-" + idx).value.trim();
-                    const imgEl = document.querySelector(`input[name="repImage-${idx}"]:checked`);
-                    const colEl = document.querySelector(`input[name="repColor-${idx}"]:checked`);
-
-                    if (!name || !comment) {
-                        alert("이름과 댓글을 입력하세요.");
-                        return;
-                    }
-
-                    messages[idx].replies = messages[idx].replies || [];
-                    messages[idx].replies.push({
-                        name: name,
-                        title: title,
-                        url: url,
-                        comment: comment,
-                        image: imgEl ? imgEl.value : null,
-                        color: colEl ? colEl.value : "#000",
-                        number: generateNumber(),
-                        timestamp: Date.now()
-                    });
-                    saveMessages(messages);
-                    renderChat();
-                });
-
-                div.appendChild(replyForm);
-
-                if (msgIndex === messages.length - 1) {
-                    const fin = document.createElement("div");
-                    fin.className = "final-divider";
-                    div.appendChild(fin);
-                }
-
-                panel.appendChild(div);
+        function renderPosts() {
+            chatBoard.innerHTML = '';
+            posts.forEach((post, idx) => {
+                chatBoard.appendChild(buildPost(post, idx));
             });
         }
 
-        document.getElementById("submitBtn").addEventListener("click", () => {
-            const name = document.getElementById("postName").value.trim();
-            const title = document.getElementById("postTitle").value.trim();
-            const comment = document.getElementById("postComment").value.trim();
-            const url = document.getElementById("postUrl").value.trim();
-            const imgEl = document.querySelector('input[name="postImage"]:checked');
-            const colEl = document.querySelector('input[name="postColor"]:checked');
+        function buildPost(post, postIndex) {
+            const el = document.createElement('div');
+            el.className = 'post';
 
-            if (!name || !comment) {
-                alert("이름과 댓글을 입력하세요.");
+            const header = document.createElement('div');
+            header.className = 'post-header';
+
+            const title = document.createElement('span');
+            title.className = 'post-title';
+            title.textContent = post.title || '(제목 없음)';
+            title.style.color = '#005500';
+            header.appendChild(title);
+
+            const author = document.createElement('span');
+            author.className = 'post-author';
+            author.textContent = '글쓴이: ' + (post.name || '익명');
+            header.appendChild(author);
+
+            const date = document.createElement('span');
+            date.className = 'post-date';
+            date.textContent = formatDateKR(post.timestamp);
+            header.appendChild(date);
+
+            const num = document.createElement('span');
+            num.className = 'post-num';
+            num.textContent = '№' + post.number;
+            header.appendChild(num);
+
+            const replyBtn = document.createElement('button');
+            replyBtn.className = 'reply-btn';
+            replyBtn.textContent = '답변';
+            replyBtn.addEventListener('click', () => toggleReplyForm(el, post, postIndex));
+            header.appendChild(replyBtn);
+
+            el.appendChild(header);
+
+            const body = document.createElement('div');
+            body.className = 'post-body';
+
+            if (post.image) {
+                const img = document.createElement('img');
+                img.className = 'post-image';
+                img.src = post.image;
+                img.alt = post.image;
+                body.appendChild(img);
+            }
+
+            const comment = document.createElement('div');
+            comment.className = 'post-comment';
+            comment.textContent = post.comment || '';
+            comment.style.color = post.color || '#000';
+            if (post.url && post.url !== 'http(s)://' && post.url.trim() !== '') {
+                const link = document.createElement('a');
+                link.className = 'post-link';
+                link.href = post.url;
+                link.target = '_blank';
+                link.textContent = post.url;
+                comment.appendChild(link);
+            }
+            body.appendChild(comment);
+
+            el.appendChild(body);
+
+            const replies = document.createElement('div');
+            replies.className = 'reply-block';
+            replies.dataset.postIndex = postIndex;
+
+            if (post.replies && post.replies.length) {
+                post.replies.forEach(r => {
+                    replies.appendChild(buildReply(r, postIndex));
+                });
+            }
+
+            el.appendChild(replies);
+
+            return el;
+        }
+
+        function buildReply(reply, postIndex) {
+            const r = document.createElement('div');
+            r.className = 'reply';
+
+            const header = document.createElement('div');
+            header.className = 'reply-header';
+
+            const title = document.createElement('span');
+            title.className = 'reply-title';
+            title.textContent = reply.title || '(제목 없음)';
+            title.style.color = '#005500';
+            header.appendChild(title);
+
+            const author = document.createElement('span');
+            author.className = 'reply-author';
+            author.textContent = '글쓴이: ' + (reply.name || '익명');
+            header.appendChild(author);
+
+            const date = document.createElement('span');
+            date.textContent = formatDateKR(reply.timestamp);
+            header.appendChild(date);
+
+            const num = document.createElement('span');
+            num.className = 'reply-num';
+            num.textContent = '№' + reply.number;
+            header.appendChild(num);
+
+            const replyBtn = document.createElement('button');
+            replyBtn.className = 'reply-btn';
+            replyBtn.textContent = '답변';
+            replyBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const postEl = r.closest('.post');
+                const post = posts[postIndex];
+                toggleReplyForm(postEl, post, postIndex);
+            });
+            header.appendChild(replyBtn);
+
+            r.appendChild(header);
+
+            const body = document.createElement('div');
+            body.className = 'reply-body';
+
+            if (reply.image) {
+                const img = document.createElement('img');
+                img.className = 'reply-image';
+                img.src = reply.image;
+                img.alt = reply.image;
+                body.appendChild(img);
+            }
+
+            const comment = document.createElement('div');
+            comment.className = 'reply-comment';
+            comment.textContent = reply.comment || '';
+            comment.style.color = reply.color || '#000';
+            if (reply.url && reply.url !== 'http(s)://' && reply.url.trim() !== '') {
+                const link = document.createElement('a');
+                link.className = 'reply-link';
+                link.href = reply.url;
+                link.target = '_blank';
+                link.textContent = reply.url;
+                comment.appendChild(link);
+            }
+            body.appendChild(comment);
+
+            r.appendChild(body);
+
+            return r;
+        }
+
+        function toggleReplyForm(postEl, post, postIndex) {
+            let existing = postEl.querySelector('.reply-form-inline');
+            if (existing) {
+                existing.remove();
                 return;
             }
 
-            messages.push({
+            const form = document.createElement('div');
+            form.className = 'reply-form-inline';
+            form.innerHTML = `
+                <div class="row">
+                    <input type="text" class="rf-name" placeholder="이름" maxlength="20">
+                    <input type="text" class="rf-title" placeholder="제목" maxlength="80">
+                </div>
+                <div class="row">
+                    <input type="text" class="rf-email" placeholder="전자 우편" maxlength="60">
+                    <input type="text" class="rf-url" placeholder="http(s)://" maxlength="200">
+                </div>
+                <div class="row">
+                    <textarea class="rf-comment" placeholder="코멘트"></textarea>
+                </div>
+                <div class="row" style="justify-content:flex-end;">
+                    <button class="cancel-btn">취소</button>
+                    <button class="send-reply-btn">보내기</button>
+                </div>
+            `;
+
+            form.querySelector('.cancel-btn').addEventListener('click', () => form.remove());
+            form.querySelector('.send-reply-btn').addEventListener('click', () => {
+                const name = form.querySelector('.rf-name').value.trim() || '익명';
+                const title = form.querySelector('.rf-title').value.trim() || '(제목 없음)';
+                const comment = form.querySelector('.rf-comment').value.trim();
+                const url = form.querySelector('.rf-url').value.trim();
+
+                if (!comment) {
+                    alert('코멘트를 입력하세요.');
+                    return;
+                }
+
+                if (!post.replies) post.replies = [];
+                post.replies.push({
+                    name: name,
+                    title: title,
+                    comment: comment,
+                    url: url,
+                    color: selectedColor,
+                    number: randomNum(),
+                    timestamp: Date.now(),
+                    image: null
+                });
+
+                form.remove();
+                renderPosts();
+            });
+
+            postEl.appendChild(form);
+        }
+
+        document.getElementById('submitPost').addEventListener('click', () => {
+            const name = document.getElementById('fieldName').value.trim();
+            const title = document.getElementById('fieldTitle').value.trim();
+            const comment = document.getElementById('fieldComment').value.trim();
+            const url = document.getElementById('fieldUrl').value.trim();
+
+            if (!name || !title || !comment) {
+                alert('이름, 제목, 코멘트를 입력하세요.');
+                return;
+            }
+
+            const imgRadio = document.querySelector('#imagesList input[name="img"]:checked');
+            const image = imgRadio ? imgRadio.value : null;
+
+            const post = {
                 name: name,
-                email: document.getElementById("postEmail").value.trim(),
                 title: title,
                 comment: comment,
-                url: url,
-                image: imgEl ? imgEl.value : null,
-                color: colEl ? colEl.value : "#000",
-                number: generateNumber(),
+                url: url === 'http(s)://' ? '' : url,
+                image: image,
+                color: selectedColor,
+                number: randomNum(),
                 timestamp: Date.now(),
                 replies: []
-            });
-            saveMessages(messages);
-            renderChat();
+            };
 
-            document.getElementById("postName").value = "";
-            document.getElementById("postEmail").value = "";
-            document.getElementById("postTitle").value = "";
-            document.getElementById("postComment").value = "";
-            document.getElementById("postUrl").value = "http(s)://";
-            document.querySelectorAll('input[name="postImage"]').forEach((el) => (el.checked = false));
-            document.querySelectorAll('input[name="postColor"]').forEach((el) => (el.checked = false));
+            posts.unshift(post);
+            renderPosts();
+
+            document.getElementById('fieldName').value = '';
+            document.getElementById('fieldTitle').value = '';
+            document.getElementById('fieldComment').value = '';
+            document.getElementById('fieldUrl').value = 'http(s)://';
+            document.querySelectorAll('#imagesList input[name="img"]').forEach(r => r.checked = false);
+            document.querySelectorAll('#imagesList .img-choice').forEach(l => l.classList.remove('selected'));
         });
-
-        document.getElementById("postUrl").value = "http(s)://";
-        renderChat();
     </script>
 </body>
 </html>

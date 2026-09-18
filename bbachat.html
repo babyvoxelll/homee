@@ -593,7 +593,89 @@
             }
         }
 
-        function buildReplyElement(reply, postId, parentReplyId, postAuthorName) {
+        function buildNestedReply(nestedReply, postId, parentPath, parentAuthorName) {
+            const nestedEl = document.createElement("div");
+            nestedEl.className = "nested-reply";
+
+            if (nestedReply.image) {
+                const nImgWrap = document.createElement("div");
+                nImgWrap.className = "reply-img";
+                const nImg = document.createElement("img");
+                nImg.src = nestedReply.image;
+                nImg.alt = "image";
+                nImgWrap.appendChild(nImg);
+                nestedEl.appendChild(nImgWrap);
+            }
+
+            const nContent = document.createElement("div");
+            nContent.className = "reply-content";
+
+            const nHeader = document.createElement("div");
+            nHeader.className = "reply-header";
+
+            if (nestedReply.replyTo) {
+                const nReLine = document.createElement("span");
+                nReLine.className = "re-line";
+                nReLine.textContent = "Re: " + nestedReply.replyTo;
+                nHeader.appendChild(nReLine);
+            }
+
+            const nAuthor = document.createElement("span");
+            nAuthor.textContent = "작성자: " + (nestedReply.name || "");
+            nHeader.appendChild(nAuthor);
+
+            const nDate = document.createElement("span");
+            nDate.textContent = formatDate(nestedReply.timestamp);
+            nHeader.appendChild(nDate);
+
+            const nNumber = document.createElement("span");
+            nNumber.className = "reply-number";
+            nNumber.textContent = "No." + (nestedReply.number || "");
+            nHeader.appendChild(nNumber);
+
+            const nHintId = "replyHint-" + postId + "-" + (nestedReply.id || Math.random().toString(36).substr(2, 9));
+            const nBtn = document.createElement("button");
+            nBtn.className = "reply-btn";
+            nBtn.textContent = "답변";
+            const nestedPath = parentPath + "/" + nestedReply.id + "/replies";
+            nBtn.addEventListener("click", () => {
+                setReplyTarget(nestedPath, nHintId, nestedReply.name || "");
+            });
+            nHeader.appendChild(nBtn);
+
+            const nHint = document.createElement("span");
+            nHint.className = "reply-hint";
+            nHint.id = nHintId;
+            nHint.style.display = "none";
+            nHint.textContent = "위의 모든 정보를 입력하세요";
+            nHeader.appendChild(nHint);
+
+            nContent.appendChild(nHeader);
+
+            const nText = document.createElement("div");
+            nText.className = "reply-text";
+            nText.textContent = nestedReply.comment || "";
+            if (nestedReply.textColor) {
+                nText.style.color = nestedReply.textColor;
+            }
+            nContent.appendChild(nText);
+
+            if (nestedReply.replies) {
+                const deeper = document.createElement("div");
+                deeper.className = "nested-replies";
+                Object.keys(nestedReply.replies).forEach((k) => {
+                    const deepReply = nestedReply.replies[k];
+                    deepReply.id = k;
+                    deeper.appendChild(buildNestedReply(deepReply, postId, nestedPath, nestedReply.name || ""));
+                });
+                nContent.appendChild(deeper);
+            }
+
+            nestedEl.appendChild(nContent);
+            return nestedEl;
+        }
+
+        function buildReplyElement(reply, postId, replyKey) {
             const replyEl = document.createElement("div");
             replyEl.className = "bba-reply";
 
@@ -633,11 +715,11 @@
             rNumber.textContent = "No." + (reply.number || "");
             rHeader.appendChild(rNumber);
 
-            const hintId = "replyHint-" + postId + "-" + parentReplyId + "-" + (reply.id || Math.random().toString(36).substr(2, 9));
+            const hintId = "replyHint-" + postId + "-" + replyKey;
             const rBtn = document.createElement("button");
             rBtn.className = "reply-btn";
             rBtn.textContent = "답변";
-            const replyPath = "bbacommunity/posts/" + postId + "/replies/" + parentReplyId + "/replies";
+            const replyPath = "bbacommunity/posts/" + postId + "/replies/" + replyKey + "/replies";
             rBtn.addEventListener("click", () => {
                 setReplyTarget(replyPath, hintId, reply.name || "");
             });
@@ -666,57 +748,7 @@
                 Object.keys(reply.replies).forEach((k) => {
                     const nestedReply = reply.replies[k];
                     nestedReply.id = k;
-                    const nestedEl = document.createElement("div");
-                    nestedEl.className = "nested-reply";
-
-                    if (nestedReply.image) {
-                        const nImgWrap = document.createElement("div");
-                        nImgWrap.className = "reply-img";
-                        const nImg = document.createElement("img");
-                        nImg.src = nestedReply.image;
-                        nImg.alt = "image";
-                        nImgWrap.appendChild(nImg);
-                        nestedEl.appendChild(nImgWrap);
-                    }
-
-                    const nContent = document.createElement("div");
-                    nContent.className = "reply-content";
-
-                    const nHeader = document.createElement("div");
-                    nHeader.className = "reply-header";
-
-                    if (nestedReply.replyTo) {
-                        const nReLine = document.createElement("span");
-                        nReLine.className = "re-line";
-                        nReLine.textContent = "Re: " + nestedReply.replyTo;
-                        nHeader.appendChild(nReLine);
-                    }
-
-                    const nAuthor = document.createElement("span");
-                    nAuthor.textContent = "작성자: " + (nestedReply.name || "");
-                    nHeader.appendChild(nAuthor);
-
-                    const nDate = document.createElement("span");
-                    nDate.textContent = formatDate(nestedReply.timestamp);
-                    nHeader.appendChild(nDate);
-
-                    const nNumber = document.createElement("span");
-                    nNumber.className = "reply-number";
-                    nNumber.textContent = "No." + (nestedReply.number || "");
-                    nHeader.appendChild(nNumber);
-
-                    nContent.appendChild(nHeader);
-
-                    const nText = document.createElement("div");
-                    nText.className = "reply-text";
-                    nText.textContent = nestedReply.comment || "";
-                    if (nestedReply.textColor) {
-                        nText.style.color = nestedReply.textColor;
-                    }
-                    nContent.appendChild(nText);
-
-                    nestedEl.appendChild(nContent);
-                    nested.appendChild(nestedEl);
+                    nested.appendChild(buildNestedReply(nestedReply, postId, replyPath, reply.name || ""));
                 });
                 rContent.appendChild(nested);
             }
@@ -819,7 +851,7 @@
                     Object.keys(post.replies).forEach((k) => {
                         const r = post.replies[k];
                         r.id = k;
-                        repliesBox.appendChild(buildReplyElement(r, post.id, k, post.name || ""));
+                        repliesBox.appendChild(buildReplyElement(r, post.id, k));
                     });
                 }
 

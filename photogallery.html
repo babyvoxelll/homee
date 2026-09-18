@@ -1,1 +1,358 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>babyvoxelll팬사이트 - Photo Gallery</title>
+    <link rel="icon" href="babyvoxelll.ico" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+            font-family: "Dotum", "Gulim", "Arial", sans-serif;
+        }
+        #image-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            line-height: 0;
+        }
+        #image-container img {
+            display: block;
+            width: 45%;
+            max-width: 550px;
+            height: auto;
+            aspect-ratio: auto;
+            object-fit: scale-down;
+            margin: 0 auto;
+            transform: scaleY(0.75);
+            transform-origin: top center;
+        }
+        .nav-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .nav-overlay a {
+            position: absolute;
+            display: block;
+            pointer-events: auto;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            width: 110px;
+            height: 20px;
+        }
+        .nav-overlay a:nth-child(1) { right: 36%; top: 8%; }
+        .nav-overlay a:nth-child(2) { right: 36%; top: 17%; }
+        .nav-overlay a:nth-child(3) { right: 36%; top: 26%; }
+        .nav-overlay a:nth-child(4) { right: 36%; top: 35%; }
+        .nav-overlay a:nth-child(5) { right: 36%; top: 44%; }
+        .nav-overlay a:nth-child(6) { right: 36%; top: 53%; }
+        .nav-overlay a:nth-child(7) { right: 36%; top: 62%; }
 
+        .photos-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 55%;
+            max-width: 600px;
+            margin: 10px auto 0 auto;
+            padding: 0;
+            line-height: 0;
+        }
+        .photos-container img {
+            display: block;
+            width: 50%;
+            max-width: 280px;
+            height: auto;
+        }
+        .gallery-container {
+            width: 55%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0;
+        }
+        .gallery-block {
+            background-color: #ffffff;
+            color: #000;
+            padding: 15px 18px;
+            margin-bottom: 0;
+            border-radius: 0;
+            border: 2px solid #00008b;
+            border-bottom: 2px solid #00008b;
+            min-height: 600px;
+        }
+        .gallery-block:last-child {
+            border-bottom: 2px solid #00008b;
+        }
+        .gallery-layout {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        .menu-wrapper {
+            flex-shrink: 0;
+            position: relative;
+        }
+        .menu-btn {
+            background: #ffffff;
+            border: 2px solid #00008b;
+            color: #00008b;
+            font-family: "Gulim", "Arial", sans-serif;
+            font-size: 11px;
+            padding: 6px 10px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .menu-btn:hover {
+            background: #00008b;
+            color: #fff;
+        }
+        .menu-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #ffffff;
+            border: 2px solid #00008b;
+            z-index: 50;
+            min-width: 130px;
+        }
+        .menu-dropdown.active {
+            display: block;
+        }
+        .menu-dropdown a {
+            display: block;
+            padding: 5px 10px;
+            font-family: "Gulim", "Arial", sans-serif;
+            font-size: 11px;
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+            border-bottom: 1px solid #ccc;
+            white-space: nowrap;
+        }
+        .menu-dropdown a:last-child {
+            border-bottom: none;
+        }
+        .menu-dropdown a:hover {
+            background: #00008b;
+            color: #fff;
+        }
+
+        .photos-grid {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-content: flex-start;
+        }
+        .photos-grid img {
+            width: 70px;
+            height: auto;
+            display: block;
+            border: 1px solid #000;
+            cursor: pointer;
+        }
+
+        .photo-viewer {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .photo-viewer.active {
+            display: flex;
+        }
+        .photo-viewer img {
+            max-width: 90vw;
+            max-height: 90vh;
+            width: auto;
+            height: auto;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-container {
+                width: 85%;
+                max-width: 600px;
+            }
+            .photos-container {
+                width: 85%;
+                max-width: 600px;
+            }
+            .photos-container img {
+                width: 45%;
+                max-width: 240px;
+            }
+            #image-container img {
+                width: 60%;
+                max-width: 450px;
+                transform: scaleY(0.75);
+                transform-origin: top center;
+            }
+            .nav-overlay a {
+                width: 90px;
+                height: 16px;
+            }
+            .nav-overlay a:nth-child(1) { right: 29%; top: 8%; }
+            .nav-overlay a:nth-child(2) { right: 29%; top: 17%; }
+            .nav-overlay a:nth-child(3) { right: 29%; top: 26%; }
+            .nav-overlay a:nth-child(4) { right: 29%; top: 35%; }
+            .nav-overlay a:nth-child(5) { right: 29%; top: 44%; }
+            .nav-overlay a:nth-child(6) { right: 29%; top: 53%; }
+            .nav-overlay a:nth-child(7) { right: 29%; top: 62%; }
+        }
+        @media (max-width: 500px) {
+            .gallery-container {
+                width: 95%;
+            }
+            .photos-container {
+                width: 95%;
+            }
+            .photos-container img {
+                width: 55%;
+                max-width: 200px;
+            }
+            #image-container img {
+                width: 75%;
+                max-width: 350px;
+                transform: scaleY(0.7);
+                transform-origin: top center;
+            }
+            .nav-overlay a {
+                width: 70px;
+                height: 12px;
+            }
+            .nav-overlay a:nth-child(1) { right: 22%; top: 8%; }
+            .nav-overlay a:nth-child(2) { right: 22%; top: 17%; }
+            .nav-overlay a:nth-child(3) { right: 22%; top: 26%; }
+            .nav-overlay a:nth-child(4) { right: 22%; top: 35%; }
+            .nav-overlay a:nth-child(5) { right: 22%; top: 44%; }
+            .nav-overlay a:nth-child(6) { right: 22%; top: 53%; }
+            .nav-overlay a:nth-child(7) { right: 22%; top: 62%; }
+            .photos-grid img {
+                width: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="image-container">
+        <img src="photogallery.jpg" alt="photogallery">
+        <div class="nav-overlay">
+            <a href="videos.html"></a>
+            <a href="index.html"></a>
+            <a href="profiles.html"></a>
+            <a href="discography.html"></a>
+            <a href="history.html"></a>
+            <a href="bbachat.html"></a>
+            <a href="photogallery.html"></a>
+        </div>
+    </div>
+    
+    <div class="photos-container">
+        <img src="photos.jpg" alt="photos">
+    </div>
+    
+    <div class="gallery-container">
+        <div class="gallery-block">
+            <div class="gallery-layout">
+                <div class="menu-wrapper">
+                    <button class="menu-btn" onclick="toggleMenu(event)">멤버 선택</button>
+                    <div class="menu-dropdown" id="memberMenu">
+                        <a onclick="showMember('ez', event)">Kim E-Z</a>
+                        <a onclick="showMember('eun', event)">Lee Heejin</a>
+                        <a onclick="showMember('hee', event)">Shim Eunjin</a>
+                        <a onclick="showMember('mi', event)">Kan Miyoun</a>
+                        <a onclick="showMember('hye', event)">Yoon Eunhye</a>
+                        <a onclick="showMember('bbvox', event)">Baby V.O.X</a>
+                    </div>
+                </div>
+                <div class="photos-grid" id="photosGrid"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="photo-viewer" id="photoViewer" onclick="closeViewer()">
+        <img id="viewerImg" src="" alt="">
+    </div>
+
+    <script>
+        const members = {
+            ez: ['ez1.jpg', 'ez2.jpg', 'ez3.jpg', 'ez4.jpg'],
+            eun: ['eun1.jpg', 'eun2.jpg', 'eun3.jpg', 'eun4.jpg'],
+            hee: ['hee1.jpg', 'hee2.jpg', 'hee3.jpg', 'hee4.jpg'],
+            mi: ['mi1.jpg', 'mi2.jpg', 'mi3.jpg', 'mi4.jpg'],
+            hye: ['hye1.jpg', 'hye2.jpg', 'hye3.jpg', 'hye4.jpg'],
+            bbvox: ['bbvox1.jpg', 'bbvox2.jpg', 'bbvox3.jpg', 'bbvox4.jpg']
+        };
+
+        function toggleMenu(event) {
+            event.stopPropagation();
+            const menu = document.getElementById('memberMenu');
+            menu.classList.toggle('active');
+        }
+
+        function showMember(key, event) {
+            event.stopPropagation();
+            const menu = document.getElementById('memberMenu');
+            menu.classList.remove('active');
+
+            const grid = document.getElementById('photosGrid');
+            grid.innerHTML = '';
+            members[key].forEach(src => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = src;
+                img.onclick = () => openViewer(src);
+                grid.appendChild(img);
+            });
+        }
+
+        function openViewer(src) {
+            const viewer = document.getElementById('photoViewer');
+            const img = document.getElementById('viewerImg');
+            img.src = src;
+            viewer.classList.add('active');
+        }
+
+        function closeViewer() {
+            const viewer = document.getElementById('photoViewer');
+            viewer.classList.remove('active');
+            document.getElementById('viewerImg').src = '';
+        }
+
+        document.addEventListener('click', function() {
+            const menu = document.getElementById('memberMenu');
+            if (menu) menu.classList.remove('active');
+        });
+    </script>
+</body>
+</html>

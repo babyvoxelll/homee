@@ -37,8 +37,8 @@
         }
         .bbacommunity-top img.bbacommunity {
             display: block;
-            width: 260px;
-            max-width: 70%;
+            width: 320px;
+            max-width: 75%;
             height: auto;
             margin: 0 auto;
         }
@@ -87,18 +87,21 @@
             width: 100%;
             border-collapse: collapse;
             background: transparent;
+            font-family: "Gulim", "Arial", sans-serif;
         }
         .bba-form-table td {
             padding: 4px 6px;
             vertical-align: top;
             color: #fff;
             font-size: 12px;
+            font-family: "Gulim", "Arial", sans-serif;
         }
         .bba-form-table td.label {
             width: 100px;
             font-weight: bold;
             color: #fff;
             white-space: nowrap;
+            font-family: "Gulim", "Arial", sans-serif;
         }
         .bba-form-table input[type="text"],
         .bba-form-table input[type="email"],
@@ -108,7 +111,7 @@
             padding: 3px 5px;
             border: 1px solid #ccc;
             background: #fff;
-            font-family: "Dotum", "Gulim", "Arial", sans-serif;
+            font-family: "Gulim", "Arial", sans-serif;
         }
         .bba-form-table textarea {
             width: 100%;
@@ -116,7 +119,7 @@
             padding: 3px 5px;
             border: 1px solid #ccc;
             background: #fff;
-            font-family: "Dotum", "Gulim", "Arial", sans-serif;
+            font-family: "Gulim", "Arial", sans-serif;
             min-height: 140px;
             resize: vertical;
         }
@@ -125,7 +128,7 @@
             padding: 3px;
             border: 1px solid #ccc;
             background: #fff;
-            font-family: "Dotum", "Gulim", "Arial", sans-serif;
+            font-family: "Gulim", "Arial", sans-serif;
         }
 
         .bba-colors-row {
@@ -142,6 +145,7 @@
             font-size: 12px;
             flex-shrink: 0;
             padding-top: 1px;
+            font-family: "Gulim", "Arial", sans-serif;
         }
         .bba-colors-row .color-row {
             display: inline-flex;
@@ -183,22 +187,21 @@
 
         .bba-comment-row {
             display: flex;
-            align-items: flex-start;
-            gap: 8px;
+            flex-direction: column;
+            gap: 6px;
             width: 100%;
         }
         .bba-comment-row textarea {
-            flex: 1;
+            width: 100%;
             min-height: 140px;
             font-size: 12px;
             padding: 3px 5px;
             border: 1px solid #ccc;
             background: #fff;
-            font-family: "Dotum", "Gulim", "Arial", sans-serif;
+            font-family: "Gulim", "Arial", sans-serif;
             resize: vertical;
         }
         .bba-comment-row .send-btn {
-            flex-shrink: 0;
             background: #ffffff;
             color: #000;
             border: 1px solid #333;
@@ -206,8 +209,8 @@
             font-weight: bold;
             padding: 6px 14px;
             cursor: pointer;
-            font-family: "Dotum", "Gulim", "Arial", sans-serif;
-            align-self: flex-start;
+            font-family: "Gulim", "Arial", sans-serif;
+            align-self: flex-end;
         }
         .bba-comment-row .send-btn:hover {
             background: #eee;
@@ -223,6 +226,7 @@
             padding: 0;
             color: #000;
             font-size: 12px;
+            font-family: "Dotum", "Gulim", "Arial", sans-serif;
         }
 
         .bba-post {
@@ -238,6 +242,7 @@
             align-items: center;
             gap: 10px;
             font-size: 12px;
+            font-family: "Dotum", "Gulim", "Arial", sans-serif;
         }
         .bba-post-header .post-title {
             color: #006400;
@@ -290,6 +295,7 @@
             color: #000;
             white-space: pre-wrap;
             word-wrap: break-word;
+            font-family: "Dotum", "Gulim", "Arial", sans-serif;
         }
 
         .bba-replies {
@@ -301,6 +307,7 @@
             border-top: 1px dashed #000;
             font-size: 12px;
             color: #000;
+            font-family: "Dotum", "Gulim", "Arial", sans-serif;
         }
         .bba-reply .reply-header {
             display: flex;
@@ -331,7 +338,7 @@
             padding: 3px 5px;
             border: 1px solid #ccc;
             margin-bottom: 4px;
-            font-family: "Dotum", "Gulim", "Arial", sans-serif;
+            font-family: "Gulim", "Arial", sans-serif;
         }
         .reply-form-box textarea {
             min-height: 50px;
@@ -343,7 +350,7 @@
             color: #fff;
             border: 1px solid #555;
             cursor: pointer;
-            font-family: "Dotum", "Gulim", "Arial", sans-serif;
+            font-family: "Gulim", "Arial", sans-serif;
         }
 
         @media (max-width: 760px) {
@@ -421,7 +428,6 @@
                 <td>
                     <div class="bba-comment-row">
                         <textarea id="comment"></textarea>
-                        <button id="submitBtn" class="send-btn">보내기</button>
                     </div>
                 </td>
             </tr>
@@ -459,6 +465,11 @@
                     </div>
                 </td>
             </tr>
+            <tr>
+                <td colspan="2" style="text-align:right; padding-right:6px;">
+                    <button id="submitBtn" class="send-btn">보내기</button>
+                </td>
+            </tr>
         </table>
     </div>
 
@@ -469,14 +480,13 @@
         import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
         const firebaseConfig = {
-            apiKey: "AIzaSyDBxl0S2LbjmxRTOGlAc6KsxIWM_ID7trI",
-            authDomain: "babyvox-chat.firebaseapp.com",
-            databaseURL: "https://babyvox-chat-default-rtdb.firebaseio.com",
-            projectId: "babyvox-chat",
-            storageBucket: "babyvox-chat.firebasestorage.app",
-            messagingSenderId: "741605907733",
-            appId: "1:741605907733:web:9f0cdb69685ac0e4631d1c",
-            measurementId: "G-V53X8WZ4YR"
+            apiKey: "AIzaSyBBlC1bSVdJv3ZgbZ64lgkDgraK7K2z-dI",
+            authDomain: "bbachat-50424.firebaseapp.com",
+            databaseURL: "https://bbachat-50424-default-rtdb.firebaseio.com",
+            projectId: "bbachat-50424",
+            storageBucket: "bbachat-50424.firebasestorage.app",
+            messagingSenderId: "153696923590",
+            appId: "1:153696923590:web:60c63678f0c0e41392ccc7"
         };
 
         const app = initializeApp(firebaseConfig);

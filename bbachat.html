@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>babyvoxelll팬사이트 - BBA Chat</title>
+    <title>babyvoxelll팬사이트 - BBA Community</title>
     <link rel="icon" href="babyvoxelll.ico" type="image/x-icon">
     <style>
         * {
@@ -18,7 +18,8 @@
             background: #990033;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
+            flex-direction: column;
             min-height: 100vh;
             padding: 0;
             margin: 0;
@@ -29,44 +30,50 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            margin: -200px auto 0 auto;
+            justify-content: flex-start;
+            margin: 0 auto 0 auto;
             width: 1000px;
             max-width: 1000px;
+        }
+
+        .bbacommunity-top {
+            width: 1000px;
+            max-width: 100%;
+            line-height: 0;
+            margin: 0 auto;
+            padding: 0;
+        }
+        .bbacommunity-top img {
+            display: block;
+            width: 100%;
+            height: auto;
+            margin: 0 auto;
         }
 
         .bbachat-top-imgs {
             position: relative;
             width: 1000px;
+            max-width: 1000px;
             height: 420px;
+            margin-top: -5px;
             margin-bottom: 0;
             flex-shrink: 0;
         }
         .bbachat-top-imgs img.bbvoxpanel {
             position: absolute;
             left: 0;
-            bottom: 0;
+            top: 0;
             width: 520px;
             max-width: 520px;
             height: auto;
             display: block;
         }
-        .bbachat-top-imgs img.panel {
-            position: absolute;
-            left: 280px;
-            bottom: 0;
-            width: 720px;
-            max-width: 720px;
-            height: auto;
-            display: block;
-            z-index: 2;
-        }
 
         .nav-overlay {
             position: absolute;
-            left: 280px;
-            bottom: 0;
-            width: 720px;
+            left: 0;
+            top: 0;
+            width: 520px;
             height: 420px;
             pointer-events: none;
             z-index: 10;
@@ -81,401 +88,342 @@
             text-decoration: none;
             height: 22px;
         }
-        .nav-overlay a:nth-child(1) { left: 0%;   bottom: 2%; width: 55px; }
-        .nav-overlay a:nth-child(2) { left: 11%;  bottom: 2%; width: 55px; }
-        .nav-overlay a:nth-child(3) { left: 23%;  bottom: 2%; width: 55px; }
-        .nav-overlay a:nth-child(4) { left: 36%;  bottom: 2%; width: 80px; }
-        .nav-overlay a:nth-child(5) { left: 52%;  bottom: 2%; width: 55px; }
-        .nav-overlay a:nth-child(6) { left: 65%;  bottom: 2%; width: 70px; }
-        .nav-overlay a:nth-child(7) { left: 85%;  bottom: 2%; width: 85px; }
+        .nav-overlay a:nth-child(1) { left: 2%;   top: 4%; width: 60px; }
+        .nav-overlay a:nth-child(2) { left: 20%;  top: 4%; width: 60px; }
+        .nav-overlay a:nth-child(3) { left: 40%;  top: 4%; width: 60px; }
+        .nav-overlay a:nth-child(4) { left: 60%;  top: 4%; width: 80px; }
+        .nav-overlay a:nth-child(5) { left: 2%;   top: 12%; width: 60px; }
+        .nav-overlay a:nth-child(6) { left: 20%;  top: 12%; width: 70px; }
+        .nav-overlay a:nth-child(7) { left: 40%;  top: 12%; width: 80px; }
 
         .bbachat-wrapper {
             width: 1000px;
             max-width: 1000px;
             padding: 20px;
-            background: #404040;
+            background: transparent;
             display: flex;
+            flex-direction: column;
             gap: 15px;
-            align-items: flex-start;
+            align-items: center;
             justify-content: center;
             position: relative;
-            min-height: 460px;
-        }
-        .bbachat-left {
-            flex: 1;
-            background: #404040;
-            display: flex;
-            flex-direction: column;
-            min-width: 0;
-            min-height: 420px;
-        }
-        .bbachat-header {
-            background: #800020;
-            color: #fff;
-            font-size: 12px;
-            font-weight: bold;
-            padding: 6px 8px;
-            display: grid;
-            grid-template-columns: 50px 1fr 70px 100px 120px;
-            gap: 4px;
-            text-align: center;
-            flex-shrink: 0;
-        }
-        .bbachat-messages {
-            display: flex;
-            flex-direction: column;
-            gap: 0;
-            overflow-y: auto;
-            max-height: 460px;
-            flex: 1;
-        }
-        .bbachat-row {
-            display: grid;
-            grid-template-columns: 50px 1fr 70px 100px 120px;
-            gap: 4px;
-            padding: 6px 8px;
-            background: #d0d0d0;
-            font-size: 12px;
-            align-items: center;
-            text-align: center;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            min-width: 0;
-            cursor: pointer;
-            transition: background 0.15s;
-        }
-        .bbachat-row:hover {
-            background: #b8b8b8;
-        }
-        .bbachat-row > div {
-            min-width: 0;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
-        .bbachat-row .msg-cell {
-            text-align: left;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            flex-wrap: wrap;
-            min-width: 0;
-            overflow-wrap: break-word;
-            word-wrap: break-word;
-            word-break: break-word;
-        }
-        .bbachat-row .msg-cell span {
-            min-width: 0;
-            overflow-wrap: break-word;
-            word-wrap: break-word;
-            word-break: break-word;
-            white-space: pre-wrap;
-        }
-        .bbachat-row .msg-cell img.new-icon {
-            width: 18px;
-            height: auto;
-            flex-shrink: 0;
-        }
-        .bbachat-row .msg-cell img.gif-inline {
-            width: 32px;
-            height: auto;
-            flex-shrink: 0;
-            margin-left: 6px;
-        }
-        .bbachat-row .file-cell img {
-            width: 16px;
-            height: auto;
-            display: inline-block;
-        }
-        .bbachat-pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 0;
-            background: #404040;
-            flex-wrap: nowrap;
-            flex-shrink: 0;
-        }
-        .bbachat-pagination button {
-            background: transparent;
-            color: #fff;
-            border: none;
-            padding: 2px 6px;
-            font-size: 13px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        .bbachat-pagination button.active {
-            color: #fff;
-            background: transparent;
-            text-decoration: underline;
-        }
-        .bbachat-pagination button:hover {
-            color: #fff;
-            opacity: 0.7;
         }
 
-        .bbachat-form {
-            width: 200px;
+        .write-form {
             background: #d0d0d0;
-            padding: 12px;
-            flex-shrink: 0;
-        }
-        .bbachat-form .form-title {
-            font-size: 12px;
-            font-weight: bold;
-            color: #000;
-            margin-bottom: 8px;
-            text-align: center;
-        }
-        .bbachat-form label {
-            display: block;
-            font-size: 12px;
-            color: #000;
-            margin-bottom: 2px;
-            margin-top: 8px;
-        }
-        .bbachat-form input[type="text"] {
+            border: 1px solid #555;
+            padding: 20px 25px;
             width: 100%;
-            font-size: 12px;
-            padding: 4px;
+            max-width: 1000px;
+        }
+        .write-form .form-row {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+            font-size: 13px;
+            color: #000;
+        }
+        .write-form .form-row > label {
+            width: 160px;
+            flex-shrink: 0;
+            text-align: right;
+            padding-right: 15px;
+            padding-top: 4px;
+            font-weight: bold;
+        }
+        .write-form .form-row .field-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .write-form input[type="text"],
+        .write-form input[type="email"] {
+            width: 100%;
+            max-width: 400px;
+            padding: 4px 6px;
             border: 1px solid #888;
             background: #fff;
+            font-size: 13px;
+            font-family: inherit;
         }
-        .bbachat-form input[type="file"] {
-            display: none;
-        }
-        .form-row {
-            display: flex;
-            gap: 8px;
-            margin-top: 10px;
-            align-items: center;
-        }
-        .form-row .gif-toggle,
-        .form-row .file-btn {
-            flex: 1;
-            text-align: center;
-            font-size: 12px;
-            font-weight: bold;
-            color: #000;
-            cursor: pointer;
-            padding: 4px 0;
-            background: #eee;
+        .write-form textarea {
+            width: 100%;
+            max-width: 700px;
+            min-height: 120px;
+            padding: 6px;
             border: 1px solid #888;
-        }
-        .form-row .gif-toggle:hover,
-        .form-row .file-btn:hover {
-            background: #800020;
-            color: #fff;
-            border-color: #800020;
-        }
-        .form-row .gif-toggle.open {
-            background: #800020;
-            color: #fff;
-            border-color: #800020;
-        }
-        .file-name-display {
-            margin-top: 4px;
-            font-size: 11px;
-            color: #000;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            min-height: 14px;
+            background: #fff;
+            font-size: 13px;
+            font-family: inherit;
+            resize: vertical;
         }
 
-        .gif-picker {
-            display: none;
-            background: #fff;
-            border: 1px solid #888;
-            margin-top: 6px;
-            padding: 6px;
-            max-height: 120px;
-            overflow-y: auto;
+        .image-select-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
         }
-        .gif-picker.open {
-            display: block;
-        }
-        .gif-picker .gif-item {
-            display: inline-block;
-            margin: 2px;
+        .image-select-row .img-choice {
             cursor: pointer;
-            border: 1px solid #ccc;
+            border: 2px solid transparent;
             padding: 2px;
             background: #eee;
+            line-height: 0;
         }
-        .gif-picker .gif-item img {
-            width: 32px;
-            height: auto;
+        .image-select-row .img-choice img {
             display: block;
-        }
-        .gif-picker .gif-item.selected {
-            border-color: #800020;
-            background: #ffe;
-        }
-        .gif-preview {
-            margin-top: 4px;
-            font-size: 11px;
-            color: #000;
-            min-height: 14px;
-        }
-        .gif-preview img {
-            width: 28px;
+            width: 80px;
             height: auto;
-            vertical-align: middle;
-            margin-right: 4px;
+        }
+        .image-select-row .img-choice.selected {
+            border-color: #0000ee;
         }
 
-        .bbachat-form button#sendBtn {
-            width: 100%;
-            margin-top: 12px;
-            padding: 8px;
-            font-size: 13px;
-            font-weight: bold;
+        .color-select-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+        .color-select-row .color-choice {
+            position: relative;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid #888;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .color-select-row .color-choice .sq {
+            width: 8px;
+            height: 8px;
+            position: absolute;
+            bottom: -2px;
+            right: -2px;
+            border: 1px solid #333;
+        }
+        .color-select-row .color-choice.selected {
+            border-color: #0000ee;
+            box-shadow: 0 0 0 2px #0000ee;
+        }
+
+        .write-form .submit-row {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        .write-form .submit-row button {
+            padding: 8px 30px;
             background: #800020;
             color: #fff;
             border: 1px solid #555;
+            font-size: 13px;
+            font-weight: bold;
             cursor: pointer;
+            font-family: inherit;
         }
-        .bbachat-form button#sendBtn:hover {
+        .write-form .submit-row button:hover {
             background: #a00028;
         }
 
-        .bbachat-detail {
-            display: none;
-            flex: 1;
-            background: #404040;
-            min-width: 0;
-            min-height: 420px;
-            position: relative;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: stretch;
-        }
-        .bbachat-detail.open {
+        .chat-list {
+            background: #fff;
+            border: 1px solid #000;
+            width: 100%;
+            max-width: 1000px;
+            padding: 0;
             display: flex;
+            flex-direction: column;
         }
-        .bbachat-detail .detail-back {
-            position: absolute;
-            top: 6px;
-            left: 6px;
-            background: transparent;
-            border: none;
-            color: #fff;
-            font-size: 22px;
+
+        .chat-thread {
+            padding: 12px 15px;
+            border-bottom: 4px solid #000;
+        }
+        .chat-thread:last-child {
+            border-bottom: 4px solid #000;
+        }
+
+        .thread-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+            font-size: 13px;
+            margin-bottom: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #999;
+        }
+        .thread-header .th-title {
+            color: #004d00;
             font-weight: bold;
+            font-size: 15px;
+        }
+        .thread-header .th-author {
+            color: #000;
+        }
+        .thread-header .th-date {
+            color: #555;
+            font-size: 12px;
+        }
+        .thread-header .th-num {
+            color: #555;
+            font-size: 12px;
+        }
+        .thread-header .th-reply-btn {
+            margin-left: auto;
+            background: #eee;
+            border: 1px solid #888;
+            padding: 2px 10px;
+            font-size: 12px;
             cursor: pointer;
-            padding: 0 6px;
-            line-height: 1;
-            z-index: 5;
+            font-family: inherit;
+            color: #000;
         }
-        .bbachat-detail .detail-back:hover {
-            opacity: 0.7;
-        }
-        .bbachat-detail .detail-header {
+        .thread-header .th-reply-btn:hover {
             background: #800020;
             color: #fff;
-            font-size: 12px;
-            font-weight: bold;
-            padding: 6px 8px;
-            display: grid;
-            grid-template-columns: 50px 1fr 70px 100px 120px;
-            gap: 4px;
-            text-align: center;
-            flex-shrink: 0;
-            margin-top: 30px;
         }
-        .bbachat-detail .detail-row {
-            display: grid;
-            grid-template-columns: 50px 1fr 70px 100px 120px;
-            gap: 4px;
-            padding: 6px 8px;
-            background: #d0d0d0;
-            font-size: 12px;
-            align-items: center;
-            text-align: center;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            min-width: 0;
-        }
-        .bbachat-detail .detail-row > div {
-            min-width: 0;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
-        .bbachat-detail .detail-row .msg-cell {
-            text-align: left;
+
+        .thread-body {
             display: flex;
-            align-items: center;
-            gap: 4px;
+            gap: 15px;
+            align-items: flex-start;
             flex-wrap: wrap;
-            min-width: 0;
-            overflow-wrap: break-word;
-            word-wrap: break-word;
-            word-break: break-word;
         }
-        .bbachat-detail .detail-row .msg-cell span {
-            min-width: 0;
-            overflow-wrap: break-word;
+        .thread-body .th-img {
+            flex-shrink: 0;
+            width: 120px;
+            height: auto;
+        }
+        .thread-body .th-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border: 1px solid #ccc;
+        }
+        .thread-body .th-text {
+            flex: 1;
+            min-width: 200px;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #000;
             word-wrap: break-word;
-            word-break: break-word;
+            overflow-wrap: break-word;
             white-space: pre-wrap;
         }
-        .bbachat-detail .detail-row .msg-cell img.gif-inline {
-            width: 32px;
-            height: auto;
-            flex-shrink: 0;
-            margin-left: 6px;
-        }
-        .bbachat-detail .detail-row .file-cell img {
-            width: 16px;
-            height: auto;
-            display: inline-block;
-        }
-        .bbachat-detail .detail-extra {
-            background: #d0d0d0;
-            padding: 10px 14px 14px 14px;
-            text-align: left;
-            color: #000;
-            font-size: 13px;
-            border-top: 1px solid #b0b0b0;
-        }
-        .bbachat-detail .detail-extra a.detail-file-link {
-            display: inline-block;
+        .thread-body .th-text a {
             color: #0000ee;
             text-decoration: underline;
-            font-size: 13px;
-            cursor: pointer;
+            word-break: break-all;
+        }
+
+        .thread-replies {
+            margin-top: 10px;
+            margin-left: 30px;
+            padding-left: 12px;
+            border-left: 2px dashed #000;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .reply-item {
+            padding: 6px 0;
+            border-bottom: 1px dashed #999;
+            font-size: 12px;
+        }
+        .reply-item:last-child {
+            border-bottom: none;
+        }
+        .reply-item .rp-header {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            color: #555;
             margin-bottom: 4px;
+            font-size: 11px;
+        }
+        .reply-item .rp-author {
+            color: #000;
+            font-weight: bold;
+        }
+        .reply-item .rp-text {
+            color: #000;
+            font-size: 13px;
+            line-height: 1.5;
             word-wrap: break-word;
             overflow-wrap: break-word;
-            max-width: 100%;
+            white-space: pre-wrap;
         }
-        .bbachat-detail .detail-extra a.detail-file-link:visited {
-            color: #551a8b;
+
+        .reply-form-inline {
+            margin-top: 10px;
+            margin-left: 30px;
+            padding: 10px;
+            background: #f0f0f0;
+            border: 1px solid #888;
+            display: none;
         }
-        .bbachat-detail .detail-extra a.detail-file-link:hover {
-            color: #800020;
+        .reply-form-inline.open {
+            display: block;
+        }
+        .reply-form-inline .rf-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 6px;
+            align-items: center;
+            font-size: 12px;
+        }
+        .reply-form-inline .rf-row label {
+            width: 70px;
+            flex-shrink: 0;
+        }
+        .reply-form-inline .rf-row input {
+            flex: 1;
+            padding: 3px 5px;
+            border: 1px solid #888;
+            font-size: 12px;
+            font-family: inherit;
+        }
+        .reply-form-inline .rf-row textarea {
+            flex: 1;
+            padding: 4px 5px;
+            border: 1px solid #888;
+            font-size: 12px;
+            min-height: 50px;
+            font-family: inherit;
+            resize: vertical;
+        }
+        .reply-form-inline .rf-submit {
+            text-align: right;
+        }
+        .reply-form-inline .rf-submit button {
+            padding: 4px 16px;
+            background: #800020;
+            color: #fff;
+            border: 1px solid #555;
+            font-size: 12px;
+            cursor: pointer;
+            font-family: inherit;
         }
 
         @media (max-width: 1100px) {
             .bbachat-outer {
-                width: 90%;
-                margin: -160px auto 0 auto;
+                width: 95%;
             }
-            .bbachat-wrapper {
+            .bbacommunity-top,
+            .bbachat-top-imgs,
+            .bbachat-wrapper,
+            .write-form,
+            .chat-list {
                 width: 100%;
-            }
-            .bbachat-top-imgs {
-                width: 100%;
+                max-width: 100%;
             }
         }
         @media (max-width: 900px) {
-            .bbachat-wrapper {
-                flex-direction: column;
-            }
-            .bbachat-form {
-                width: 100%;
-            }
             .bbachat-top-imgs {
                 height: 280px;
             }
@@ -483,33 +431,21 @@
                 width: 340px;
                 max-width: 340px;
             }
-            .bbachat-top-imgs img.panel {
-                width: 460px;
-                max-width: 460px;
-                left: 180px;
-            }
             .nav-overlay {
-                left: 180px;
-                width: 460px;
+                width: 340px;
                 height: 280px;
             }
-            .nav-overlay a {
-                width: 40px;
-                height: 16px;
+            .write-form .form-row {
+                flex-direction: column;
+            }
+            .write-form .form-row > label {
+                width: 100%;
+                text-align: left;
+                padding-right: 0;
+                margin-bottom: 4px;
             }
         }
         @media (max-width: 500px) {
-            .bbachat-outer {
-                width: 95%;
-                margin: -80px auto 0 auto;
-            }
-            .bbachat-header,
-            .bbachat-row,
-            .bbachat-detail .detail-header,
-            .bbachat-detail .detail-row {
-                grid-template-columns: 35px 1fr 55px 70px 80px;
-                font-size: 10px;
-            }
             .bbachat-top-imgs {
                 height: 200px;
             }
@@ -517,19 +453,15 @@
                 width: 240px;
                 max-width: 240px;
             }
-            .bbachat-top-imgs img.panel {
-                width: 320px;
-                max-width: 320px;
-                left: 120px;
-            }
             .nav-overlay {
-                left: 120px;
-                width: 320px;
+                width: 240px;
                 height: 200px;
             }
             .nav-overlay a {
-                width: 30px;
-                height: 12px;
+                height: 14px;
+            }
+            .thread-body .th-img {
+                width: 90px;
             }
         }
     </style>
@@ -537,9 +469,12 @@
 <body>
 
     <div class="bbachat-outer">
+        <div class="bbacommunity-top">
+            <img src="bbacommunity.jpg" alt="bbacommunity">
+        </div>
+
         <div class="bbachat-top-imgs">
             <img src="bbvoxpanel.jpg" alt="bbvoxpanel" class="bbvoxpanel">
-            <img src="panel.png" alt="panel" class="panel">
             <div class="nav-overlay">
                 <a href="videos.html"></a>
                 <a href="index.html"></a>
@@ -552,416 +487,309 @@
         </div>
 
         <div class="bbachat-wrapper">
-            <div class="bbachat-left" id="bbachatLeft">
-                <div class="bbachat-header">
-                    <div>번호</div>
-                    <div>메시지</div>
-                    <div>파일</div>
-                    <div>이름</div>
-                    <div>등록일</div>
-                </div>
-                <div class="bbachat-messages" id="messages"></div>
-                <div class="bbachat-pagination" id="pagination"></div>
-            </div>
-
-            <div class="bbachat-form" id="bbachatForm">
-                <div class="form-title">메시지 보내기</div>
-                <label>이름</label>
-                <input type="text" id="name" maxlength="20" required>
-                <label>메시지 (최대 350자)</label>
-                <input type="text" id="message" maxlength="350" required>
-
+            <div class="write-form" id="writeForm">
                 <div class="form-row">
-                    <span class="gif-toggle" id="gifBtn">기프</span>
-                    <label for="file" class="file-btn">파일 선택</label>
-                    <input type="file" id="file" accept=".jpg,.jpeg,.exe">
+                    <label>이름</label>
+                    <div class="field-area">
+                        <input type="text" id="inName" maxlength="30">
+                    </div>
                 </div>
-                <div class="file-name-display" id="fileNameDisplay"></div>
-
-                <div class="gif-picker" id="gifPicker"></div>
-                <div class="gif-preview" id="gifPreview"></div>
-
-                <button id="sendBtn">보내기</button>
+                <div class="form-row">
+                    <label>이메일</label>
+                    <div class="field-area">
+                        <input type="email" id="inEmail" maxlength="60">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label>제목</label>
+                    <div class="field-area">
+                        <input type="text" id="inTitle" maxlength="80">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label>코멘트</label>
+                    <div class="field-area">
+                        <textarea id="inComment"></textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label>URL</label>
+                    <div class="field-area">
+                        <input type="text" id="inUrl" value="http(s)://" onfocus="if(this.value=='http(s)://'){this.value='';}" onblur="if(this.value==''){this.value='http(s)://';}">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label>이미지</label>
+                    <div class="field-area">
+                        <div class="image-select-row" id="imageSelectRow"></div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <label>글자색</label>
+                    <div class="field-area">
+                        <div class="color-select-row" id="colorSelectRow"></div>
+                    </div>
+                </div>
+                <div class="submit-row">
+                    <button id="submitBtn">등록</button>
+                </div>
             </div>
 
-            <div class="bbachat-detail" id="bbachatDetail">
-                <button class="detail-back" id="detailBack">←</button>
-                <div class="detail-header">
-                    <div>번호</div>
-                    <div>메시지</div>
-                    <div>파일</div>
-                    <div>이름</div>
-                    <div>등록일</div>
-                </div>
-                <div class="detail-row" id="detailRow"></div>
-                <div class="detail-extra" id="detailExtra"></div>
-            </div>
+            <div class="chat-list" id="chatList"></div>
         </div>
     </div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyDBxl0S2LbjmxRTOGlAc6KsxIWM_ID7trI",
-            authDomain: "babyvox-chat.firebaseapp.com",
-            databaseURL: "https://babyvox-chat-default-rtdb.firebaseio.com",
-            projectId: "babyvox-chat",
-            storageBucket: "babyvox-chat.firebasestorage.app",
-            messagingSenderId: "741605907733",
-            appId: "1:741605907733:web:9f0cdb69685ac0e4631d1c",
-            measurementId: "G-V53X8WZ4YR"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
-        const messagesRef = ref(db, "bbachat/messages");
-
-        const PER_PAGE = 10;
-        let currentPage = 1;
-        let allMessages = [];
-        let selectedGif = null;
-        let selectedFile = null;
-        let selectedFileDataUrl = null;
-
-        function generateRandomNumber() {
-            return Math.floor(10000 + Math.random() * 90000).toString();
-        }
-
-        function buildRow(data) {
-            const row = document.createElement("div");
-            row.className = "bbachat-row";
-
-            const numCell = document.createElement("div");
-            numCell.textContent = data.number || "";
-
-            const msgCell = document.createElement("div");
-            msgCell.className = "msg-cell";
-
-            if (data.timestamp) {
-                const age = Date.now() - data.timestamp;
-                if (age < 24 * 60 * 60 * 1000) {
-                    const newImg = document.createElement("img");
-                    newImg.src = "new.gif";
-                    newImg.className = "new-icon";
-                    newImg.alt = "new";
-                    msgCell.appendChild(newImg);
-                }
-            }
-
-            const msgText = document.createElement("span");
-            msgText.textContent = data.message || "";
-            msgCell.appendChild(msgText);
-
-            if (data.gif) {
-                const gifImg = document.createElement("img");
-                gifImg.src = data.gif;
-                gifImg.className = "gif-inline";
-                gifImg.alt = "gif";
-                msgCell.appendChild(gifImg);
-            }
-
-            const fileCell = document.createElement("div");
-            fileCell.className = "file-cell";
-            if (data.fileType === "jpg") {
-                const img = document.createElement("img");
-                img.src = "JPG.gif";
-                img.alt = "JPG";
-                fileCell.appendChild(img);
-            } else if (data.fileType === "exe") {
-                const img = document.createElement("img");
-                img.src = "EXE.gif";
-                img.alt = "EXE";
-                fileCell.appendChild(img);
-            }
-
-            const nameCell = document.createElement("div");
-            nameCell.textContent = data.name || "";
-
-            const dateCell = document.createElement("div");
-            if (data.timestamp) {
-                const d = new Date(data.timestamp);
-                const pad = (n) => n.toString().padStart(2, "0");
-                dateCell.textContent = `${pad(d.getDate())}.${pad(d.getMonth() + 1)}.${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
-            }
-
-            row.appendChild(numCell);
-            row.appendChild(msgCell);
-            row.appendChild(fileCell);
-            row.appendChild(nameCell);
-            row.appendChild(dateCell);
-
-            row.addEventListener("click", () => {
-                showDetail(data);
-            });
-
-            return row;
-        }
-
-        function showDetail(data) {
-            document.getElementById("bbachatForm").style.display = "none";
-            document.getElementById("bbachatLeft").style.display = "none";
-            const detail = document.getElementById("bbachatDetail");
-            detail.classList.add("open");
-
-            const rowContainer = document.getElementById("detailRow");
-            rowContainer.innerHTML = "";
-
-            const numCell = document.createElement("div");
-            numCell.textContent = data.number || "";
-            rowContainer.appendChild(numCell);
-
-            const msgCell = document.createElement("div");
-            msgCell.className = "msg-cell";
-            const msgText = document.createElement("span");
-            msgText.textContent = data.message || "";
-            msgCell.appendChild(msgText);
-            if (data.gif) {
-                const gifImg = document.createElement("img");
-                gifImg.src = data.gif;
-                gifImg.className = "gif-inline";
-                gifImg.alt = "gif";
-                msgCell.appendChild(gifImg);
-            }
-            rowContainer.appendChild(msgCell);
-
-            const fileCell = document.createElement("div");
-            fileCell.className = "file-cell";
-            if (data.fileType === "jpg") {
-                const img = document.createElement("img");
-                img.src = "JPG.gif";
-                img.alt = "JPG";
-                fileCell.appendChild(img);
-            } else if (data.fileType === "exe") {
-                const img = document.createElement("img");
-                img.src = "EXE.gif";
-                img.alt = "EXE";
-                fileCell.appendChild(img);
-            }
-            rowContainer.appendChild(fileCell);
-
-            const nameCell = document.createElement("div");
-            nameCell.textContent = data.name || "";
-            rowContainer.appendChild(nameCell);
-
-            const dateCell = document.createElement("div");
-            if (data.timestamp) {
-                const d = new Date(data.timestamp);
-                const pad = (n) => n.toString().padStart(2, "0");
-                dateCell.textContent = `${pad(d.getDate())}.${pad(d.getMonth() + 1)}.${d.getFullYear()} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
-            }
-            rowContainer.appendChild(dateCell);
-
-            const extra = document.getElementById("detailExtra");
-            extra.innerHTML = "";
-
-            if (data.fileData && data.fileName) {
-                const link = document.createElement("a");
-                link.className = "detail-file-link";
-                link.href = data.fileData;
-                link.download = data.fileName;
-                link.textContent = data.fileName;
-                extra.appendChild(link);
-                extra.style.display = "block";
-            } else {
-                extra.style.display = "none";
-            }
-        }
-
-        document.getElementById("detailBack").addEventListener("click", () => {
-            document.getElementById("bbachatDetail").classList.remove("open");
-            document.getElementById("bbachatForm").style.display = "block";
-            document.getElementById("bbachatLeft").style.display = "flex";
-        });
-
-        function renderPage() {
-            const container = document.getElementById("messages");
-            container.innerHTML = "";
-            const start = (currentPage - 1) * PER_PAGE;
-            const pageItems = allMessages.slice(start, start + PER_PAGE);
-            pageItems.forEach((m) => container.appendChild(buildRow(m)));
-        }
-
-        function renderPagination() {
-            const pag = document.getElementById("pagination");
-            pag.innerHTML = "";
-            const totalPages = Math.ceil(allMessages.length / PER_PAGE);
-            if (allMessages.length < PER_PAGE) return;
-
-            const maxNumbers = 5;
-            let startPage = Math.max(1, currentPage - Math.floor(maxNumbers / 2));
-            let endPage = startPage + maxNumbers - 1;
-
-            if (endPage > totalPages) {
-                endPage = totalPages;
-                startPage = Math.max(1, endPage - maxNumbers + 1);
-            }
-
-            if (startPage > 1) {
-                const prev = document.createElement("button");
-                prev.textContent = "←";
-                prev.addEventListener("click", () => {
-                    currentPage = Math.max(1, currentPage - 1);
-                    renderPage();
-                    renderPagination();
-                });
-                pag.appendChild(prev);
-            }
-
-            for (let i = startPage; i <= endPage; i++) {
-                const btn = document.createElement("button");
-                btn.textContent = i;
-                if (i === currentPage) btn.classList.add("active");
-                btn.addEventListener("click", () => {
-                    currentPage = i;
-                    renderPage();
-                    renderPagination();
-                });
-                pag.appendChild(btn);
-            }
-
-            if (endPage < totalPages) {
-                const next = document.createElement("button");
-                next.textContent = "→";
-                next.addEventListener("click", () => {
-                    currentPage = Math.min(totalPages, currentPage + 1);
-                    renderPage();
-                    renderPagination();
-                });
-                pag.appendChild(next);
-            }
-        }
-
-        onValue(messagesRef, (snapshot) => {
-            allMessages = [];
-            snapshot.forEach((child) => {
-                allMessages.push(child.val());
-            });
-            allMessages.sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0));
-            const totalPages = Math.ceil(allMessages.length / PER_PAGE);
-            if (currentPage > totalPages && totalPages > 0) currentPage = totalPages;
-            if (allMessages.length < PER_PAGE) currentPage = 1;
-            renderPage();
-            renderPagination();
-        });
-
-        const gifBtn = document.getElementById("gifBtn");
-        const gifPicker = document.getElementById("gifPicker");
-        const gifPreview = document.getElementById("gifPreview");
-        const fileInput = document.getElementById("file");
-        const fileNameDisplay = document.getElementById("fileNameDisplay");
-
-        gifBtn.addEventListener("click", () => {
-            gifPicker.classList.toggle("open");
-            gifBtn.classList.toggle("open");
-        });
-
-        fileInput.addEventListener("change", () => {
-            if (fileInput.files && fileInput.files.length > 0) {
-                selectedFile = fileInput.files[0];
-                fileNameDisplay.textContent = selectedFile.name;
-
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    selectedFileDataUrl = e.target.result;
-                };
-                reader.readAsDataURL(selectedFile);
-            } else {
-                selectedFile = null;
-                selectedFileDataUrl = null;
-                fileNameDisplay.textContent = "";
-            }
-        });
-
-        const availableGifs = [
-            "1.gif", "2.gif", "3.gif", "4.gif", "5.gif", "6.gif",
-            "7.gif", "8.gif", "9.gif", "10.gif", "11.gif", "12.gif"
+    <script>
+        const IMAGES = ["kimez.jpg", "leeheejin.jpg", "shimeunjin.jpg", "kanmiyoun.jpg", "yooneunhye.jpg"];
+        const COLORS = [
+            { name: "빨강", value: "#ff0000" },
+            { name: "파랑", value: "#0000ff" },
+            { name: "분홍", value: "#ff69b4" },
+            { name: "초록", value: "#008000" },
+            { name: "보라", value: "#800080" },
+            { name: "갈색", value: "#8b4513" },
+            { name: "검정", value: "#000000" },
+            { name: "주황", value: "#ff8c00" }
         ];
 
-        availableGifs.forEach((src) => {
-            const item = document.createElement("div");
-            item.className = "gif-item";
-            const img = document.createElement("img");
-            img.src = src;
-            img.alt = "gif";
-            item.appendChild(img);
-            item.addEventListener("click", () => {
-                document.querySelectorAll(".gif-picker .gif-item").forEach((el) => el.classList.remove("selected"));
-                item.classList.add("selected");
-                selectedGif = src;
-                gifPreview.innerHTML = "";
-                const previewImg = document.createElement("img");
-                previewImg.src = src;
-                gifPreview.appendChild(previewImg);
-                const previewText = document.createElement("span");
-                previewText.textContent = "선택됨";
-                gifPreview.appendChild(previewText);
-                gifPicker.classList.remove("open");
-                gifBtn.classList.remove("open");
+        let selectedImage = null;
+        let selectedColor = "#000000";
+        let allThreads = [];
+
+        function pad(n) { return n.toString().padStart(2, "0"); }
+
+        function formatDate(ts) {
+            const d = new Date(ts);
+            const days = ["일", "월", "화", "수", "목", "금", "토"];
+            return `${pad(d.getMonth()+1)}.${pad(d.getDate())}.${d.getFullYear()} (${days[d.getDay()]}) ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+        }
+
+        function randomNum() {
+            return Math.floor(10000 + Math.random() * 90000);
+        }
+
+        function buildImageSelectors() {
+            const row = document.getElementById("imageSelectRow");
+            IMAGES.forEach((src) => {
+                const wrap = document.createElement("div");
+                wrap.className = "img-choice";
+                const img = document.createElement("img");
+                img.src = src;
+                img.alt = src;
+                wrap.appendChild(img);
+                wrap.addEventListener("click", () => {
+                    document.querySelectorAll("#imageSelectRow .img-choice").forEach(el => el.classList.remove("selected"));
+                    wrap.classList.add("selected");
+                    selectedImage = src;
+                });
+                row.appendChild(wrap);
             });
-            gifPicker.appendChild(item);
-        });
+        }
 
-        document.getElementById("sendBtn").addEventListener("click", async () => {
-            const name = document.getElementById("name").value.trim();
-            const message = document.getElementById("message").value.trim();
+        function buildColorSelectors() {
+            const row = document.getElementById("colorSelectRow");
+            COLORS.forEach((c) => {
+                const wrap = document.createElement("div");
+                wrap.className = "color-choice";
+                wrap.style.background = c.value;
+                wrap.title = c.name;
+                const sq = document.createElement("div");
+                sq.className = "sq";
+                sq.style.background = c.value;
+                wrap.appendChild(sq);
+                wrap.addEventListener("click", () => {
+                    document.querySelectorAll("#colorSelectRow .color-choice").forEach(el => el.classList.remove("selected"));
+                    wrap.classList.add("selected");
+                    selectedColor = c.value;
+                });
+                row.appendChild(wrap);
+            });
+            if (row.firstChild) row.firstChild.classList.add("selected");
+        }
 
-            if (!name || !message) {
-                alert("이름과 메시지를 입력하세요.");
-                return;
+        function renderThreads() {
+            const list = document.getElementById("chatList");
+            list.innerHTML = "";
+            allThreads.sort((a, b) => b.timestamp - a.timestamp);
+            allThreads.forEach((t) => {
+                list.appendChild(buildThreadElement(t));
+            });
+        }
+
+        function buildThreadElement(t) {
+            const wrap = document.createElement("div");
+            wrap.className = "chat-thread";
+
+            const header = document.createElement("div");
+            header.className = "thread-header";
+
+            const title = document.createElement("span");
+            title.className = "th-title";
+            title.textContent = t.title || "";
+            header.appendChild(title);
+
+            const author = document.createElement("span");
+            author.className = "th-author";
+            author.textContent = "글쓴이: " + (t.name || "");
+            header.appendChild(author);
+
+            const date = document.createElement("span");
+            date.className = "th-date";
+            date.textContent = formatDate(t.timestamp);
+            header.appendChild(date);
+
+            const num = document.createElement("span");
+            num.className = "th-num";
+            num.textContent = "№" + t.number;
+            header.appendChild(num);
+
+            const replyBtn = document.createElement("button");
+            replyBtn.className = "th-reply-btn";
+            replyBtn.textContent = "답변";
+            replyBtn.addEventListener("click", () => {
+                const form = wrap.querySelector(".reply-form-inline");
+                if (form) form.classList.toggle("open");
+            });
+            header.appendChild(replyBtn);
+
+            wrap.appendChild(header);
+
+            const body = document.createElement("div");
+            body.className = "thread-body";
+
+            if (t.image) {
+                const imgWrap = document.createElement("div");
+                imgWrap.className = "th-img";
+                const img = document.createElement("img");
+                img.src = t.image;
+                img.alt = t.image;
+                imgWrap.appendChild(img);
+                body.appendChild(imgWrap);
             }
-            if (message.length > 350) {
-                alert("메시지는 최대 350자까지 입력할 수 있습니다.");
-                return;
+
+            const textWrap = document.createElement("div");
+            textWrap.className = "th-text";
+            textWrap.style.color = t.color || "#000";
+
+            const commentText = document.createTextNode(t.comment || "");
+            textWrap.appendChild(commentText);
+
+            if (t.url && t.url.trim() && t.url.trim() !== "http(s)://") {
+                textWrap.appendChild(document.createElement("br"));
+                const a = document.createElement("a");
+                a.href = t.url.startsWith("http") ? t.url : "http://" + t.url;
+                a.target = "_blank";
+                a.rel = "noopener";
+                a.textContent = t.url;
+                textWrap.appendChild(a);
             }
 
-            let fileType = null;
-            let fileData = null;
-            let fileName = null;
+            body.appendChild(textWrap);
+            wrap.appendChild(body);
 
-            if (selectedFile) {
-                const fname = selectedFile.name.toLowerCase();
-                if (fname.endsWith(".jpg") || fname.endsWith(".jpeg")) {
-                    fileType = "jpg";
-                } else if (fname.endsWith(".exe")) {
-                    fileType = "exe";
-                } else {
-                    alert("jpg 또는 exe 파일만 업로드할 수 있습니다.");
+            if (t.replies && t.replies.length > 0) {
+                const repliesWrap = document.createElement("div");
+                repliesWrap.className = "thread-replies";
+                t.replies.forEach((r) => {
+                    const rItem = document.createElement("div");
+                    rItem.className = "reply-item";
+
+                    const rHead = document.createElement("div");
+                    rHead.className = "rp-header";
+                    const rAuth = document.createElement("span");
+                    rAuth.className = "rp-author";
+                    rAuth.textContent = r.name || "익명";
+                    rHead.appendChild(rAuth);
+                    const rDate = document.createElement("span");
+                    rDate.textContent = formatDate(r.timestamp);
+                    rHead.appendChild(rDate);
+                    rItem.appendChild(rHead);
+
+                    const rText = document.createElement("div");
+                    rText.className = "rp-text";
+                    rText.textContent = r.comment || "";
+                    rItem.appendChild(rText);
+
+                    repliesWrap.appendChild(rItem);
+                });
+                wrap.appendChild(repliesWrap);
+            }
+
+            const replyForm = document.createElement("div");
+            replyForm.className = "reply-form-inline";
+            replyForm.innerHTML = `
+                <div class="rf-row"><label>이름</label><input type="text" class="rf-name" maxlength="30"></div>
+                <div class="rf-row"><label>코멘트</label><textarea class="rf-comment"></textarea></div>
+                <div class="rf-submit"><button class="rf-submit-btn">답변 등록</button></div>
+            `;
+            wrap.appendChild(replyForm);
+
+            replyForm.querySelector(".rf-submit-btn").addEventListener("click", () => {
+                const rName = replyForm.querySelector(".rf-name").value.trim();
+                const rComment = replyForm.querySelector(".rf-comment").value.trim();
+                if (!rName || !rComment) {
+                    alert("이름과 코멘트를 입력하세요.");
                     return;
                 }
+                t.replies = t.replies || [];
+                t.replies.push({
+                    name: rName,
+                    comment: rComment,
+                    timestamp: Date.now()
+                });
+                renderThreads();
+            });
 
-                if (!selectedFileDataUrl) {
-                    alert("파일을 읽는 중입니다. 잠시 후 다시 시도하세요.");
-                    return;
-                }
+            return wrap;
+        }
 
-                fileData = selectedFileDataUrl;
-                fileName = selectedFile.name;
+        document.getElementById("submitBtn").addEventListener("click", () => {
+            const name = document.getElementById("inName").value.trim();
+            const email = document.getElementById("inEmail").value.trim();
+            const title = document.getElementById("inTitle").value.trim();
+            const comment = document.getElementById("inComment").value.trim();
+            let url = document.getElementById("inUrl").value.trim();
+
+            if (!name || !title || !comment) {
+                alert("이름, 제목, 코멘트를 입력하세요.");
+                return;
             }
 
-            const userNumber = generateRandomNumber();
+            if (url === "http(s)://") url = "";
 
-            await push(messagesRef, {
-                number: userNumber,
-                message: message,
+            const thread = {
+                number: randomNum(),
                 name: name,
-                fileType: fileType,
-                fileData: fileData,
-                fileName: fileName,
-                gif: selectedGif || null,
-                timestamp: Date.now()
-            });
+                email: email,
+                title: title,
+                comment: comment,
+                url: url,
+                image: selectedImage,
+                color: selectedColor,
+                timestamp: Date.now(),
+                replies: []
+            };
 
-            document.getElementById("message").value = "";
-            fileInput.value = "";
-            fileNameDisplay.textContent = "";
-            selectedFile = null;
-            selectedFileDataUrl = null;
-            selectedGif = null;
-            gifPreview.innerHTML = "";
-            document.querySelectorAll(".gif-picker .gif-item").forEach((el) => el.classList.remove("selected"));
+            allThreads.push(thread);
+
+            document.getElementById("inName").value = "";
+            document.getElementById("inEmail").value = "";
+            document.getElementById("inTitle").value = "";
+            document.getElementById("inComment").value = "";
+            document.getElementById("inUrl").value = "http(s)://";
+            document.querySelectorAll("#imageSelectRow .img-choice").forEach(el => el.classList.remove("selected"));
+            document.querySelectorAll("#colorSelectRow .color-choice").forEach((el, i) => {
+                el.classList.toggle("selected", i === 0);
+            });
+            selectedImage = null;
+            selectedColor = "#000000";
+
+            renderThreads();
         });
+
+        buildImageSelectors();
+        buildColorSelectors();
+        renderThreads();
     </script>
 </body>
 </html>

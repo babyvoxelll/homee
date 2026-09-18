@@ -15,71 +15,41 @@
             height: 100%;
         }
         body {
-            background: #ffffff;
+            background: #990033;
             display: flex;
-            align-items: flex-start;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
             min-height: 100vh;
             padding: 0;
             margin: 0;
             font-family: "Dotum", "Gulim", "Arial", sans-serif;
         }
 
-        .bbachat-outer {
+        .bbacommunity-top {
+            width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
-            margin: 0 auto;
-            width: 900px;
-            max-width: 100%;
             padding: 0;
-        }
-
-        .bbacommunity-wrap {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            line-height: 0;
             margin: 0;
-            padding: 0;
         }
-        .bbacommunity-wrap img {
+        .bbacommunity-top img {
             display: block;
-            width: 130px;
+            width: 90px;
+            max-width: 90px;
             height: auto;
             margin: 0 auto;
         }
-
-        .bbachat-top-imgs {
+        .bbacommunity-nav {
             position: relative;
-            width: 100%;
-            max-width: 900px;
+            width: 720px;
+            max-width: 100%;
+            height: 30px;
             margin: 0 auto;
-            line-height: 0;
-            display: flex;
-            justify-content: center;
         }
-        .bbachat-top-imgs img.panel {
-            display: block;
-            width: 900px;
-            max-width: 100%;
-            height: auto;
-        }
-
-        .nav-overlay {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 900px;
-            max-width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 10;
-        }
-        .nav-overlay a {
+        .bbacommunity-nav a {
             position: absolute;
             display: block;
             pointer-events: auto;
@@ -88,722 +58,609 @@
             cursor: pointer;
             text-decoration: none;
             height: 22px;
+            top: 4px;
         }
-        .nav-overlay a:nth-child(1) { left: 3%;   bottom: 4%; width: 55px; }
-        .nav-overlay a:nth-child(2) { left: 12%;  bottom: 4%; width: 55px; }
-        .nav-overlay a:nth-child(3) { left: 22%;  bottom: 4%; width: 55px; }
-        .nav-overlay a:nth-child(4) { left: 33%;  bottom: 4%; width: 80px; }
-        .nav-overlay a:nth-child(5) { left: 46%;  bottom: 4%; width: 55px; }
-        .nav-overlay a:nth-child(6) { left: 58%;  bottom: 4%; width: 70px; }
-        .nav-overlay a:nth-child(7) { left: 73%;  bottom: 4%; width: 85px; }
+        .bbacommunity-nav a:nth-child(1) { left: 0%;   width: 55px; }
+        .bbacommunity-nav a:nth-child(2) { left: 11%;  width: 55px; }
+        .bbacommunity-nav a:nth-child(3) { left: 23%;  width: 55px; }
+        .bbacommunity-nav a:nth-child(4) { left: 36%;  width: 80px; }
+        .bbacommunity-nav a:nth-child(5) { left: 52%;  width: 55px; }
+        .bbacommunity-nav a:nth-child(6) { left: 65%;  width: 70px; }
+        .bbacommunity-nav a:nth-child(7) { left: 85%;  width: 85px; }
 
-        .form-outer {
+        .bba-form-wrapper {
+            width: 720px;
+            max-width: 95%;
+            margin: 20px auto 0 auto;
+            background: transparent;
+            color: #000;
+            font-size: 12px;
+        }
+        .bba-form-table {
             width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px 0;
+            border-collapse: collapse;
+            background: transparent;
+        }
+        .bba-form-table td {
+            padding: 4px 6px;
+            vertical-align: top;
+            color: #fff;
+            font-size: 12px;
+        }
+        .bba-form-table td.label {
+            width: 130px;
+            font-weight: bold;
+            color: #fff;
+            white-space: nowrap;
+        }
+        .bba-form-table input[type="text"],
+        .bba-form-table input[type="email"],
+        .bba-form-table input[type="url"],
+        .bba-form-table textarea {
+            width: 100%;
+            font-size: 12px;
+            padding: 3px 5px;
+            border: 1px solid #ccc;
+            background: #fff;
+            font-family: "Dotum", "Gulim", "Arial", sans-serif;
+        }
+        .bba-form-table textarea {
+            min-height: 120px;
+            resize: vertical;
         }
 
-        .color-picker {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 12px;
-            align-items: flex-end;
+        .bba-colors {
+            margin: 10px auto 0 auto;
+            text-align: center;
+            color: #fff;
+            font-size: 12px;
         }
-        .color-picker .circle-wrap {
+        .bba-colors .color-row {
+            display: inline-flex;
+            gap: 14px;
+            align-items: center;
+            justify-content: center;
+            margin-top: 6px;
+        }
+        .bba-colors .color-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            cursor: pointer;
+            gap: 3px;
         }
-        .color-picker .circle {
+        .bba-colors .circle {
             width: 16px;
             height: 16px;
             border-radius: 50%;
+            background: #fff;
             border: 1px solid #333;
-            background: #fff;
-            transition: all 0.15s;
-        }
-        .color-picker .circle.selected {
-            background: #0033cc;
-            border-color: #0033cc;
-        }
-        .color-picker .square {
-            width: 8px;
-            height: 8px;
-            margin-top: 3px;
-        }
-
-        .form-table {
-            width: 100%;
-            max-width: 720px;
-            border-collapse: collapse;
-        }
-        .form-table td {
-            padding: 4px 6px;
-            font-size: 12px;
-            vertical-align: top;
-            color: #000;
-        }
-        .form-table td.label-cell {
-            width: 120px;
-            white-space: nowrap;
-            font-weight: bold;
-        }
-        .form-table td.input-cell {
-            width: auto;
-        }
-        .form-table input[type="text"],
-        .form-table textarea {
-            width: 100%;
-            font-family: "Dotum", "Gulim", "Arial", sans-serif;
-            font-size: 12px;
-            padding: 3px 5px;
-            border: 1px solid #666;
-            background: #fff;
-            box-sizing: border-box;
-        }
-        .form-table textarea {
-            height: 120px;
-            resize: vertical;
-        }
-        .form-table input[type="url"] {
-            width: 100%;
-            font-family: "Dotum", "Gulim", "Arial", sans-serif;
-            font-size: 12px;
-            padding: 3px 5px;
-            border: 1px solid #666;
-            background: #fff;
-            box-sizing: border-box;
-        }
-
-        .images-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-        }
-        .images-list .img-choice {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 11px;
             cursor: pointer;
-            padding: 2px 4px;
-            border: 1px solid #ccc;
-            background: #f4f4f4;
         }
-        .images-list .img-choice.selected {
-            border-color: #0033cc;
-            background: #dbe4ff;
+        .bba-colors .circle.selected {
+            background: #0000cc;
         }
-        .images-list .img-choice input {
-            margin: 0;
+        .bba-colors .square {
+            width: 12px;
+            height: 12px;
+            border: 1px solid #333;
         }
+        .bba-colors .square.red { background: #ff0000; }
+        .bba-colors .square.blue { background: #0000ff; }
+        .bba-colors .square.pink { background: #ff69b4; }
+        .bba-colors .square.green { background: #00aa00; }
+        .bba-colors .square.purple { background: #800080; }
+        .bba-colors .square.brown { background: #8b4513; }
+        .bba-colors .square.black { background: #000000; }
+        .bba-colors .square.orange { background: #ff8c00; }
 
-        .submit-row {
-            margin-top: 12px;
+        .bba-form-submit {
             text-align: center;
+            margin-top: 12px;
         }
-        .submit-row button {
-            padding: 6px 24px;
+        .bba-form-submit button {
+            padding: 6px 30px;
             font-size: 13px;
             font-weight: bold;
             background: #800020;
             color: #fff;
             border: 1px solid #555;
             cursor: pointer;
+            font-family: "Dotum", "Gulim", "Arial", sans-serif;
         }
-        .submit-row button:hover {
+        .bba-form-submit button:hover {
             background: #a00028;
         }
 
-        .chat-board {
-            width: 100%;
-            max-width: 900px;
-            margin: 20px auto;
+        .bba-chat-board {
+            width: 720px;
+            max-width: 95%;
+            margin: 20px auto 40px auto;
             background: #ffffff;
             border: 1px solid #000;
-            min-height: 300px;
+            min-height: 400px;
             padding: 0;
-        }
-        .post {
-            padding: 12px 16px;
-            border-bottom: 1px solid #000;
-        }
-        .post:last-child {
-            border-bottom: 1px solid #000;
-        }
-        .post-header {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            font-size: 12px;
-            margin-bottom: 8px;
-        }
-        .post-header .post-title {
-            color: #005500;
-            font-weight: bold;
-            font-size: 14px;
-        }
-        .post-header .post-author {
             color: #000;
-        }
-        .post-header .post-date {
-            color: #333;
-        }
-        .post-header .post-num {
-            color: #333;
-        }
-        .post-header .reply-btn {
-            margin-left: auto;
-            background: #eee;
-            border: 1px solid #888;
-            font-size: 11px;
-            padding: 2px 8px;
-            cursor: pointer;
-            font-family: inherit;
-        }
-        .post-header .reply-btn:hover {
-            background: #800020;
-            color: #fff;
-            border-color: #800020;
-        }
-        .post-body {
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
             font-size: 12px;
-        }
-        .post-body img.post-image {
-            width: 120px;
-            height: auto;
-            flex-shrink: 0;
-            border: 1px solid #ccc;
-        }
-        .post-body .post-comment {
-            flex: 1;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            color: #000;
-        }
-        .post-body .post-link {
-            display: block;
-            margin-top: 4px;
-            color: #0000ee;
-            text-decoration: underline;
-            font-size: 11px;
-            word-break: break-all;
         }
 
-        .reply-block {
-            margin-top: 8px;
-            margin-left: 30px;
-            padding-top: 8px;
-            border-top: 1px solid #000;
-            padding-left: 10px;
+        .bba-post {
+            padding: 10px 14px;
+            border-bottom: 1px solid #000;
         }
-        .reply-block .reply {
-            padding: 6px 0;
-            border-bottom: 1px dotted #999;
-            font-size: 12px;
-        }
-        .reply-block .reply:last-child {
+        .bba-post:last-child {
             border-bottom: none;
         }
-        .reply-block .reply .reply-header {
+        .bba-post-header {
             display: flex;
-            gap: 8px;
             flex-wrap: wrap;
             align-items: center;
-            font-size: 11px;
-            color: #333;
-            margin-bottom: 3px;
+            gap: 10px;
+            font-size: 12px;
         }
-        .reply-block .reply .reply-header .reply-title {
-            color: #005500;
+        .bba-post-header .post-title {
+            color: #006400;
             font-weight: bold;
         }
-        .reply-block .reply .reply-header .reply-num {
-            color: #333;
-        }
-        .reply-block .reply .reply-header .reply-author {
+        .bba-post-header .post-author {
             color: #000;
         }
-        .reply-block .reply-header .reply-btn {
-            margin-left: auto;
-            background: #eee;
-            border: 1px solid #888;
-            font-size: 10px;
-            padding: 1px 6px;
-            cursor: pointer;
-            font-family: inherit;
+        .bba-post-header .post-date {
+            color: #000;
         }
-        .reply-block .reply-header .reply-btn:hover {
-            background: #800020;
-            color: #fff;
-            border-color: #800020;
+        .bba-post-header .post-number {
+            color: #000;
         }
-        .reply-block .reply .reply-body {
-            display: flex;
-            gap: 10px;
-            align-items: flex-start;
-        }
-        .reply-block .reply .reply-body img.reply-image {
-            width: 80px;
-            height: auto;
-            flex-shrink: 0;
-            border: 1px solid #ccc;
-        }
-        .reply-block .reply .reply-body .reply-comment {
-            flex: 1;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
-        .reply-block .reply .reply-body .reply-link {
-            display: block;
-            margin-top: 4px;
+        .bba-post-header .post-reply-btn {
+            background: transparent;
+            border: none;
             color: #0000ee;
             text-decoration: underline;
-            font-size: 11px;
-            word-break: break-all;
+            font-size: 12px;
+            cursor: pointer;
+            font-family: "Dotum", "Gulim", "Arial", sans-serif;
+            padding: 0;
+        }
+        .bba-post-header .post-reply-btn:hover {
+            color: #800020;
         }
 
-        .reply-form-inline {
+        .bba-post-body {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+        .bba-post-body .post-img {
+            flex-shrink: 0;
+            width: 120px;
+            height: auto;
+        }
+        .bba-post-body .post-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .bba-post-body .post-comment {
+            flex: 1;
+            min-width: 200px;
+            font-size: 12px;
+            color: #000;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .bba-replies {
+            margin-top: 8px;
+            padding-left: 20px;
+        }
+        .bba-reply {
+            padding: 6px 0;
+            border-top: 1px dashed #000;
+            font-size: 12px;
+            color: #000;
+        }
+        .bba-reply:first-child {
+            border-top: 1px dashed #000;
+        }
+        .bba-reply .reply-header {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            color: #000;
+        }
+        .bba-reply .reply-text {
+            margin-top: 4px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .reply-form-box {
+            display: none;
             margin-top: 8px;
             padding: 8px;
-            background: #f4f4f4;
-            border: 1px solid #999;
-            font-size: 11px;
+            background: #f0f0f0;
+            border: 1px solid #ccc;
         }
-        .reply-form-inline .row {
-            display: flex;
-            gap: 6px;
+        .reply-form-box.open {
+            display: block;
+        }
+        .reply-form-box input,
+        .reply-form-box textarea {
+            width: 100%;
+            font-size: 12px;
+            padding: 3px 5px;
+            border: 1px solid #ccc;
             margin-bottom: 4px;
+            font-family: "Dotum", "Gulim", "Arial", sans-serif;
         }
-        .reply-form-inline input[type="text"],
-        .reply-form-inline textarea {
-            font-family: inherit;
-            font-size: 11px;
-            padding: 2px 4px;
-            border: 1px solid #666;
-            background: #fff;
-            flex: 1;
-        }
-        .reply-form-inline textarea {
+        .reply-form-box textarea {
             min-height: 50px;
-            resize: vertical;
         }
-        .reply-form-inline button {
-            padding: 3px 10px;
-            font-size: 11px;
+        .reply-form-box button {
+            padding: 4px 16px;
+            font-size: 12px;
             background: #800020;
             color: #fff;
             border: 1px solid #555;
             cursor: pointer;
-            font-family: inherit;
-        }
-        .reply-form-inline button.cancel-btn {
-            background: #ccc;
-            color: #000;
+            font-family: "Dotum", "Gulim", "Arial", sans-serif;
         }
 
-        @media (max-width: 900px) {
-            .bbachat-outer {
-                width: 100%;
-                padding: 0 8px;
-            }
-            .form-table td.label-cell {
+        @media (max-width: 760px) {
+            .bba-form-table td.label {
                 width: 100px;
-                font-size: 11px;
-            }
-            .nav-overlay a {
-                height: 18px;
             }
         }
-        @media (max-width: 600px) {
-            .bbacommunity-wrap img {
-                width: 100px;
+        @media (max-width: 500px) {
+            .bba-form-table td.label {
+                width: 80px;
+                font-size: 11px;
             }
-            .post-body img.post-image {
+            .bba-form-table td {
+                font-size: 11px;
+            }
+            .bba-post-body .post-img {
                 width: 90px;
-            }
-            .reply-block .reply .reply-body img.reply-image {
-                width: 60px;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="bbachat-outer">
-        <div class="bbacommunity-wrap">
-            <img src="bbacommunity.jpg" alt="bbacommunity">
+    <div class="bbacommunity-top">
+        <img src="bbacommunity.jpg" alt="bbacommunity">
+        <div class="bbacommunity-nav">
+            <a href="videos.html"></a>
+            <a href="index.html"></a>
+            <a href="profiles.html"></a>
+            <a href="discography.html"></a>
+            <a href="history.html"></a>
+            <a href="bbachat.html"></a>
+            <a href="photogallery.html"></a>
         </div>
-
-        <div class="bbachat-top-imgs">
-            <img src="bbachat.jpg" alt="bbachat" class="panel">
-            <div class="nav-overlay">
-                <a href="videos.html"></a>
-                <a href="index.html"></a>
-                <a href="profiles.html"></a>
-                <a href="discography.html"></a>
-                <a href="history.html"></a>
-                <a href="bbachat.html"></a>
-                <a href="photogallery.html"></a>
-            </div>
-        </div>
-
-        <div class="form-outer">
-
-            <div class="color-picker" id="colorPicker">
-                <div class="circle-wrap" data-color="#cc0000"><div class="circle"></div><div class="square" style="background:#cc0000;"></div></div>
-                <div class="circle-wrap" data-color="#0033cc"><div class="circle"></div><div class="square" style="background:#0033cc;"></div></div>
-                <div class="circle-wrap" data-color="#ff66b3"><div class="circle"></div><div class="square" style="background:#ff66b3;"></div></div>
-                <div class="circle-wrap" data-color="#009933"><div class="circle"></div><div class="square" style="background:#009933;"></div></div>
-                <div class="circle-wrap" data-color="#8000cc"><div class="circle"></div><div class="square" style="background:#8000cc;"></div></div>
-                <div class="circle-wrap" data-color="#8b4513"><div class="circle"></div><div class="square" style="background:#8b4513;"></div></div>
-                <div class="circle-wrap" data-color="#000000"><div class="circle"></div><div class="square" style="background:#000000;"></div></div>
-                <div class="circle-wrap" data-color="#ff8800"><div class="circle"></div><div class="square" style="background:#ff8800;"></div></div>
-            </div>
-
-            <table class="form-table">
-                <tr>
-                    <td class="label-cell">이름</td>
-                    <td class="input-cell"><input type="text" id="fieldName" maxlength="20"></td>
-                </tr>
-                <tr>
-                    <td class="label-cell">전자 우편</td>
-                    <td class="input-cell"><input type="text" id="fieldEmail" maxlength="60"></td>
-                </tr>
-                <tr>
-                    <td class="label-cell">제목</td>
-                    <td class="input-cell"><input type="text" id="fieldTitle" maxlength="80"></td>
-                </tr>
-                <tr>
-                    <td class="label-cell">코멘트</td>
-                    <td class="input-cell"><textarea id="fieldComment"></textarea></td>
-                </tr>
-                <tr>
-                    <td class="label-cell">URL</td>
-                    <td class="input-cell"><input type="text" id="fieldUrl" value="http(s)://" onfocus="if(this.value=='http(s)://')this.value='';" onblur="if(this.value=='')this.value='http(s)://';"></td>
-                </tr>
-                <tr>
-                    <td class="label-cell">이미지</td>
-                    <td class="input-cell">
-                        <div class="images-list" id="imagesList">
-                            <label class="img-choice"><input type="radio" name="img" value="kimez.jpg">kimez.jpg</label>
-                            <label class="img-choice"><input type="radio" name="img" value="leeheejin.jpg">leeheejin.jpg</label>
-                            <label class="img-choice"><input type="radio" name="img" value="shimeunjin.jpg">shimeunjin.jpg</label>
-                            <label class="img-choice"><input type="radio" name="img" value="kanmiyoun.jpg">kanmiyoun.jpg</label>
-                            <label class="img-choice"><input type="radio" name="img" value="yooneunhye.jpg">yooneunhye.jpg</label>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="label-cell">텍스트 색상</td>
-                    <td class="input-cell" id="colorLabelCell">—</td>
-                </tr>
-            </table>
-
-            <div class="submit-row">
-                <button id="submitPost">보내기</button>
-            </div>
-        </div>
-
-        <div class="chat-board" id="chatBoard"></div>
     </div>
 
-    <script>
-        const colorPicker = document.getElementById('colorPicker');
-        const colorLabelCell = document.getElementById('colorLabelCell');
-        let selectedColor = '#000000';
+    <div class="bba-form-wrapper">
+        <table class="bba-form-table">
+            <tr>
+                <td class="label">이름</td>
+                <td><input type="text" id="name" maxlength="20"></td>
+            </tr>
+            <tr>
+                <td class="label">이메일</td>
+                <td><input type="email" id="email" maxlength="60"></td>
+            </tr>
+            <tr>
+                <td class="label">제목</td>
+                <td><input type="text" id="title" maxlength="100"></td>
+            </tr>
+            <tr>
+                <td class="label">　</td>
+                <td>　</td>
+            </tr>
+            <tr>
+                <td class="label">코멘트</td>
+                <td><textarea id="comment"></textarea></td>
+            </tr>
+            <tr>
+                <td class="label">URL</td>
+                <td><input type="url" id="url" placeholder="http(s)://" value=""></td>
+            </tr>
+            <tr>
+                <td class="label">이미지</td>
+                <td>
+                    <select id="image" style="font-size:12px; padding:3px;">
+                        <option value="">선택하세요</option>
+                        <option value="kimez.jpg">kimez.jpg</option>
+                        <option value="leeheejin.jpg">leeheejin.jpg</option>
+                        <option value="shimeunjin.jpg">shimeunjin.jpg</option>
+                        <option value="kanmiyoun.jpg">kanmiyoun.jpg</option>
+                        <option value="yooneunhye.jpg">yooneunhye.jpg</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
 
-        colorPicker.querySelectorAll('.circle-wrap').forEach(wrap => {
-            wrap.addEventListener('click', () => {
-                colorPicker.querySelectorAll('.circle').forEach(c => c.classList.remove('selected'));
-                wrap.querySelector('.circle').classList.add('selected');
-                selectedColor = wrap.getAttribute('data-color');
-                colorLabelCell.textContent = selectedColor;
+        <div class="bba-colors">
+            <div>텍스트 색상</div>
+            <div class="color-row">
+                <div class="color-item"><div class="circle" data-color="#ff0000"></div><div class="square red"></div></div>
+                <div class="color-item"><div class="circle" data-color="#0000ff"></div><div class="square blue"></div></div>
+                <div class="color-item"><div class="circle" data-color="#ff69b4"></div><div class="square pink"></div></div>
+                <div class="color-item"><div class="circle" data-color="#00aa00"></div><div class="square green"></div></div>
+                <div class="color-item"><div class="circle" data-color="#800080"></div><div class="square purple"></div></div>
+                <div class="color-item"><div class="circle" data-color="#8b4513"></div><div class="square brown"></div></div>
+                <div class="color-item"><div class="circle" data-color="#000000"></div><div class="square black"></div></div>
+                <div class="color-item"><div class="circle" data-color="#ff8c00"></div><div class="square orange"></div></div>
+            </div>
+        </div>
+
+        <div class="bba-form-submit">
+            <button id="submitBtn">보내기</button>
+        </div>
+    </div>
+
+    <div class="bba-chat-board" id="chatBoard"></div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDBxl0S2LbjmxRTOGlAc6KsxIWM_ID7trI",
+            authDomain: "babyvox-chat.firebaseapp.com",
+            databaseURL: "https://babyvox-chat-default-rtdb.firebaseio.com",
+            projectId: "babyvox-chat",
+            storageBucket: "babyvox-chat.firebasestorage.app",
+            messagingSenderId: "741605907733",
+            appId: "1:741605907733:web:9f0cdb69685ac0e4631d1c",
+            measurementId: "G-V53X8WZ4YR"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+        const postsRef = ref(db, "bbacommunity/posts");
+
+        let selectedColor = "#000000";
+        let currentReplyPostId = null;
+
+        document.querySelectorAll(".bba-colors .circle").forEach((circle) => {
+            circle.addEventListener("click", () => {
+                document.querySelectorAll(".bba-colors .circle").forEach((c) => c.classList.remove("selected"));
+                circle.classList.add("selected");
+                selectedColor = circle.getAttribute("data-color");
             });
         });
 
-        document.querySelectorAll('#imagesList .img-choice').forEach(label => {
-            label.addEventListener('click', () => {
-                setTimeout(() => {
-                    document.querySelectorAll('#imagesList .img-choice').forEach(l => l.classList.remove('selected'));
-                    if (label.querySelector('input').checked) label.classList.add('selected');
-                }, 0);
-            });
+        const urlInput = document.getElementById("url");
+        urlInput.addEventListener("focus", () => {
+            if (urlInput.value === "http(s)://") urlInput.value = "";
+        });
+        urlInput.addEventListener("blur", () => {
+            if (urlInput.value === "") urlInput.value = "";
         });
 
-        const DAYS_KR = ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'];
+        function generateNumber() {
+            return Math.floor(10000 + Math.random() * 90000).toString();
+        }
 
-        function formatDateKR(ts) {
+        function getDayOfWeek(date) {
+            const days = ["일", "월", "화", "수", "목", "금", "토"];
+            return days[date.getDay()];
+        }
+
+        function formatDate(ts) {
             const d = new Date(ts);
-            const pad = n => n.toString().padStart(2,'0');
-            return `${d.getFullYear()}년 ${pad(d.getMonth()+1)}월 ${pad(d.getDate())}일 ${DAYS_KR[d.getDay()]} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+            const pad = (n) => n.toString().padStart(2, "0");
+            return `${pad(d.getMonth() + 1)}.${pad(d.getDate())} (${getDayOfWeek(d)}) ${pad(d.getHours())}:${pad(d.getMinutes())}`;
         }
 
-        function randomNum() {
-            return Math.floor(10000 + Math.random()*90000).toString();
-        }
+        function renderPosts(posts) {
+            const board = document.getElementById("chatBoard");
+            board.innerHTML = "";
 
-        const posts = [];
+            posts.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
 
-        const chatBoard = document.getElementById('chatBoard');
+            posts.forEach((post) => {
+                const postEl = document.createElement("div");
+                postEl.className = "bba-post";
 
-        function renderPosts() {
-            chatBoard.innerHTML = '';
-            posts.forEach((post, idx) => {
-                chatBoard.appendChild(buildPost(post, idx));
-            });
-        }
+                const header = document.createElement("div");
+                header.className = "bba-post-header";
 
-        function buildPost(post, postIndex) {
-            const el = document.createElement('div');
-            el.className = 'post';
+                const title = document.createElement("span");
+                title.className = "post-title";
+                title.textContent = post.title || "";
+                header.appendChild(title);
 
-            const header = document.createElement('div');
-            header.className = 'post-header';
+                const author = document.createElement("span");
+                author.className = "post-author";
+                author.textContent = "작성자: " + (post.name || "");
+                header.appendChild(author);
 
-            const title = document.createElement('span');
-            title.className = 'post-title';
-            title.textContent = post.title || '(제목 없음)';
-            title.style.color = '#005500';
-            header.appendChild(title);
+                const date = document.createElement("span");
+                date.className = "post-date";
+                date.textContent = formatDate(post.timestamp);
+                header.appendChild(date);
 
-            const author = document.createElement('span');
-            author.className = 'post-author';
-            author.textContent = '글쓴이: ' + (post.name || '익명');
-            header.appendChild(author);
+                const num = document.createElement("span");
+                num.className = "post-number";
+                num.textContent = "No." + (post.number || "");
+                header.appendChild(num);
 
-            const date = document.createElement('span');
-            date.className = 'post-date';
-            date.textContent = formatDateKR(post.timestamp);
-            header.appendChild(date);
-
-            const num = document.createElement('span');
-            num.className = 'post-num';
-            num.textContent = '№' + post.number;
-            header.appendChild(num);
-
-            const replyBtn = document.createElement('button');
-            replyBtn.className = 'reply-btn';
-            replyBtn.textContent = '답변';
-            replyBtn.addEventListener('click', () => toggleReplyForm(el, post, postIndex));
-            header.appendChild(replyBtn);
-
-            el.appendChild(header);
-
-            const body = document.createElement('div');
-            body.className = 'post-body';
-
-            if (post.image) {
-                const img = document.createElement('img');
-                img.className = 'post-image';
-                img.src = post.image;
-                img.alt = post.image;
-                body.appendChild(img);
-            }
-
-            const comment = document.createElement('div');
-            comment.className = 'post-comment';
-            comment.textContent = post.comment || '';
-            comment.style.color = post.color || '#000';
-            if (post.url && post.url !== 'http(s)://' && post.url.trim() !== '') {
-                const link = document.createElement('a');
-                link.className = 'post-link';
-                link.href = post.url;
-                link.target = '_blank';
-                link.textContent = post.url;
-                comment.appendChild(link);
-            }
-            body.appendChild(comment);
-
-            el.appendChild(body);
-
-            const replies = document.createElement('div');
-            replies.className = 'reply-block';
-            replies.dataset.postIndex = postIndex;
-
-            if (post.replies && post.replies.length) {
-                post.replies.forEach(r => {
-                    replies.appendChild(buildReply(r, postIndex));
+                const replyBtn = document.createElement("button");
+                replyBtn.className = "post-reply-btn";
+                replyBtn.textContent = "답변";
+                replyBtn.addEventListener("click", () => {
+                    currentReplyPostId = post.id;
+                    const box = document.getElementById("replyBox-" + post.id);
+                    if (box) {
+                        box.classList.toggle("open");
+                    }
                 });
-            }
+                header.appendChild(replyBtn);
 
-            el.appendChild(replies);
+                postEl.appendChild(header);
 
-            return el;
-        }
+                const body = document.createElement("div");
+                body.className = "bba-post-body";
 
-        function buildReply(reply, postIndex) {
-            const r = document.createElement('div');
-            r.className = 'reply';
-
-            const header = document.createElement('div');
-            header.className = 'reply-header';
-
-            const title = document.createElement('span');
-            title.className = 'reply-title';
-            title.textContent = reply.title || '(제목 없음)';
-            title.style.color = '#005500';
-            header.appendChild(title);
-
-            const author = document.createElement('span');
-            author.className = 'reply-author';
-            author.textContent = '글쓴이: ' + (reply.name || '익명');
-            header.appendChild(author);
-
-            const date = document.createElement('span');
-            date.textContent = formatDateKR(reply.timestamp);
-            header.appendChild(date);
-
-            const num = document.createElement('span');
-            num.className = 'reply-num';
-            num.textContent = '№' + reply.number;
-            header.appendChild(num);
-
-            const replyBtn = document.createElement('button');
-            replyBtn.className = 'reply-btn';
-            replyBtn.textContent = '답변';
-            replyBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const postEl = r.closest('.post');
-                const post = posts[postIndex];
-                toggleReplyForm(postEl, post, postIndex);
-            });
-            header.appendChild(replyBtn);
-
-            r.appendChild(header);
-
-            const body = document.createElement('div');
-            body.className = 'reply-body';
-
-            if (reply.image) {
-                const img = document.createElement('img');
-                img.className = 'reply-image';
-                img.src = reply.image;
-                img.alt = reply.image;
-                body.appendChild(img);
-            }
-
-            const comment = document.createElement('div');
-            comment.className = 'reply-comment';
-            comment.textContent = reply.comment || '';
-            comment.style.color = reply.color || '#000';
-            if (reply.url && reply.url !== 'http(s)://' && reply.url.trim() !== '') {
-                const link = document.createElement('a');
-                link.className = 'reply-link';
-                link.href = reply.url;
-                link.target = '_blank';
-                link.textContent = reply.url;
-                comment.appendChild(link);
-            }
-            body.appendChild(comment);
-
-            r.appendChild(body);
-
-            return r;
-        }
-
-        function toggleReplyForm(postEl, post, postIndex) {
-            let existing = postEl.querySelector('.reply-form-inline');
-            if (existing) {
-                existing.remove();
-                return;
-            }
-
-            const form = document.createElement('div');
-            form.className = 'reply-form-inline';
-            form.innerHTML = `
-                <div class="row">
-                    <input type="text" class="rf-name" placeholder="이름" maxlength="20">
-                    <input type="text" class="rf-title" placeholder="제목" maxlength="80">
-                </div>
-                <div class="row">
-                    <input type="text" class="rf-email" placeholder="전자 우편" maxlength="60">
-                    <input type="text" class="rf-url" placeholder="http(s)://" maxlength="200">
-                </div>
-                <div class="row">
-                    <textarea class="rf-comment" placeholder="코멘트"></textarea>
-                </div>
-                <div class="row" style="justify-content:flex-end;">
-                    <button class="cancel-btn">취소</button>
-                    <button class="send-reply-btn">보내기</button>
-                </div>
-            `;
-
-            form.querySelector('.cancel-btn').addEventListener('click', () => form.remove());
-            form.querySelector('.send-reply-btn').addEventListener('click', () => {
-                const name = form.querySelector('.rf-name').value.trim() || '익명';
-                const title = form.querySelector('.rf-title').value.trim() || '(제목 없음)';
-                const comment = form.querySelector('.rf-comment').value.trim();
-                const url = form.querySelector('.rf-url').value.trim();
-
-                if (!comment) {
-                    alert('코멘트를 입력하세요.');
-                    return;
+                if (post.image) {
+                    const imgWrap = document.createElement("div");
+                    imgWrap.className = "post-img";
+                    const img = document.createElement("img");
+                    img.src = post.image;
+                    img.alt = "image";
+                    imgWrap.appendChild(img);
+                    body.appendChild(imgWrap);
                 }
 
-                if (!post.replies) post.replies = [];
-                post.replies.push({
-                    name: name,
-                    title: title,
-                    comment: comment,
-                    url: url,
-                    color: selectedColor,
-                    number: randomNum(),
-                    timestamp: Date.now(),
-                    image: null
+                const comment = document.createElement("div");
+                comment.className = "post-comment";
+                comment.textContent = post.comment || "";
+                if (post.textColor) {
+                    comment.style.color = post.textColor;
+                }
+                body.appendChild(comment);
+
+                postEl.appendChild(body);
+
+                if (post.url) {
+                    const urlLine = document.createElement("div");
+                    urlLine.style.marginTop = "6px";
+                    urlLine.style.fontSize = "12px";
+                    const urlLink = document.createElement("a");
+                    urlLink.href = post.url;
+                    urlLink.target = "_blank";
+                    urlLink.textContent = post.url;
+                    urlLink.style.color = "#0000ee";
+                    urlLine.appendChild(urlLink);
+                    postEl.appendChild(urlLine);
+                }
+
+                const repliesBox = document.createElement("div");
+                repliesBox.className = "bba-replies";
+
+                if (post.replies) {
+                    const replyKeys = Object.keys(post.replies);
+                    replyKeys.forEach((k) => {
+                        const r = post.replies[k];
+                        const replyEl = document.createElement("div");
+                        replyEl.className = "bba-reply";
+
+                        const rHeader = document.createElement("div");
+                        rHeader.className = "reply-header";
+
+                        const rAuthor = document.createElement("span");
+                        rAuthor.textContent = "작성자: " + (r.name || "");
+                        rHeader.appendChild(rAuthor);
+
+                        const rDate = document.createElement("span");
+                        rDate.textContent = formatDate(r.timestamp);
+                        rHeader.appendChild(rDate);
+
+                        replyEl.appendChild(rHeader);
+
+                        const rText = document.createElement("div");
+                        rText.className = "reply-text";
+                        rText.textContent = r.comment || "";
+                        if (r.textColor) {
+                            rText.style.color = r.textColor;
+                        }
+                        replyEl.appendChild(rText);
+
+                        repliesBox.appendChild(replyEl);
+                    });
+                }
+
+                const replyBox = document.createElement("div");
+                replyBox.className = "reply-form-box";
+                replyBox.id = "replyBox-" + post.id;
+
+                const rNameInput = document.createElement("input");
+                rNameInput.type = "text";
+                rNameInput.placeholder = "이름";
+                replyBox.appendChild(rNameInput);
+
+                const rCommentInput = document.createElement("textarea");
+                rCommentInput.placeholder = "코멘트";
+                replyBox.appendChild(rCommentInput);
+
+                const rSubmit = document.createElement("button");
+                rSubmit.textContent = "답변 보내기";
+                rSubmit.addEventListener("click", async () => {
+                    const rName = rNameInput.value.trim();
+                    const rComment = rCommentInput.value.trim();
+                    if (!rName || !rComment) {
+                        alert("이름과 코멘트를 입력하세요.");
+                        return;
+                    }
+                    const replyRef = ref(db, "bbacommunity/posts/" + post.id + "/replies");
+                    await push(replyRef, {
+                        name: rName,
+                        comment: rComment,
+                        textColor: selectedColor,
+                        timestamp: Date.now()
+                    });
+                    rNameInput.value = "";
+                    rCommentInput.value = "";
+                    replyBox.classList.remove("open");
                 });
+                replyBox.appendChild(rSubmit);
 
-                form.remove();
-                renderPosts();
+                repliesBox.appendChild(replyBox);
+                postEl.appendChild(repliesBox);
+
+                board.appendChild(postEl);
             });
-
-            postEl.appendChild(form);
         }
 
-        document.getElementById('submitPost').addEventListener('click', () => {
-            const name = document.getElementById('fieldName').value.trim();
-            const title = document.getElementById('fieldTitle').value.trim();
-            const comment = document.getElementById('fieldComment').value.trim();
-            const url = document.getElementById('fieldUrl').value.trim();
+        onValue(postsRef, (snapshot) => {
+            const posts = [];
+            snapshot.forEach((child) => {
+                const val = child.val();
+                val.id = child.key;
+                posts.push(val);
+            });
+            renderPosts(posts);
+        });
+
+        document.getElementById("submitBtn").addEventListener("click", async () => {
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const title = document.getElementById("title").value.trim();
+            const comment = document.getElementById("comment").value.trim();
+            const url = document.getElementById("url").value.trim();
+            const image = document.getElementById("image").value;
 
             if (!name || !title || !comment) {
-                alert('이름, 제목, 코멘트를 입력하세요.');
+                alert("이름, 제목, 코멘트를 입력하세요.");
                 return;
             }
 
-            const imgRadio = document.querySelector('#imagesList input[name="img"]:checked');
-            const image = imgRadio ? imgRadio.value : null;
+            const userNumber = generateNumber();
 
-            const post = {
+            await push(postsRef, {
+                number: userNumber,
                 name: name,
+                email: email,
                 title: title,
                 comment: comment,
-                url: url === 'http(s)://' ? '' : url,
-                image: image,
-                color: selectedColor,
-                number: randomNum(),
-                timestamp: Date.now(),
-                replies: []
-            };
+                url: url,
+                image: image || null,
+                textColor: selectedColor,
+                timestamp: Date.now()
+            });
 
-            posts.unshift(post);
-            renderPosts();
-
-            document.getElementById('fieldName').value = '';
-            document.getElementById('fieldTitle').value = '';
-            document.getElementById('fieldComment').value = '';
-            document.getElementById('fieldUrl').value = 'http(s)://';
-            document.querySelectorAll('#imagesList input[name="img"]').forEach(r => r.checked = false);
-            document.querySelectorAll('#imagesList .img-choice').forEach(l => l.classList.remove('selected'));
+            document.getElementById("name").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("title").value = "";
+            document.getElementById("comment").value = "";
+            document.getElementById("url").value = "";
+            document.getElementById("image").value = "";
+            document.querySelectorAll(".bba-colors .circle").forEach((c) => c.classList.remove("selected"));
+            selectedColor = "#000000";
         });
     </script>
 </body>

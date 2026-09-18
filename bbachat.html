@@ -37,8 +37,8 @@
         }
         .bbacommunity-top img.bbacommunity {
             display: block;
-            width: 420px;
-            max-width: 85%;
+            width: 340px;
+            max-width: 75%;
             height: auto;
             margin: 0 auto;
         }
@@ -78,11 +78,12 @@
         .bba-form-wrapper {
             width: 720px;
             max-width: 95%;
-            margin: 20px auto 0 auto;
+            margin: 12px auto 0 auto;
             background: transparent;
             color: #000;
-            font-size: 12px;
+            font-size: 11px;
             font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.2;
         }
         .bba-form-table {
             width: 100%;
@@ -90,14 +91,14 @@
             background: transparent;
         }
         .bba-form-table td {
-            padding: 4px 6px;
-            vertical-align: top;
+            padding: 1px 4px;
+            vertical-align: middle;
             color: #fff;
-            font-size: 12px;
+            font-size: 11px;
             font-family: Arial, Helvetica, sans-serif;
         }
         .bba-form-table td.label {
-            width: 100px;
+            width: 90px;
             font-weight: normal;
             color: #fff;
             white-space: nowrap;
@@ -106,26 +107,26 @@
         .bba-form-table input[type="text"],
         .bba-form-table input[type="email"],
         .bba-form-table input[type="url"] {
-            width: 180px;
-            font-size: 12px;
-            padding: 3px 5px;
+            width: 170px;
+            font-size: 11px;
+            padding: 2px 4px;
             border: 1px solid #ccc;
             background: #fff;
             font-family: Arial, Helvetica, sans-serif;
         }
         .bba-form-table textarea {
             width: 100%;
-            font-size: 12px;
-            padding: 3px 5px;
+            font-size: 11px;
+            padding: 2px 4px;
             border: 1px solid #ccc;
             background: #fff;
             font-family: Arial, Helvetica, sans-serif;
-            min-height: 140px;
+            min-height: 110px;
             resize: vertical;
         }
         .bba-form-table select {
-            font-size: 12px;
-            padding: 3px;
+            font-size: 11px;
+            padding: 2px;
             border: 1px solid #ccc;
             background: #fff;
             font-family: Arial, Helvetica, sans-serif;
@@ -133,32 +134,31 @@
 
         .bba-colors-row {
             display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin: 6px 0 0 0;
-            padding: 4px 6px;
+            align-items: center;
+            gap: 10px;
+            margin: 2px 0 0 0;
+            padding: 1px 4px;
         }
         .bba-colors-row .label {
-            width: 100px;
+            width: 90px;
             font-weight: normal;
             color: #fff;
-            font-size: 12px;
+            font-size: 11px;
             flex-shrink: 0;
-            padding-top: 1px;
             font-family: Arial, Helvetica, sans-serif;
         }
         .bba-colors-row .color-row {
             display: inline-flex;
-            gap: 10px;
-            align-items: flex-start;
+            gap: 8px;
+            align-items: center;
         }
         .bba-colors-row .color-item {
             position: relative;
             display: inline-block;
         }
         .bba-colors-row .circle {
-            width: 13px;
-            height: 13px;
+            width: 11px;
+            height: 11px;
             border-radius: 50%;
             background: #fff;
             border: 1px solid #333;
@@ -174,17 +174,17 @@
             position: absolute;
             top: 2px;
             left: 2px;
-            width: 5px;
-            height: 5px;
+            width: 4px;
+            height: 4px;
             border-radius: 50%;
             background: #fff;
         }
         .bba-colors-row .square {
             position: absolute;
-            right: -3px;
-            bottom: -3px;
-            width: 6px;
-            height: 6px;
+            right: -2px;
+            bottom: -2px;
+            width: 5px;
+            height: 5px;
             border: 1px solid #333;
         }
         .bba-colors-row .square.red { background: #ff0000; }
@@ -200,14 +200,14 @@
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-            gap: 6px;
+            gap: 4px;
             width: 100%;
         }
         .bba-comment-row textarea {
             width: 100%;
-            min-height: 140px;
-            font-size: 12px;
-            padding: 3px 5px;
+            min-height: 110px;
+            font-size: 11px;
+            padding: 2px 4px;
             border: 1px solid #ccc;
             background: #fff;
             font-family: Arial, Helvetica, sans-serif;
@@ -217,9 +217,9 @@
             background: #ffffff;
             color: #000;
             border: 1px solid #333;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: normal;
-            padding: 5px 14px;
+            padding: 4px 12px;
             cursor: pointer;
             font-family: Arial, Helvetica, sans-serif;
         }
@@ -228,12 +228,12 @@
         }
 
         .bba-chat-board {
-            width: 98%;
-            max-width: 1600px;
-            margin: 30px auto 40px auto;
+            width: 99%;
+            max-width: 1800px;
+            margin: 20px auto 20px auto;
             background: #ffffff;
             border: 1px solid #000;
-            min-height: 1200px;
+            min-height: 1600px;
             padding: 0;
             color: #000;
             font-size: 12px;
@@ -364,36 +364,36 @@
 
         @media (max-width: 760px) {
             .bba-form-table td.label {
-                width: 80px;
+                width: 75px;
             }
             .bba-form-table input[type="text"],
             .bba-form-table input[type="email"],
             .bba-form-table input[type="url"] {
-                width: 150px;
+                width: 140px;
             }
             .bba-colors-row .label {
-                width: 80px;
+                width: 75px;
             }
         }
         @media (max-width: 500px) {
             .bba-form-table td.label {
-                width: 65px;
-                font-size: 11px;
+                width: 60px;
+                font-size: 10px;
             }
             .bba-form-table td {
-                font-size: 11px;
+                font-size: 10px;
             }
             .bba-form-table input[type="text"],
             .bba-form-table input[type="email"],
             .bba-form-table input[type="url"] {
-                width: 120px;
+                width: 110px;
             }
             .bba-post-body .post-img {
                 width: 90px;
             }
             .bba-colors-row .label {
-                width: 65px;
-                font-size: 11px;
+                width: 60px;
+                font-size: 10px;
             }
         }
     </style>

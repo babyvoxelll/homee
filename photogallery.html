@@ -70,17 +70,17 @@
         .nav-overlay a:nth-child(6) { right: 36%; top: 53%; }
         .nav-overlay a:nth-child(7) { right: 36%; top: 62%; }
 
-        .menu-bar {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 55%;
-            max-width: 600px;
+        .gallery-container {
+            width: 40%;
+            max-width: 450px;
             margin: 10px auto 0 auto;
             padding: 0;
             position: relative;
         }
         .menu-btn {
+            position: absolute;
+            top: 0;
+            left: -100px;
             background: #d4d0c8;
             border-top: 2px solid #ffffff;
             border-left: 2px solid #ffffff;
@@ -89,9 +89,10 @@
             color: #000;
             font-family: "Gulim", "Arial", sans-serif;
             font-size: 11px;
-            padding: 3px 12px;
+            padding: 3px 10px;
             cursor: pointer;
             white-space: nowrap;
+            z-index: 10;
         }
         .menu-btn:active {
             border-top: 2px solid #404040;
@@ -103,19 +104,18 @@
             display: none;
             position: absolute;
             top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
+            left: -100px;
             background: #ffffff;
             border: 2px solid #00008b;
             z-index: 50;
-            min-width: 130px;
+            min-width: 120px;
         }
         .menu-dropdown.active {
             display: block;
         }
         .menu-dropdown a {
             display: block;
-            padding: 5px 10px;
+            padding: 4px 10px;
             font-family: "Gulim", "Arial", sans-serif;
             font-size: 11px;
             color: #000;
@@ -136,33 +136,27 @@
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            width: 55%;
-            max-width: 600px;
-            margin: 5px auto 0 auto;
+            width: 40%;
+            max-width: 450px;
+            margin: 0 auto;
             padding: 0;
             line-height: 0;
         }
         .photos-container img {
             display: block;
-            width: 30%;
-            max-width: 160px;
+            width: 22%;
+            max-width: 100px;
             height: auto;
-        }
-        .gallery-container {
-            width: 55%;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 0;
         }
         .gallery-block {
             background-color: #ffffff;
             color: #000;
-            padding: 15px 18px;
+            padding: 10px 12px;
             margin-bottom: 0;
             border-radius: 0;
             border: 2px solid #00008b;
             border-bottom: 2px solid #00008b;
-            min-height: 600px;
+            min-height: 400px;
         }
         .gallery-block:last-child {
             border-bottom: 2px solid #00008b;
@@ -170,15 +164,17 @@
         .photos-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
             align-content: flex-start;
         }
         .photos-grid img {
             display: block;
             border: 1px solid #000;
             cursor: pointer;
-            max-width: 90px;
+            width: auto;
             height: auto;
+            max-width: 80px;
+            max-height: 80px;
         }
 
         .photo-viewer {
@@ -206,20 +202,22 @@
 
         @media (max-width: 768px) {
             .gallery-container {
-                width: 85%;
-                max-width: 600px;
+                width: 70%;
+                max-width: 450px;
             }
             .photos-container {
-                width: 85%;
-                max-width: 600px;
+                width: 70%;
+                max-width: 450px;
             }
             .photos-container img {
-                width: 35%;
-                max-width: 150px;
+                width: 25%;
+                max-width: 90px;
             }
-            .menu-bar {
-                width: 85%;
-                max-width: 600px;
+            .menu-btn {
+                left: -90px;
+            }
+            .menu-dropdown {
+                left: -90px;
             }
             #image-container img {
                 width: 65%;
@@ -241,17 +239,20 @@
         }
         @media (max-width: 500px) {
             .gallery-container {
-                width: 95%;
+                width: 90%;
             }
             .photos-container {
-                width: 95%;
+                width: 90%;
             }
             .photos-container img {
-                width: 45%;
-                max-width: 130px;
+                width: 30%;
+                max-width: 80px;
             }
-            .menu-bar {
-                width: 95%;
+            .menu-btn {
+                left: -80px;
+            }
+            .menu-dropdown {
+                left: -80px;
             }
             #image-container img {
                 width: 80%;
@@ -270,9 +271,6 @@
             .nav-overlay a:nth-child(5) { right: 22%; top: 44%; }
             .nav-overlay a:nth-child(6) { right: 22%; top: 53%; }
             .nav-overlay a:nth-child(7) { right: 22%; top: 62%; }
-            .photos-grid img {
-                max-width: 70px;
-            }
         }
     </style>
 </head>
@@ -290,7 +288,11 @@
         </div>
     </div>
     
-    <div class="menu-bar">
+    <div class="photos-container">
+        <img src="photos.jpg" alt="photos">
+    </div>
+    
+    <div class="gallery-container">
         <button class="menu-btn" onclick="toggleMenu(event)">멤버 선택</button>
         <div class="menu-dropdown" id="memberMenu">
             <a onclick="showMember('ez', event)">Kim E-Z</a>
@@ -300,13 +302,6 @@
             <a onclick="showMember('hye', event)">Yoon Eunhye</a>
             <a onclick="showMember('bbvox', event)">Baby V.O.X</a>
         </div>
-    </div>
-    
-    <div class="photos-container">
-        <img src="photos.jpg" alt="photos">
-    </div>
-    
-    <div class="gallery-container">
         <div class="gallery-block">
             <div class="photos-grid" id="photosGrid"></div>
         </div>

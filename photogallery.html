@@ -34,8 +34,8 @@
         }
         #image-container img {
             display: block;
-            width: 50%;
-            max-width: 620px;
+            width: 45%;
+            max-width: 550px;
             height: auto;
             aspect-ratio: auto;
             object-fit: scale-down;
@@ -71,16 +71,15 @@
         .nav-overlay a:nth-child(7) { right: 36%; top: 62%; }
 
         .gallery-container {
-            width: 40%;
-            max-width: 450px;
-            margin: 10px auto 0 auto;
+            width: 45%;
+            max-width: 500px;
+            margin: 0 auto;
             padding: 0;
             position: relative;
         }
         .menu-btn {
-            position: absolute;
-            top: 0;
-            left: -100px;
+            display: block;
+            width: 100%;
             background: #d4d0c8;
             border-top: 2px solid #ffffff;
             border-left: 2px solid #ffffff;
@@ -89,10 +88,18 @@
             color: #000;
             font-family: "Gulim", "Arial", sans-serif;
             font-size: 11px;
-            padding: 3px 10px;
+            padding: 3px 6px;
             cursor: pointer;
-            white-space: nowrap;
-            z-index: 10;
+            text-align: left;
+            position: relative;
+        }
+        .menu-btn::after {
+            content: "▼";
+            position: absolute;
+            right: 6px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 8px;
         }
         .menu-btn:active {
             border-top: 2px solid #404040;
@@ -104,18 +111,18 @@
             display: none;
             position: absolute;
             top: 100%;
-            left: -100px;
+            left: 0;
+            width: 100%;
             background: #ffffff;
             border: 2px solid #00008b;
             z-index: 50;
-            min-width: 120px;
         }
         .menu-dropdown.active {
             display: block;
         }
         .menu-dropdown a {
             display: block;
-            padding: 4px 10px;
+            padding: 4px 8px;
             font-family: "Gulim", "Arial", sans-serif;
             font-size: 11px;
             color: #000;
@@ -136,27 +143,27 @@
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            width: 40%;
-            max-width: 450px;
+            width: 45%;
+            max-width: 500px;
             margin: 0 auto;
             padding: 0;
             line-height: 0;
         }
         .photos-container img {
             display: block;
-            width: 22%;
-            max-width: 100px;
+            width: 32%;
+            max-width: 160px;
             height: auto;
         }
         .gallery-block {
             background-color: #ffffff;
             color: #000;
-            padding: 10px 12px;
+            padding: 12px 14px;
             margin-bottom: 0;
             border-radius: 0;
             border: 2px solid #00008b;
             border-bottom: 2px solid #00008b;
-            min-height: 400px;
+            min-height: 500px;
         }
         .gallery-block:last-child {
             border-bottom: 2px solid #00008b;
@@ -164,17 +171,13 @@
         .photos-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 6px;
+            gap: 8px;
             align-content: flex-start;
         }
         .photos-grid img {
             display: block;
             border: 1px solid #000;
             cursor: pointer;
-            width: auto;
-            height: auto;
-            max-width: 80px;
-            max-height: 80px;
         }
 
         .photo-viewer {
@@ -202,26 +205,20 @@
 
         @media (max-width: 768px) {
             .gallery-container {
-                width: 70%;
-                max-width: 450px;
+                width: 85%;
+                max-width: 500px;
             }
             .photos-container {
-                width: 70%;
-                max-width: 450px;
+                width: 85%;
+                max-width: 500px;
             }
             .photos-container img {
-                width: 25%;
-                max-width: 90px;
-            }
-            .menu-btn {
-                left: -90px;
-            }
-            .menu-dropdown {
-                left: -90px;
+                width: 35%;
+                max-width: 140px;
             }
             #image-container img {
-                width: 65%;
-                max-width: 500px;
+                width: 60%;
+                max-width: 450px;
                 transform: scaleY(0.75);
                 transform-origin: top center;
             }
@@ -239,24 +236,18 @@
         }
         @media (max-width: 500px) {
             .gallery-container {
-                width: 90%;
+                width: 95%;
             }
             .photos-container {
-                width: 90%;
+                width: 95%;
             }
             .photos-container img {
-                width: 30%;
-                max-width: 80px;
-            }
-            .menu-btn {
-                left: -80px;
-            }
-            .menu-dropdown {
-                left: -80px;
+                width: 40%;
+                max-width: 120px;
             }
             #image-container img {
-                width: 80%;
-                max-width: 380px;
+                width: 75%;
+                max-width: 350px;
                 transform: scaleY(0.7);
                 transform-origin: top center;
             }
@@ -288,10 +279,6 @@
         </div>
     </div>
     
-    <div class="photos-container">
-        <img src="photos.jpg" alt="photos">
-    </div>
-    
     <div class="gallery-container">
         <button class="menu-btn" onclick="toggleMenu(event)">멤버 선택</button>
         <div class="menu-dropdown" id="memberMenu">
@@ -305,6 +292,10 @@
         <div class="gallery-block">
             <div class="photos-grid" id="photosGrid"></div>
         </div>
+    </div>
+
+    <div class="photos-container">
+        <img src="photos.jpg" alt="photos">
     </div>
 
     <div class="photo-viewer" id="photoViewer" onclick="closeViewer()">

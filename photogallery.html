@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>babyvoxelll팬사이트 - Photogallery</title>
+    <title>babyvoxelll팬사이트 - Photo Gallery</title>
     <link rel="icon" href="babyvoxelll.ico" type="image/x-icon">
     <style>
         * {
@@ -70,7 +70,7 @@
         .nav-overlay a:nth-child(6) { right: 36%; top: 53%; }
         .nav-overlay a:nth-child(7) { right: 36%; top: 62%; }
 
-        .photos-container {
+        .photos-header {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -80,99 +80,131 @@
             padding: 0;
             line-height: 0;
         }
-        .photos-container img {
+        .photos-header img {
             display: block;
-            width: 30%;
-            max-width: 160px;
+            width: 22%;
+            max-width: 130px;
             height: auto;
+            margin: 0 auto;
         }
-        .gallery-container {
+        .gallery-panel {
+            background-color: #ffffff;
+            color: #000;
+            padding: 15px 18px;
             width: 55%;
             max-width: 600px;
             margin: 0 auto;
-            padding: 0;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-        }
-        .member-menu {
-            flex-shrink: 0;
-            width: 130px;
-            background-color: #ffffff;
             border: 2px solid #00008b;
-            padding: 6px 4px;
-        }
-        .member-menu-title {
-            font-size: 10px;
-            font-weight: bold;
-            color: #000;
-            text-align: center;
-            cursor: pointer;
-            padding: 4px 0;
-            user-select: none;
-        }
-        .member-menu-title:hover {
-            color: #00008b;
-        }
-        .member-menu-list {
-            display: none;
-            flex-direction: column;
-            margin-top: 4px;
-        }
-        .member-menu-list.open {
-            display: flex;
-        }
-        .member-menu-list a {
-            display: block;
-            font-size: 9px;
-            color: #00008b;
-            text-decoration: none;
-            padding: 3px 4px;
-            text-align: left;
-            cursor: pointer;
-        }
-        .member-menu-list a:hover {
-            background-color: #00008b;
-            color: #fff;
-        }
-        .gallery-panel {
-            flex: 1;
-            background-color: #ffffff;
-            border: 2px solid #00008b;
+            border-bottom: 2px solid #00008b;
             min-height: 600px;
-            padding: 10px;
-            display: flex;
-            flex-wrap: wrap;
-            align-content: flex-start;
-            gap: 8px;
+            position: relative;
         }
-        .gallery-panel .photo-thumb {
-            width: 70px;
-            height: auto;
-            display: block;
-            border: 1px solid #000;
+        .member-select {
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            z-index: 10;
+        }
+        .member-btn {
+            background-color: #d4d0c8;
+            color: #000;
+            border-top: 2px solid #ffffff;
+            border-left: 2px solid #ffffff;
+            border-right: 2px solid #808080;
+            border-bottom: 2px solid #808080;
+            padding: 3px 10px;
+            font-family: "Gulim", "Arial", sans-serif;
+            font-size: 11px;
             cursor: pointer;
-            object-fit: cover;
+            min-width: 130px;
+            text-align: left;
         }
-        .gallery-panel .photo-thumb img {
-            width: 100%;
-            height: auto;
+        .member-btn:active {
+            border-top: 2px solid #808080;
+            border-left: 2px solid #808080;
+            border-right: 2px solid #ffffff;
+            border-bottom: 2px solid #ffffff;
+        }
+        .member-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #d4d0c8;
+            border-top: 2px solid #ffffff;
+            border-left: 2px solid #ffffff;
+            border-right: 2px solid #808080;
+            border-bottom: 2px solid #808080;
+            min-width: 130px;
+            z-index: 20;
+        }
+        .member-dropdown.open {
             display: block;
         }
-        .gallery-panel .empty-msg {
-            font-size: 10px;
-            color: #888;
-            padding: 6px;
+        .member-dropdown a {
+            display: block;
+            padding: 3px 10px;
+            font-family: "Gulim", "Arial", sans-serif;
+            font-size: 11px;
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+            border-bottom: 1px solid #a0a0a0;
+        }
+        .member-dropdown a:last-child {
+            border-bottom: none;
+        }
+        .member-dropdown a:hover {
+            background-color: #00008b;
+            color: #ffffff;
+        }
+
+        .photos-center {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 10px;
+        }
+        .photos-center img {
+            display: block;
+            width: 22%;
+            max-width: 130px;
+            height: auto;
+        }
+
+        .photos-grid {
+            display: none;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        .photos-grid.active {
+            display: flex;
+        }
+        .photos-grid a {
+            display: block;
+            line-height: 0;
+        }
+        .photos-grid img {
+            display: block;
+            width: 90px;
+            height: auto;
+            border: 1px solid #000;
         }
 
         @media (max-width: 768px) {
-            .photos-container {
+            .gallery-panel {
                 width: 85%;
                 max-width: 600px;
             }
-            .gallery-container {
+            .photos-header {
                 width: 85%;
                 max-width: 600px;
+            }
+            .photos-header img {
+                width: 22%;
+                max-width: 110px;
             }
             #image-container img {
                 width: 60%;
@@ -193,11 +225,15 @@
             .nav-overlay a:nth-child(7) { right: 29%; top: 62%; }
         }
         @media (max-width: 500px) {
-            .photos-container {
+            .gallery-panel {
                 width: 95%;
             }
-            .gallery-container {
+            .photos-header {
                 width: 95%;
+            }
+            .photos-header img {
+                width: 28%;
+                max-width: 90px;
             }
             #image-container img {
                 width: 75%;
@@ -216,11 +252,8 @@
             .nav-overlay a:nth-child(5) { right: 22%; top: 44%; }
             .nav-overlay a:nth-child(6) { right: 22%; top: 53%; }
             .nav-overlay a:nth-child(7) { right: 22%; top: 62%; }
-            .member-menu {
-                width: 110px;
-            }
-            .gallery-panel .photo-thumb {
-                width: 55px;
+            .photos-grid img {
+                width: 70px;
             }
         }
     </style>
@@ -239,14 +272,14 @@
         </div>
     </div>
     
-    <div class="photos-container">
+    <div class="photos-header">
         <img src="photos.jpg" alt="photos">
     </div>
     
-    <div class="gallery-container">
-        <div class="member-menu">
-            <div class="member-menu-title" onclick="toggleMenu()">멤버 선택</div>
-            <div class="member-menu-list" id="memberList">
+    <div class="gallery-panel">
+        <div class="member-select">
+            <button class="member-btn" onclick="toggleDropdown(event)">멤버 선택</button>
+            <div class="member-dropdown" id="memberDropdown">
                 <a onclick="showPhotos('ez')">Kim E-Z</a>
                 <a onclick="showPhotos('hee')">Lee Heejin</a>
                 <a onclick="showPhotos('eun')">Shim Eunjin</a>
@@ -255,41 +288,64 @@
                 <a onclick="showPhotos('bbvox')">Baby V.O.X</a>
             </div>
         </div>
-        <div class="gallery-panel" id="galleryPanel">
-            <div class="empty-msg">왼쪽에서 멤버를 선택하세요</div>
+
+        <div class="photos-grid" id="grid-ez">
+            <a href="ez1.jpg" target="_self"><img src="ez1.jpg" alt=""></a>
+            <a href="ez2.jpg" target="_self"><img src="ez2.jpg" alt=""></a>
+            <a href="ez3.jpg" target="_self"><img src="ez3.jpg" alt=""></a>
+            <a href="ez4.jpg" target="_self"><img src="ez4.jpg" alt=""></a>
+        </div>
+        <div class="photos-grid" id="grid-hee">
+            <a href="hee1.jpg" target="_self"><img src="hee1.jpg" alt=""></a>
+            <a href="hee2.jpg" target="_self"><img src="hee2.jpg" alt=""></a>
+            <a href="hee3.jpg" target="_self"><img src="hee3.jpg" alt=""></a>
+            <a href="hee4.jpg" target="_self"><img src="hee4.jpg" alt=""></a>
+        </div>
+        <div class="photos-grid" id="grid-eun">
+            <a href="eun1.jpg" target="_self"><img src="eun1.jpg" alt=""></a>
+            <a href="eun2.jpg" target="_self"><img src="eun2.jpg" alt=""></a>
+            <a href="eun3.jpg" target="_self"><img src="eun3.jpg" alt=""></a>
+            <a href="eun4.jpg" target="_self"><img src="eun4.jpg" alt=""></a>
+        </div>
+        <div class="photos-grid" id="grid-mi">
+            <a href="mi1.jpg" target="_self"><img src="mi1.jpg" alt=""></a>
+            <a href="mi2.jpg" target="_self"><img src="mi2.jpg" alt=""></a>
+            <a href="mi3.jpg" target="_self"><img src="mi3.jpg" alt=""></a>
+            <a href="mi4.jpg" target="_self"><img src="mi4.jpg" alt=""></a>
+        </div>
+        <div class="photos-grid" id="grid-hye">
+            <a href="hye1.jpg" target="_self"><img src="hye1.jpg" alt=""></a>
+            <a href="hye2.jpg" target="_self"><img src="hye2.jpg" alt=""></a>
+            <a href="hye3.jpg" target="_self"><img src="hye3.jpg" alt=""></a>
+            <a href="hye4.jpg" target="_self"><img src="hye4.jpg" alt=""></a>
+        </div>
+        <div class="photos-grid" id="grid-bbvox">
+            <a href="bbvox1.jpg" target="_self"><img src="bbvox1.jpg" alt=""></a>
+            <a href="bbvox2.jpg" target="_self"><img src="bbvox2.jpg" alt=""></a>
+            <a href="bbvox3.jpg" target="_self"><img src="bbvox3.jpg" alt=""></a>
+            <a href="bbvox4.jpg" target="_self"><img src="bbvox4.jpg" alt=""></a>
         </div>
     </div>
 
     <script>
-        const galleries = {
-            ez: ['ez1.jpg', 'ez2.jpg', 'ez3.jpg', 'ez4.jpg'],
-            hee: ['hee1.jpg', 'hee2.jpg', 'hee3.jpg', 'hee4.jpg'],
-            eun: ['eun1.jpg', 'eun2.jpg', 'eun3.jpg', 'eun4.jpg'],
-            mi: ['mi1.jpg', 'mi2.jpg', 'mi3.jpg', 'mi4.jpg'],
-            hye: ['hye1.jpg', 'hye2.jpg', 'hye3.jpg', 'hye4.jpg'],
-            bbvox: ['bbvox1.jpg', 'bbvox2.jpg', 'bbvox3.jpg', 'bbvox4.jpg']
-        };
-
-        function toggleMenu() {
-            document.getElementById('memberList').classList.toggle('open');
+        function toggleDropdown(event) {
+            event.stopPropagation();
+            document.getElementById('memberDropdown').classList.toggle('open');
         }
 
-        function showPhotos(key) {
-            const panel = document.getElementById('galleryPanel');
-            panel.innerHTML = '';
-            const list = galleries[key] || [];
-            list.forEach(file => {
-                const wrap = document.createElement('a');
-                wrap.href = file;
-                wrap.className = 'photo-thumb';
-                const img = document.createElement('img');
-                img.src = file;
-                img.alt = '';
-                wrap.appendChild(img);
-                panel.appendChild(wrap);
-            });
-            document.getElementById('memberList').classList.remove('open');
+        function showPhotos(prefix) {
+            const grids = document.querySelectorAll('.photos-grid');
+            grids.forEach(g => g.classList.remove('active'));
+            document.getElementById('grid-' + prefix).classList.add('active');
+            document.getElementById('memberDropdown').classList.remove('open');
         }
+
+        document.addEventListener('click', function(e) {
+            const dd = document.getElementById('memberDropdown');
+            if (dd.classList.contains('open') && !e.target.closest('.member-select')) {
+                dd.classList.remove('open');
+            }
+        });
     </script>
 </body>
 </html>

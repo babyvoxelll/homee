@@ -350,6 +350,7 @@
             flex-wrap: wrap;
             gap: 10px;
             color: #000;
+            align-items: center;
         }
         .bba-reply .reply-number {
             color: #000;
@@ -358,6 +359,45 @@
             margin-top: 4px;
             white-space: pre-wrap;
             word-wrap: break-word;
+        }
+        .bba-reply .reply-btn {
+            background: #c0c0c0;
+            border: 1px solid #888;
+            color: #000;
+            font-size: 11px;
+            cursor: pointer;
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 1px 8px;
+        }
+        .bba-reply .reply-btn:hover {
+            background: #a8a8a8;
+        }
+        .bba-reply .reply-hint {
+            color: #888;
+            font-size: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .bba-reply .nested-replies {
+            margin-top: 8px;
+            padding-left: 16px;
+        }
+        .bba-reply .nested-reply {
+            padding: 6px 0;
+            border-top: 1px solid #aaa;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+        .bba-reply .nested-reply .reply-img {
+            flex-shrink: 0;
+            width: 45px;
+            height: auto;
+        }
+        .bba-reply .nested-reply .reply-img img {
+            width: 100%;
+            height: auto;
+            display: block;
         }
 
         @media (max-width: 760px) {
@@ -387,7 +427,8 @@
                 width: 110px;
             }
             .bba-post-body .post-img,
-            .bba-reply .reply-img {
+            .bba-reply .reply-img,
+            .bba-reply .nested-reply .reply-img {
                 width: 45px;
             }
             .bba-colors-row .label {
@@ -498,7 +539,8 @@
         const postsRef = ref(db, "bbacommunity/posts");
 
         let selectedColor = "#000000";
-        let replyTargetId = null;
+        let replyTargetPath = null;
+        let replyTargetHintId = null;
 
         document.querySelectorAll(".bba-colors-row .circle").forEach((circle) => {
             circle.addEventListener("click", () => {
@@ -521,6 +563,145 @@
             const d = new Date(ts);
             const pad = (n) => n.toString().padStart(2, "0");
             return `${pad(d.getMonth() + 1)}.${pad(d.getDate())} (${getDayOfWeek(d)}) ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+        }
+
+        function clearAllHints() {
+            document.querySelectorAll(".post-reply-hint, .reply-hint").forEach((h) => h.style.display = "none");
+        }
+
+        function setReplyTarget(path, hintId) {
+            if (replyTargetPath === path) {
+                replyTargetPath = null;
+                replyTargetHintId = null;
+                clearAllHints();
+            } else {
+                replyTargetPath = path;
+                replyTargetHintId = hintId;
+                clearAllHints();
+                const hint = document.getElementById(hintId);
+                if (hint) hint.style.display = "inline";
+                document.getElementById("name").focus();
+            }
+        }
+
+        function buildReplyElement(reply, postId, parentReplyId) {
+            const replyEl = document.createElement("div");
+            replyEl.className = "bba-reply";
+
+            if (reply.image) {
+                const rImgWrap = document.createElement("div");
+                rImgWrap.className = "reply-img";
+                const rImg = document.createElement("img");
+                rImg.src = reply.image;
+                rImg.alt = "image";
+                rImgWrap.appendChild(rImg);
+                replyEl.appendChild(rImgWrap);
+            }
+
+            const rContent = document.createElement("div");
+            rContent.className = "reply-content";
+
+            const rHeader = document.createElement("div");
+            rHeader.className = "reply-header";
+
+            const rAuthor = document.createElement("span");
+            rAuthor.textContent = "작성자: " + (reply.name || "");
+            rHeader.appendChild(rAuthor);
+
+            const rDate = document.createElement("span");
+            rDate.textContent = formatDate(reply.timestamp);
+            rHeader.appendChild(rDate);
+
+            const rNumber = document.createElement("span");
+            rNumber.className = "reply-number";
+            rNumber.textContent = "No." + (reply.number || "");
+            rHeader.appendChild(rNumber);
+
+            const hintId = "replyHint-" + postId + "-" + parentReplyId + "-" + (reply.id || Math.random().toString(36).substr(2, 9));
+            const rBtn = document.createElement("button");
+            rBtn.className = "reply-btn";
+            rBtn.textContent = "답변";
+            const replyPath = parentReplyId
+                ? "bbacommunity/posts/" + postId + "/replies/" + parentReplyId + "/replies"
+                : "bbacommunity/posts/" + postId + "/replies";
+            rBtn.addEventListener("click", () => {
+                setReplyTarget(replyPath, hintId);
+            });
+            rHeader.appendChild(rBtn);
+
+            const rHint = document.createElement("span");
+            rHint.className = "reply-hint";
+            rHint.id = hintId;
+            rHint.style.display = "none";
+            rHint.textContent = "위의 모든 정보를 입력하세요";
+            rHeader.appendChild(rHint);
+
+            rContent.appendChild(rHeader);
+
+            const rText = document.createElement("div");
+            rText.className = "reply-text";
+            rText.textContent = reply.comment || "";
+            if (reply.textColor) {
+                rText.style.color = reply.textColor;
+            }
+            rContent.appendChild(rText);
+
+            if (reply.replies) {
+                const nested = document.createElement("div");
+                nested.className = "nested-replies";
+                Object.keys(reply.replies).forEach((k) => {
+                    const nestedReply = reply.replies[k];
+                    nestedReply.id = k;
+                    const nestedEl = document.createElement("div");
+                    nestedEl.className = "nested-reply";
+
+                    if (nestedReply.image) {
+                        const nImgWrap = document.createElement("div");
+                        nImgWrap.className = "reply-img";
+                        const nImg = document.createElement("img");
+                        nImg.src = nestedReply.image;
+                        nImg.alt = "image";
+                        nImgWrap.appendChild(nImg);
+                        nestedEl.appendChild(nImgWrap);
+                    }
+
+                    const nContent = document.createElement("div");
+                    nContent.className = "reply-content";
+
+                    const nHeader = document.createElement("div");
+                    nHeader.className = "reply-header";
+
+                    const nAuthor = document.createElement("span");
+                    nAuthor.textContent = "작성자: " + (nestedReply.name || "");
+                    nHeader.appendChild(nAuthor);
+
+                    const nDate = document.createElement("span");
+                    nDate.textContent = formatDate(nestedReply.timestamp);
+                    nHeader.appendChild(nDate);
+
+                    const nNumber = document.createElement("span");
+                    nNumber.className = "reply-number";
+                    nNumber.textContent = "No." + (nestedReply.number || "");
+                    nHeader.appendChild(nNumber);
+
+                    nContent.appendChild(nHeader);
+
+                    const nText = document.createElement("div");
+                    nText.className = "reply-text";
+                    nText.textContent = nestedReply.comment || "";
+                    if (nestedReply.textColor) {
+                        nText.style.color = nestedReply.textColor;
+                    }
+                    nContent.appendChild(nText);
+
+                    nestedEl.appendChild(nContent);
+                    nested.appendChild(nestedEl);
+                });
+                rContent.appendChild(nested);
+            }
+
+            replyEl.appendChild(rContent);
+            return replyEl;
         }
 
         function renderPosts(posts) {
@@ -556,26 +737,18 @@
                 num.textContent = "No." + (post.number || "");
                 header.appendChild(num);
 
+                const postHintId = "postHint-" + post.id;
                 const replyBtn = document.createElement("button");
                 replyBtn.className = "post-reply-btn";
                 replyBtn.textContent = "답변";
                 replyBtn.addEventListener("click", () => {
-                    const hint = document.getElementById("replyHint-" + post.id);
-                    if (replyTargetId === post.id) {
-                        replyTargetId = null;
-                        if (hint) hint.style.display = "none";
-                    } else {
-                        replyTargetId = post.id;
-                        document.querySelectorAll(".post-reply-hint").forEach((h) => h.style.display = "none");
-                        if (hint) hint.style.display = "inline";
-                        document.getElementById("name").focus();
-                    }
+                    setReplyTarget("bbacommunity/posts/" + post.id + "/replies", postHintId);
                 });
                 header.appendChild(replyBtn);
 
                 const replyHint = document.createElement("span");
                 replyHint.className = "post-reply-hint";
-                replyHint.id = "replyHint-" + post.id;
+                replyHint.id = postHintId;
                 replyHint.style.display = "none";
                 replyHint.textContent = "위의 모든 정보를 입력하세요";
                 header.appendChild(replyHint);
@@ -622,53 +795,10 @@
                 repliesBox.className = "bba-replies";
 
                 if (post.replies) {
-                    const replyKeys = Object.keys(post.replies);
-                    replyKeys.forEach((k) => {
+                    Object.keys(post.replies).forEach((k) => {
                         const r = post.replies[k];
-                        const replyEl = document.createElement("div");
-                        replyEl.className = "bba-reply";
-
-                        if (r.image) {
-                            const rImgWrap = document.createElement("div");
-                            rImgWrap.className = "reply-img";
-                            const rImg = document.createElement("img");
-                            rImg.src = r.image;
-                            rImg.alt = "image";
-                            rImgWrap.appendChild(rImg);
-                            replyEl.appendChild(rImgWrap);
-                        }
-
-                        const rContent = document.createElement("div");
-                        rContent.className = "reply-content";
-
-                        const rHeader = document.createElement("div");
-                        rHeader.className = "reply-header";
-
-                        const rAuthor = document.createElement("span");
-                        rAuthor.textContent = "작성자: " + (r.name || "");
-                        rHeader.appendChild(rAuthor);
-
-                        const rDate = document.createElement("span");
-                        rDate.textContent = formatDate(r.timestamp);
-                        rHeader.appendChild(rDate);
-
-                        const rNumber = document.createElement("span");
-                        rNumber.className = "reply-number";
-                        rNumber.textContent = "No." + (r.number || "");
-                        rHeader.appendChild(rNumber);
-
-                        rContent.appendChild(rHeader);
-
-                        const rText = document.createElement("div");
-                        rText.className = "reply-text";
-                        rText.textContent = r.comment || "";
-                        if (r.textColor) {
-                            rText.style.color = r.textColor;
-                        }
-                        rContent.appendChild(rText);
-
-                        replyEl.appendChild(rContent);
-                        repliesBox.appendChild(replyEl);
+                        r.id = k;
+                        repliesBox.appendChild(buildReplyElement(r, post.id, k));
                     });
                 }
 
@@ -700,8 +830,8 @@
                 return;
             }
 
-            if (replyTargetId) {
-                const replyRef = ref(db, "bbacommunity/posts/" + replyTargetId + "/replies");
+            if (replyTargetPath) {
+                const replyRef = ref(db, replyTargetPath);
                 await push(replyRef, {
                     number: generateNumber(),
                     name: name,
@@ -710,9 +840,9 @@
                     textColor: selectedColor,
                     timestamp: Date.now()
                 });
-                const hint = document.getElementById("replyHint-" + replyTargetId);
-                if (hint) hint.style.display = "none";
-                replyTargetId = null;
+                replyTargetPath = null;
+                replyTargetHintId = null;
+                clearAllHints();
             } else {
                 if (!title) {
                     alert("제목을 입력하세요.");

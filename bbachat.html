@@ -35,19 +35,26 @@
             padding: 0;
             margin: 0;
         }
-        .bbacommunity-top img {
+        .bbacommunity-top img.bbacommunity {
             display: block;
-            width: 550px;
-            max-width: 90%;
+            width: 260px;
+            max-width: 70%;
             height: auto;
             margin: 0 auto;
+        }
+        .bbacommunity-top img.panel {
+            display: block;
+            width: 720px;
+            max-width: 95%;
+            height: auto;
+            margin: -2px auto 0 auto;
         }
         .bbacommunity-nav {
             position: relative;
             width: 720px;
             max-width: 95%;
             height: 30px;
-            margin: 0 auto;
+            margin: -30px auto 0 auto;
         }
         .bbacommunity-nav a {
             position: absolute;
@@ -88,7 +95,7 @@
             font-size: 12px;
         }
         .bba-form-table td.label {
-            width: 110px;
+            width: 100px;
             font-weight: bold;
             color: #fff;
             white-space: nowrap;
@@ -96,7 +103,7 @@
         .bba-form-table input[type="text"],
         .bba-form-table input[type="email"],
         .bba-form-table input[type="url"] {
-            width: 200px;
+            width: 180px;
             font-size: 12px;
             padding: 3px 5px;
             border: 1px solid #ccc;
@@ -121,78 +128,98 @@
             font-family: "Dotum", "Gulim", "Arial", sans-serif;
         }
 
-        .bba-colors {
-            margin: 12px auto 0 auto;
-            text-align: left;
+        .bba-colors-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin: 6px 0 0 0;
+            padding: 4px 6px;
+        }
+        .bba-colors-row .label {
+            width: 100px;
+            font-weight: bold;
             color: #fff;
             font-size: 12px;
-            width: 720px;
-            max-width: 95%;
+            flex-shrink: 0;
+            padding-top: 1px;
         }
-        .bba-colors .color-row {
+        .bba-colors-row .color-row {
             display: inline-flex;
-            gap: 18px;
-            align-items: center;
-            justify-content: flex-start;
-            margin-top: 6px;
+            gap: 10px;
+            align-items: flex-start;
         }
-        .bba-colors .color-item {
-            display: flex;
-            align-items: center;
-            gap: 4px;
+        .bba-colors-row .color-item {
+            position: relative;
+            display: inline-block;
         }
-        .bba-colors .circle {
-            width: 16px;
-            height: 16px;
+        .bba-colors-row .circle {
+            width: 11px;
+            height: 11px;
             border-radius: 50%;
             background: #fff;
             border: 1px solid #333;
             cursor: pointer;
-            flex-shrink: 0;
+            display: block;
         }
-        .bba-colors .circle.selected {
+        .bba-colors-row .circle.selected {
             background: #0000cc;
         }
-        .bba-colors .square {
-            width: 12px;
-            height: 12px;
+        .bba-colors-row .square {
+            position: absolute;
+            right: -3px;
+            bottom: -3px;
+            width: 6px;
+            height: 6px;
             border: 1px solid #333;
-            flex-shrink: 0;
         }
-        .bba-colors .square.red { background: #ff0000; }
-        .bba-colors .square.blue { background: #0000ff; }
-        .bba-colors .square.pink { background: #ff69b4; }
-        .bba-colors .square.green { background: #00aa00; }
-        .bba-colors .square.purple { background: #800080; }
-        .bba-colors .square.brown { background: #8b4513; }
-        .bba-colors .square.black { background: #000000; }
-        .bba-colors .square.orange { background: #ff8c00; }
+        .bba-colors-row .square.red { background: #ff0000; }
+        .bba-colors-row .square.blue { background: #0000ff; }
+        .bba-colors-row .square.pink { background: #ff69b4; }
+        .bba-colors-row .square.green { background: #00aa00; }
+        .bba-colors-row .square.purple { background: #800080; }
+        .bba-colors-row .square.brown { background: #8b4513; }
+        .bba-colors-row .square.black { background: #000000; }
+        .bba-colors-row .square.orange { background: #ff8c00; }
 
-        .bba-form-submit {
-            text-align: center;
-            margin-top: 12px;
+        .bba-comment-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            width: 100%;
         }
-        .bba-form-submit button {
-            padding: 6px 30px;
-            font-size: 13px;
+        .bba-comment-row textarea {
+            flex: 1;
+            min-height: 140px;
+            font-size: 12px;
+            padding: 3px 5px;
+            border: 1px solid #ccc;
+            background: #fff;
+            font-family: "Dotum", "Gulim", "Arial", sans-serif;
+            resize: vertical;
+        }
+        .bba-comment-row .send-btn {
+            flex-shrink: 0;
+            background: #ffffff;
+            color: #000;
+            border: 1px solid #333;
+            font-size: 12px;
             font-weight: bold;
-            background: #800020;
-            color: #fff;
-            border: 1px solid #555;
+            padding: 6px 14px;
             cursor: pointer;
             font-family: "Dotum", "Gulim", "Arial", sans-serif;
+            align-self: flex-start;
         }
-        .bba-form-submit button:hover {
-            background: #a00028;
+        .bba-comment-row .send-btn:hover {
+            background: #eee;
         }
 
         .bba-chat-board {
-            width: 95%;
-            max-width: 1400px;
+            width: 98%;
+            max-width: 1600px;
             margin: 30px auto 40px auto;
             background: #ffffff;
             border: 1px solid #000;
-            min-height: 800px;
+            min-height: 1200px;
             padding: 0;
             color: #000;
             font-size: 12px;
@@ -321,17 +348,20 @@
 
         @media (max-width: 760px) {
             .bba-form-table td.label {
-                width: 90px;
+                width: 80px;
             }
             .bba-form-table input[type="text"],
             .bba-form-table input[type="email"],
             .bba-form-table input[type="url"] {
-                width: 160px;
+                width: 150px;
+            }
+            .bba-colors-row .label {
+                width: 80px;
             }
         }
         @media (max-width: 500px) {
             .bba-form-table td.label {
-                width: 70px;
+                width: 65px;
                 font-size: 11px;
             }
             .bba-form-table td {
@@ -340,10 +370,14 @@
             .bba-form-table input[type="text"],
             .bba-form-table input[type="email"],
             .bba-form-table input[type="url"] {
-                width: 130px;
+                width: 120px;
             }
             .bba-post-body .post-img {
                 width: 90px;
+            }
+            .bba-colors-row .label {
+                width: 65px;
+                font-size: 11px;
             }
         }
     </style>
@@ -351,7 +385,8 @@
 <body>
 
     <div class="bbacommunity-top">
-        <img src="bbacommunity.jpg" alt="bbacommunity">
+        <img src="bbacommunity.jpg" alt="bbacommunity" class="bbacommunity">
+        <img src="panel.png" alt="panel" class="panel">
         <div class="bbacommunity-nav">
             <a href="videos.html"></a>
             <a href="index.html"></a>
@@ -383,7 +418,12 @@
             </tr>
             <tr>
                 <td class="label">코멘트</td>
-                <td><textarea id="comment"></textarea></td>
+                <td>
+                    <div class="bba-comment-row">
+                        <textarea id="comment"></textarea>
+                        <button id="submitBtn" class="send-btn">보내기</button>
+                    </div>
+                </td>
             </tr>
             <tr>
                 <td class="label">URL</td>
@@ -402,25 +442,24 @@
                     </select>
                 </td>
             </tr>
+            <tr>
+                <td colspan="2" style="padding:0;">
+                    <div class="bba-colors-row">
+                        <div class="label">텍스트 색상</div>
+                        <div class="color-row">
+                            <div class="color-item"><div class="circle" data-color="#ff0000"></div><div class="square red"></div></div>
+                            <div class="color-item"><div class="circle" data-color="#0000ff"></div><div class="square blue"></div></div>
+                            <div class="color-item"><div class="circle" data-color="#ff69b4"></div><div class="square pink"></div></div>
+                            <div class="color-item"><div class="circle" data-color="#00aa00"></div><div class="square green"></div></div>
+                            <div class="color-item"><div class="circle" data-color="#800080"></div><div class="square purple"></div></div>
+                            <div class="color-item"><div class="circle" data-color="#8b4513"></div><div class="square brown"></div></div>
+                            <div class="color-item"><div class="circle" data-color="#000000"></div><div class="square black"></div></div>
+                            <div class="color-item"><div class="circle" data-color="#ff8c00"></div><div class="square orange"></div></div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
         </table>
-
-        <div class="bba-colors">
-            <div>텍스트 색상</div>
-            <div class="color-row">
-                <div class="color-item"><div class="circle" data-color="#ff0000"></div><div class="square red"></div></div>
-                <div class="color-item"><div class="circle" data-color="#0000ff"></div><div class="square blue"></div></div>
-                <div class="color-item"><div class="circle" data-color="#ff69b4"></div><div class="square pink"></div></div>
-                <div class="color-item"><div class="circle" data-color="#00aa00"></div><div class="square green"></div></div>
-                <div class="color-item"><div class="circle" data-color="#800080"></div><div class="square purple"></div></div>
-                <div class="color-item"><div class="circle" data-color="#8b4513"></div><div class="square brown"></div></div>
-                <div class="color-item"><div class="circle" data-color="#000000"></div><div class="square black"></div></div>
-                <div class="color-item"><div class="circle" data-color="#ff8c00"></div><div class="square orange"></div></div>
-            </div>
-        </div>
-
-        <div class="bba-form-submit">
-            <button id="submitBtn">보내기</button>
-        </div>
     </div>
 
     <div class="bba-chat-board" id="chatBoard"></div>
@@ -446,9 +485,9 @@
 
         let selectedColor = "#000000";
 
-        document.querySelectorAll(".bba-colors .circle").forEach((circle) => {
+        document.querySelectorAll(".bba-colors-row .circle").forEach((circle) => {
             circle.addEventListener("click", () => {
-                document.querySelectorAll(".bba-colors .circle").forEach((c) => c.classList.remove("selected"));
+                document.querySelectorAll(".bba-colors-row .circle").forEach((c) => c.classList.remove("selected"));
                 circle.classList.add("selected");
                 selectedColor = circle.getAttribute("data-color");
             });
@@ -671,7 +710,7 @@
             document.getElementById("comment").value = "";
             document.getElementById("url").value = "";
             document.getElementById("image").value = "";
-            document.querySelectorAll(".bba-colors .circle").forEach((c) => c.classList.remove("selected"));
+            document.querySelectorAll(".bba-colors-row .circle").forEach((c) => c.classList.remove("selected"));
             selectedColor = "#000000";
         });
     </script>

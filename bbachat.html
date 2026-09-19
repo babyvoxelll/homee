@@ -294,10 +294,10 @@
 
         .bba-post-body {
             display: flex;
-            flex-direction: column;
             gap: 12px;
             margin-top: 10px;
             align-items: flex-start;
+            flex-wrap: wrap;
         }
         .bba-post-body .post-img {
             flex-shrink: 0;
@@ -310,14 +310,14 @@
             display: block;
         }
         .bba-post-body .post-comment {
-            width: 50%;
-            max-width: 600px;
+            flex: 1;
+            min-width: 200px;
             font-size: 13px;
             color: #000;
-            white-space: pre-wrap;
             word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
             font-family: Arial, Helvetica, sans-serif;
-            display: block;
         }
 
         .bba-replies {
@@ -331,9 +331,9 @@
             color: #000;
             font-family: Arial, Helvetica, sans-serif;
             display: flex;
-            flex-direction: column;
             gap: 12px;
             align-items: flex-start;
+            flex-wrap: wrap;
         }
         .bba-reply .reply-img {
             flex-shrink: 0;
@@ -346,8 +346,8 @@
             display: block;
         }
         .bba-reply .reply-content {
-            width: 50%;
-            max-width: 600px;
+            flex: 1;
+            min-width: 200px;
         }
         .bba-reply .reply-header {
             display: flex;
@@ -364,9 +364,9 @@
         }
         .bba-reply .reply-text {
             margin-top: 4px;
-            white-space: pre-wrap;
             word-wrap: break-word;
-            display: block;
+            overflow-wrap: break-word;
+            white-space: normal;
         }
         .bba-reply .reply-btn {
             background: #c0c0c0;
@@ -404,12 +404,6 @@
             .bba-colors-row .label {
                 width: 75px;
             }
-            .bba-post-body .post-comment {
-                width: 70%;
-            }
-            .bba-reply .reply-content {
-                width: 70%;
-            }
         }
         @media (max-width: 500px) {
             .bba-form-table td.label {
@@ -431,12 +425,6 @@
             .bba-colors-row .label {
                 width: 60px;
                 font-size: 10px;
-            }
-            .bba-post-body .post-comment {
-                width: 85%;
-            }
-            .bba-reply .reply-content {
-                width: 85%;
             }
         }
     </style>
@@ -734,7 +722,26 @@
 
                 const comment = document.createElement("div");
                 comment.className = "post-comment";
-                comment.textContent = post.comment || "";
+                const maxCharsPerLine = 90;
+                const text = post.comment || "";
+                let formatted = "";
+                if (text.length > maxCharsPerLine) {
+                    const words = text.split(" ");
+                    let line = "";
+                    words.forEach((word) => {
+                        if ((line + " " + word).trim().length > maxCharsPerLine) {
+                            formatted += (formatted ? "\n" : "") + line.trim();
+                            line = word;
+                        } else {
+                            line += (line ? " " : "") + word;
+                        }
+                    });
+                    if (line) formatted += (formatted ? "\n" : "") + line.trim();
+                } else {
+                    formatted = text;
+                }
+                comment.style.whiteSpace = "pre-wrap";
+                comment.textContent = formatted;
                 if (post.textColor) {
                     comment.style.color = post.textColor;
                 }

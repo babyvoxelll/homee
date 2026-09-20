@@ -158,14 +158,17 @@
             let player = ruffle.createPlayer();
             let container = document.getElementById("player-container");
 
-            player.style.width = "500px";
-            player.style.height = "270px";
-
             container.appendChild(player);
+
+            player.addEventListener('loadedmetadata', (e) => {
+                const w = e.detail.width || 500;
+                const h = e.detail.height || 270;
+                player.style.width = w + "px";
+                player.style.height = h + "px";
+            });
+
             player.load({ url: "babyvoxmain77.swf" });
-            
-            player.play();
-            
+
             player.addEventListener('loadeddata', () => {
                 player.play();
             });

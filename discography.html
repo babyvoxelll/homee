@@ -34,14 +34,10 @@
         }
         #image-container img {
             display: block;
-            width: 48%;
-            max-width: 590px;
+            width: 45%;
+            max-width: 550px;
             height: auto;
-            aspect-ratio: auto;
-            object-fit: scale-down;
             margin: 0 auto;
-            transform: scaleY(0.75);
-            transform-origin: top center;
         }
         .nav-overlay {
             position: absolute;
@@ -74,33 +70,33 @@
             display: flex;
             justify-content: flex-start;
             align-items: flex-start;
-            width: 40%;
-            max-width: 450px;
+            width: 45%;
+            max-width: 500px;
             margin: -4px auto 0 auto;
             padding: 0;
             line-height: 0;
         }
         .albumheader-container img {
             display: block;
-            width: 20%;
-            max-width: 95px;
+            width: 22%;
+            max-width: 105px;
             height: auto;
         }
         .discography-container {
-            width: 40%;
-            max-width: 450px;
+            width: 45%;
+            max-width: 500px;
             margin: 0 auto;
             padding: 0;
         }
         .album-block {
             background-color: #ffffff;
             color: #000;
-            padding: 12px 15px;
+            padding: 15px 18px;
             margin-bottom: 0;
             border-radius: 0;
             display: flex;
             align-items: flex-start;
-            gap: 12px;
+            gap: 15px;
             border: 2px solid #00008b;
             border-bottom: 2px solid #00008b;
         }
@@ -109,7 +105,7 @@
         }
         .album-photo {
             flex-shrink: 0;
-            width: 120px;
+            width: 140px;
             height: auto;
         }
         .album-photo img {
@@ -119,8 +115,8 @@
         }
         .album-tracks {
             flex: 1;
-            font-size: 10px;
-            line-height: 1.4;
+            font-size: 11px;
+            line-height: 1.5;
             color: #000;
             text-align: left;
             word-wrap: break-word;
@@ -133,7 +129,7 @@
             width: 100%;
             max-width: 100%;
             height: auto;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
         }
         .album-tracks .album-label.smaller {
             width: 70%;
@@ -150,24 +146,25 @@
             width: 40%;
             height: 1px;
             background: #000;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             align-self: center;
         }
         .album-tracks .line {
             margin-bottom: 1px;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
+            flex-wrap: nowrap;
         }
         .album-tracks .line .mp3-icon {
-            width: 26px;
-            height: 12px;
+            width: 32px;
+            height: 14px;
             cursor: pointer;
             flex-shrink: 0;
         }
         .album-tracks .disc-label {
             font-weight: bold;
-            margin-top: 3px;
+            margin-top: 4px;
             margin-bottom: 2px;
         }
         .album-block.reverse {
@@ -176,22 +173,20 @@
         @media (max-width: 768px) {
             .discography-container {
                 width: 85%;
-                max-width: 450px;
+                max-width: 500px;
             }
             .albumheader-container {
                 width: 85%;
-                max-width: 450px;
+                max-width: 500px;
                 margin: -3px auto 0 auto;
             }
             .albumheader-container img {
-                width: 20%;
-                max-width: 85px;
+                width: 22%;
+                max-width: 90px;
             }
             #image-container img {
-                width: 65%;
-                max-width: 500px;
-                transform: scaleY(0.75);
-                transform-origin: top center;
+                width: 60%;
+                max-width: 450px;
             }
             .nav-overlay a {
                 width: 90px;
@@ -207,16 +202,16 @@
             .album-block {
                 flex-direction: column;
                 align-items: center;
-                padding: 10px;
+                padding: 12px;
             }
             .album-block.reverse {
                 flex-direction: column;
             }
             .album-photo {
-                width: 130px;
+                width: 150px;
             }
             .album-tracks {
-                font-size: 10px;
+                font-size: 11px;
                 text-align: center;
                 align-items: center;
             }
@@ -244,14 +239,12 @@
                 margin: -3px auto 0 auto;
             }
             .albumheader-container img {
-                width: 24%;
-                max-width: 75px;
+                width: 26%;
+                max-width: 80px;
             }
             #image-container img {
-                width: 80%;
-                max-width: 400px;
-                transform: scaleY(0.7);
-                transform-origin: top center;
+                width: 75%;
+                max-width: 350px;
             }
             .nav-overlay a {
                 width: 70px;
@@ -265,10 +258,10 @@
             .nav-overlay a:nth-child(6) { right: 20%; top: 58%; }
             .nav-overlay a:nth-child(7) { right: 20%; top: 62%; }
             .album-photo {
-                width: 110px;
+                width: 120px;
             }
             .album-tracks {
-                font-size: 9px;
+                font-size: 10px;
             }
         }
     </style>

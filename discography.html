@@ -35,8 +35,9 @@
         #image-container img {
             display: block;
             width: 70%;
-            max-width: 900px;
+            max-width: 1400px;
             height: auto;
+            object-fit: scale-down;
             margin: 0 auto;
         }
         .nav-overlay {
@@ -55,15 +56,15 @@
             border: none;
             cursor: pointer;
             text-decoration: none;
-            height: 8%;
+            width: 15%;
+            height: 12%;
         }
-        /* Кнопки справа на картинке */
-        .nav-overlay a:nth-child(1) { right: 0%; top: 2%;  width: 15%; }  /* Videos */
-        .nav-overlay a:nth-child(2) { right: 0%; top: 13%; width: 15%; }  /* Home */
-        .nav-overlay a:nth-child(3) { right: 0%; top: 25%; width: 15%; }  /* Profiles */
-        .nav-overlay a:nth-child(4) { right: 0%; top: 37%; width: 15%; }  /* History */
-        .nav-overlay a:nth-child(5) { right: 0%; top: 49%; width: 15%; }  /* Baby Angels */
-        .nav-overlay a:nth-child(6) { right: 0%; top: 61%; width: 15%; }  /* Photogallery */
+        .nav-overlay a:nth-child(1) { right: 0%; top: 1%; }
+        .nav-overlay a:nth-child(2) { right: 0%; top: 15%; }
+        .nav-overlay a:nth-child(3) { right: 0%; top: 29%; }
+        .nav-overlay a:nth-child(4) { right: 0%; top: 43%; }
+        .nav-overlay a:nth-child(5) { right: 0%; top: 57%; }
+        .nav-overlay a:nth-child(6) { right: 0%; top: 71%; }
 
         .albumheader-container {
             display: flex;
@@ -183,7 +184,7 @@
                 max-width: 90px;
             }
             #image-container img {
-                width: 95%;
+                width: 90%;
                 max-width: 700px;
             }
             .album-block {

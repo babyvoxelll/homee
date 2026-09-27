@@ -1,1 +1,813 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=600px, user-scalable=yes">
+<title>babyvoxelll</title>
+<link rel="icon" type="image/png" href="logoo.png">
+<link rel="shortcut icon" href="logoo.png">
+<style>
+body {
+    background:#e6f0fa;
+    margin:0;
+    font-family:"Dotum", "Gulim", "Arial", sans-serif;
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    padding-top:0;
+}
 
+.white-frame {
+    background:white;
+    width:620px;
+    padding:80px 0 0 0;
+    box-sizing:border-box;
+    margin:0 auto;
+    position:relative;
+}
+
+.top-logo {
+    position:absolute;
+    left:30px;
+    top:20px;
+    z-index:10;
+    width:180px;
+    height:auto;
+}
+
+.top-logo img {
+    width:180px;
+    height:auto;
+    display:block;
+}
+
+.top-block {
+    width:590px;
+    margin:0 auto;
+    position:relative;
+    overflow:hidden;
+    border-radius:20px 20px 0 0;
+}
+
+.top-image {
+    width:590px;
+    margin:0;
+    display:block;
+    overflow:hidden;
+    position:relative;
+    cursor:default;
+    height:auto;
+    border-radius:20px 20px 0 0;
+}
+
+.top-image object,
+.top-image embed {
+    width:590px;
+    height:auto;
+    display:block;
+    border-radius:20px 20px 0 0;
+    pointer-events:auto;
+}
+
+.image-wrapper {
+    position: relative;
+    width: 590px;
+    height: auto;
+    overflow: hidden;
+    border-radius:20px 20px 0 0;
+    transition: filter 0.5s ease, transform 0.5s ease;
+}
+
+.image-wrapper object,
+.image-wrapper embed {
+    width:590px;
+    height:auto;
+    display:block;
+    border-radius:20px 20px 0 0;
+}
+
+.nav-overlay {
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:rgba(200, 225, 245, 0.85);
+    backdrop-filter: blur(2px);
+    padding:4px 20px;
+    box-sizing:border-box;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:3px 0;
+    z-index:2;
+    pointer-events:auto;
+    border-top:1px solid rgba(150, 190, 220, 0.3);
+}
+
+.nav-overlay a {
+    color:#1a5f5f;
+    text-decoration:none;
+    font-size:12px;
+    font-weight:400;
+    font-family:"Georgia", "Times New Roman", serif;
+    text-transform:lowercase;
+    letter-spacing:0.3px;
+    padding:3px 5px;
+    transition: all 0.25s ease;
+    display:inline-block;
+    cursor:pointer;
+    background:transparent;
+    border:none;
+    outline:none;
+}
+
+.nav-overlay a:hover {
+    transform:scale(1.2);
+    background:rgba(255,255,255,0.5);
+}
+
+.image-text-overlay {
+    position:absolute;
+    left:20px;
+    bottom:40px;
+    z-index:3;
+    pointer-events:none;
+    font-family:"Georgia", "Times New Roman", serif;
+    font-size:26px;
+    font-weight:400;
+    text-transform:none;
+    color:#000000;
+    letter-spacing:0.3px;
+    line-height:1.2;
+    font-style:normal;
+    border:none;
+    outline:none;
+    background:transparent;
+    text-shadow:none;
+    filter: none !important;
+    -webkit-filter: none !important;
+    transform: none !important;
+    transition: none !important;
+}
+
+.panel {
+    background:transparent;
+    width:590px;
+    margin:0 auto;
+    padding:0px 0px 0px 0px;
+    box-sizing:border-box;
+}
+
+.blue-panel {
+    background:#e8f4f8;
+    padding:10px 15px 8px 15px;
+    border-radius:0 0 4px 4px;
+    margin:0 0 0 0;
+    font-family:"Dotum", "Gulim", "Arial", sans-serif;
+    max-height:340px;
+    overflow-y:auto;
+    width:100%;
+    box-sizing:border-box;
+}
+
+.blue-panel::-webkit-scrollbar {
+    width:6px;
+}
+
+.blue-panel::-webkit-scrollbar-track {
+    background:#d5e8ef;
+    border-radius:3px;
+}
+
+.blue-panel::-webkit-scrollbar-thumb {
+    background:#8fb8c8;
+    border-radius:3px;
+}
+
+.blue-panel::-webkit-scrollbar-thumb:hover {
+    background:#6a9eb0;
+}
+
+.news-title {
+    font-family: "Georgia", "Times New Roman", serif;
+    font-size:14px;
+    font-weight:normal;
+    font-style:italic;
+    color:#1a5f5f;
+    margin:0 0 3px 0;
+    letter-spacing:0.3px;
+}
+
+.news-content {
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    font-family:"Dotum", "Gulim", "Arial", sans-serif;
+    margin-bottom:4px;
+    position:relative;
+}
+
+.news-left-block {
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.news-text {
+    font-size:12px;
+    line-height:1.4;
+    color:#333333;
+    font-family:"Dotum", "Gulim", "Arial", sans-serif;
+}
+
+.friends-panel {
+    background:#ffffff;
+    border:1px solid #1a1a1a;
+    border-radius:0px;
+    padding:6px 10px;
+    width:120px;
+    height:80px;
+    overflow-y:auto;
+    text-align:center;
+    box-sizing:border-box;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+    align-items:center;
+    flex-shrink:0;
+}
+
+.friends-panel::-webkit-scrollbar {
+    width:5px;
+}
+
+.friends-panel::-webkit-scrollbar-track {
+    background:#e0e0e0;
+    border-radius:0px;
+}
+
+.friends-panel::-webkit-scrollbar-thumb {
+    background:#aaaaaa;
+    border-radius:0px;
+}
+
+.friends-panel::-webkit-scrollbar-thumb:hover {
+    background:#888888;
+}
+
+.friends-title {
+    font-family:"Dotum", "Gulim", "Arial", sans-serif;
+    font-size:12px;
+    font-weight:bold;
+    font-style:italic;
+    color:#000000;
+    margin:0 0 4px 0;
+    letter-spacing:0.3px;
+    flex-shrink:0;
+}
+
+.friends-content {
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:4px;
+    width:100%;
+    flex-shrink:0;
+    padding-bottom:2px;
+}
+
+.friends-content .voxi-btn {
+    width:60px;
+    height:auto;
+    cursor:pointer;
+    border:none;
+    outline:none;
+    display:block;
+}
+
+.news-right-block {
+    flex-shrink:0;
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.bbvox-logo {
+    width:50px;
+    height:auto;
+    flex-shrink:0;
+    display:block;
+    margin-left:-30px;
+    margin-top:12px;
+}
+
+.right-content {
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:2px;
+    padding-top:4px;
+    padding-left:0px;
+}
+
+.site-open-text {
+    font-family:"Dotum", "Gulim", "Arial", sans-serif;
+    font-size:10px;
+    color:#2d7a2d;
+    font-weight:normal;
+    letter-spacing:0.2px;
+    line-height:1.3;
+    margin:0;
+    white-space:nowrap;
+    flex-shrink:0;
+}
+
+.gifs-row {
+    display:flex;
+    gap:2px;
+    align-items:center;
+    flex-shrink:0;
+}
+
+.gifs-row img {
+    width:35px;
+    height:auto;
+    display:block;
+    image-rendering:pixelated;
+}
+
+.my-button-text {
+    font-family:"Dotum", "Gulim", "Arial", sans-serif;
+    font-size:13px;
+    font-weight:bold;
+    color:#000000;
+    margin:0;
+    letter-spacing:0.3px;
+    flex-shrink:0;
+    text-align:left;
+}
+
+.voxelll-img {
+    width:90px;
+    height:auto;
+    display:block;
+    flex-shrink:0;
+}
+
+.news-image {
+    width:110px;
+    height:auto;
+    flex-shrink:0;
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+.news-image img {
+    width:110px;
+    height:auto;
+    display:block;
+    border:none;
+    outline:none;
+}
+
+.divider {
+    width:100%;
+    height:1px;
+    background:#1a1a1a;
+    margin:2px 0 2px 0;
+}
+
+.about-title {
+    font-family: "Georgia", "Times New Roman", serif;
+    font-size:14px;
+    font-weight:normal;
+    font-style:italic;
+    color:#1a5f5f;
+    margin:2px 0 3px 0;
+    letter-spacing:0.3px;
+}
+
+.about-text {
+    font-size:11px;
+    line-height:1.5;
+    color:#333333;
+    font-family:"Dotum", "Gulim", "Arial", sans-serif;
+    margin:0 0 4px 0;
+}
+
+.credits-line {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:0px;
+}
+
+.credits {
+    font-family:"Dotum", "Gulim", "Arial", sans-serif;
+    font-size:11px;
+    color:#d4698a;
+    margin:0;
+    letter-spacing:0.3px;
+}
+
+.credits-divider {
+    width:1px;
+    height:18px;
+    background:#1a1a1a;
+    flex-shrink:0;
+    margin:0 8px;
+}
+
+.contact-right {
+    font-family:"Dotum", "Gulim", "Arial", sans-serif;
+    font-size:11px;
+    color:#333333;
+    margin:0;
+    letter-spacing:0.3px;
+}
+
+.contact-right .email {
+    color:#0066cc;
+    text-decoration:underline;
+    cursor:pointer;
+    font-family:"Dotum", "Gulim", "Arial", sans-serif;
+    font-size:11px;
+}
+
+.contact-right .email:hover {
+    opacity:0.8;
+}
+
+.bottom-lang {
+    width:590px;
+    margin:0 auto 0 auto;
+    padding:4px 12px 4px 12px;
+    box-sizing:border-box;
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+}
+
+.lang-box {
+    display:flex;
+    gap:6px;
+    background:white;
+    padding:2px 5px;
+    border:1px solid #c0d8c0;
+    box-shadow:1px 1px 3px rgba(0,0,0,0.05);
+}
+
+.lang-btn {
+    cursor:pointer;
+    color:#1a5f5f;
+    text-transform:uppercase;
+    font-weight:bold;
+    font-size:9px;
+    font-style:italic;
+    letter-spacing:0.3px;
+    padding:2px 2px;
+    border-radius:3px;
+    transition: all 0.2s ease;
+    font-family:"Dotum", "Gulim", "Arial", sans-serif;
+    background:transparent;
+    border:none;
+}
+
+.lang-btn:hover {
+    background:#e0f0e0;
+    transform:scale(1.15);
+}
+
+.lang-btn.active {
+    background:#5f9f5f;
+    color:white;
+}
+
+.lang-content {
+    display:none;
+}
+
+.lang-content.active {
+    display:block;
+}
+
+.footer {
+    width:100%;
+    background:#1a1a1a;
+    padding:8px 20px;
+    box-sizing:border-box;
+    text-align:center;
+    margin:0;
+    border-radius:0;
+}
+
+.footer-text {
+    font-family:"Dotum", "Gulim", "Arial", sans-serif;
+    font-size:10px;
+    color:#ffffff;
+    letter-spacing:0.5px;
+    font-style:normal;
+    margin:0;
+    line-height:1.4;
+}
+</style>
+</head>
+<body>
+
+<div class="white-frame">
+
+    <div class="top-logo">
+        <img src="logo2.gif" alt="logo">
+    </div>
+
+    <div class="top-block">
+        <div class="top-image" id="imageContainer">
+            <div class="image-wrapper" id="imageWrapper">
+                <object type="application/x-shockwave-flash" data="babyvoxelllhome.swf" width="590">
+                    <param name="movie" value="babyvoxelllhome.swf">
+                    <param name="quality" value="high">
+                    <param name="bgcolor" value="#ffffff">
+                    <embed src="babyvoxelllhome.swf" type="application/x-shockwave-flash" width="590" quality="high" bgcolor="#ffffff">
+                </object>
+            </div>
+            <div class="image-text-overlay" id="textOverlay">babyvoxelll.2bd.net</div>
+        </div>
+        <div class="nav-overlay" id="navOverlay">
+            <a href="home.htm" data-nav="home">home</a>
+            <a href="profiles.htm" data-nav="profiles">profiles</a>
+            <a href="discography.htm" data-nav="discography">discography</a>
+            <a href="history.htm" data-nav="history">history</a>
+            <a href="chat.htm" data-nav="chat">chat</a>
+            <a href="photogallery.htm" data-nav="photogallery">photogallery</a>
+        </div>
+    </div>
+
+    <div class="panel">
+
+        <div id="content-ko" class="lang-content active">
+            <div class="blue-panel">
+                <div class="news-title">News</div>
+                
+                <div class="news-content">
+                    <div class="news-left-block">
+                        <div class="news-text">사이트의 옛 디자인을 복원하고 조금 바꿨습니다!</div>
+                        <div class="friends-panel">
+                            <div class="friends-title">My Friends!!</div>
+                            <div class="friends-content">
+                                <a href="https://babyvoxi.neocities.org/" target="_blank">
+                                    <img src="voxi.png" alt="voxi" class="voxi-btn">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="news-right-block">
+                        <img src="bbvoxlogo.png" alt="bbvoxlogo" class="bbvox-logo">
+                        <div class="right-content">
+                            <div class="site-open-text">▶ 사이트 오픈: 2026년 1월 26일</div>
+                            <div class="gifs-row">
+                                <img src="chance.gif" alt="chance">
+                                <img src="doll.gif" alt="doll">
+                                <img src="game_over.gif" alt="game_over">
+                                <img src="why2.gif" alt="why2">
+                            </div>
+                            <div class="my-button-text">MY BUTTON</div>
+                            <img src="voxelll.gif" alt="voxelll" class="voxelll-img">
+                        </div>
+                        <div class="news-image">
+                            <img src="mainr.jpg" alt="mainr">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="divider"></div>
+                
+                <div class="about-title">About this Site</div>
+                <div class="about-text">2026년 1월 26일부터 팬들을 하나로 묶는 babyvoxelll.2bd.net에 오신 것을 환영합니다! babyvoxelll.2bd.net은 그룹 Baby VOX를 위한 글로벌 웹사이트입니다. Baby VOX의 해체와 재결합에도 불구하고 이 사이트는 영원히 존재할 것입니다. 위의 링크를 이용해주세요. 환영합니다!</div>
+                
+                <div class="credits-line">
+                    <div class="credits">kaze@babyvoxelll.2bd.net</div>
+                    <div class="credits-divider"></div>
+                    <div class="contact-right">연락처 <span class="email">kazemorcihelp@gmail.com</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content-ru" class="lang-content">
+            <div class="blue-panel">
+                <div class="news-title">News</div>
+                
+                <div class="news-content">
+                    <div class="news-left-block">
+                        <div class="news-text">Я вернула старое оформление сайта и его чуть поменяла!</div>
+                        <div class="friends-panel">
+                            <div class="friends-title">My Friends!!</div>
+                            <div class="friends-content">
+                                <a href="https://babyvoxi.neocities.org/" target="_blank">
+                                    <img src="voxi.png" alt="voxi" class="voxi-btn">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="news-right-block">
+                        <img src="bbvoxlogo.png" alt="bbvoxlogo" class="bbvox-logo">
+                        <div class="right-content">
+                            <div class="site-open-text">▶ сайт открыт: 26.01.2026</div>
+                            <div class="gifs-row">
+                                <img src="chance.gif" alt="chance">
+                                <img src="doll.gif" alt="doll">
+                                <img src="game_over.gif" alt="game_over">
+                                <img src="why2.gif" alt="why2">
+                            </div>
+                            <div class="my-button-text">MY BUTTON</div>
+                            <img src="voxelll.gif" alt="voxelll" class="voxelll-img">
+                        </div>
+                        <div class="news-image">
+                            <img src="mainr.jpg" alt="mainr">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="divider"></div>
+                
+                <div class="about-title">About this Site</div>
+                <div class="about-text">Добро пожаловать на babyvoxelll.2bd.net, сайт, объединяющий фанатов с 26 января 2026 года! babyvoxelll.2bd.net — глобальный сайт, посвященный группе Baby VOX. Несмотря на распады и воссоединения Baby VOX, этот сайт будет существовать вечно. Пожалуйста, используйте ссылки выше для навигации. Добро пожаловать!</div>
+                
+                <div class="credits-line">
+                    <div class="credits">kaze@babyvoxelll.2bd.net</div>
+                    <div class="credits-divider"></div>
+                    <div class="contact-right">Контакты <span class="email">kazemorcihelp@gmail.com</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content-en" class="lang-content">
+            <div class="blue-panel">
+                <div class="news-title">News</div>
+                
+                <div class="news-content">
+                    <div class="news-left-block">
+                        <div class="news-text">I've restored the old site design and changed it a bit!</div>
+                        <div class="friends-panel">
+                            <div class="friends-title">My Friends!!</div>
+                            <div class="friends-content">
+                                <a href="https://babyvoxi.neocities.org/" target="_blank">
+                                    <img src="voxi.png" alt="voxi" class="voxi-btn">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="news-right-block">
+                        <img src="bbvoxlogo.png" alt="bbvoxlogo" class="bbvox-logo">
+                        <div class="right-content">
+                            <div class="site-open-text">▶ site opened: 2026.01.26</div>
+                            <div class="gifs-row">
+                                <img src="chance.gif" alt="chance">
+                                <img src="doll.gif" alt="doll">
+                                <img src="game_over.gif" alt="game_over">
+                                <img src="why2.gif" alt="why2">
+                            </div>
+                            <div class="my-button-text">MY BUTTON</div>
+                            <img src="voxelll.gif" alt="voxelll" class="voxelll-img">
+                        </div>
+                        <div class="news-image">
+                            <img src="mainr.jpg" alt="mainr">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="divider"></div>
+                
+                <div class="about-title">About this Site</div>
+                <div class="about-text">Welcome to babyvoxelll.2bd.net, a site uniting fans since January 26, 2026! babyvoxelll.2bd.net is the global website for the group Baby VOX. Despite Baby VOX's disbandment and reunions, this site will always exist. Please use the links above for navigation. Welcome!</div>
+                
+                <div class="credits-line">
+                    <div class="credits">kaze@babyvoxelll.2bd.net</div>
+                    <div class="credits-divider"></div>
+                    <div class="contact-right">Contact <span class="email">kazemorcihelp@gmail.com</span></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="bottom-lang">
+        <div class="lang-box">
+            <span class="lang-btn active" onclick="switchLanguage('ko')">KO</span>
+            <span class="lang-btn" onclick="switchLanguage('ru')">RU</span>
+            <span class="lang-btn" onclick="switchLanguage('en')">EN</span>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p class="footer-text">Copyright © 2026 babyvoxelll.2bd.net. All rights reserved</p>
+    </div>
+
+</div>
+
+<script>
+function switchLanguage(lang) {
+    document.querySelectorAll('.lang-content').forEach(el => {
+        el.classList.remove('active');
+    });
+    document.getElementById('content-' + lang).classList.add('active');
+    
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    const buttons = document.querySelectorAll('.lang-btn');
+    for (let btn of buttons) {
+        if (btn.textContent.toLowerCase() === lang || 
+            (lang === 'ko' && btn.textContent === 'KO') ||
+            (lang === 'ru' && btn.textContent === 'RU') ||
+            (lang === 'en' && btn.textContent === 'EN')) {
+            btn.classList.add('active');
+        }
+    }
+    
+    document.querySelectorAll('.blue-panel').forEach(el => {
+        el.scrollTop = 0;
+    });
+}
+
+const imageWrapper = document.getElementById('imageWrapper');
+const textOverlay = document.getElementById('textOverlay');
+const navLinks = document.querySelectorAll('.nav-overlay a');
+const container = document.getElementById('imageContainer');
+
+navLinks.forEach(link => {
+    link.addEventListener('mouseenter', function() {
+        imageWrapper.style.transition = 'filter 0.5s ease, transform 0.5s ease';
+        imageWrapper.style.filter = 'blur(3px) brightness(0.9)';
+        imageWrapper.style.transform = 'translateY(-15px)';
+        textOverlay.style.filter = 'none';
+        textOverlay.style.webkitFilter = 'none';
+        textOverlay.style.transform = 'none';
+    });
+    
+    link.addEventListener('mouseleave', function() {
+        imageWrapper.style.transition = 'filter 0.5s ease, transform 0.5s ease';
+        imageWrapper.style.filter = 'blur(0px) brightness(1)';
+        imageWrapper.style.transform = 'translateY(0px)';
+    });
+});
+
+const image = document.getElementById('movingImage');
+
+let isHovering = false;
+let navHovering = false;
+
+container.addEventListener('mouseenter', function() {
+    isHovering = true;
+});
+
+container.addEventListener('mousemove', function(e) {
+    if (!isHovering || navHovering) return;
+    
+    const rect = container.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    
+    const moveX = ((x - centerX) / centerX) * 20;
+    const moveY = ((y - centerY) / centerY) * 20;
+    
+    image.style.transition = 'transform 0.3s cubic-bezier(0.34, 1.2, 0.64, 1)';
+    image.style.transform = 'scale(1.4) translate(' + moveX + 'px, ' + moveY + 'px)';
+});
+
+container.addEventListener('mouseleave', function() {
+    isHovering = false;
+    if (!navHovering) {
+        image.style.transition = 'transform 0.6s cubic-bezier(0.34, 1.0, 0.64, 1)';
+        image.style.transform = 'scale(1) translate(0px, 0px)';
+    }
+});
+
+navLinks.forEach(link => {
+    link.addEventListener('mouseenter', function() {
+        navHovering = true;
+    });
+    
+    link.addEventListener('mouseleave', function() {
+        navHovering = false;
+        if (!isHovering) {
+            image.style.transition = 'transform 0.6s cubic-bezier(0.34, 1.0, 0.64, 1)';
+            image.style.transform = 'scale(1) translate(0px, 0px)';
+        }
+    });
+});
+</script>
+
+</body>
+</html>

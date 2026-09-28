@@ -301,12 +301,12 @@ body {
 }
 
 .babyvoxelll2bdnet-gif {
-    width:230px;
+    width:260px;
     height:auto;
     display:block;
     flex-shrink:0;
     position:absolute;
-    top:-25px;
+    top:-28px;
     right:-10px;
 }
 
@@ -342,11 +342,18 @@ body {
     text-align:center;
 }
 
-.babyvoxmain-img {
-    width:120px;
+.gifs-row {
+    display:flex;
+    gap:2px;
+    align-items:center;
+    flex-shrink:0;
+}
+
+.gifs-row img {
+    width:35px;
     height:auto;
     display:block;
-    flex-shrink:0;
+    image-rendering:pixelated;
 }
 
 .my-button-text {
@@ -505,6 +512,36 @@ body {
     display:block;
 }
 
+.news-link-bar {
+    width:590px;
+    margin:0 auto;
+    background:#c8e1f5;
+    padding:5px 15px;
+    box-sizing:border-box;
+    display:flex;
+    justify-content:flex-start;
+    align-items:center;
+    border-top:1px solid rgba(150, 190, 220, 0.4);
+}
+
+.news-link-bar a {
+    font-family: "Georgia", "Times New Roman", serif;
+    font-size:13px;
+    font-style:italic;
+    color:#1a5f5f;
+    text-decoration:none;
+    letter-spacing:0.3px;
+    cursor:pointer;
+    transition: all 0.2s ease;
+}
+
+.news-link-bar a:hover {
+    transform:scale(1.1);
+    background:rgba(255,255,255,0.5);
+    padding:2px 5px;
+    border-radius:3px;
+}
+
 .footer {
     width:100%;
     background:#1a1a1a;
@@ -575,7 +612,12 @@ body {
                         <img src="bbvoxlogo.png" alt="bbvoxlogo" class="bbvox-logo">
                         <div class="right-content">
                             <div class="site-open-text">▶ 사이트 오픈: 2026년 1월 26일</div>
-                            <img src="babyvoxmain.jpg" alt="babyvoxmain" class="babyvoxmain-img">
+                            <div class="gifs-row">
+                                <img src="chance.gif" alt="chance">
+                                <img src="doll.gif" alt="doll">
+                                <img src="game_over.gif" alt="game_over">
+                                <img src="why2.gif" alt="why2">
+                            </div>
                             <div class="my-button-text">MY BUTTON</div>
                             <img src="voxelll.gif" alt="voxelll" class="voxelll-img">
                         </div>
@@ -620,7 +662,12 @@ body {
                         <img src="bbvoxlogo.png" alt="bbvoxlogo" class="bbvox-logo">
                         <div class="right-content">
                             <div class="site-open-text">▶ сайт открыт: 26.01.2026</div>
-                            <img src="babyvoxmain.jpg" alt="babyvoxmain" class="babyvoxmain-img">
+                            <div class="gifs-row">
+                                <img src="chance.gif" alt="chance">
+                                <img src="doll.gif" alt="doll">
+                                <img src="game_over.gif" alt="game_over">
+                                <img src="why2.gif" alt="why2">
+                            </div>
                             <div class="my-button-text">MY BUTTON</div>
                             <img src="voxelll.gif" alt="voxelll" class="voxelll-img">
                         </div>
@@ -665,7 +712,12 @@ body {
                         <img src="bbvoxlogo.png" alt="bbvoxlogo" class="bbvox-logo">
                         <div class="right-content">
                             <div class="site-open-text">▶ site opened: 2026.01.26</div>
-                            <img src="babyvoxmain.jpg" alt="babyvoxmain" class="babyvoxmain-img">
+                            <div class="gifs-row">
+                                <img src="chance.gif" alt="chance">
+                                <img src="doll.gif" alt="doll">
+                                <img src="game_over.gif" alt="game_over">
+                                <img src="why2.gif" alt="why2">
+                            </div>
                             <div class="my-button-text">MY BUTTON</div>
                             <img src="voxelll.gif" alt="voxelll" class="voxelll-img">
                         </div>
@@ -696,6 +748,10 @@ body {
             <span class="lang-btn" onclick="switchLanguage('ru')">RU</span>
             <span class="lang-btn" onclick="switchLanguage('en')">EN</span>
         </div>
+    </div>
+
+    <div class="news-link-bar">
+        <a href="news.htm">News</a>
     </div>
 
     <div class="footer">

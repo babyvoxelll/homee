@@ -65,66 +65,13 @@
         .nav-overlay a:nth-child(5) { right: 34%; top: 58%; }
         .nav-overlay a:nth-child(6) { right: 34%; top: 70%; }
 
-        .top-row {
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            width: 55%;
-            max-width: 600px;
-            margin: 35px auto 0 auto;
-            padding: 0;
-            position: relative;
-        }
-        .member-select {
-            position: absolute;
-            left: 25%;
-            bottom: 8px;
-            z-index: 10;
-        }
-        .member-btn {
-            background-color: #ffffff;
-            color: #000;
-            border: 1px solid #000;
-            padding: 1px 5px;
-            font-family: "Gulim", "Arial", sans-serif;
-            font-size: 9px;
-            cursor: pointer;
-            min-width: 60px;
-            text-align: left;
-        }
-        .member-btn:hover {
-            background-color: #f0f0f0;
-        }
-        .member-dropdown {
-            display: none;
-            position: absolute;
-            bottom: 100%;
-            left: 0;
-            background-color: #ffffff;
-            border: 1px solid #000;
-            min-width: 60px;
-            z-index: 20;
-        }
-        .member-dropdown.open {
-            display: block;
-        }
-        .member-dropdown a {
-            display: block;
-            padding: 1px 5px;
-            font-family: "Gulim", "Arial", sans-serif;
-            font-size: 9px;
-            color: #000;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .member-dropdown a:hover {
-            background-color: #00008b;
-            color: #ffffff;
-        }
         .photos-center {
             display: flex;
             justify-content: center;
             align-items: flex-end;
+            width: 45%;
+            max-width: 550px;
+            margin: 35px auto 0 auto;
             line-height: 0;
         }
         .photos-center img {
@@ -133,12 +80,49 @@
             height: auto;
         }
 
+        .bba-form-wrapper {
+            width: 45%;
+            max-width: 550px;
+            margin: 15px auto 0 auto;
+            background: transparent;
+            color: #000;
+            font-size: 11px;
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.2;
+        }
+        .bba-form-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: transparent;
+        }
+        .bba-form-table td {
+            padding: 1px 4px;
+            vertical-align: middle;
+            color: #fff;
+            font-size: 11px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .bba-form-table td.label {
+            width: 90px;
+            font-weight: normal;
+            color: #000;
+            white-space: nowrap;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .bba-form-table select {
+            font-size: 11px;
+            padding: 2px;
+            border: 1px solid #ccc;
+            background: #fff;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
         .gallery-panel {
             background-color: #ffffff;
             color: #000;
             padding: 15px 18px;
-            width: 55%;
-            max-width: 600px;
+            width: 45%;
+            max-width: 550px;
             margin: 0 auto;
             border: 2px solid #00008b;
             border-bottom: 2px solid #00008b;
@@ -166,12 +150,9 @@
         }
 
         @media (max-width: 768px) {
-            .gallery-panel, .top-row {
+            .gallery-panel, .bba-form-wrapper, .photos-center {
                 width: 85%;
-                max-width: 600px;
-            }
-            .top-row {
-                margin: 30px auto 0 auto;
+                max-width: 550px;
             }
             #image-container img {
                 width: 60%;
@@ -193,11 +174,8 @@
             }
         }
         @media (max-width: 500px) {
-            .gallery-panel, .top-row {
+            .gallery-panel, .bba-form-wrapper, .photos-center {
                 width: 95%;
-            }
-            .top-row {
-                margin: 25px auto 0 auto;
             }
             #image-container img {
                 width: 75%;
@@ -220,20 +198,6 @@
                 width: 60px;
                 height: 60px;
             }
-            .member-btn {
-                min-width: 50px;
-                font-size: 8px;
-            }
-            .member-dropdown {
-                min-width: 50px;
-            }
-            .member-dropdown a {
-                font-size: 8px;
-            }
-            .member-select {
-                left: 12%;
-                bottom: 6px;
-            }
         }
     </style>
 </head>
@@ -249,22 +213,28 @@
             <a href="bbachat.htm"></a>
         </div>
     </div>
-    
-    <div class="top-row">
-        <div class="member-select">
-            <button class="member-btn" onclick="toggleDropdown(event)">멤버 선택</button>
-            <div class="member-dropdown" id="memberDropdown">
-                <a onclick="showPhotos('ez')">Kim E-Z</a>
-                <a onclick="showPhotos('hee')">Lee Heejin</a>
-                <a onclick="showPhotos('eun')">Shim Eunjin</a>
-                <a onclick="showPhotos('mi')">Kan Miyoun</a>
-                <a onclick="showPhotos('hye')">Yoon Eunhye</a>
-                <a onclick="showPhotos('bbvox')">Baby V.O.X</a>
-            </div>
-        </div>
-        <div class="photos-center">
-            <img src="photos.jpg" alt="photos">
-        </div>
+
+    <div class="photos-center">
+        <img src="photos.jpg" alt="photos">
+    </div>
+
+    <div class="bba-form-wrapper">
+        <table class="bba-form-table">
+            <tr>
+                <td class="label">이미지</td>
+                <td>
+                    <select id="image">
+                        <option value=""></option>
+                        <option value="ez">Kim E-Z</option>
+                        <option value="hee">Lee Heejin</option>
+                        <option value="eun">Shim Eunjin</option>
+                        <option value="mi">Kan Miyoun</option>
+                        <option value="hye">Yoon Eunhye</option>
+                        <option value="bbvox">Baby V.O.X</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
     </div>
 
     <div class="gallery-panel">
@@ -344,22 +314,11 @@
     </div>
 
     <script>
-        function toggleDropdown(event) {
-            event.stopPropagation();
-            document.getElementById('memberDropdown').classList.toggle('open');
-        }
-
-        function showPhotos(prefix) {
+        document.getElementById('image').addEventListener('change', function() {
             const grids = document.querySelectorAll('.photos-grid');
             grids.forEach(g => g.classList.remove('active'));
-            document.getElementById('grid-' + prefix).classList.add('active');
-            document.getElementById('memberDropdown').classList.remove('open');
-        }
-
-        document.addEventListener('click', function(e) {
-            const dd = document.getElementById('memberDropdown');
-            if (dd.classList.contains('open') && !e.target.closest('.member-select')) {
-                dd.classList.remove('open');
+            if (this.value) {
+                document.getElementById('grid-' + this.value).classList.add('active');
             }
         });
     </script>

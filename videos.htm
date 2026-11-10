@@ -283,6 +283,30 @@
                     </div>
                     <div class="video-title">6.mp4</div>
                 </div>
+                <div class="video-item">
+                    <div class="video-thumb" onclick="openVideo('7.mp4')">
+                        <canvas id="thumb7" width="70" height="40"></canvas>
+                    </div>
+                    <div class="video-title">7.mp4</div>
+                </div>
+                <div class="video-item">
+                    <div class="video-thumb" onclick="openVideo('8.mp4')">
+                        <canvas id="thumb8" width="70" height="40"></canvas>
+                    </div>
+                    <div class="video-title">8.mp4</div>
+                </div>
+                <div class="video-item">
+                    <div class="video-thumb" onclick="openVideo('9.mp4')">
+                        <canvas id="thumb9" width="70" height="40"></canvas>
+                    </div>
+                    <div class="video-title">9.mp4</div>
+                </div>
+                <div class="video-item">
+                    <div class="video-thumb" onclick="openVideo('10.mp4')">
+                        <canvas id="thumb10" width="70" height="40"></canvas>
+                    </div>
+                    <div class="video-title">10.mp4</div>
+                </div>
             </div>
         </div>
     </div>
@@ -347,6 +371,10 @@
         setupThumb('4.mp4', 'thumb4');
         setupThumb('5.mp4', 'thumb5');
         setupThumb('6.mp4', 'thumb6');
+        setupThumb('7.mp4', 'thumb7');
+        setupThumb('8.mp4', 'thumb8');
+        setupThumb('9.mp4', 'thumb9');
+        setupThumb('10.mp4', 'thumb10');
 
         function openVideo(src) {
             const modal = document.getElementById('modal');
